@@ -1,0 +1,290 @@
+local armor_recoil = {}
+
+-- =========================
+-- armor multiplier table
+-- =========================
+armor_recoil.armor_table = {
+    ["army_nosorog_outfit"] = 0.85,
+    ["dolg_nosorog_outfit"] = 0.85,
+    ["freedom_nosorog_outfit"] = 0.85,
+    ["isg_nosorog_outfit"] = 0.85,
+    ["merc_nosorog_outfit"] = 0.85,
+    ["monolith_nosorog_outfit"] = 0.85,
+
+    ["exo_outfit"] = 0.8,
+    ["bandit_exo_outfit"] = 0.9,
+    ["cs_exo_outfit"] = 0.8,
+    ["dolg_exo_outfit"] = 0.8,
+    ["ecolog_exo_outfit"] = 0.85,
+    ["greh_exo_outfit"] = 0.8,
+    ["isg_exo_outfit"] = 0.8,
+    ["merc_exo_outfit"] = 0.8,
+    ["military_exo_outfit"] = 0.8,
+    ["monolith_exo_outfit"] = 0.8,
+    ["renegade_exo_outfit"] = 0.9,
+    ["svoboda_exo_outfit"] = 0.8,
+
+    ["military_proto_exo_outfit"] = 0.75,
+    ["dolg_heavy_proto_exo_outfit"] = 0.75,
+    ["stalker_proto_exo_outfit"] = 0.65,
+    ["cs_stalker_proto_exo_outfit"] = 0.72,
+    ["dolg_proto_exo_outfit"] = 0.70,
+    ["ecolog_proto_exo_outfit"] = 0.7,
+    ["isg_proto_exo_outfit"] = 0.7,
+    ["monolith_proto_exo_outfit"] = 0.71,
+    ["svoboda_light_proto_exo_outfit"] = 0.7
+}
+
+local DEFAULT_MULT = 1.0
+
+-- =========================
+-- get the current weapon stats
+-- =========================
+armor_recoil.current_mult = DEFAULT_MULT
+armor_recoil.current_weapon = nil
+armor_recoil.current_weapon_id = nil
+armor_recoil.current_armor_section = nil
+
+local recoil_map = {
+    cam_dispersion = {
+        get = function(w) return w:cast_Weapon():GetCamDispersion() end,
+        set = function(w, v) w:cast_Weapon():SetCamDispersion(v) end
+    },
+    cam_dispersion_inc = {
+        get = function(w) return w:cast_Weapon():GetCamDispersionInc() end,
+        set = function(w, v) w:cast_Weapon():SetCamDispersionInc(v) end
+    },
+    cam_dispersion_frac = {
+        get = function(w) return w:cast_Weapon():GetCamDispersionFrac() end,
+        set = function(w, v) w:cast_Weapon():SetCamDispersionFrac(v) end
+    },
+    cam_max_angle = {
+        get = function(w) return w:cast_Weapon():GetCamMaxAngleVert() end,
+        set = function(w, v) w:cast_Weapon():SetCamMaxAngleVert(v) end
+    },
+    cam_max_angle_horz = {
+        get = function(w) return w:cast_Weapon():GetCamMaxAngleHorz() end,
+        set = function(w, v) w:cast_Weapon():SetCamMaxAngleHorz(v) end
+    },
+    cam_step_angle_horz = {
+        get = function(w) return w:cast_Weapon():GetCamStepAngleHorz() end,
+        set = function(w, v) w:cast_Weapon():SetCamStepAngleHorz(v) end
+    },
+
+    zoom_cam_dispersion = {
+        get = function(w) return w:cast_Weapon():GetZoomCamDispersion() end,
+        set = function(w, v) w:cast_Weapon():SetZoomCamDispersion(v) end
+    },
+    zoom_cam_dispersion_inc = {
+        get = function(w) return w:cast_Weapon():GetZoomCamDispersionInc() end,
+        set = function(w, v) w:cast_Weapon():SetZoomCamDispersionInc(v) end
+    },
+    zoom_cam_dispersion_frac = {
+        get = function(w) return w:cast_Weapon():GetZoomCamDispersionFrac() end,
+        set = function(w, v) w:cast_Weapon():SetZoomCamDispersionFrac(v) end
+    },
+    zoom_cam_max_angle = {
+        get = function(w) return w:cast_Weapon():GetZoomCamMaxAngleVert() end,
+        set = function(w, v) w:cast_Weapon():SetZoomCamMaxAngleVert(v) end
+    },
+    zoom_cam_max_angle_horz = {
+        get = function(w) return w:cast_Weapon():GetZoomCamMaxAngleHorz() end,
+        set = function(w, v) w:cast_Weapon():SetZoomCamMaxAngleHorz(v) end
+    },
+    zoom_cam_step_angle_horz = {
+        get = function(w) return w:cast_Weapon():GetZoomCamStepAngleHorz() end,
+        set = function(w, v) w:cast_Weapon():SetZoomCamStepAngleHorz(v) end
+    }
+}
+
+local original_values = {}
+
+-- =========================
+-- HELPERS
+-- =========================
+local function get_actor()
+    return db.actor
+end
+
+local function get_current_weapon()
+    local actor = get_actor()
+    return actor and actor:active_item() or nil
+end
+
+local function get_current_armor()
+    local actor = get_actor()
+    return actor and actor:item_in_slot(7) or nil
+end
+
+-- =========================
+-- AApply recoil modifier
+-- =========================
+local function apply_recoil_multiplier(weapon, mult)
+    if not weapon then return end
+
+    local wpn = weapon:cast_Weapon()
+    if not wpn then return end
+
+    local section = weapon:section()
+
+    if not original_values[section] then
+        original_values[section] = {}
+
+        for name, funcs in pairs(recoil_map) do
+            original_values[section][name] = funcs.get(weapon)
+        end
+    end
+
+    for name, funcs in pairs(recoil_map) do
+        local base = original_values[section][name]
+        if base then
+            funcs.set(weapon, base * mult)
+        end
+    end
+end
+
+local function reset_weapon(weapon)
+    if not weapon then return end
+
+    local wpn = weapon:cast_Weapon()
+    if not wpn then return end
+
+    local section = weapon:section()
+    local stored = original_values[section]
+    if not stored then return end
+
+    for name, funcs in pairs(recoil_map) do
+        local val = stored[name]
+        if val then
+            funcs.set(weapon, val)
+        end
+    end
+end
+
+-- =========================
+-- update recoil if needed, called by grok_bo_enhanced_recoil
+-- =========================
+function armor_recoil.update_if_needed(weapon_override)
+---    log("ARMOR_RECOIL | update_if_needed CALLED")
+
+    local weapon = nil
+
+    if weapon_override and weapon_override:cast_Weapon() then
+        weapon = weapon_override
+    else
+        weapon = db.actor:active_item()
+    end
+
+    if not weapon then
+    ---    log("ARMOR_RECOIL | weapon is NIL (even after obj fallback)")
+        return
+    end
+
+---    log("ARMOR_RECOIL | weapon FOUND: " .. weapon:section())
+
+    local wpn = weapon and weapon:cast_Weapon()
+    if not wpn then
+    ---    log("ARMOR_RECOIL | cast_Weapon FAILED")
+        return
+    end
+
+    local armor = get_current_armor()
+
+    local weapon_id = weapon and weapon:id() or nil
+    local armor_section = armor and armor:section() or nil
+
+    -- No change → do nothing
+    if weapon_id == armor_recoil.current_weapon_id
+    and armor_section == armor_recoil.current_armor_section then
+        return
+    end
+
+    -- Reset previous weapon if changed
+    if armor_recoil.current_weapon_id and armor_recoil.current_weapon_id ~= weapon_id then
+        if armor_recoil.current_weapon then
+            reset_weapon(armor_recoil.current_weapon)
+        end
+    end
+
+    -- Always reset current weapon before applying
+    if weapon then
+        reset_weapon(weapon)
+    end
+
+    -- Store new state
+    armor_recoil.current_weapon = weapon
+    armor_recoil.current_weapon_id = weapon_id
+    armor_recoil.current_armor_section = armor_section
+
+    -- Determine multiplier
+    local new_mult = DEFAULT_MULT
+    if armor_section and armor_recoil.armor_table[armor_section] then
+        new_mult = armor_recoil.armor_table[armor_section]
+    end
+
+    armor_recoil.current_mult = new_mult
+
+    -- Apply
+    if weapon then
+        apply_recoil_multiplier(weapon, new_mult)
+    end
+
+
+---    log(string.format("[Armor_Recoil] Armor=%s" , armor_section or "nil"))
+---    log("ARMOR_RECOIL | Armor: " .. tostring(armor_section))
+---    log("ARMOR_RECOIL | Weapon: " .. (weapon and weapon:section() or "nil"))
+---    log("ARMOR_RECOIL | Multiplier: " .. tostring(new_mult))
+end
+
+-- =========================
+-- all the calls
+-- =========================
+
+-- 🔥 Main trigger (fires often, cheap due to early return)
+function armor_recoil.actor_on_weapon_fired(actor, weapon, ...)
+    if actor ~= db.actor then return end
+    armor_recoil.update_if_needed(weapon)
+end
+
+-- 🔥 Equip to slot (weapon swap OR armor equip)
+function armor_recoil.actor_item_to_slot(item)
+    armor_recoil.update_if_needed()
+end
+
+-- 🔥 Unequip cases
+function armor_recoil.actor_item_to_ruck(item)
+    armor_recoil.update_if_needed()
+end
+
+function armor_recoil.actor_on_item_drop(item)
+    armor_recoil.update_if_needed()
+end
+
+-- 🔥 Safety init (on load)
+function armor_recoil.actor_on_first_update()
+    armor_recoil.update_if_needed()
+end
+
+printf("=== Armor Recoil Loaded ===")
+
+function Update_Shooting(wpn)
+
+	if armor_recoil and armor_recoil.update_if_needed then
+		armor_recoil.update_if_needed(wpn)
+	end
+	
+end
+
+function Update_Before_Shooting(params)
+    local wpn = params and params.weapon
+
+    if armor_recoil and armor_recoil.update_if_needed then
+        armor_recoil.update_if_needed(wpn)
+    end
+end
+
+
+function on_game_start()
+	RegisterScriptCallback("actor_on_weapon_fired",Update_Shooting)
+	RegisterScriptCallback("actor_on_weapon_before_fire", Update_Before_Shooting)
+end
