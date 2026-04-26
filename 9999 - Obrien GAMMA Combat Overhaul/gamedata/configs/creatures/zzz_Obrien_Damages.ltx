@@ -1,0 +1,952 @@
+;-----this file needs to replace damages.ltx in \mods\G.A.M.M.A. Outfits Balances\gamedata\configs\creatures
+
+;***************************************************************
+; BODY SECTIONS
+;***************************************************************
+; damage calculation: https://pastebin.com/raw/spv4YzaZ
+
+[body_damage_absent] ; zero
+bip01_pelvis 				= 1, 0.0
+bip01_spine 		 		= 1, 0.0
+bip01_spine1 		 		= 1, 0.0
+bip01_spine2 		 		= 1, 0.0
+
+bip01_l_clavicle	 		= 1, 0.0
+bip01_l_upperarm	 		= 1, 0.0
+bip01_l_forearm	 	 		= 1, 0.0
+bip01_l_hand	 	 		= 1, 0.0
+
+bip01_r_clavicle	 		= 1, 0.0
+bip01_r_upperarm	 		= 1, 0.0
+bip01_r_forearm	 	 		= 1, 0.0
+bip01_r_hand	 	 		= 1, 0.0
+
+bip01_l_thigh	 	 		= 1, 0.0
+bip01_l_calf	 	 		= 1, 0.0
+bip01_l_foot	 	 		= 1, 0.0
+bip01_r_thigh	 	 		= 1, 0.0
+bip01_r_calf	 	 		= 1, 0.0
+bip01_r_foot	 	 		= 1, 0.0
+
+[body_damage_test] ; zero
+bip01_pelvis 				= 1, 0.01
+bip01_spine 		 		= 1, 0.02
+bip01_spine1 		 		= 1, 0.03
+bip01_spine2 		 		= 1, 0.04
+
+bip01_l_clavicle	 		= 1, 0.05
+bip01_l_upperarm	 		= 1, 0.06
+bip01_l_forearm	 	 		= 1, 0.07
+bip01_l_hand	 	 		= 1, 0.08
+
+bip01_r_clavicle	 		= 1, 0.09
+bip01_r_upperarm	 		= 1, 0.1
+bip01_r_forearm	 	 		= 1, 0.11
+bip01_r_hand	 	 		= 1, 0.12
+
+bip01_l_thigh	 	 		= 1, 0.13
+bip01_l_calf	 	 		= 1, 0.14
+bip01_l_foot	 	 		= 1, 0.15
+bip01_r_thigh	 	 		= 1, 0.16
+bip01_r_calf	 	 		= 1, 0.17
+bip01_r_foot	 	 		= 1, 0.18
+
+bip01_neck 			 		= 1, 0.19
+bip01_head 			 		= 1, 0.2
+eyelid_1 			 		= 1, 0.21
+eye_left 			 		= 1, 0.22
+eye_right 			 		= 1, 0.23
+jaw_1 		 		 		= 1, 0.24
+
+
+[body_damage_0011] ; ---- used by 9
+bip01_pelvis 				= 1, 0.02
+bip01_spine 		 		= 1, 0.02
+bip01_spine1 		 		= 1, 0.02
+bip01_spine2 		 		= 1, 0.02
+
+bip01_l_clavicle	 		= 1, 0.01
+bip01_l_upperarm	 		= 1, 0.01
+bip01_l_forearm	 	 		= 1, 0.01
+bip01_l_hand	 	 		= 1, 0.0
+
+bip01_r_clavicle	 		= 1, 0.01
+bip01_r_upperarm	 		= 1, 0.01
+bip01_r_forearm	 	 		= 1, 0.01
+bip01_r_hand	 	 		= 1, 0.0
+
+bip01_l_thigh	 	 		= 1, 0.01
+bip01_l_calf	 	 		= 1, 0.01
+bip01_l_foot	 	 		= 1, 0.0
+bip01_r_thigh	 	 		= 1, 0.01
+bip01_r_calf	 	 		= 1, 0.01
+bip01_r_foot	 	 		= 1, 0.0
+
+[body_damage_004] ; --- not used
+bip01_pelvis 				= 1, 0.05
+bip01_spine 		 		= 1, 0.05
+bip01_spine1 		 		= 1, 0.05
+bip01_spine2 		 		= 1, 0.05
+
+bip01_l_clavicle	 		= 1, 0.04
+bip01_l_upperarm	 		= 1, 0.04
+bip01_l_forearm	 	 		= 1, 0.04
+bip01_l_hand	 	 		= 1, 0.01
+
+bip01_r_clavicle	 		= 1, 0.04
+bip01_r_upperarm	 		= 1, 0.04
+bip01_r_forearm	 	 		= 1, 0.04
+bip01_r_hand	 	 		= 1, 0.01
+
+bip01_l_thigh	 	 		= 1, 0.04
+bip01_l_calf	 	 		= 1, 0.04
+bip01_l_foot	 	 		= 1, 0.02
+bip01_r_thigh	 	 		= 1, 0.04
+bip01_r_calf	 	 		= 1, 0.04
+bip01_r_foot	 	 		= 1, 0.02
+
+[body_damage_0075] ; --- used by 8, ecologist science suits
+bip01_pelvis 				= 1, 0.075
+bip01_spine 		 		= 1, 0.075
+bip01_spine1 		 		= 1, 0.075
+bip01_spine2 		 		= 1, 0.075
+
+bip01_l_clavicle	 		= 1, 0.05
+bip01_l_upperarm	 		= 1, 0.05
+bip01_l_forearm	 	 		= 1, 0.05
+bip01_l_hand	 	 		= 1, 0.01
+
+bip01_r_clavicle	 		= 1, 0.05
+bip01_r_upperarm	 		= 1, 0.05
+bip01_r_forearm	 	 		= 1, 0.05
+bip01_r_hand	 	 		= 1, 0.01
+
+bip01_l_thigh	 	 		= 1, 0.05
+bip01_l_calf	 	 		= 1, 0.05
+bip01_l_foot	 	 		= 1, 0.01
+bip01_r_thigh	 	 		= 1, 0.05
+bip01_r_calf	 	 		= 1, 0.05
+bip01_r_foot	 	 		= 1, 0.01
+
+[body_damage_008] ; ---- not used
+bip01_pelvis 				= 1, 0.08
+bip01_spine 		 		= 1, 0.08
+bip01_spine1 		 		= 1, 0.08
+bip01_spine2 		 		= 1, 0.08
+
+bip01_l_clavicle	 		= 1, 0.06
+bip01_l_upperarm	 		= 1, 0.06
+bip01_l_forearm	 	 		= 1, 0.06
+bip01_l_hand	 	 		= 1, 0.02
+
+bip01_r_clavicle	 		= 1, 0.06
+bip01_r_upperarm	 		= 1, 0.06
+bip01_r_forearm	 	 		= 1, 0.06
+bip01_r_hand	 	 		= 1, 0.02
+
+bip01_l_thigh	 	 		= 1, 0.06
+bip01_l_calf	 	 		= 1, 0.06
+bip01_l_foot	 	 		= 1, 0.02
+bip01_r_thigh	 	 		= 1, 0.06
+bip01_r_calf	 	 		= 1, 0.06
+bip01_r_foot	 	 		= 1, 0.02
+
+[body_damage_010] ;  --- used by 12
+bip01_pelvis 				= 1, 0.1
+bip01_spine 		 		= 1, 0.1
+bip01_spine1 		 		= 1, 0.1
+bip01_spine2 		 		= 1, 0.1
+
+bip01_l_clavicle	 		= 1, 0.1
+bip01_l_upperarm	 		= 1, 0.1
+bip01_l_forearm	 	 		= 1, 0.1
+bip01_l_hand	 	 		= 1, 0.02
+
+bip01_r_clavicle	 		= 1, 0.1
+bip01_r_upperarm	 		= 1, 0.1
+bip01_r_forearm	 	 		= 1, 0.1
+bip01_r_hand	 	 		= 1, 0.02
+
+bip01_l_thigh	 	 		= 1, 0.1
+bip01_l_calf	 	 		= 1, 0.1
+bip01_l_foot	 	 		= 1, 0.02
+bip01_r_thigh	 	 		= 1, 0.1
+bip01_r_calf	 	 		= 1, 0.1
+bip01_r_foot	 	 		= 1, 0.02
+
+[body_damage_011] ;  --- not used
+bip01_pelvis 				= 1, 0.13
+bip01_spine 		 		= 1, 0.13
+bip01_spine1 		 		= 1, 0.13
+bip01_spine2 		 		= 1, 0.13
+
+bip01_l_clavicle	 		= 1, 0.13
+bip01_l_upperarm	 		= 1, 0.13
+bip01_l_forearm	 	 		= 1, 0.13
+bip01_l_hand	 	 		= 1, 0.04
+
+bip01_r_clavicle	 		= 1, 0.13
+bip01_r_upperarm	 		= 1, 0.13
+bip01_r_forearm	 	 		= 1, 0.13
+bip01_r_hand	 	 		= 1, 0.04
+
+bip01_l_thigh	 	 		= 1, 0.13
+bip01_l_calf	 	 		= 1, 0.13
+bip01_l_foot	 	 		= 1, 0.05
+bip01_r_thigh	 	 		= 1, 0.13
+bip01_r_calf	 	 		= 1, 0.13
+bip01_r_foot	 	 		= 1, 0.05
+
+[body_damage_0125] ; --- used by stalker nebo?
+bip01_pelvis 				= 1, 0.18
+bip01_spine 		 		= 1, 0.18
+bip01_spine1 		 		= 1, 0.18
+bip01_spine2 		 		= 1, 0.18
+
+bip01_l_clavicle	 		= 1, 0.16
+bip01_l_upperarm	 		= 1, 0.16
+bip01_l_forearm	 	 		= 1, 0.16
+bip01_l_hand	 	 		= 1, 0.06
+
+bip01_r_clavicle	 		= 1, 0.125
+bip01_r_upperarm	 		= 1, 0.125
+bip01_r_forearm	 	 		= 1, 0.125
+bip01_r_hand	 	 		= 1, 0.06
+
+bip01_l_thigh	 	 		= 1, 0.16
+bip01_l_calf	 	 		= 1, 0.16
+bip01_l_foot	 	 		= 1, 0.07
+bip01_r_thigh	 	 		= 1, 0.16
+bip01_r_calf	 	 		= 1, 0.16
+bip01_r_foot	 	 		= 1, 0.07
+
+[body_damage_013] ; --- top of light armor hybrid, start of light combat 
+bip01_pelvis 				= 1, 0.2
+bip01_spine 		 		= 1, 0.2
+bip01_spine1 		 		= 1, 0.2
+bip01_spine2 		 		= 1, 0.2
+
+bip01_l_clavicle	 		= 1, 0.18
+bip01_l_upperarm	 		= 1, 0.18
+bip01_l_forearm	 	 		= 1, 0.18
+bip01_l_hand	 	 		= 1, 0.08
+
+bip01_r_clavicle	 		= 1, 0.18
+bip01_r_upperarm	 		= 1, 0.18
+bip01_r_forearm	 	 		= 1, 0.18
+bip01_r_hand	 	 		= 1, 0.08
+
+bip01_l_thigh	 	 		= 1, 0.18
+bip01_l_calf	 	 		= 1, 0.18
+bip01_l_foot	 	 		= 1, 0.08
+bip01_r_thigh	 	 		= 1, 0.18
+bip01_r_calf	 	 		= 1, 0.18
+bip01_r_foot	 	 		= 1, 0.08
+
+[body_damage_014] ; --- used by stalker proto 1
+bip01_pelvis 				= 1, 0.22
+bip01_spine 		 		= 1, 0.22
+bip01_spine1 		 		= 1, 0.22
+bip01_spine2 		 		= 1, 0.22
+
+bip01_l_clavicle	 		= 1, 0.18
+bip01_l_upperarm	 		= 1, 0.18
+bip01_l_forearm	 	 		= 1, 0.18
+bip01_l_hand	 	 		= 1, 0.06
+
+bip01_r_clavicle	 		= 1, 0.18
+bip01_r_upperarm	 		= 1, 0.18
+bip01_r_forearm	 	 		= 1, 0.18
+bip01_r_hand	 	 		= 1, 0.06
+
+bip01_l_thigh	 	 		= 1, 0.18
+bip01_l_calf	 	 		= 1, 0.18
+bip01_l_foot	 	 		= 1, 0.06
+bip01_r_thigh	 	 		= 1, 0.18
+bip01_r_calf	 	 		= 1, 0.18
+bip01_r_foot	 	 		= 1, 0.06
+
+[body_damage_015] ; --- used a lot, 33.
+bip01_pelvis 				= 1, 0.25
+bip01_spine 		 		= 1, 0.25
+bip01_spine1 		 		= 1, 0.25
+bip01_spine2 		 		= 1, 0.25
+
+bip01_l_clavicle	 		= 1, 0.2
+bip01_l_upperarm	 		= 1, 0.2
+bip01_l_forearm	 	 		= 1, 0.2
+bip01_l_hand	 	 		= 1, 0.08
+
+bip01_r_clavicle	 		= 1, 0.2
+bip01_r_upperarm	 		= 1, 0.2
+bip01_r_forearm	 	 		= 1, 0.2
+bip01_r_hand	 	 		= 1, 0.08
+
+bip01_l_thigh	 	 		= 1, 0.2
+bip01_l_calf	 	 		= 1, 0.2
+bip01_l_foot	 	 		= 1, 0.08
+bip01_r_thigh	 	 		= 1, 0.2
+bip01_r_calf	 	 		= 1, 0.2
+bip01_r_foot	 	 		= 1, 0.08
+
+[body_damage_017] ; --- max of light armor
+bip01_pelvis 				= 1, 0.27
+bip01_spine 		 		= 1, 0.27
+bip01_spine1 		 		= 1, 0.27
+bip01_spine2 		 		= 1, 0.27
+
+bip01_l_clavicle	 		= 1, 0.21
+bip01_l_upperarm	 		= 1, 0.21
+bip01_l_forearm	 	 		= 1, 0.21
+bip01_l_hand	 	 		= 1, 0.1
+
+bip01_r_clavicle	 		= 1, 0.21
+bip01_r_upperarm	 		= 1, 0.21
+bip01_r_forearm	 	 		= 1, 0.21
+bip01_r_hand	 	 		= 1, 0.1
+
+bip01_l_thigh	 	 		= 1, 0.21
+bip01_l_calf	 	 		= 1, 0.21
+bip01_l_foot	 	 		= 1, 0.1
+bip01_r_thigh	 	 		= 1, 0.21
+bip01_r_calf	 	 		= 1, 0.21
+bip01_r_foot	 	 		= 1, 0.1
+
+[body_damage_020] ; ---- bottom of medium class
+bip01_pelvis 				= 1, 0.3
+bip01_spine 		 		= 1, 0.3
+bip01_spine1 		 		= 1, 0.3
+bip01_spine2 		 		= 1, 0.3
+
+bip01_l_clavicle	 		= 1, 0.25
+bip01_l_upperarm	 		= 1, 0.25
+bip01_l_forearm	 	 		= 1, 0.25
+bip01_l_hand	 	 		= 1, 0.12
+
+bip01_r_clavicle	 		= 1, 0.25
+bip01_r_upperarm	 		= 1, 0.25
+bip01_r_forearm	 	 		= 1, 0.25
+bip01_r_hand	 	 		= 1, 0.12
+
+bip01_l_thigh	 	 		= 1, 0.25
+bip01_l_calf	 	 		= 1, 0.25
+bip01_l_foot	 	 		= 1, 0.12
+bip01_r_thigh	 	 		= 1, 0.25
+bip01_r_calf	 	 		= 1, 0.25
+bip01_r_foot	 	 		= 1, 0.12
+
+[body_damage_021] ; --- hybrid medium, bottom of medium combat
+bip01_pelvis 				= 1, 0.35
+bip01_spine 		 		= 1, 0.35
+bip01_spine1 		 		= 1, 0.35
+bip01_spine2 		 		= 1, 0.35
+
+bip01_l_clavicle	 		= 1, 0.27
+bip01_l_upperarm	 		= 1, 0.27
+bip01_l_forearm	 	 		= 1, 0.27
+bip01_l_hand	 	 		= 1, 0.16
+
+bip01_r_clavicle	 		= 1, 0.27
+bip01_r_upperarm	 		= 1, 0.27
+bip01_r_forearm	 	 		= 1, 0.27
+bip01_r_hand	 	 		= 1, 0.16
+
+bip01_l_thigh	 	 		= 1, 0.27
+bip01_l_calf	 	 		= 1, 0.27
+bip01_l_foot	 	 		= 1, 0.16
+bip01_r_thigh	 	 		= 1, 0.27
+bip01_r_calf	 	 		= 1, 0.27
+bip01_r_foot	 	 		= 1, 0.16
+
+[body_damage_025] ; ---- stalker hero?
+bip01_pelvis 				= 1, 0.4
+bip01_spine 		 		= 1, 0.4
+bip01_spine1 		 		= 1, 0.4
+bip01_spine2 		 		= 1, 0.4
+
+bip01_l_clavicle	 		= 1, 0.33
+bip01_l_upperarm	 		= 1, 0.33
+bip01_l_forearm	 	 		= 1, 0.33
+bip01_l_hand	 	 		= 1, 0.2
+
+bip01_r_clavicle	 		= 1, 0.33
+bip01_r_upperarm	 		= 1, 0.33
+bip01_r_forearm	 	 		= 1, 0.33
+bip01_r_hand	 	 		= 1, 0.2
+
+bip01_l_thigh	 	 		= 1, 0.33
+bip01_l_calf	 	 		= 1, 0.33
+bip01_l_foot	 	 		= 1, 0.2
+bip01_r_thigh	 	 		= 1, 0.33
+bip01_r_calf	 	 		= 1, 0.33
+bip01_r_foot	 	 		= 1, 0.2
+
+[body_damage_027] ; --- not used
+bip01_pelvis 				= 1, 0.45
+bip01_spine 		 		= 1, 0.45
+bip01_spine1 		 		= 1, 0.45
+bip01_spine2 		 		= 1, 0.45
+
+bip01_l_clavicle	 		= 1, 0.36
+bip01_l_upperarm	 		= 1, 0.36
+bip01_l_forearm	 	 		= 1, 0.36
+bip01_l_hand	 	 		= 1, 0.21
+
+bip01_r_clavicle	 		= 1, 0.36
+bip01_r_upperarm	 		= 1, 0.36
+bip01_r_forearm	 	 		= 1, 0.36
+bip01_r_hand	 	 		= 1, 0.21
+
+bip01_l_thigh	 	 		= 1, 0.36
+bip01_l_calf	 	 		= 1, 0.36
+bip01_l_foot	 	 		= 1, 0.21
+bip01_r_thigh	 	 		= 1, 0.36
+bip01_r_calf	 	 		= 1, 0.36
+bip01_r_foot	 	 		= 1, 0.21
+
+[body_damage_030] ; ---- used on an exo light, shift down probably
+bip01_pelvis 				= 1, 0.5
+bip01_spine 		 		= 1, 0.5
+bip01_spine1 		 		= 1, 0.5
+bip01_spine2 		 		= 1, 0.5
+
+bip01_l_clavicle	 		= 1, 0.41
+bip01_l_upperarm	 		= 1, 0.41
+bip01_l_forearm	 	 		= 1, 0.41
+bip01_l_hand	 	 		= 1, 0.23
+
+bip01_r_clavicle	 		= 1, 0.41
+bip01_r_upperarm	 		= 1, 0.41
+bip01_r_forearm	 	 		= 1, 0.41
+bip01_r_hand	 	 		= 1, 0.23
+
+bip01_l_thigh	 	 		= 1, 0.41
+bip01_l_calf	 	 		= 1, 0.41
+bip01_l_foot	 	 		= 1, 0.23
+bip01_r_thigh	 	 		= 1, 0.41
+bip01_r_calf	 	 		= 1, 0.41
+bip01_r_foot	 	 		= 1, 0.23
+
+[body_damage_032] ; --- skat low
+bip01_pelvis 				= 1, 0.6
+bip01_spine 		 		= 1, 0.6
+bip01_spine1 		 		= 1, 0.6
+bip01_spine2 		 		= 1, 0.6
+
+bip01_l_clavicle	 		= 1, 0.51
+bip01_l_upperarm	 		= 1, 0.51
+bip01_l_forearm	 	 		= 1, 0.51
+bip01_l_hand	 	 		= 1, 0.25
+
+bip01_r_clavicle	 		= 1, 0.51
+bip01_r_upperarm	 		= 1, 0.51
+bip01_r_forearm	 	 		= 1, 0.51
+bip01_r_hand	 	 		= 1, 0.25
+
+bip01_l_thigh	 	 		= 1, 0.51
+bip01_l_calf	 	 		= 1, 0.51
+bip01_l_foot	 	 		= 1, 0.25
+bip01_r_thigh	 	 		= 1, 0.51
+bip01_r_calf	 	 		= 1, 0.51
+bip01_r_foot	 	 		= 1, 0.25
+
+[body_damage_034] ; --- skat medium
+bip01_pelvis 				= 1, 0.65
+bip01_spine 		 		= 1, 0.65
+bip01_spine1 		 		= 1, 0.65
+bip01_spine2 		 		= 1, 0.65
+
+bip01_l_clavicle	 		= 1, 0.57
+bip01_l_upperarm	 		= 1, 0.57
+bip01_l_forearm	 	 		= 1, 0.57
+bip01_l_hand	 	 		= 1, 0.27
+
+bip01_r_clavicle	 		= 1, 0.57
+bip01_r_upperarm	 		= 1, 0.57
+bip01_r_forearm	 	 		= 1, 0.57
+bip01_r_hand	 	 		= 1, 0.27
+
+bip01_l_thigh	 	 		= 1, 0.57
+bip01_l_calf	 	 		= 1, 0.57
+bip01_l_foot	 	 		= 1, 0.27
+bip01_r_thigh	 	 		= 1, 0.57
+bip01_r_calf	 	 		= 1, 0.57
+bip01_r_foot	 	 		= 1, 0.27
+
+[body_damage_035] ; --- skat medium
+bip01_pelvis 				= 1, 0.65
+bip01_spine 		 		= 1, 0.65
+bip01_spine1 		 		= 1, 0.65
+bip01_spine2 		 		= 1, 0.65
+
+bip01_l_clavicle	 		= 1, 0.6
+bip01_l_upperarm	 		= 1, 0.6
+bip01_l_forearm	 	 		= 1, 0.6
+bip01_l_hand	 	 		= 1, 0.3
+
+bip01_r_clavicle	 		= 1, 0.6
+bip01_r_upperarm	 		= 1, 0.6
+bip01_r_forearm	 	 		= 1, 0.6
+bip01_r_hand	 	 		= 1, 0.3
+
+bip01_l_thigh	 	 		= 1, 0.6
+bip01_l_calf	 	 		= 1, 0.6
+bip01_l_foot	 	 		= 1, 0.3
+bip01_r_thigh	 	 		= 1, 0.6
+bip01_r_calf	 	 		= 1, 0.6
+bip01_r_foot	 	 		= 1, 0.3
+
+[body_damage_036] ; ---- skat high
+bip01_pelvis 				= 1, 0.7
+bip01_spine 		 		= 1, 0.7
+bip01_spine1 		 		= 1, 0.7
+bip01_spine2 		 		= 1, 0.7
+
+bip01_l_clavicle	 		= 1, 0.61
+bip01_l_upperarm	 		= 1, 0.61
+bip01_l_forearm	 	 		= 1, 0.61
+bip01_l_hand	 	 		= 1, 0.31
+
+bip01_r_clavicle	 		= 1, 0.61
+bip01_r_upperarm	 		= 1, 0.61
+bip01_r_forearm	 	 		= 1, 0.61
+bip01_r_hand	 	 		= 1, 0.31
+
+bip01_l_thigh	 	 		= 1, 0.61
+bip01_l_calf	 	 		= 1, 0.61
+bip01_l_foot	 	 		= 1, 0.31
+bip01_r_thigh	 	 		= 1, 0.61
+bip01_r_calf	 	 		= 1, 0.61
+bip01_r_foot	 	 		= 1, 0.31
+
+[body_damage_039] ; --- 
+bip01_pelvis 				= 1, 0.7
+bip01_spine 		 		= 1, 0.7
+bip01_spine1 		 		= 1, 0.7
+bip01_spine2 		 		= 1, 0.7
+
+bip01_l_clavicle	 		= 1, 0.7
+bip01_l_upperarm	 		= 1, 0.7
+bip01_l_forearm	 	 		= 1, 0.7
+bip01_l_hand	 	 		= 1, 0.35
+
+bip01_r_clavicle	 		= 1, 0.7
+bip01_r_upperarm	 		= 1, 0.7
+bip01_r_forearm	 	 		= 1, 0.7
+bip01_r_hand	 	 		= 1, 0.35
+
+bip01_l_thigh	 	 		= 1, 0.7
+bip01_l_calf	 	 		= 1, 0.7
+bip01_l_foot	 	 		= 1, 0.35
+bip01_r_thigh	 	 		= 1, 0.7
+bip01_r_calf	 	 		= 1, 0.7
+bip01_r_foot	 	 		= 1, 0.35
+
+[body_damage_040] ; ---- 
+bip01_pelvis 				= 1, 0.75
+bip01_spine 		 		= 1, 0.75
+bip01_spine1 		 		= 1, 0.75
+bip01_spine2 		 		= 1, 0.75
+
+bip01_l_clavicle	 		= 1, 0.65
+bip01_l_upperarm	 		= 1, 0.65
+bip01_l_forearm	 	 		= 1, 0.65
+bip01_l_hand	 	 		= 1, 0.35
+
+bip01_r_clavicle	 		= 1, 0.65
+bip01_r_upperarm	 		= 1, 0.65
+bip01_r_forearm	 	 		= 1, 0.65
+bip01_r_hand	 	 		= 1, 0.35
+
+bip01_l_thigh	 	 		= 1, 0.65
+bip01_l_calf	 	 		= 1, 0.65
+bip01_l_foot	 	 		= 1, 0.35
+bip01_r_thigh	 	 		= 1, 0.65
+bip01_r_calf	 	 		= 1, 0.65
+bip01_r_foot	 	 		= 1, 0.35
+
+[body_damage_041] ; --- 	
+bip01_pelvis 				= 1, 0.75
+bip01_spine 		 		= 1, 0.75
+bip01_spine1 		 		= 1, 0.75
+bip01_spine2 		 		= 1, 0.75
+
+bip01_l_clavicle	 		= 1, 0.75
+bip01_l_upperarm	 		= 1, 0.75
+bip01_l_forearm	 	 		= 1, 0.75
+bip01_l_hand	 	 		= 1, 0.35
+
+bip01_r_clavicle	 		= 1, 0.75
+bip01_r_upperarm	 		= 1, 0.75
+bip01_r_forearm	 	 		= 1, 0.75
+bip01_r_hand	 	 		= 1, 0.35
+
+bip01_l_thigh	 	 		= 1, 0.75
+bip01_l_calf	 	 		= 1, 0.75
+bip01_l_foot	 	 		= 1, 0.35
+bip01_r_thigh	 	 		= 1, 0.75
+bip01_r_calf	 	 		= 1, 0.75
+bip01_r_foot	 	 		= 1, 0.35
+
+[body_damage_042] ; ---- exo
+bip01_pelvis 				= 1, 0.8
+bip01_spine 		 		= 1, 0.8
+bip01_spine1 		 		= 1, 0.8
+bip01_spine2 		 		= 1, 0.8
+
+bip01_l_clavicle	 		= 1, 0.72
+bip01_l_upperarm	 		= 1, 0.72
+bip01_l_forearm	 	 		= 1, 0.72
+bip01_l_hand	 	 		= 1, 0.36
+
+bip01_r_clavicle	 		= 1, 0.72
+bip01_r_upperarm	 		= 1, 0.72
+bip01_r_forearm	 	 		= 1, 0.72
+bip01_r_hand	 	 		= 1, 0.36
+
+bip01_l_thigh	 	 		= 1, 0.72
+bip01_l_calf	 	 		= 1, 0.72
+bip01_l_foot	 	 		= 1, 0.36
+bip01_r_thigh	 	 		= 1, 0.72
+bip01_r_calf	 	 		= 1, 0.72
+bip01_r_foot	 	 		= 1, 0.36
+
+[body_damage_043] ; --- 
+bip01_pelvis 				= 1, 0.8
+bip01_spine 		 		= 1, 0.8
+bip01_spine1 		 		= 1, 0.8
+bip01_spine2 		 		= 1, 0.8
+
+bip01_l_clavicle	 		= 1, 0.8
+bip01_l_upperarm	 		= 1, 0.8
+bip01_l_forearm	 	 		= 1, 0.8
+bip01_l_hand	 	 		= 1, 0.4
+
+bip01_r_clavicle	 		= 1, 0.8
+bip01_r_upperarm	 		= 1, 0.8
+bip01_r_forearm	 	 		= 1, 0.8
+bip01_r_hand	 	 		= 1, 0.4
+
+bip01_l_thigh	 	 		= 1, 0.8
+bip01_l_calf	 	 		= 1, 0.8
+bip01_l_foot	 	 		= 1, 0.4
+bip01_r_thigh	 	 		= 1, 0.8
+bip01_r_calf	 	 		= 1, 0.8
+bip01_r_foot	 	 		= 1, 0.4
+
+[body_damage_044] ; --- not used
+bip01_pelvis 				= 1, 0.85
+bip01_spine 		 		= 1, 0.85
+bip01_spine1 		 		= 1, 0.85
+bip01_spine2 		 		= 1, 0.85
+
+bip01_l_clavicle	 		= 1, 0.78
+bip01_l_upperarm	 		= 1, 0.78
+bip01_l_forearm	 	 		= 1, 0.78
+bip01_l_hand	 	 		= 1, 0.42
+
+bip01_r_clavicle	 		= 1, 0.78
+bip01_r_upperarm	 		= 1, 0.78
+bip01_r_forearm	 	 		= 1, 0.78
+bip01_r_hand	 	 		= 1, 0.42
+
+bip01_l_thigh	 	 		= 1, 0.78
+bip01_l_calf	 	 		= 1, 0.78
+bip01_l_foot	 	 		= 1, 0.42
+bip01_r_thigh	 	 		= 1, 0.78
+bip01_r_calf	 	 		= 1, 0.78
+bip01_r_foot	 	 		= 1, 0.42
+
+[body_damage_045] ; --- Exo non-nosrog
+bip01_pelvis 				= 1, 0.85
+bip01_spine 		 		= 1, 0.85
+bip01_spine1 		 		= 1, 0.85
+bip01_spine2 		 		= 1, 0.85
+
+bip01_l_clavicle	 		= 1, 0.85
+bip01_l_upperarm	 		= 1, 0.85
+bip01_l_forearm	 	 		= 1, 0.85
+bip01_l_hand	 	 		= 1, 0.55
+
+bip01_r_clavicle	 		= 1, 0.85
+bip01_r_upperarm	 		= 1, 0.85
+bip01_r_forearm	 	 		= 1, 0.85
+bip01_r_hand	 	 		= 1, 0.55
+
+bip01_l_thigh	 	 		= 1, 0.85
+bip01_l_calf	 	 		= 1, 0.85
+bip01_l_foot	 	 		= 1, 0.55
+bip01_r_thigh	 	 		= 1, 0.85
+bip01_r_calf	 	 		= 1, 0.85
+bip01_r_foot	 	 		= 1, 0.55
+
+[body_damage_046] ; --- not used
+bip01_pelvis 				= 1, 0.9
+bip01_spine 		 		= 1, 0.9
+bip01_spine1 		 		= 1, 0.9
+bip01_spine2 		 		= 1, 0.9
+
+bip01_l_clavicle	 		= 1, 0.85
+bip01_l_upperarm	 		= 1, 0.85
+bip01_l_forearm	 	 		= 1, 0.85
+bip01_l_hand	 	 		= 1, 0.55
+
+bip01_r_clavicle	 		= 1, 0.85
+bip01_r_upperarm	 		= 1, 0.85
+bip01_r_forearm	 	 		= 1, 0.85
+bip01_r_hand	 	 		= 1, 0.55
+
+bip01_l_thigh	 	 		= 1, 0.85
+bip01_l_calf	 	 		= 1, 0.85
+bip01_l_foot	 	 		= 1, 0.55
+bip01_r_thigh	 	 		= 1, 0.85
+bip01_r_calf	 	 		= 1, 0.85
+bip01_r_foot	 	 		= 1, 0.55
+
+[body_damage_047] ; --- used by 2		
+bip01_pelvis 				= 1, 0.9
+bip01_spine 		 		= 1, 0.9
+bip01_spine1 		 		= 1, 0.9
+bip01_spine2 		 		= 1, 0.9
+
+bip01_l_clavicle	 		= 1, 0.9
+bip01_l_upperarm	 		= 1, 0.9
+bip01_l_forearm	 	 		= 1, 0.9
+bip01_l_hand	 	 		= 1, 0.6
+
+bip01_r_clavicle	 		= 1, 0.9
+bip01_r_upperarm	 		= 1, 0.9
+bip01_r_forearm	 	 		= 1, 0.9
+bip01_r_hand	 	 		= 1, 0.6
+
+bip01_l_thigh	 	 		= 1, 0.9
+bip01_l_calf	 	 		= 1, 0.9
+bip01_l_foot	 	 		= 1, 0.6
+bip01_r_thigh	 	 		= 1, 0.9
+bip01_r_calf	 	 		= 1, 0.9
+bip01_r_foot	 	 		= 1, 0.6
+
+[body_damage_049] ; ---- nosrog
+bip01_pelvis 				= 1, 0.95
+bip01_spine 		 		= 1, 0.95
+bip01_spine1 		 		= 1, 0.95
+bip01_spine2 		 		= 1, 0.95
+
+bip01_l_clavicle	 		= 1, 0.88
+bip01_l_upperarm	 		= 1, 0.88
+bip01_l_forearm	 	 		= 1, 0.88
+bip01_l_hand	 	 		= 1, 0.63
+
+bip01_r_clavicle	 		= 1, 0.88
+bip01_r_upperarm	 		= 1, 0.88
+bip01_r_forearm	 	 		= 1, 0.88
+bip01_r_hand	 	 		= 1, 0.63
+
+bip01_l_thigh	 	 		= 1, 0.88
+bip01_l_calf	 	 		= 1, 0.88
+bip01_l_foot	 	 		= 1, 0.63
+bip01_r_thigh	 	 		= 1, 0.88
+bip01_r_calf	 	 		= 1, 0.88
+bip01_r_foot	 	 		= 1, 0.63
+
+[body_damage_050] ; --- not used
+bip01_pelvis 				= 1, 0.95
+bip01_spine 		 		= 1, 0.95
+bip01_spine1 		 		= 1, 0.95
+bip01_spine2 		 		= 1, 0.95
+
+bip01_l_clavicle	 		= 1, 0.95
+bip01_l_upperarm	 		= 1, 0.95
+bip01_l_forearm	 	 		= 1, 0.95
+bip01_l_hand	 	 		= 1, 0.65
+
+bip01_r_clavicle	 		= 1, 0.95
+bip01_r_upperarm	 		= 1, 0.95
+bip01_r_forearm	 	 		= 1, 0.95
+bip01_r_hand	 	 		= 1, 0.65
+
+bip01_l_thigh	 	 		= 1, 0.95
+bip01_l_calf	 	 		= 1, 0.95
+bip01_l_foot	 	 		= 1, 0.6
+bip01_r_thigh	 	 		= 1, 0.95
+bip01_r_calf	 	 		= 1, 0.95
+bip01_r_foot	 	 		= 1, 0.65
+
+[body_damage_052] ; -- not used
+bip01_pelvis 				= 1, 1.0
+bip01_spine 		 		= 1, 1.0
+bip01_spine1 		 		= 1, 1.0
+bip01_spine2 		 		= 1, 1.0
+
+bip01_l_clavicle	 		= 1, 1.0
+bip01_l_upperarm	 		= 1, 1.0
+bip01_l_forearm	 	 		= 1, 1.0
+bip01_l_hand	 	 		= 1, 0.7
+
+bip01_r_clavicle	 		= 1, 1.0
+bip01_r_upperarm	 		= 1, 1.0
+bip01_r_forearm	 	 		= 1, 1.0
+bip01_r_hand	 	 		= 1, 0.7
+
+bip01_l_thigh	 	 		= 1, 1.0
+bip01_l_calf	 	 		= 1, 1.0
+bip01_l_foot	 	 		= 1, 1.0
+bip01_r_thigh	 	 		= 1, 1.0
+bip01_r_calf	 	 		= 1, 1.0
+bip01_r_foot	 	 		= 1, 0.7
+
+;***************************************************************
+; HEAD SECTIONS
+;***************************************************************
+[head_damage_00]; --- none
+bip01_neck 			 		= 1, 0.0
+bip01_head 			 		= 1, 0.0
+eyelid_1 			 		= 1, 0.0
+eye_left 			 		= 1, 0.0
+eye_right 			 		= 1, 0.0
+jaw_1 		 		 		= 1, 0.0
+
+[head_damage_0011]; --- cloth
+bip01_neck 			 		= 1, 0.01
+bip01_head 			 		= 1, 0.01
+eyelid_1 			 		= 1, 0.01
+eye_left 			 		= 1, 0.01
+eye_right 			 		= 1, 0.01
+jaw_1 		 		 		= 1, 0.01
+
+[head_damage_003]; ---- respirator mask stalkers
+bip01_neck 			 		= 1, 0.03
+bip01_head 			 		= 1, 0.03
+eyelid_1 			 		= 1, 0.03
+eye_left 			 		= 1, 0.03
+eye_right 			 		= 1, 0.03
+jaw_1 		 		 		= 1, 0.03
+
+[head_damage_007];  ---- gas mask
+bip01_neck 			 		= 1, 0.07
+bip01_head 			 		= 1, 0.07
+eyelid_1 			 		= 1, 0.07
+eye_left 			 		= 1, 0.07
+eye_right 			 		= 1, 0.07
+jaw_1 		 		 		= 1, 0.07
+
+[head_damage_010];  ---- not used
+bip01_neck 			 		= 1, 0.10
+bip01_head 			 		= 1, 0.10
+eyelid_1 			 		= 1, 0.10
+eye_left 			 		= 1, 0.10
+eye_right 			 		= 1, 0.10
+jaw_1 		 		 		= 1, 0.10
+
+[head_damage_012];  ---- not used
+bip01_neck 			 		= 1, 0.15
+bip01_head 			 		= 1, 0.15
+eyelid_1 			 		= 1, 0.15
+eye_left 			 		= 1, 0.15
+eye_right 			 		= 1, 0.15
+jaw_1 		 		 		= 1, 0.15
+
+[head_damage_015]; ---- used by 7
+bip01_neck 			 		= 1, 0.18
+bip01_head 			 		= 1, 0.18
+eyelid_1 			 		= 1, 0.18
+eye_left 			 		= 1, 0.18
+eye_right 			 		= 1, 0.18
+jaw_1 		 		 		= 1, 0.18
+
+[head_damage_hardhat]; --- used by 18
+bip01_neck 			 		= 1, 0.05
+bip01_head 			 		= 1, 0.25
+eyelid_1 			 		= 1, 0.05
+eye_left 			 		= 1, 0.05
+eye_right 			 		= 1, 0.05
+jaw_1 		 		 		= 1, 0.02
+
+[head_damage_hard]; --- not used
+bip01_neck 			 		= 1, 0.07
+bip01_head 			 		= 1, 0.28
+eyelid_1 			 		= 1, 0.07
+eye_left 			 		= 1, 0.07
+eye_right 			 		= 1, 0.07
+jaw_1 		 		 		= 1, 0.07
+
+[head_damage_combi];  ---- not used
+bip01_neck 			 		= 1, 0.14
+bip01_head 			 		= 1, 0.28
+eyelid_1 			 		= 1, 0.14
+eye_left 			 		= 1, 0.14
+eye_right 			 		= 1, 0.14
+jaw_1 		 		 		= 1, 0.14
+
+[head_damage_020] ---- not used
+bip01_neck 			 		= 1, 0.20
+bip01_head 			 		= 1, 0.20
+eyelid_1 			 		= 1, 0.20
+eye_left 			 		= 1, 0.20
+eye_right 			 		= 1, 0.20
+jaw_1 		 		 		= 1, 0.20
+
+[head_damage_027];  ---- not used
+bip01_neck 			 		= 1, 0.27
+bip01_head 			 		= 1, 0.27
+eyelid_1 			 		= 1, 0.27
+eye_left 			 		= 1, 0.27
+eye_right 			 		= 1, 0.27
+jaw_1 		 		 		= 1, 0.27
+
+[head_damage_030]; ---- used by 29
+bip01_neck 			 		= 1, 0.36
+bip01_head 			 		= 1, 0.36
+eyelid_1 			 		= 1, 0.36
+eye_left 			 		= 1, 0.36
+eye_right 			 		= 1, 0.36
+jaw_1 		 		 		= 1, 0.36
+
+[head_damage_032];  ---- not used
+bip01_neck 			 		= 1, 0.44
+bip01_head 			 		= 1, 0.44
+eyelid_1 			 		= 1, 0.44
+eye_left 			 		= 1, 0.44
+eye_right 			 		= 1, 0.44
+jaw_1 		 		 		= 1, 0.44
+
+[head_damage_035]; --- used by nosrog 
+bip01_neck 			 		= 1, 0.66
+bip01_head 			 		= 1, 0.66
+eyelid_1 			 		= 1, 0.66
+eye_left 			 		= 1, 0.66
+eye_right 			 		= 1, 0.66
+jaw_1 		 		 		= 1, 0.66
+
+[head_damage_036];  ---- not used
+bip01_neck 			 		= 1, 0.7
+bip01_head 			 		= 1, 0.7
+eyelid_1 			 		= 1, 0.7
+eye_left 			 		= 1, 0.7
+eye_right 			 		= 1, 0.7
+jaw_1 		 		 		= 1, 0.7
+
+[head_damage_040]; sparta ; UL 752 lvl. 8 
+bip01_neck 			 		= 1, 0.75
+bip01_head 			 		= 1, 0.75
+eyelid_1 			 		= 1, 0.75
+eye_left 			 		= 1, 0.75
+eye_right 			 		= 1, 0.75
+jaw_1 		 		 		= 1, 0.75
+
+[head_damage_042];  ---- not used
+bip01_neck 			 		= 1, 0.8
+bip01_head 			 		= 1, 0.8
+eyelid_1 			 		= 1, 0.8
+eye_left 			 		= 1, 0.8
+eye_right 			 		= 1, 0.8
+jaw_1 		 		 		= 1, 0.8
+
+[head_damage_045]; ---- not used
+bip01_neck 			 		= 1, 0.9
+bip01_head 			 		= 1, 0.9
+eyelid_1 			 		= 1, 0.9
+eye_left 			 		= 1, 0.9
+eye_right 			 		= 1, 0.9
+jaw_1 		 		 		= 1, 0.9
+
