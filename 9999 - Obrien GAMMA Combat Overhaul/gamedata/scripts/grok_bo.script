@@ -881,7 +881,7 @@ function npc_on_before_hit(npc,shit,bone_id)
 	if shit.power ~= pbadamage.power and shit.power ~= 0
 		then pba_mult = pbadamage.power / shit.power
 	end
-log(string.format("[PBA Hit Mult] pba=%.3f hit=%.3f mult=%.3f", pbadamage.power, shit.power, pba_mult))
+-- log(string.format("[PBA Hit Mult] pba=%.3f hit=%.3f mult=%.3f", pbadamage.power, shit.power, pba_mult))
 	
 -- ===== ARMOR_BR STYLE DAMAGE (NPCs) =====
 
@@ -915,7 +915,7 @@ shit.power = shit.power  * custom_bone_dmg_mult * sniper_bad_bone_shit_reduce * 
 
 
 
-log(string.format("[PLAYER to NPC] ammo=%s k_hit=%.3f k_ap=%.3f BR=%.3f bone_mult=%.3f final_pre_dist=%.3f fac_res=%.3f", ammo_section, k_hit, k_ap, armor_br, custom_bone_dmg_mult, shit.power, faction_res))
+-- log(string.format("[PLAYER to NPC] ammo=%s k_hit=%.3f k_ap=%.3f BR=%.3f bone_mult=%.3f final_pre_dist=%.3f fac_res=%.3f", ammo_section, k_hit, k_ap, armor_br, custom_bone_dmg_mult, shit.power, faction_res))
 
 shit.power = shit.power / ( 1 + dist / 200 * ( air_res * 0.5 / ( 1 - air_res + 0.1 )))
 

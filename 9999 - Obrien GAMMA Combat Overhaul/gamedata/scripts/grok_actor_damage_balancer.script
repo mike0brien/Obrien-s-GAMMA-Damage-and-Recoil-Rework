@@ -460,9 +460,11 @@ function get_protection(shit,bone_id)
 	end)
 
 	--- Start the final protection calculation, ballistic vs elemental should be separated above.
+	local total_armor_helm = 0
 	if protection == "FireWound" then
 		if headshot == 1 then
 			total_armor = (helmet_bone_value)
+			total_armor_helm = total_armor
 			total_protection = math.ceil((helmet_protection + artefacts_protection + booster_protection) * 100)/100
 		else
 			total_armor = (armor_bone_value + artefacts_ap_res)
@@ -485,7 +487,7 @@ function get_protection(shit,bone_id)
 			total_protection = limiter
 	end
 
-	return total_protection, limiter, armor_protection, helmet_protection, armor_bone_value, helmet_bone_value, total_armor	
+	return total_protection, limiter, armor_protection, helmet_protection, total_armor, total_armor_helm
 
 end
 
@@ -671,7 +673,7 @@ function shit_booster(shit, bone_id)
 	end
 	
 	--- local player_protection = get_protection(shit,bone_id)
-	local total_protection, limiter, armor_protection, helmet_protection, armor_bone_value, helmet_bone_value, total_armor = get_protection(shit, bone_id)
+	local total_protection, limiter, armor_protection, helmet_protection, total_armor, total_armor_helm = get_protection(shit, bone_id)
 	
 	if total_protection == 0 then
 		total_protection = 0.001
@@ -762,7 +764,7 @@ function shit_booster(shit, bone_id)
 	
 	db.actor:set_health_ex(db.actor.health - damage)
 
-log(string.format("[PLAYER DAMAGE] weapon=%s ammo=%s weapon_hit=%.3f k_hit=%.3f k_ap=%.3f prot=%.3f armor=%.3f bone_mult=%.3f damage=%.3f", weapon and weapon:section() or "nil", ammo_section or "nil", weapon_hit, k_hit, k_ap, total_protection, total_armor, body_part_mult, damage))
+-- log(string.format("[PLAYER DAMAGE] weapon=%s ammo=%s weapon_hit=%.3f k_hit=%.3f k_ap=%.3f prot=%.3f armor=%.3f bone_mult=%.3f damage=%.3f", weapon and weapon:section() or "nil", ammo_section or "nil", weapon_hit, k_hit, k_ap, total_protection, total_armor, body_part_mult, damage))
 
 	
 	-- Bleed rework: 10 times less chance of bleeding, scaling with damage, but bleeding power is increased in actor ltx
