@@ -1,3 +1,6 @@
+
+printf("=== Armor Recoil Loaded ===")
+
 local armor_recoil = {}
 
 -- =========================
@@ -100,7 +103,7 @@ local recoil_map = {
 local original_values = {}
 
 -- =========================
--- HELPERS
+-- how to get stuff
 -- =========================
 local function get_actor()
     return db.actor
@@ -117,7 +120,7 @@ local function get_current_armor()
 end
 
 -- =========================
--- AApply recoil modifier
+-- Apply recoil modifier
 -- =========================
 local function apply_recoil_multiplier(weapon, mult)
     if not weapon then return end
@@ -143,11 +146,21 @@ local function apply_recoil_multiplier(weapon, mult)
     end
 end
 
+-- =========================
+-- reset weapon stats
+-- =========================
+
 local function reset_weapon(weapon)
     if not weapon then return end
 
-    local wpn = weapon:cast_Weapon()
-    if not wpn then return end
+    local ok, wpn = pcall(function()
+        return weapon:cast_Weapon()
+    end)
+
+    if not ok or not wpn then
+        log("ARMOR_RECOIL | reset skipped (invalid weapon)")
+        return
+    end
 
     local section = weapon:section()
     local stored = original_values[section]
@@ -156,67 +169,88 @@ local function reset_weapon(weapon)
     for name, funcs in pairs(recoil_map) do
         local val = stored[name]
         if val then
-            funcs.set(weapon, val)
+            pcall(function()
+                funcs.set(weapon, val)
+            end)
         end
     end
+
+    log("ARMOR_RECOIL | reset_weapon applied")
 end
 
 -- =========================
--- update recoil if needed, called by grok_bo_enhanced_recoil
+-- safest way found to get the active weapon
 -- =========================
-function armor_recoil.update_if_needed(weapon_override)
----    log("ARMOR_RECOIL | update_if_needed CALLED")
 
-    local weapon = nil
+local function get_safe_active_weapon()
+    local actor = db.actor
+    if not actor then return nil end
 
-    if weapon_override and weapon_override:cast_Weapon() then
-        weapon = weapon_override
-    else
-        weapon = db.actor:active_item()
+    local ok, weapon = pcall(function()
+        return actor:active_item()
+    end)
+
+    if not ok or not weapon then
+        return nil
     end
 
-    if not weapon then
-    ---    log("ARMOR_RECOIL | weapon is NIL (even after obj fallback)")
+    local ok2, wpn = pcall(function()
+        return weapon:cast_Weapon()
+    end)
+
+    if not ok2 or not wpn then
+        return nil
+    end
+
+    return weapon
+end
+
+
+-- =========================
+-- update recoil if needed
+-- =========================
+function armor_recoil.update_if_needed()
+    log("ARMOR_RECOIL | update_if_needed CALLED")
+
+    local actor = db.actor
+    if not actor then return end
+
+    local ok, weapon = pcall(function()
+        return actor:active_item()
+    end)
+
+    if not ok or not weapon then
         return
     end
 
----    log("ARMOR_RECOIL | weapon FOUND: " .. weapon:section())
+    local ok2, wpn = pcall(function()
+        return weapon:cast_Weapon()
+    end)
 
-    local wpn = weapon and weapon:cast_Weapon()
-    if not wpn then
-    ---    log("ARMOR_RECOIL | cast_Weapon FAILED")
+    if not ok2 or not wpn then
         return
     end
+
+    local weapon_section = weapon:section()
 
     local armor = get_current_armor()
-
-    local weapon_id = weapon and weapon:id() or nil
     local armor_section = armor and armor:section() or nil
 
-    -- No change → do nothing
-    if weapon_id == armor_recoil.current_weapon_id
+    -- No change, do nothing
+    if weapon_section == armor_recoil.current_weapon_section
     and armor_section == armor_recoil.current_armor_section then
         return
     end
 
-    -- Reset previous weapon if changed
-    if armor_recoil.current_weapon_id and armor_recoil.current_weapon_id ~= weapon_id then
-        if armor_recoil.current_weapon then
-            reset_weapon(armor_recoil.current_weapon)
-        end
-    end
+    -- Reset current weapon only
+    reset_weapon(weapon)
 
-    -- Always reset current weapon before applying
-    if weapon then
-        reset_weapon(weapon)
-    end
-
-    -- Store new state
+    -- Store state
     armor_recoil.current_weapon = weapon
-    armor_recoil.current_weapon_id = weapon_id
+    armor_recoil.current_weapon_section = weapon_section
     armor_recoil.current_armor_section = armor_section
 
-    -- Determine multiplier
+    -- Multiplier
     local new_mult = DEFAULT_MULT
     if armor_section and armor_recoil.armor_table[armor_section] then
         new_mult = armor_recoil.armor_table[armor_section]
@@ -225,66 +259,25 @@ function armor_recoil.update_if_needed(weapon_override)
     armor_recoil.current_mult = new_mult
 
     -- Apply
-    if weapon then
-        apply_recoil_multiplier(weapon, new_mult)
-    end
+    apply_recoil_multiplier(weapon, new_mult)
 
-
----    log(string.format("[Armor_Recoil] Armor=%s" , armor_section or "nil"))
----    log("ARMOR_RECOIL | Armor: " .. tostring(armor_section))
----    log("ARMOR_RECOIL | Weapon: " .. (weapon and weapon:section() or "nil"))
----    log("ARMOR_RECOIL | Multiplier: " .. tostring(new_mult))
+    log(string.format("[Armor_Recoil] Armor=%s", armor_section or "nil"))
+    log("ARMOR_RECOIL | Weapon: " .. tostring(weapon_section))
+    log("ARMOR_RECOIL | Multiplier: " .. tostring(new_mult))
 end
 
 -- =========================
--- all the calls
+-- how the game even finds this
 -- =========================
-
--- 🔥 Main trigger (fires often, cheap due to early return)
-function armor_recoil.actor_on_weapon_fired(actor, weapon, ...)
-    if actor ~= db.actor then return end
-    armor_recoil.update_if_needed(weapon)
-end
-
--- 🔥 Equip to slot (weapon swap OR armor equip)
-function armor_recoil.actor_item_to_slot(item)
-    armor_recoil.update_if_needed()
-end
-
--- 🔥 Unequip cases
-function armor_recoil.actor_item_to_ruck(item)
-    armor_recoil.update_if_needed()
-end
-
-function armor_recoil.actor_on_item_drop(item)
-    armor_recoil.update_if_needed()
-end
-
--- 🔥 Safety init (on load)
-function armor_recoil.actor_on_first_update()
-    armor_recoil.update_if_needed()
-end
-
-printf("=== Armor Recoil Loaded ===")
-
-function Update_Shooting(wpn)
-
-	if armor_recoil and armor_recoil.update_if_needed then
-		armor_recoil.update_if_needed(wpn)
-	end
-	
-end
-
 function Update_Before_Shooting(params)
     local wpn = params and params.weapon
 
     if armor_recoil and armor_recoil.update_if_needed then
-        armor_recoil.update_if_needed(wpn)
+        armor_recoil.update_if_needed()
     end
 end
 
 
 function on_game_start()
-	RegisterScriptCallback("actor_on_weapon_fired",Update_Shooting)
 	RegisterScriptCallback("actor_on_weapon_before_fire", Update_Before_Shooting)
 end
