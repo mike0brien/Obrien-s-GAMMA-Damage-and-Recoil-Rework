@@ -2,16 +2,18 @@
 -- Obrien attempt at a damage script.
 -- =======================================================================================
 --
--- Currently Weapon_Hit_Power is set to a static 1 until I can figure out how to pull out the active value of the weapon I'm being attacked with.
--- The base calculation is now final_damage = damage * (Ammo_AP/Armor_BR)
--- Ballistic Rating, BR_Class, is now the main defense value. By default, Ballistic Rating is disabled.
--- The system calculates a protection factor from different sources (armor, artefacts, boosters)
--- and simply multiply the hit power by (1 - protection).
--- Lots of hardcoded multiplier are used for the different damage sources so that even everything feels right
--- using GAMMA modpack values (ammo pen and power, mutants damage, etc).
+-- This overhauls groks calculation to a most more simplified equation
+-- The base calculation is now the following...
+-- Damage_1 = Weapon Hit_Power * Ammo K_Hit * Game 
+-- Damage_2 = Damage_1 * (Ammo_AP/Armor_BR)
+-- Final_Damage = Damage_2 * (1 - Artifact_Protection) * Body_Part_Multiplier
+-- Ballistic Rating, BR_Class, is now the main defense value. By default, Ballistic Rating is disabled for armor
+-- Ballisitic Rating now only comes from Artifacts, pelts, and drugs.
+-- I removed most of groks stacked multipliers, making it much easier to track how damage is calculated.
+-- This required a full rework of all equipment in game. Weapons, ammo, armor, artifacts, all of it.
 -- This script do not change anomalies damages
 -- This script overrides most of the values customisable in the game option menu.
--- Keep in mind that difficulty is still taken into account to simply divide incoming damages by a predifined value customisable below.
+-- By default I set all difficulty scaling to 1.0, but you can see it just below and change it for yourself. THIS WILL ONLY CHANGE IT FOR DAMAGE TO YOU! Damage to enemies is in the grok_bo.script.
 -- Hopefully I'll add all multipliers into a MCM menu at some point.
 
 -- local ini_diff = ini_file("plugins\\difficulty.ltx")
@@ -19,6 +21,13 @@
 -- local factors_game = {}
 -- factors_game["actor_immunities"] = ini_diff:r_float_ex("gdiff_" .. diff , "actor_immunities") or 1
 printf("=== OBRIEN NPC to Player Damage Script Loaded ===")
+
+local get_upgrades_installed = utils_item.get_upgrades_installed
+local get_ammo = utils_item.get_ammo
+local math_ceil = math.ceil
+local math_floor = math.floor
+local string_gsub   = string.gsub
+local char_ini = ini_file("item_upgrades.ltx")
 
 local vanilla_diff = {
 	[1] = "gd_novice",
@@ -96,7 +105,6 @@ local dtype = {
 	[hit.chemical_burn] = "chemical_burn",
 	[hit.explosion]     = "explosion",
 	[hit.fire_wound]    = "fire_wound",
-	
 }
 
 -- Immunities names
@@ -156,6 +164,42 @@ local BoosterID = {
 	["FireWoundImmunity"]      = 15,
 	["WoundImmunity"]          = 16,
 	["MaxCount"]               = 17,
+}
+
+-- { BR Class, Premitigation }
+
+mitigation_table_body = {
+	["af_kevlar"] = { 0.01, 0.05 },
+	["af_kevlar_up"] = { 0.03, 0.08 },
+	["af_plates"] = { 0.06, 0.12 },
+	["af_plates_up"] = { 0.10, 0.17 },
+	["hide_pseudogiant"] = { 0.04, 0.10 },
+	["hide_boar"] = { 0.02, 0.05 },
+	["af_ear"] = { 0, 0.06 },
+	["af_kogot"] = { 0, 0.06 },
+	["af_sandstone"] = { 0, 0.06 },
+	["af_gold_fish"] = { 0, 0.08 },
+	["af_gravi"] = { 0, 0.06 },
+	["af_night_star"] = { 0, 0.04 },
+	["af_oasis_heart"] = { 0, 0.08 },
+	["af_glass"] = { 0, 0.05 },
+	["af_fuzz_kolobok"] = { 0, 0.03 },
+	["af_death_lamp"] = { 0, 0.12 },
+}
+
+mitigation_table_head = {
+	["hide_pseudogiant"] = { 0.04, 0.10 },
+	["hide_boar"] = { 0.02, 0.05 },
+	["af_ear"] = { 0, 0.06 },
+	["af_kogot"] = { 0, 0.06 },
+	["af_sandstone"] = { 0, 0.06 },
+	["af_gold_fish"] = { 0, 0.08 },
+	["af_gravi"] = { 0, 0.06 },
+	["af_night_star"] = { 0, 0.04 },
+	["af_oasis_heart"] = { 0, 0.08 },
+	["af_glass"] = { 0, 0.05 },
+	["af_fuzz_kolobok"] = { 0, 0.03 },
+	["af_death_lamp"] = { 0, 0.12 },
 }
 
 function get_game_factor(key)
@@ -357,7 +401,7 @@ function get_protection(shit,bone_id)
 
 
 
-	-- Outfit protection
+	-- Outfit protection, and ballistic protection if applied.
 	local armor_protection = 0
 	local armor_bone_value = 0
 	local armor_br_class = 0
@@ -368,16 +412,16 @@ function get_protection(shit,bone_id)
 		if (c_outfit) then
 			if protection == "FireWound" then
 				armor_protection = ini_sys:r_float_ex(outfit:section(), "hit_fraction_actor") or 1 -- This won't be used unless added back in in shit_booster.
-				armor_protection = math.ceil(armor_protection * cond * 100)/100 or 0 
+				armor_protection = math_ceil(armor_protection * cond * 100)/100 or 0 
 			else
-				armor_protection = math.ceil(c_outfit:GetDefHitTypeProtection(hit_type) * adjuster * 100)/100 or 0 -- this applies the other resistances.
+				armor_protection = math_ceil(c_outfit:GetDefHitTypeProtection(hit_type) * adjuster * 100)/100 or 0 -- this applies the other resistances.
 			end
 			armor_br_class = ini_sys:r_float_ex(outfit:section(), "br_class") or 1 
-			armor_bone_value = math.ceil(armor_br_class * cond * 100)/100 or 0  -- this will provide the defense based off the br_class stat.
+			armor_bone_value = math_ceil(armor_br_class * cond * 100)/100 or 0  -- this will provide the defense based off the br_class stat.
 		end	
 	end
 
-	-- Helmet protection
+	-- Helmet BR class, and ballistic protection if applied.
 	local helmet_protection = 0
 	local helmet_bone_value = 0
 	local helmet_br_class = 0
@@ -388,16 +432,16 @@ function get_protection(shit,bone_id)
 		if (c_helmet) then
 			if protection == "FireWound" then
 				helmet_protection = ini_sys:r_float_ex(helmet:section(), "hit_fraction_actor") or 1 -- This won't be used unless added back in in shit_booster.
-				helmet_protection = math.ceil(helmet_protection * cond * 100)/100 or 0 
+				helmet_protection = math_ceil(helmet_protection * cond * 100)/100 or 0 
 			else
-				helmet_protection = math.ceil(c_helmet:GetDefHitTypeProtection(hit_type) * adjuster * 100)/100 or 0 -- this applies the other resistances.
+				helmet_protection = math_ceil(c_helmet:GetDefHitTypeProtection(hit_type) * adjuster * 100)/100 or 0 -- this applies the other resistances.
 			end
 			helmet_br_class = ini_sys:r_float_ex(helmet:section(), "br_class") or 1 
-			helmet_bone_value = math.ceil(helmet_br_class * cond * 100)/100 or 0 -- this will provide the defense based off the br_class stat.
+			helmet_bone_value = math_ceil(helmet_br_class * cond * 100)/100 or 0 -- this will provide the defense based off the br_class stat.
         end
 	end
 
-	-- Artefacts protection
+	-- Artefacts protection, and plate mitigation. Going to stick with just plate BR adder for now, not adding the new pre-mitigation logic.
 	local artefacts_protection = 0
 	local artefacts_ap_res = 0
 	local af_bone_value = 0
@@ -408,6 +452,18 @@ function get_protection(shit,bone_id)
 
 		af_bone_value = 0
 		prot = 0
+	-- These are the plates applying the ballistic rating value.
+		--	if headshot == 1 then
+		--	if mitigation_table_head[sec] then
+		--		af_bone_value = mitigation_table_head[sec][1]
+		--		itm_premitigation = mitigation_table_head[sec][2]
+		--	end
+	--	else
+		--	if mitigation_table_body[sec] then
+		--		af_bone_value = mitigation_table_body[sec][1]
+		--		itm_premitigation = mitigation_table_body[sec][2]
+		--	end
+	--	end
 
 		if sec == "af_kevlar" then
 			af_bone_value = 0.04
@@ -421,64 +477,64 @@ function get_protection(shit,bone_id)
 		if sec == "af_plates_up" then
 			af_bone_value = 0.1
 		end
-		
-		-- These are the plates applying the ballistic rating value.
-		
+
 		local immunities_sec = SYS_GetParam(0, sec, "hit_absorbation_sect", sec)
 		local prot = SYS_GetParam(2, immunities_sec, immunity , 0) * cond
 		local af_limit = ini_sys:r_float_ex(sec, cap_stat) or 0
 
+		-- this zeros out the ballstic rating value if it's a headshot.
 		if headshot == 1 then
 			if sec == "af_kevlar" or sec == "af_kevlar_up" or sec == "af_plates" or sec == "af_plates_up" then
 				prot = 0
 				af_bone_value = 0
 			end
 		end
-		-- this zeros out the ballstic rating value if it's a headshot.
+
 		
-		prot = math.ceil(prot * arti_adjuster *100)/100
+		prot = math_ceil(prot * arti_adjuster *100)/100
 
 		artefacts_protection = artefacts_protection + prot
 		artefacts_ap_res = artefacts_ap_res + af_bone_value
+		-- artefacts_premitigation = artefacts_premitigation + itm_premitigation
+		-- this sets the limiter to artifact protection so you can never exceed 95%
 		limiter = limiter + af_limit
 		if limiter >= 1 then
 			limiter = 0.95
 		end
 	end)
 
---	artefacts_protection = math.floor(artefacts_protection * 0.6 * arti_adjuster *100)/100 -- scale to the displayed inventory values more or less
-
-	-- Booster protection, this is stuff like morphine. I don't know if this value scales up or down.
+	-- Booster protection, this is stuff like morphine. I haven't perosnally balanced these yet, leaving as-is for now.
 	local booster_protection = 0
 	db.actor:cast_Actor():conditions():BoosterForEach( function(booster_type, booster_time, booster_value)
 		if booster_type == booster_type_def then
 			booster_protection = booster_value
 			if booster_type_def == 6 then
-				booster_protection  = math.ceil(booster_value * arti_adjuster * adjuster *100)/100
+				booster_protection  = math_ceil(booster_value * arti_adjuster * adjuster *100)/100
 			end		
 		end
 	end)
 
 	--- Start the final protection calculation, ballistic vs elemental should be separated above.
 	local total_armor_helm = 0
+	local premitigation = 0
 	if protection == "FireWound" then
 		if headshot == 1 then
 			total_armor = (helmet_bone_value)
 			total_armor_helm = total_armor
-			total_protection = math.ceil((helmet_protection + artefacts_protection + booster_protection) * 100)/100
+			total_protection = math_ceil((helmet_protection + artefacts_protection + booster_protection) * 100)/100
 		else
 			total_armor = (armor_bone_value + artefacts_ap_res)
-			total_protection = math.ceil((armor_protection + artefacts_protection + booster_protection) * 100)/100
+			total_protection = math_ceil((armor_protection + artefacts_protection + booster_protection) * 100)/100
 		end
 
 	elseif protection == "telepatic" or protection == "radiation" then
-		total_protection = math.ceil((helmet_protection + armor_protection + artefacts_protection + booster_protection) * 100)/100
+		total_protection = math_ceil((helmet_protection + armor_protection + artefacts_protection + booster_protection) * 100)/100
 
 	else
 		if headshot == 1 then
-			total_protection = math.ceil((helmet_protection + artefacts_protection + booster_protection) * 100)/100
+			total_protection = math_ceil((helmet_protection + artefacts_protection + booster_protection) * 100)/100
 		else
-			total_protection = math.ceil((armor_protection + artefacts_protection + booster_protection) * 100)/100
+			total_protection = math_ceil((armor_protection + artefacts_protection + booster_protection) * 100)/100
 		end
 	end
 
@@ -487,7 +543,7 @@ function get_protection(shit,bone_id)
 			total_protection = limiter
 	end
 
-	return total_protection, limiter, armor_protection, helmet_protection, total_armor, total_armor_helm
+	return total_protection, limiter, armor_protection, helmet_protection, total_armor, total_armor_helm, premitigation
 
 end
 
@@ -523,7 +579,7 @@ function get_af_value(obj, sec, name, def)
 		local immunities_sec = SYS_GetParam(0, sec, "hit_absorbation_sect", sec)
 		local prot = SYS_GetParam(2, immunities_sec, immunity , 0)
 		
-		af_prot = math.ceil(prot * arti_adjuster *100)/100
+		af_prot = math_ceil(prot * arti_adjuster *100)/100
 		return af_prot
 	end
 	
@@ -534,7 +590,7 @@ function get_af_value(obj, sec, name, def)
 		local immunities_sec = SYS_GetParam(0, sec, "hit_absorbation_sect", sec)
 		local prot = SYS_GetParam(2, immunities_sec, immunity , 0)
 		
-		af_prot = math.ceil(prot * arti_adjuster *100)/100
+		af_prot = math_ceil(prot * arti_adjuster *100)/100
 		return af_prot
 	end
 end
@@ -563,9 +619,9 @@ function get_outfit_value(obj, sec, name, def)
 		if (c_outfit) then
 			if protection == "FireWound" then
 				armor_protection = ini_sys:r_float_ex(obj:section(), "hit_fraction_actor") or 0
-				armor_protection = math.ceil(armor_protection * cond * 100) or 0
+				armor_protection = math_ceil(armor_protection * cond * 100) or 0
 			else
-				armor_protection = math.ceil(c_outfit:GetDefHitTypeProtection( hit_type ) * adjuster *100 * 1/cond) or 0
+				armor_protection = math_ceil(c_outfit:GetDefHitTypeProtection( hit_type ) * adjuster *100 * 1/cond) or 0
 			end
 			return armor_protection
 		end
@@ -580,9 +636,9 @@ function get_outfit_value(obj, sec, name, def)
 		if (c_helmet) then
 			if protection == "FireWound" then
 				helmet_protection = ini_sys:r_float_ex(obj:section(), "hit_fraction_actor") or 0
-				helmet_protection = math.ceil(helmet_protection * cond * 100) or 0
+				helmet_protection = math_ceil(helmet_protection * cond * 100) or 0
 			else
-				helmet_protection = math.ceil(c_helmet:GetDefHitTypeProtection( hit_type ) * adjuster *100 * 1/cond) or 0
+				helmet_protection = math_ceil(c_helmet:GetDefHitTypeProtection( hit_type ) * adjuster *100 * 1/cond) or 0
 			end
 			return helmet_protection
 		end
@@ -590,9 +646,9 @@ function get_outfit_value(obj, sec, name, def)
 	
 	if sec then
 		if protection == "FireWound" then
-			section_protection = math.ceil(SYS_GetParam(0,sec,"hit_fraction_actor") * adjuster *100) or 0
+			section_protection = math_ceil(SYS_GetParam(0,sec,"hit_fraction_actor") * adjuster *100) or 0
 		else
-			section_protection = math.ceil(SYS_GetParam(0,sec, defense) * adjuster *100) or 0
+			section_protection = math_ceil(SYS_GetParam(0,sec, defense) * adjuster *100) or 0
 		end
 		
 		return section_protection
@@ -630,8 +686,31 @@ function PBA_a_obd(whoID, flags)
 	perk_based_artefacts.process_artefacts(perk_based_artefacts.artefact_on_before_death_functions, whoID, flags)
 end
 
-function shit_booster(shit, bone_id)
-	
+function get_outfit_durability_upgrades_increase(obj)
+	durability_increase = 0
+	installed_upgrades = get_upgrades_installed(obj)
+	for i=1,#installed_upgrades do
+		local upgr_sec = installed_upgrades[i]
+		--printf(upgr_sec)
+		local section_of_upgrade = char_ini:r_string_ex(upgr_sec,"property")
+		--printf(section_of_upgrade)
+		if section_of_upgrade then
+			if section_of_upgrade == "prop_durability" then
+				durability_increase = durability_increase + 0.10
+			end
+		end
+	end
+	return durability_increase
+end
+
+-- Grok new shit_booster logic, I guess it can automatically pull this now. Will need to test instead of static set.
+-- function shit_booster(shit, bone_id, k_ap)
+--	local actor = db.actor
+	--printf("/// Actor got hit - Grok damage balancer")
+
+
+function shit_booster(shit, bone_id, k_ap)
+	local actor = db.actor
 	local damage = 0
 	--- local player_protection
 
@@ -640,7 +719,7 @@ function shit_booster(shit, bone_id)
 	local attacker = shit.draftsman
 	local weapon   = attacker and attacker:active_item()
 
-	local weapon_hit = 1.0
+--	local weapon_hit = 1.0
  --- need to add in logic to find weapon hit power
 
 
@@ -672,17 +751,13 @@ function shit_booster(shit, bone_id)
 		end
 	end
 	
-	--- local player_protection = get_protection(shit,bone_id)
+
 	local total_protection, limiter, armor_protection, helmet_protection, total_armor, total_armor_helm = get_protection(shit, bone_id)
 	
-	if total_protection == 0 then
-		total_protection = 0.001
+	if total_armor == 0 then
+		total_armor = 0.001
 	end
 	
-	--- if total_armor == 0 then
-	---	total_armor = 0.01
-	---end
-
 	if shit.type == hit.telepatic then
 		game_num = gameplay["type"] or game_num
 		damage = shit.power * ( 1 - total_protection ) * difficulty_multiplier[game_num] * 0.90
@@ -699,7 +774,7 @@ function shit_booster(shit, bone_id)
 	end
 
 	if shit.type == hit.fire_wound then
-		shit.power = shit.power -- weapons damage are a bit crazy, P90 has a power of 0.33 + crazy rate of fire...
+		shit.power = shit.power -- Grok normally reduces this, but with my scaling you don't need too.
 	end
 
 	if shit.type == hit.wound then
@@ -707,66 +782,52 @@ function shit_booster(shit, bone_id)
 	end
 	
 	-- etapomom: run on_before_hit before doing armor math
+	local body_part = hitboxes[bone_id]
+	local body_part_mult = hitbox_mult[body_part] or 1.0
+	local pen_ratio = 0
 	local pbadamage = hit(shit)
 	PBA_a_obh(pbadamage, bone_id, flags)
 	shit.power = pbadamage.power
-	--Now add in the ammo damage modification if bullets.
-	---if shit.type == hit.fire_wound then
----		shit.power = weapon_hit * k_hit
-	---end
-	-- calculate damage now based on armor.
-	if shit.type == hit.fire_wound then
-		if total_armor > 0 then
-			damage = shit.power * (k_ap / total_armor)
-		else
-			damage = shit.power
-		end
 
-		if damage > shit.power then
-			damage = shit.power
+-- Damage calculation
+
+	if shit.type == hit.fire_wound then
+		pen_ratio = (k_ap/total_armor)
+		
+		if pen_ratio > 1 then
+			pen_ratio = 1
 		end
+			
+		damage = shit.power * pen_ratio
+		damage = (damage * (1 - total_protection)) * body_part_mult 
 	else
 		damage = shit.power * (1 - total_protection)
+		damage = damage * body_part_mult 
 	end
-	
-
-	-- multiply damage from body part mult equation against player_protection multiplier
-	local body_part = hitboxes[bone_id]
-	local body_part_mult = hitbox_mult[body_part] or 1.0
-
-		if shit.type == hit.fire_wound then
-			damage = (damage * (1 - total_protection)) * body_part_mult 
-		else
-			damage = damage * body_part_mult 
-		end
 
 	-- Resolve mechanic, survive with few hp instead of dying from huge hits
-	if damage >= db.actor.health and db.actor.health >= 0.65 then
+	if damage >= actor.health and actor.health >= 0.65 then
 	--printf("/// avoided one shot - last chance")
-		damage = db.actor.health - 0.25
+		damage = actor.health - 0.25
 	end
-	
-	--printf('Hit by %s %s damages', shit.power, protection)
-	--printf('part hit = %s', hitboxes[bone_id])
-	--printf('total protection = %s', player_protection)
-	--printf('damage to actor = %s', damage)	
 
 	if zzz_player_injuries and zzz_player_injuries_mcm then
-		zzz_player_injuries.actor_on_hit_callback(bone_id)
+		if damage and damage > 0.0293 and zzz_player_injuries.recieved_damage then
+			zzz_player_injuries.recieved_damage(damage, bone_id)
+		end
 	end
 
+log(string.format("[PLAYER DAMAGE] weapon=%s ammo=%s weapon_hit=%.3f k_hit=%.3f k_ap=%.3f prot=%.3f armor=%.3f bone_mult=%.3f damage=%.3f", weapon and weapon:section() or "nil", ammo_section or "nil", shit.power, k_hit, k_ap, total_protection, total_armor, body_part_mult, damage))
+	
 	shit.power = 0
 	
 	-- etapomom: run on_before_death, make the seraphim work with ironman. maybe the only cool thing about making damage this inflexible
-	if (db.actor.health - damage) <= 0 then
-		PBA_a_obd(db.actor, flags)
+	if (actor.health - damage) <= 0 then
+		PBA_a_obd(actor, flags)
 	end
 	
-	db.actor:set_health_ex(db.actor.health - damage)
+	actor:set_health_ex(actor.health - damage)
 
--- log(string.format("[PLAYER DAMAGE] weapon=%s ammo=%s weapon_hit=%.3f k_hit=%.3f k_ap=%.3f prot=%.3f armor=%.3f bone_mult=%.3f damage=%.3f", weapon and weapon:section() or "nil", ammo_section or "nil", weapon_hit, k_hit, k_ap, total_protection, total_armor, body_part_mult, damage))
-
-	
 	-- Bleed rework: 10 times less chance of bleeding, scaling with damage, but bleeding power is increased in actor ltx
 	
 	if shit.type == hit.fire_wound or shit.type == hit.wound then
@@ -780,44 +841,48 @@ function shit_booster(shit, bone_id)
 					bleed_power = 0.20
 				end
 					
-				db.actor:cast_Actor():conditions():AddWound(bleed_power, hit_type, bone_id)
+				actor:cast_Actor():conditions():AddWound(bleed_power, hit_type, bone_id)
 			end
 		end
 	end
 	
-	PBA_a_ohc(db.actor, damage, shit.direction, shit.draftsman, bone_id)
+	PBA_a_ohc(actor, damage, shit.direction, shit.draftsman, bone_id)
 	
 	previous_hitbox = bone_id
 
 	if elemental == 1 then
-		helmet = db.actor:item_in_slot(12)
+		helmet = actor:item_in_slot(12)
         if helmet then
-			cond = helmet:condition()
-			helmet:set_condition(cond - damage * 0.05)
+			local cond = helmet:condition()
+			local durability = get_outfit_durability_upgrades_increase(helmet)
+			helmet:set_condition(cond - damage * 0.07 * (1 - durability))
 			--printf('Helmet condition dmg = %s', damage * 0.07)
 		end
 
-		armor = db.actor:item_in_slot(7)
+		armor = actor:item_in_slot(7)
 		if armor then
-			cond = armor:condition()
-		    armor:set_condition(cond - damage * 0.05)
+			local cond = armor:condition()
+			local durability = get_outfit_durability_upgrades_increase(armor)
+		    armor:set_condition(cond - damage * 0.07 * (1 - durability))
 			--printf('Armor condition dmg = %s', damage * 0.07)
 		end
 	end
 
 	if elemental == 0 then
 		if headshot == 1 then
-			helmet = db.actor:item_in_slot(12)
+			helmet = actor:item_in_slot(12)
 			if helmet then
-				cond = helmet:condition()
-				helmet:set_condition(cond - damage * 0.05)
+				local cond = helmet:condition()
+				local durability = get_outfit_durability_upgrades_increase(helmet)
+				helmet:set_condition(cond - damage * 0.07 * (1 - durability))
 				--printf('Helmet condition dmg = %s', damage * 0.07)
 			end
 		else
-			armor = db.actor:item_in_slot(7)
+			armor = actor:item_in_slot(7)
 			if armor then
-				cond = armor:condition()
-				armor:set_condition(cond - damage * 0.05)
+				local cond = armor:condition()
+				local durability = get_outfit_durability_upgrades_increase(armor)
+				armor:set_condition(cond - damage * 0.07 * (1 - durability))
 				--printf('Armor condition dmg = %s', damage * 0.07)
 			end
 		end
@@ -884,7 +949,7 @@ function actor_on_before_hit(shit,bone_id, flags)
 	tg = time_global()
 	
 	if climbing and climbing == 1 and shit.type == hit.strike then
-		printf("cancelling strike damage during climbing")
+		--printf("cancelling strike damage during climbing")
 		shit.power = 0
 		flags.ret_value = false
 		return
@@ -896,7 +961,7 @@ function actor_on_before_hit(shit,bone_id, flags)
 			rad_grace_delay = tg + rad_grace
 			rad_grace_cancel = tg + rad_damage
 			rad_trigger = 1
-			printf("starting radiation protection")
+			--printf("starting radiation protection")
 			shit.power = 0
 			flags.ret_value = false
 			return
@@ -978,7 +1043,7 @@ function actor_on_before_hit(shit,bone_id, flags)
 			local wpn_id = wpn:id()
 
 			local ammo_type_number = wpn:get_ammo_type()
-			local ammo_list = utils_item.get_ammo(sec, wpn_id)
+			local ammo_list = get_ammo(sec, wpn_id)
 			local ammo_section = ammo_list[ammo_type_number+1]
 
 			if ammo_section == nil then return end
@@ -1010,7 +1075,7 @@ function actor_on_before_hit(shit,bone_id, flags)
 
 			k_ap = ini_sys:r_float_ex(ammo_section, "k_ap") or 0
 
-			shit_booster(shit,bone_id)
+			shit_booster(shit,bone_id, k_ap)
 		end
 
 		if (shit.type == hit.wound) then

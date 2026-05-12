@@ -532,6 +532,11 @@ function npc_on_before_hit(npc,shit,bone_id)
 
 	local shooter = shit.draftsman
 	wpn = level.object_by_id(shit.weapon_id)
+	
+  if wpn == nil then 
+		return 
+	end
+
 	sec = wpn:section()
 
 	if sec == "explosive_barrel" or sec == "explosive_barrel_low" or sec == "explosive_tank" or sec == "explosive_grenade" or sec == "explosive_hide" or sec == "explosive_particle" or sec == "explosive_fuelcan" 
@@ -541,10 +546,6 @@ function npc_on_before_hit(npc,shit,bone_id)
 
 	if IsGrenade(wpn) then
 		return
-	end
-
-	if wpn == nil then 
-		return 
 	end
 
 	printf("///////////   Stalker Hit registered: GBO v1.6.6  //////////////////")
@@ -574,7 +575,8 @@ function npc_on_before_hit(npc,shit,bone_id)
 		silencer_boost = 1
 	end
 	
-	if sec and integrated_silencer[sec] then
+	local parent_section = ini_sys:r_string_ex(wpn:section(), "parent_section") or wpn:section()
+	if parent_section and integrated_silencer[parent_section] then
 		silencer_boost = 1.05
 	end
 
@@ -865,8 +867,9 @@ function npc_on_before_hit(npc,shit,bone_id)
 		end
 	end
 	
-	if snipers[wpn:section()] then
-		k_ap = k_ap + 0.0
+	local parent_section = ini_sys:r_string_ex(wpn:section(), "parent_section") or wpn:section()
+	if snipers[parent_section] then
+		k_ap = k_ap + 0.00
 	end
 
 
@@ -881,7 +884,7 @@ function npc_on_before_hit(npc,shit,bone_id)
 	if shit.power ~= pbadamage.power and shit.power ~= 0
 		then pba_mult = pbadamage.power / shit.power
 	end
--- log(string.format("[PBA Hit Mult] pba=%.3f hit=%.3f mult=%.3f", pbadamage.power, shit.power, pba_mult))
+log(string.format("[PBA Hit Mult] pba=%.3f hit=%.3f mult=%.3f", pbadamage.power, shit.power, pba_mult))
 	
 -- ===== ARMOR_BR STYLE DAMAGE (NPCs) =====
 
@@ -915,7 +918,7 @@ shit.power = shit.power  * custom_bone_dmg_mult * sniper_bad_bone_shit_reduce * 
 
 
 
--- log(string.format("[PLAYER to NPC] ammo=%s k_hit=%.3f k_ap=%.3f BR=%.3f bone_mult=%.3f final_pre_dist=%.3f fac_res=%.3f", ammo_section, k_hit, k_ap, armor_br, custom_bone_dmg_mult, shit.power, faction_res))
+log(string.format("[PLAYER to NPC] ammo=%s k_hit=%.3f k_ap=%.3f BR=%.3f bone_mult=%.3f final_pre_dist=%.3f fac_res=%.3f", ammo_section, k_hit, k_ap, armor_br, custom_bone_dmg_mult, shit.power, faction_res))
 
 shit.power = shit.power / ( 1 + dist / 200 * ( air_res * 0.5 / ( 1 - air_res + 0.1 )))
 
