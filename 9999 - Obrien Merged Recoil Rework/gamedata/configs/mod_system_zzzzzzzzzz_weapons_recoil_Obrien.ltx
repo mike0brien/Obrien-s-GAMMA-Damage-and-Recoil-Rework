@@ -1,14 +1,52 @@
-;-----Changes to Groks bo_enhanced_recoil camera tricks-----
-
-;This is part of a separate plug-in, mod_grok_bo_enhanced_recoil_Obrien. Notes on the changes.
-;--Change SA58 AUS and change scar_siber from 7.62x51higher to 7.62x51.
-;---![grok_bo_enhanced_recoil]
-    ;---![wpn_fal_aus]:wpn_762x51
-    ;---![wpn_scar_siber]:wpn_762x51
+--- This ltx gives all guns recoil stats based on a calculation I came up with
+--- I gave a "standard" to each rifle design and caliber, so a 5.56 bullpup is similar across the board, a 5.56 traditional rifle is similar, 545, etc...
+--- The goal is aside from PCCs/SMGs, sustained full auto isn't viable at distance. CQB sure but outside you'll want to use semi-auto fire.
 
 ;=============================================================
 ;-------------------------Pistols----------------------
 ;=============================================================
+
+![wpn_colt1911_anarchy] ;--- 1911, comp
+ammo_elapsed                = 8
+ammo_mag_size               = 8
+
+zoom_rotate_time                         = 0.2
+cam_return                               = 0
+cam_relax_speed                          = 5
+cam_dispersion                           = 3.84
+cam_dispersion_frac                      = 1.0
+cam_dispersion_inc                       = 0.38
+cam_max_angle                            = 360.0
+cam_max_angle_horz                       = 50.0
+cam_step_angle_horz                      = 0.04
+zoom_cam_relax_speed                     = 3
+zoom_cam_dispersion                      = 2.88
+zoom_cam_dispersion_frac                 = 1.0
+zoom_cam_dispersion_inc                  = 0.29
+zoom_cam_max_angle                       = 360.0
+zoom_cam_max_angle_horz                  = 50.0
+zoom_cam_step_angle_horz                 = 0.02
+
+![wpn_m45a1] ;--- 1911 base
+ammo_elapsed                = 8
+ammo_mag_size               = 8
+
+zoom_rotate_time                         = 0.2
+cam_return                               = 0
+cam_relax_speed                          = 5
+cam_dispersion                           = 4.00
+cam_dispersion_frac                      = 1.0
+cam_dispersion_inc                       = 0.44
+cam_max_angle                            = 360.0
+cam_max_angle_horz                       = 50.0
+cam_step_angle_horz                      = 0.04
+zoom_cam_relax_speed                     = 3
+zoom_cam_dispersion                      = 3.0
+zoom_cam_dispersion_frac                 = 1.0
+zoom_cam_dispersion_inc                  = 0.33
+zoom_cam_max_angle                       = 360.0
+zoom_cam_max_angle_horz                  = 50.0
+zoom_cam_step_angle_horz                 = 0.02
 
 ![wpn_korth] ;--- 1911, short barrel
 
@@ -57,14 +95,14 @@ cam_return                               = 0
 cam_relax_speed                          = 5
 cam_dispersion                           = 4.00
 cam_dispersion_frac                      = 1.0
-cam_dispersion_inc                       = 0.33
+cam_dispersion_inc                       = 0.44
 cam_max_angle                            = 360.0
 cam_max_angle_horz                       = 50.0
 cam_step_angle_horz                      = 0.04
 zoom_cam_relax_speed                     = 3
 zoom_cam_dispersion                      = 3.0
 zoom_cam_dispersion_frac                 = 1.0
-zoom_cam_dispersion_inc                  = 0.25
+zoom_cam_dispersion_inc                  = 0.33
 zoom_cam_max_angle                       = 360.0
 zoom_cam_max_angle_horz                  = 50.0
 zoom_cam_step_angle_horz                 = 0.02
@@ -78,14 +116,14 @@ cam_return                               = 0
 cam_relax_speed                          = 5
 cam_dispersion                           = 4.00
 cam_dispersion_frac                      = 1.0
-cam_dispersion_inc                       = 0.33
+cam_dispersion_inc                       = 0.44
 cam_max_angle                            = 360.0
 cam_max_angle_horz                       = 50.0
 cam_step_angle_horz                      = 0.04
 zoom_cam_relax_speed                     = 3
 zoom_cam_dispersion                      = 3.0
 zoom_cam_dispersion_frac                 = 1.0
-zoom_cam_dispersion_inc                  = 0.25
+zoom_cam_dispersion_inc                  = 0.33
 zoom_cam_max_angle                       = 360.0
 zoom_cam_max_angle_horz                  = 50.0
 zoom_cam_step_angle_horz                 = 0.02
@@ -615,20 +653,38 @@ zoom_cam_max_angle                       = 360.0
 zoom_cam_max_angle_horz                  = 90.0
 zoom_cam_step_angle_horz                 = 0.02
 
+![wpn_beretta_m9_upgr_kit] ;--- glock base
+zoom_rotate_time                         = 0.18
+cam_return                               = 0
+cam_relax_speed                          = 5
+cam_dispersion                           = 3.2
+cam_dispersion_frac                      = 1.0
+cam_dispersion_inc                       = 0.24
+cam_max_angle                            = 360.0
+cam_max_angle_horz                       = 90.0
+cam_step_angle_horz                      = 0.04
+zoom_cam_relax_speed                     = 3
+zoom_cam_dispersion                      = 2.2
+zoom_cam_dispersion_frac                 = 1.0
+zoom_cam_dispersion_inc                  = 0.17
+zoom_cam_max_angle                       = 360.0
+zoom_cam_max_angle_horz                  = 90.0
+zoom_cam_step_angle_horz                 = 0.02
+
 ![wpn_colt1911_camo] ;--- 1911 base
 zoom_rotate_time                         = 0.2
 cam_return                               = 0
 cam_relax_speed                          = 5
 cam_dispersion                           = 4.00
 cam_dispersion_frac                      = 1.0
-cam_dispersion_inc                       = 0.33
+cam_dispersion_inc                       = 0.44
 cam_max_angle                            = 360.0
 cam_max_angle_horz                       = 50.0
 cam_step_angle_horz                      = 0.04
 zoom_cam_relax_speed                     = 3
 zoom_cam_dispersion                      = 3.0
 zoom_cam_dispersion_frac                 = 1.0
-zoom_cam_dispersion_inc                  = 0.25
+zoom_cam_dispersion_inc                  = 0.33
 zoom_cam_max_angle                       = 360.0
 zoom_cam_max_angle_horz                  = 50.0
 zoom_cam_step_angle_horz                 = 0.02
@@ -639,14 +695,14 @@ cam_return                               = 0
 cam_relax_speed                          = 5
 cam_dispersion                           = 4.00
 cam_dispersion_frac                      = 1.0
-cam_dispersion_inc                       = 0.33
+cam_dispersion_inc                       = 0.44
 cam_max_angle                            = 360.0
 cam_max_angle_horz                       = 50.0
 cam_step_angle_horz                      = 0.04
 zoom_cam_relax_speed                     = 3
 zoom_cam_dispersion                      = 3.0
 zoom_cam_dispersion_frac                 = 1.0
-zoom_cam_dispersion_inc                  = 0.25
+zoom_cam_dispersion_inc                  = 0.33
 zoom_cam_max_angle                       = 360.0
 zoom_cam_max_angle_horz                  = 50.0
 zoom_cam_step_angle_horz                 = 0.02
@@ -853,6 +909,24 @@ zoom_cam_step_angle_horz                 = 0.02
 ;-------------------------SMGS-------------------------
 ;=============================================================
 
+![wpn_mp5_kurtz] ;---- mp5, short barrel, expert vert grip, no stock
+zoom_rotate_time                         = 0.1
+cam_return                               = 0
+cam_relax_speed                          = 5
+cam_dispersion                           = 1.8
+cam_dispersion_frac                      = 1.0
+cam_dispersion_inc                       = 0.09
+cam_max_angle                            = 360.0
+cam_max_angle_horz                       = 90.0
+cam_step_angle_horz                      = 0.11
+zoom_cam_relax_speed                     = 3
+zoom_cam_dispersion                      = 1.32
+zoom_cam_dispersion_frac                 = 1.0
+zoom_cam_dispersion_inc                  = 0.07
+zoom_cam_max_angle                       = 360.0
+zoom_cam_max_angle_horz                  = 90.0
+zoom_cam_step_angle_horz                 = 0.06
+
 ![wpn_mp5] ;---- baseline mp5
 zoom_rotate_time                         = 0.2
 cam_return                               = 0
@@ -979,20 +1053,38 @@ zoom_cam_max_angle                       = 360.0
 zoom_cam_max_angle_horz                  = 90.0
 zoom_cam_step_angle_horz                 = 0.05
 
-![wpn_kiparis] ;---- use mp5, experienced flash hider
+![wpn_kiparis] ;---- use mp5 base
 zoom_rotate_time                         = 0.2
 cam_return                               = 0
 cam_relax_speed                          = 5
-cam_dispersion                           = 1.49
+cam_dispersion                           = 1.5
 cam_dispersion_frac                      = 1.0
 cam_dispersion_inc                       = 0.08
 cam_max_angle                            = 360.0
 cam_max_angle_horz                       = 50.0
 cam_step_angle_horz                      = 0.1
 zoom_cam_relax_speed                     = 3
-zoom_cam_dispersion                      = 1.09
+zoom_cam_dispersion                      = 1.1
 zoom_cam_dispersion_frac                 = 1.0
 zoom_cam_dispersion_inc                  = 0.06
+zoom_cam_max_angle                       = 360.0
+zoom_cam_max_angle_horz                  = 90.0
+zoom_cam_step_angle_horz                 = 0.05
+
+![wpn_kiparis_ots2_upgr_kit] ;---- use mp5, long barrel, expert VFG, vet mag
+zoom_rotate_time                         = 0.26
+cam_return                               = 0
+cam_relax_speed                          = 5
+cam_dispersion                           = 1.35
+cam_dispersion_frac                      = 1.0
+cam_dispersion_inc                       = 0.07
+cam_max_angle                            = 360.0
+cam_max_angle_horz                       = 90.0
+cam_step_angle_horz                      = 0.1
+zoom_cam_relax_speed                     = 3
+zoom_cam_dispersion                      = 0.99
+zoom_cam_dispersion_frac                 = 1.0
+zoom_cam_dispersion_inc                  = 0.05
 zoom_cam_max_angle                       = 360.0
 zoom_cam_max_angle_horz                  = 90.0
 zoom_cam_step_angle_horz                 = 0.05
@@ -1267,6 +1359,24 @@ zoom_cam_max_angle                       = 360.0
 zoom_cam_max_angle_horz                  = 90.0
 zoom_cam_step_angle_horz                 = 0.05
 
+![wpn_vityaz_vitup] ;---- use mp5, expert comp, vet AFG
+zoom_rotate_time                         = 0.18
+cam_return                               = 0
+cam_relax_speed                          = 5
+cam_dispersion                           = 1.38
+cam_dispersion_frac                      = 1.0
+cam_dispersion_inc                       = 0.07
+cam_max_angle                            = 360.0
+cam_max_angle_horz                       = 90.0
+cam_step_angle_horz                      = 0.09
+zoom_cam_relax_speed                     = 3
+zoom_cam_dispersion                      = 1.01
+zoom_cam_dispersion_frac                 = 1.0
+zoom_cam_dispersion_inc                  = 0.05
+zoom_cam_max_angle                       = 360.0
+zoom_cam_max_angle_horz                  = 90.0
+zoom_cam_step_angle_horz                 = 0.05
+
 ![wpn_vz61] ;--- kiparis no stock
 zoom_rotate_time                         = 0.14
 cam_return                               = 0
@@ -1284,6 +1394,78 @@ zoom_cam_dispersion_inc                  = 0.07
 zoom_cam_max_angle                       = 360.0
 zoom_cam_max_angle_horz                  = 90.0
 zoom_cam_step_angle_horz                 = 0.06
+
+![wpn_uzi] ;---- mp5 base
+zoom_rotate_time                         = 0.2
+cam_return                               = 0
+cam_relax_speed                          = 5
+cam_dispersion                           = 1.5
+cam_dispersion_frac                      = 1.0
+cam_dispersion_inc                       = 0.08
+cam_max_angle                            = 360.0
+cam_max_angle_horz                       = 50.0
+cam_step_angle_horz                      = 0.1
+zoom_cam_relax_speed                     = 3
+zoom_cam_dispersion                      = 1.1
+zoom_cam_dispersion_frac                 = 1.0
+zoom_cam_dispersion_inc                  = 0.06
+zoom_cam_max_angle                       = 360.0
+zoom_cam_max_angle_horz                  = 90.0
+zoom_cam_step_angle_horz                 = 0.05
+
+![wpn_uzi_mini] ;---- mp5, short barrel, experienced comp
+zoom_rotate_time                         = 0.2
+cam_return                               = 0
+cam_relax_speed                          = 5
+cam_dispersion                           = 1.56
+cam_dispersion_frac                      = 1.0
+cam_dispersion_inc                       = 0.08
+cam_max_angle                            = 360.0
+cam_max_angle_horz                       = 50.0
+cam_step_angle_horz                      = 0.1
+zoom_cam_relax_speed                     = 3
+zoom_cam_dispersion                      = 1.14
+zoom_cam_dispersion_frac                 = 1.0
+zoom_cam_dispersion_inc                  = 0.06
+zoom_cam_max_angle                       = 360.0
+zoom_cam_max_angle_horz                  = 90.0
+zoom_cam_step_angle_horz                 = 0.05
+
+![wpn_uzi_micro] ;---- glock, long barrel, experienced comp
+zoom_rotate_time                         = 0.2
+cam_return                               = 0
+cam_relax_speed                          = 5
+cam_dispersion                           = 3.01
+cam_dispersion_frac                      = 1.0
+cam_dispersion_inc                       = 0.33
+cam_max_angle                            = 360.0
+cam_max_angle_horz                       = 50.0
+cam_step_angle_horz                      = 0.04
+zoom_cam_relax_speed                     = 3
+zoom_cam_dispersion                      = 2.07
+zoom_cam_dispersion_frac                 = 1.0
+zoom_cam_dispersion_inc                  = 0.23
+zoom_cam_max_angle                       = 360.0
+zoom_cam_max_angle_horz                  = 90.0
+zoom_cam_step_angle_horz                 = 0.02
+
+![wpn_mac10] ;---- mp5, short barrel, expert mag
+zoom_rotate_time                         = 0.18
+cam_return                               = 0
+cam_relax_speed                          = 5
+cam_dispersion                           = 1.48
+cam_dispersion_frac                      = 1.0
+cam_dispersion_inc                       = 0.08
+cam_max_angle                            = 360.0
+cam_max_angle_horz                       = 50.0
+cam_step_angle_horz                      = 0.04
+zoom_cam_relax_speed                     = 3
+zoom_cam_dispersion                      = 1.16
+zoom_cam_dispersion_frac                 = 1.0
+zoom_cam_dispersion_inc                  = 0.06
+zoom_cam_max_angle                       = 360.0
+zoom_cam_max_angle_horz                  = 90.0
+zoom_cam_step_angle_horz                 = 0.05
 
 ;================================================================
 ;-------------------------Assault Rifles-------------------------
@@ -1362,20 +1544,56 @@ zoom_cam_max_angle                       = 360.0
 zoom_cam_max_angle_horz                  = 90.0
 zoom_cam_step_angle_horz                 = 0.08
 
-![wpn_xm4] ; ---- veteran m4, short barrel, vet flash hider
+![wpn_xm4] ; ---- expert m4, short barrel, expert flash hider
+zoom_rotate_time                         = 0.21
+cam_return                               = 0
+cam_relax_speed                          = 7
+cam_dispersion                           = 2.99
+cam_dispersion_frac                      = 1.0
+cam_dispersion_inc                       = 0.46
+cam_max_angle                            = 360.0
+cam_max_angle_horz                       = 90.0
+cam_step_angle_horz                      = 0.2
+zoom_cam_relax_speed                     = 7
+zoom_cam_dispersion                      = 1.84
+zoom_cam_dispersion_frac                 = 1.0
+zoom_cam_dispersion_inc                  = 0.28
+zoom_cam_max_angle                       = 360.0
+zoom_cam_max_angle_horz                  = 90.0
+zoom_cam_step_angle_horz                 = 0.1
+
+![wpn_xm4_bd] ; ---- veteran m4, short barrel, vet flash hider
 zoom_rotate_time                         = 0.22
 cam_return                               = 0
 cam_relax_speed                          = 7
 cam_dispersion                           = 2.96
 cam_dispersion_frac                      = 1.0
-cam_dispersion_inc                       = 0.39
+cam_dispersion_inc                       = 0.45
 cam_max_angle                            = 360.0
 cam_max_angle_horz                       = 90.0
-cam_step_angle_horz                      = 0.12
+cam_step_angle_horz                      = 0.2
 zoom_cam_relax_speed                     = 7
 zoom_cam_dispersion                      = 1.84
 zoom_cam_dispersion_frac                 = 1.0
-zoom_cam_dispersion_inc                  = 0.24
+zoom_cam_dispersion_inc                  = 0.28
+zoom_cam_max_angle                       = 360.0
+zoom_cam_max_angle_horz                  = 90.0
+zoom_cam_step_angle_horz                 = 0.1
+
+![wpn_xm4_admin] ; ---- Professional m4, short barrel, Pro flash hider
+zoom_rotate_time                         = 0.21
+cam_return                               = 0
+cam_relax_speed                          = 7
+cam_dispersion                           = 2.93
+cam_dispersion_frac                      = 1.0
+cam_dispersion_inc                       = 0.45
+cam_max_angle                            = 360.0
+cam_max_angle_horz                       = 90.0
+cam_step_angle_horz                      = 0.2
+zoom_cam_relax_speed                     = 7
+zoom_cam_dispersion                      = 1.82
+zoom_cam_dispersion_frac                 = 1.0
+zoom_cam_dispersion_inc                  = 0.28
 zoom_cam_max_angle                       = 360.0
 zoom_cam_max_angle_horz                  = 90.0
 zoom_cam_step_angle_horz                 = 0.1
@@ -1398,7 +1616,25 @@ zoom_cam_max_angle                       = 360.0
 zoom_cam_max_angle_horz                  = 90.0
 zoom_cam_step_angle_horz                 = 0.49
 
-![wpn_mk47] ;---- Professional M4 in 7.62x39, standard barrel, pro comp, pro AFG
+![wpn_mk47] ;---- Veteran M4 in 7.62x39, short barrel, vet brake, vet AFG
+zoom_rotate_time                         = 0.19
+cam_return                               = 0
+cam_relax_speed                          = 7
+cam_dispersion                           = 3.34
+cam_dispersion_frac                      = 1.0
+cam_dispersion_inc                       = 0.63
+cam_max_angle                            = 360.0
+cam_max_angle_horz                       = 90.0
+cam_step_angle_horz                      = 0.71
+zoom_cam_relax_speed                     = 7
+zoom_cam_dispersion                      = 2.14
+zoom_cam_dispersion_frac                 = 1.0
+zoom_cam_dispersion_inc                  = 0.4
+zoom_cam_max_angle                       = 360.0
+zoom_cam_max_angle_horz                  = 90.0
+zoom_cam_step_angle_horz                 = 0.42
+
+![wpn_mk47_sup] ;---- Professional M4 in 7.62x39, standard barrel, pro comp, pro AFG
 zoom_rotate_time                         = 0.25
 cam_return                               = 0
 cam_relax_speed                          = 7
@@ -1415,6 +1651,78 @@ zoom_cam_dispersion_inc                  = 0.32
 zoom_cam_max_angle                       = 360.0
 zoom_cam_max_angle_horz                  = 90.0
 zoom_cam_step_angle_horz                 = 0.46
+
+![wpn_grot_short] ;---- expert M4, short barrel, expert flashhider
+zoom_rotate_time                         = 0.21
+cam_return                               = 0
+cam_relax_speed                          = 7
+cam_dispersion                           = 2.99
+cam_dispersion_frac                      = 1.0
+cam_dispersion_inc                       = 0.46
+cam_max_angle                            = 360.0
+cam_max_angle_horz                       = 90.0
+cam_step_angle_horz                      = 0.2
+zoom_cam_relax_speed                     = 7
+zoom_cam_dispersion                      = 1.84
+zoom_cam_dispersion_frac                 = 1.0
+zoom_cam_dispersion_inc                  = 0.28
+zoom_cam_max_angle                       = 360.0
+zoom_cam_max_angle_horz                  = 90.0
+zoom_cam_step_angle_horz                 = 0.1
+
+![wpn_grot] ;---- veteran M4, long barrel, pro flashhider, pro vert grip
+zoom_rotate_time                         = 0.3
+cam_return                               = 0
+cam_relax_speed                          = 7
+cam_dispersion                           = 2.2
+cam_dispersion_frac                      = 1.0
+cam_dispersion_inc                       = 0.34
+cam_max_angle                            = 360.0
+cam_max_angle_horz                       = 90.0
+cam_step_angle_horz                      = 0.17
+zoom_cam_relax_speed                     = 7
+zoom_cam_dispersion                      = 1.37
+zoom_cam_dispersion_frac                 = 1.0
+zoom_cam_dispersion_inc                  = 0.21
+zoom_cam_max_angle                       = 360.0
+zoom_cam_max_angle_horz                  = 90.0
+zoom_cam_step_angle_horz                 = 0.08
+
+![wpn_grot_short_tan] ;---- expert M4, short barrel, expert flashhider
+zoom_rotate_time                         = 0.21
+cam_return                               = 0
+cam_relax_speed                          = 7
+cam_dispersion                           = 2.99
+cam_dispersion_frac                      = 1.0
+cam_dispersion_inc                       = 0.46
+cam_max_angle                            = 360.0
+cam_max_angle_horz                       = 90.0
+cam_step_angle_horz                      = 0.2
+zoom_cam_relax_speed                     = 7
+zoom_cam_dispersion                      = 1.84
+zoom_cam_dispersion_frac                 = 1.0
+zoom_cam_dispersion_inc                  = 0.28
+zoom_cam_max_angle                       = 360.0
+zoom_cam_max_angle_horz                  = 90.0
+zoom_cam_step_angle_horz                 = 0.1
+
+![wpn_grot_tan] ;---- veteran M4, long barrel, pro flashhider, pro vert grip
+zoom_rotate_time                         = 0.3
+cam_return                               = 0
+cam_relax_speed                          = 7
+cam_dispersion                           = 2.2
+cam_dispersion_frac                      = 1.0
+cam_dispersion_inc                       = 0.34
+cam_max_angle                            = 360.0
+cam_max_angle_horz                       = 90.0
+cam_step_angle_horz                      = 0.17
+zoom_cam_relax_speed                     = 7
+zoom_cam_dispersion                      = 1.37
+zoom_cam_dispersion_frac                 = 1.0
+zoom_cam_dispersion_inc                  = 0.21
+zoom_cam_max_angle                       = 360.0
+zoom_cam_max_angle_horz                  = 90.0
+zoom_cam_step_angle_horz                 = 0.08
 
 
 ;----------------------- Bullpup Rifles------------------------------
@@ -1437,7 +1745,7 @@ zoom_cam_max_angle                       = 360.0
 zoom_cam_max_angle_horz                  = 90.0
 zoom_cam_step_angle_horz                 = 0.09
 
-![wpn_dtmdr_sup] ; ---- Vet bullpup, standard barrel, vet muzzle brake,
+![wpn_dtmdr_sup] ; ---- Vet bullpup, standard barrel, vet muzzle brake
 zoom_rotate_time                         = 0.24
 cam_return                               = 0
 cam_relax_speed                          = 5
@@ -2334,23 +2642,23 @@ zoom_cam_max_angle                       = 360.0
 zoom_cam_max_angle_horz                  = 90.0
 zoom_cam_step_angle_horz                 = 0.2
 
-![wpn_dtmdr_black_sup] ;--- vet bullpup, standard barrel, vet comp
-zoom_rotate_time                         = 0.27
+![wpn_dtmdr_black_sup] ;--- vet bullpup, standard barrel, vet comp, vet VFG
+zoom_rotate_time                         = 0.25
 cam_return                               = 0
 cam_relax_speed                          = 5
-cam_dispersion                           = 5.81
+cam_dispersion                           = 5.2
 cam_dispersion_frac                      = 1.0
-cam_dispersion_inc                       = 0.92
+cam_dispersion_inc                       = 0.82
 cam_max_angle                            = 360.0
 cam_max_angle_horz                       = 90.0
-cam_step_angle_horz                      = 0.5
+cam_step_angle_horz                      = 0.45
 zoom_cam_relax_speed                     = 5
-zoom_cam_dispersion                      = 3.8
+zoom_cam_dispersion                      = 3.41
 zoom_cam_dispersion_frac                 = 1.0
-zoom_cam_dispersion_inc                  = 0.6
+zoom_cam_dispersion_inc                  = 0.54
 zoom_cam_max_angle                       = 360.0
 zoom_cam_max_angle_horz                  = 90.0
-zoom_cam_step_angle_horz                 = 0.2
+zoom_cam_step_angle_horz                 = 0.18
 
 ![wpn_scar_siber] ;---- Pro SCAR, short barrel, pro flash hider, pro afg
 zoom_rotate_time                         = 0.2
@@ -2680,9 +2988,45 @@ zoom_cam_max_angle                       = 360.0
 zoom_cam_max_angle_horz                  = 90.0
 zoom_cam_step_angle_horz                 = 0.5
 
+![wpn_hk21] ;---- M240, long barrel, vet flashhider
+zoom_rotate_time                         = 0.42
+cam_return                               = 0
+cam_relax_speed                          = 5
+cam_dispersion                           = 5.06
+cam_dispersion_frac                      = 1.0
+cam_dispersion_inc                       = 0.82
+cam_max_angle                            = 360.0
+cam_max_angle_horz                       = 90.0
+cam_step_angle_horz                      = 0.49
+zoom_cam_relax_speed                     = 5
+zoom_cam_dispersion                      = 3.4
+zoom_cam_dispersion_frac                 = 1.0
+zoom_cam_dispersion_inc                  = 0.55
+zoom_cam_max_angle                       = 360.0
+zoom_cam_max_angle_horz                  = 90.0
+zoom_cam_step_angle_horz                 = 0.49
+
 ;=============================================================
 ;----------------------Shotguns-------------------------------
 ;=============================================================
+
+![wpn_eft_mts_255] ;--- 20ga, long barrel
+zoom_rotate_time                         = 0.32
+cam_return                               = 0
+cam_relax_speed                          = 5
+cam_dispersion                           = 3.8
+cam_dispersion_frac                      = 1.0
+cam_dispersion_inc                       = 0.42
+cam_max_angle                            = 360.0
+cam_max_angle_horz                       = 90.0
+cam_step_angle_horz                      = 0.5
+zoom_cam_relax_speed                     = 5
+zoom_cam_dispersion                      = 2.85
+zoom_cam_dispersion_frac                 = 1.0
+zoom_cam_dispersion_inc                  = 0.32
+zoom_cam_max_angle                       = 360.0
+zoom_cam_max_angle_horz                  = 90.0
+zoom_cam_step_angle_horz                 = 0.5
 
 ![wpn_benelli_m1014] ;---- 12ga base
 zoom_rotate_time                         = 0.3
@@ -2847,6 +3191,24 @@ zoom_cam_max_angle_horz                  = 90.0
 zoom_cam_step_angle_horz                 = 0.5
 
 ![wpn_ks23] ;---- 4ga base
+zoom_rotate_time                         = 0.3
+cam_return                               = 0
+cam_relax_speed                          = 5
+cam_dispersion                           = 7.0
+cam_dispersion_frac                      = 1.0
+cam_dispersion_inc                       = 2.8
+cam_max_angle                            = 360.0
+cam_max_angle_horz                       = 90.0
+cam_step_angle_horz                      = 0.5
+zoom_cam_relax_speed                     = 5
+zoom_cam_dispersion                      = 5.0
+zoom_cam_dispersion_frac                 = 2.0
+zoom_cam_dispersion_inc                  = 2.0
+zoom_cam_max_angle                       = 360.0
+zoom_cam_max_angle_horz                  = 90.0
+zoom_cam_step_angle_horz                 = 0.5
+
+![wpn_ks23_vorkuta] ;---- 4ga base
 zoom_rotate_time                         = 0.3
 cam_return                               = 0
 cam_relax_speed                          = 5
@@ -3080,23 +3442,23 @@ zoom_cam_max_angle                       = 360.0
 zoom_cam_max_angle_horz                  = 90.0
 zoom_cam_step_angle_horz                 = 0.5
 
-![wpn_remington870] ;---- 12ga base
-zoom_rotate_time                         = 0.3
+![wpn_remington870] ;---- 12ga, short barrel, no stock
+zoom_rotate_time                         = 0.16
 cam_return                               = 0
 cam_relax_speed                          = 5
-cam_dispersion                           = 6.0
+cam_dispersion                           = 7.56
 cam_dispersion_frac                      = 1.0
-cam_dispersion_inc                       = 1.5
+cam_dispersion_inc                       = 1.89
 cam_max_angle                            = 360.0
 cam_max_angle_horz                       = 90.0
-cam_step_angle_horz                      = 0.5
+cam_step_angle_horz                      = 0.6
 zoom_cam_relax_speed                     = 5
-zoom_cam_dispersion                      = 4.0
+zoom_cam_dispersion                      = 5.04
 zoom_cam_dispersion_frac                 = 1.0
-zoom_cam_dispersion_inc                  = 1.0
+zoom_cam_dispersion_inc                  = 1.26
 zoom_cam_max_angle                       = 360.0
 zoom_cam_max_angle_horz                  = 90.0
-zoom_cam_step_angle_horz                 = 0.5
+zoom_cam_step_angle_horz                 = 0.6
 
 ![wpn_saiga12s_isg] ;---- 12ga, pro comp, pro brake, expert mag
 zoom_rotate_time                         = 0.27
@@ -3461,6 +3823,24 @@ zoom_cam_dispersion_inc                  = 0.57
 zoom_cam_max_angle                       = 360.0
 zoom_cam_max_angle_horz                  = 90.0
 zoom_cam_step_angle_horz                 = 0.09
+
+![wpn_svt40] ;--- SVD, standard barrel, experienced flash hider
+zoom_rotate_time                         = 0.32
+cam_return                               = 0
+cam_relax_speed                          = 5
+cam_dispersion                           = 5.63
+cam_dispersion_frac                      = 1.0
+cam_dispersion_inc                       = 0.84
+cam_max_angle                            = 360.0
+cam_max_angle_horz                       = 90.0
+cam_step_angle_horz                      = 0.39
+zoom_cam_relax_speed                     = 5
+zoom_cam_dispersion                      = 3.88
+zoom_cam_dispersion_frac                 = 1.0
+zoom_cam_dispersion_inc                  = 0.87
+zoom_cam_max_angle                       = 360.0
+zoom_cam_max_angle_horz                  = 90.0
+zoom_cam_step_angle_horz                 = 0.19
 
 ![wpn_svd] ;--- SVD, long barrel, experienced flash hider
 zoom_rotate_time                         = 0.38
@@ -4008,6 +4388,20 @@ zoom_cam_dispersion_inc_k                  = 0.85
 zoom_cam_step_angle_horz_k                 = 0.93
 
 ;---- rifle suppressors ----
+
+![wpn_sil_grot] ;--- socom, pro suppressor, balanced for pro flashider
+;--- Grot short and long 
+cam_return                                 = 0
+zoom_rotate_time_k                         = 1.3
+
+cam_dispersion_k                           = 0.89
+cam_dispersion_inc_k                       = 0.85
+cam_step_angle_horz_k                      = 0.95
+
+zoom_cam_dispersion_k                      = 0.89
+zoom_cam_dispersion_inc_k                  = 0.85
+zoom_cam_step_angle_horz_k                 = 0.95
+
 
 ![wpn_sil_surfire] ;--- socom, pro suppressor, balanced for pro comp
 ;--- BRN-180, m4a1 protector, 
