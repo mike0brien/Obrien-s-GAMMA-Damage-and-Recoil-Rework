@@ -18,10 +18,8 @@
 		wound_protection              = 0.65
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
-		additional_inventory_weight   = 35
-		additional_inventory_weight2   = 35
+		additional_inventory_weight   = 20
 		bones_koeff_protection        = actor_armor_exo
-		inv_weight 					  = 45
 
 ![dolg_nosorog_outfit]
 		burn_protection               = 0.42
@@ -34,10 +32,8 @@
 		wound_protection              = 0.7
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
-		additional_inventory_weight   = 35
-		additional_inventory_weight2   = 35
+		additional_inventory_weight   = 20
 		bones_koeff_protection        = actor_armor_exo
-		inv_weight 					  = 47
 
 ![freedom_nosorog_outfit]
 		burn_protection               = 0.25
@@ -50,10 +46,8 @@
 		wound_protection              = 0.5
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
-		additional_inventory_weight   = 35
-		additional_inventory_weight2   = 35
+		additional_inventory_weight   = 20
 		bones_koeff_protection        = actor_armor_exo
-		inv_weight 					  = 47
 
 ![isg_nosorog_outfit]
 		burn_protection               = 0.3
@@ -66,10 +60,8 @@
 		wound_protection              = 0.6
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
-		additional_inventory_weight   = 35
-		additional_inventory_weight2   = 35
+		additional_inventory_weight   = 20
 		bones_koeff_protection        = actor_armor_exo
-		inv_weight 					  = 50
 
 ![merc_nosorog_outfit]
 		burn_protection               = 0.3
@@ -82,10 +74,8 @@
 		wound_protection              = 0.61
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
-		additional_inventory_weight   = 35
-		additional_inventory_weight2   = 35
+		additional_inventory_weight   = 20
 		bones_koeff_protection        = actor_armor_exo
-		inv_weight 					  = 50
 
 ![monolith_nosorog_outfit]
 		burn_protection               = 0.333
@@ -98,10 +88,8 @@
 		wound_protection              = 0.6
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
-		additional_inventory_weight   = 35
-		additional_inventory_weight2   = 35
+		additional_inventory_weight   = 20
 		bones_koeff_protection        = actor_armor_exo
-		inv_weight 					  = 48
 
 
 ;===================================================
@@ -119,10 +107,8 @@
 		wound_protection              = 0.585
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
-		additional_inventory_weight   = 45
-		additional_inventory_weight2   = 45
+		additional_inventory_weight   = 30
 		bones_koeff_protection        = actor_armor_exo
-		inv_weight 					  = 40
 
 ![exo_outfit]
 		burn_protection               = 0.3
@@ -135,10 +121,8 @@
 		wound_protection              = 0.6
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
-		additional_inventory_weight   = 45
-		additional_inventory_weight2   = 45
+		additional_inventory_weight   = 30
 		bones_koeff_protection        = actor_armor_exo
-		inv_weight 					  = 38
 
 ![bandit_exo_outfit]
 		burn_protection               = 0.31
@@ -151,10 +135,8 @@
 		wound_protection              = 0.58
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
-		additional_inventory_weight   = 50
-		additional_inventory_weight2   = 50
+		additional_inventory_weight   = 22
 		bones_koeff_protection        = actor_armor_exo
-		inv_weight 					  = 36
 
 ![cs_exo_outfit]
 		burn_protection               = 0.24
@@ -167,10 +149,8 @@
 		wound_protection              = 0.504
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
-		additional_inventory_weight   = 45
-		additional_inventory_weight2   = 45
+		additional_inventory_weight   = 30
 		bones_koeff_protection        = actor_armor_exo
-		inv_weight 					  = 40
 
 ![dolg_exo_outfit]
 		burn_protection               = 0.378
@@ -183,10 +163,8 @@
 		wound_protection              = 0.63
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
-		additional_inventory_weight   = 45
-		additional_inventory_weight2   = 45
+		additional_inventory_weight   = 30
 		bones_koeff_protection        = actor_armor_exo
-		inv_weight 					  = 42
 
 ![svoboda_exo_outfit]
 		burn_protection               = 0.207
@@ -199,10 +177,8 @@
 		wound_protection              = 0.45
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
-		additional_inventory_weight   = 45
-		additional_inventory_weight2   = 45
+		additional_inventory_weight   = 30
 		bones_koeff_protection        = actor_armor_exo
-		inv_weight 					  = 42
 
 ![isg_exo_outfit]
 		burn_protection               = 0.27
@@ -215,10 +191,8 @@
 		wound_protection              = 0.54
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
-		additional_inventory_weight   = 45
-		additional_inventory_weight2   = 45
+		additional_inventory_weight   = 30
 		bones_koeff_protection        = actor_armor_exo
-		inv_weight 					  = 44
 
 ![merc_exo_outfit]
 		burn_protection               = 0.27
@@ -231,10 +205,8 @@
 		wound_protection              = 0.549
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
-		additional_inventory_weight   = 45
-		additional_inventory_weight2   = 45
+		additional_inventory_weight   = 30
 		bones_koeff_protection        = actor_armor_exo
-		inv_weight 					  = 44
 
 ![monolith_exo_outfit]
 		burn_protection               = 0.300
@@ -247,10 +219,8 @@
 		wound_protection              = 0.54
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
-		additional_inventory_weight   = 45
-		additional_inventory_weight2   = 45
+		additional_inventory_weight   = 30
 		bones_koeff_protection        = actor_armor_exo
-		inv_weight 					  = 41
 
 ![ecolog_exo_outfit]
 		burn_protection               = 0.39
@@ -263,10 +233,8 @@
 		wound_protection              = 0.56
 		fire_wound_protection         = 0.00
 		artefact_count                = 2
-		additional_inventory_weight   = 45
-		additional_inventory_weight2   = 45
+		additional_inventory_weight   = 30
 		bones_koeff_protection        = actor_armor_exo
-		inv_weight 					  = 39
 
 ![greh_exo_outfit]
 		burn_protection               = 0.21
@@ -279,10 +247,8 @@
 		wound_protection              = 0.55
 		fire_wound_protection         = 0.00
 		artefact_count                = 2
-		additional_inventory_weight   = 45
-		additional_inventory_weight2   = 45
+		additional_inventory_weight   = 30
 		bones_koeff_protection        = actor_armor_exo
-		inv_weight 					  = 41
 
 ![renegade_exo_outfit]
 		burn_protection               = 0.3
@@ -295,10 +261,8 @@
 		wound_protection              = 0.58
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
-		additional_inventory_weight   = 50
-		additional_inventory_weight2   = 50
+		additional_inventory_weight   = 25
 		bones_koeff_protection        = actor_armor_exo
-		inv_weight 					  = 36
 
 
 
@@ -320,9 +284,7 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
 		additional_inventory_weight   = -7
-		additional_inventory_weight2   = -7
 		bones_koeff_protection        = actor_armor_psz
-		inv_weight 					  = 28
 		
 ![exo_wood_outfit]
 		burn_protection               = 0.23
@@ -336,9 +298,7 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
 		additional_inventory_weight   = -7
-		additional_inventory_weight2   = -7
 		bones_koeff_protection        = actor_armor_psz
-		inv_weight 					  = 28
 
 ![bandit_exolight_outfit]
 		burn_protection               = 0.3
@@ -352,9 +312,7 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
 		additional_inventory_weight   = -7
-		additional_inventory_weight2   = -7
 		bones_koeff_protection        = actor_armor_psz
-		inv_weight 					  = 26
 
 ![cs_exolight_outfit]
 		burn_protection               = 0.24
@@ -368,9 +326,7 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
 		additional_inventory_weight   = -7
-		additional_inventory_weight2   = -7
 		bones_koeff_protection        = actor_armor_psz
-		inv_weight 					  = 30
 
 ![dolg_exolight_outfit]
 		burn_protection               = 0.378
@@ -384,9 +340,7 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
 		additional_inventory_weight   = -7
-		additional_inventory_weight2   = -7
 		bones_koeff_protection        = actor_armor_psz
-		inv_weight 					  = 32
 
 ![exo_dolg_outfit] 
 		burn_protection               = 0.378
@@ -400,9 +354,7 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
 		additional_inventory_weight   = -7
-		additional_inventory_weight2   = -7
 		bones_koeff_protection        = actor_armor_psz
-		inv_weight 					  = 32
 
 ![exo_dolg_red_outfit] 
 		burn_protection               = 0.378
@@ -416,9 +368,7 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
 		additional_inventory_weight   = -7
-		additional_inventory_weight2   = -7
 		bones_koeff_protection        = actor_armor_psz
-		inv_weight 					  = 32
 
 ![exo_dolg_urban_outfit] 
 		burn_protection               = 0.359
@@ -432,9 +382,7 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
 		additional_inventory_weight   = -5
-		additional_inventory_weight2   = -5
 		bones_koeff_protection        = actor_armor_psz
-		inv_weight 					  = 32
 
 ![exo_dolg_wood_outfit] 
 		burn_protection               = 0.378
@@ -448,9 +396,7 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
 		additional_inventory_weight   = -7
-		additional_inventory_weight2   = -7
 		bones_koeff_protection        = actor_armor_psz
-		inv_weight 					  = 32
 
 ![exo_merc_grass_outfit]
 		burn_protection               = 0.315
@@ -464,9 +410,7 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
 		additional_inventory_weight   = -7
-		additional_inventory_weight2   = -7
 		bones_koeff_protection        = actor_armor_psz
-		inv_weight 					  = 34
 
 ![exo_merc_urban_outfit]
 		burn_protection               = 0.299
@@ -480,9 +424,7 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 1
 		additional_inventory_weight   = -5
-		additional_inventory_weight2   = -5
 		bones_koeff_protection        = actor_armor_psz
-		inv_weight 					  = 34
 
 ![exo_merc_wood_outfit]
 		burn_protection               = 0.27
@@ -496,9 +438,7 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
 		additional_inventory_weight   = -7
-		additional_inventory_weight2   = -7
 		bones_koeff_protection        = actor_armor_psz
-		inv_weight 					  = 34
 
 ![merc_exolight_outfit]
 		burn_protection               = 0.27
@@ -512,9 +452,7 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
 		additional_inventory_weight   = -7
-		additional_inventory_weight2   = -7
 		bones_koeff_protection        = actor_armor_psz
-		inv_weight 					  = 34
 
 ![isg_exolight_outfit]
 		burn_protection               = 0.27
@@ -528,9 +466,7 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
 		additional_inventory_weight   = -7
-		additional_inventory_weight2   = -7
 		bones_koeff_protection        = actor_armor_psz
-		inv_weight 					  = 34
 
 ![monolith_exolight_outfit]
 		burn_protection               = 0.300
@@ -544,9 +480,7 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
 		additional_inventory_weight   = -7
-		additional_inventory_weight2   = -7
 		bones_koeff_protection        = actor_armor_psz
-		inv_weight 					  = 31
 
 ![svoboda_exolight_outfit]
 		burn_protection               = 0.207
@@ -560,9 +494,7 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
 		additional_inventory_weight   = -7
-		additional_inventory_weight2   = -7
 		bones_koeff_protection        = actor_armor_psz
-		inv_weight 					  = 32
 
 ![military_exolight_outfit] 
 		burn_protection               = 0.338
@@ -576,9 +508,7 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
 		additional_inventory_weight   = -7
-		additional_inventory_weight2   = -7
 		bones_koeff_protection        = actor_armor_psz
-		inv_weight 					  = 30
 
 ![freedom_exo_vineleaf_outfit] 
 		burn_protection               = 0.23
@@ -592,9 +522,7 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 2
 		additional_inventory_weight   = -12
-		additional_inventory_weight2   = -12
 		bones_koeff_protection        = actor_armor_psz
-		inv_weight 					  = 37
 
 
 
@@ -614,7 +542,6 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_class3
-		inv_weight 					  = 26.4
 
 ![dolg_specops_red_outfit] --- PS5-B2 Veteran Battlesuit
 		burn_protection               = 0.302
@@ -628,7 +555,6 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 2
 		bones_koeff_protection        = actor_armor_berill
-		inv_weight 					  = 24.3
 
 
 ;===================================================
@@ -648,7 +574,6 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 2
 		bones_koeff_protection        = actor_armor_berill
-		inv_weight 					  = 26.5
 
 ![hybrid_outfit]  -- Hybrid Armored Suit
 		burn_protection               = 0.315
@@ -662,9 +587,7 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 2
 		additional_inventory_weight   = 35
-		additional_inventory_weight2  = 35
 		bones_koeff_protection        = actor_armor_class3
-		inv_weight 					  = 25.4
 
 ![merc_scientific_armored_outfit]  -- Mercenary SEVA Body Armor 
 		burn_protection               = 0.33
@@ -679,7 +602,6 @@
 		artefact_count                = 2
 		repair_type = outfit_heavy
 		bones_koeff_protection        = actor_armor_cs3
-		inv_weight 					  = 23.8
 
 
 ;===================================================
@@ -697,11 +619,9 @@
 		wound_protection              = 0.605
 		fire_wound_protection         = 0.00
 		artefact_count                = 2
-		additional_inventory_weight   = 55
-		additional_inventory_weight2   = 55
+		additional_inventory_weight   = 15
 		bones_koeff_protection        = actor_armor_skat
 		repair_type = outfit_heavy
-		inv_weight 					  = 35.5
 
 ![dolg_heavy_proto_exo_outfit]
 		burn_protection               = 0.29
@@ -714,11 +634,9 @@
 		wound_protection              = 0.587
 		fire_wound_protection         = 0.00
 		artefact_count                = 2
-		additional_inventory_weight   = 55
-		additional_inventory_weight2   = 55
+		additional_inventory_weight   = 15
 		bones_koeff_protection        = actor_armor_skat
 		repair_type = outfit_heavy
-		inv_weight 					  = 37.2
 
 ![military_outfit] 
 		burn_protection               = 0.24
@@ -732,9 +650,7 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 2
 		additional_inventory_weight   = 7
-		additional_inventory_weight2   = 7
 		bones_koeff_protection        = actor_armor_skat
-		inv_weight 					  = 25.5
 
 ![dolg_heavy_outfit]
 		burn_protection               = 0.29
@@ -748,9 +664,7 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 2
 		additional_inventory_weight   = 7
-		additional_inventory_weight2   = 7
 		bones_koeff_protection        = actor_armor_skat
-		inv_weight 					  = 27.2
 
 ![dolg_heavy_redline_outfit]
 		burn_protection               = 0.29
@@ -764,9 +678,7 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 2
 		additional_inventory_weight   = 7
-		additional_inventory_weight2   = 7
 		bones_koeff_protection        = actor_armor_skat
-		inv_weight 					  = 27.2
 
 ![dolg_pantsir_outfit]
 		burn_protection               = 0.29
@@ -780,9 +692,7 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 2
 		additional_inventory_weight   = 7
-		additional_inventory_weight2   = 7
 		bones_koeff_protection        = actor_armor_skat
-		inv_weight 					  = 27.2
 
 ![military_bandit_outfit]
 		burn_protection               = 0.220
@@ -795,10 +705,8 @@
 		wound_protection              = 0.542
 		fire_wound_protection         = 0.00
 		artefact_count                = 1
-		additional_inventory_weight   = 10
-		additional_inventory_weight2   = 10
+		additional_inventory_weight   = 7
 		bones_koeff_protection        = actor_armor_skat
-		inv_weight 					  = 22.1
 
 ![military_freedom_outfit]
 		burn_protection               = 0.15
@@ -812,9 +720,7 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 2
 		additional_inventory_weight   = 7
-		additional_inventory_weight2   = 7
 		bones_koeff_protection        = actor_armor_skat
-		inv_weight 					  = 27.2
 
 ![military_merc_outfit]
 		burn_protection               = 0.2
@@ -828,9 +734,7 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 2
 		additional_inventory_weight   = 7
-		additional_inventory_weight2   = 7
 		bones_koeff_protection        = actor_armor_skat
-		inv_weight 					  = 28.9
 
 ![military_monolit_outfit]
 		burn_protection               = 0.220
@@ -844,9 +748,7 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 2
 		additional_inventory_weight   = 7
-		additional_inventory_weight2   = 7
 		bones_koeff_protection        = actor_armor_skat
-		inv_weight 					  = 26.35
 
 ![military_sky_outfit]
 		burn_protection               = 0.17
@@ -860,9 +762,7 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 2
 		additional_inventory_weight   = 7
-		additional_inventory_weight2   = 7
 		bones_koeff_protection        = actor_armor_skat
-		inv_weight 					  = 25.5
 
 
 
@@ -881,8 +781,7 @@
 		wound_protection              = 0.5
 		fire_wound_protection         = 0.00 
 		artefact_count                = 1 
-		bones_koeff_protection        = actor_armor_cs_heavy
-		inv_weight 					  = 22.95
+		bones_koeff_protection        = actor_armor_cs_heavy 
 
 ![light_dolg_outfit] --- IBAz Universal Protection Suit, Duty
 		burn_protection               = 0.243
@@ -895,8 +794,7 @@
 		wound_protection              = 0.556
 		fire_wound_protection         = 0.00 
 		artefact_count                = 1 
-		bones_koeff_protection        = actor_armor_cs_heavy
-		inv_weight 					  = 24.48
+		bones_koeff_protection        = actor_armor_cs_heavy 
 
 ![light_freedom_outfit] --- Defender of Freedom
 		burn_protection               = 0.149 
@@ -909,8 +807,7 @@
 		wound_protection              = 0.41 
 		fire_wound_protection         = 0.00 
 		artefact_count                = 1 
-		bones_koeff_protection        = actor_armor_cs_heavy
-		inv_weight 					  = 24.48
+		bones_koeff_protection        = actor_armor_cs_heavy 
 
 ![light_isg_outfit] --- UNISG IBAz Suit
 		burn_protection               = 0.194 
@@ -924,7 +821,6 @@
 		fire_wound_protection         = 0.00 
 		artefact_count                = 1 
 		bones_koeff_protection        = actor_armor_cs_heavy 
-		inv_weight 					  = 26.01
 
 ![light_loner_outfit] --- Interceptor Body Armor, Stalker
 		burn_protection               = 0.216 
@@ -937,8 +833,7 @@
 		wound_protection              = 0.469 
 		fire_wound_protection         = 0.00 
 		artefact_count                = 1 
-		bones_koeff_protection        = actor_armor_cs_heavy
-		inv_weight 					  = 21.42
+		bones_koeff_protection        = actor_armor_cs_heavy 
 
 ![light_merc_outfit] --- Mercenary IBAz Suit
 		burn_protection               = 0.194 
@@ -951,8 +846,7 @@
 		wound_protection              = 0.469 
 		fire_wound_protection         = 0.00 
 		artefact_count                = 1 
-		bones_koeff_protection        = actor_armor_cs_heavy
-		inv_weight 					  = 26.01
+		bones_koeff_protection        = actor_armor_cs_heavy 
 
 ![light_monolit_outfit] --- Monolith IBAz Suit
 		burn_protection               = 0.216 
@@ -965,8 +859,7 @@
 		wound_protection              = 0.462 
 		fire_wound_protection         = 0.00 
 		artefact_count                = 1 
-		bones_koeff_protection        = actor_armor_cs_heavy
-		inv_weight 					  = 23.715 
+		bones_koeff_protection        = actor_armor_cs_heavy 
 
 ![light_voen_outfit] --- Military IBAz Suit
 		burn_protection               = 0.243
@@ -979,8 +872,7 @@
 		wound_protection              = 0.556
 		fire_wound_protection         = 0.00 
 		artefact_count                = 1 
-		bones_koeff_protection        = actor_armor_cs_heavy
-		inv_weight 					  = 24.48
+		bones_koeff_protection        = actor_armor_cs_heavy 
 
 
 
@@ -1000,11 +892,9 @@
 		explosion_protection          = 0.036
 		wound_protection              = 0.072
 		fire_wound_protection         = 0.0
-		artefact_count                = 4
-		additional_inventory_weight   = 85
-		additional_inventory_weight   = 85
+		artefact_count                = 3
+		additional_inventory_weight   = 45
 		bones_koeff_protection        = actor_armor_class3
-		inv_weight 					  = 24.48
 
 ![cs_stalker_proto_exo_outfit] --- CS-2b Exoskeleton
 		burn_protection               = 0.2
@@ -1017,10 +907,8 @@
 		wound_protection              = 0.32
 		fire_wound_protection         = 0.00
 		artefact_count                = 2
-		additional_inventory_weight   = 85
-		additional_inventory_weight   = 85
+		additional_inventory_weight   = 40
 		bones_koeff_protection        = actor_armor_class3
-		inv_weight 					  = 24.48
 
 ![dolg_proto_exo_outfit] --- PS5-M Exoskeleton
 		repair_type = outfit_heavy
@@ -1034,10 +922,8 @@
 		wound_protection              = 0.29
 		fire_wound_protection         = 0.000
 		artefact_count                = 3
-		additional_inventory_weight   = 80
-		additional_inventory_weight   = 80
+		additional_inventory_weight   = 40
 		bones_koeff_protection        = actor_armor_class3
-		inv_weight 					  = 24.48
 
 ![ecolog_proto_exo_outfit] --- SSP-99M Exoskeleton
 		repair_type = outfit_heavy
@@ -1051,10 +937,8 @@
 		wound_protection              = 0.15
 		fire_wound_protection         = 0.0
 		artefact_count                = 3
-		additional_inventory_weight   = 80
-		additional_inventory_weight   = 80
+		additional_inventory_weight   = 40
 		bones_koeff_protection        = actor_armor_class3
-		inv_weight 					  = 24.48
 
 ![isg_proto_exo_outfit] --- UNISG Tactical Exoskeleton
 		repair_type = outfit_heavy
@@ -1067,11 +951,9 @@
 		explosion_protection          = 0.3
 		wound_protection              = 0.29
 		fire_wound_protection         = 0.000
-		artefact_count                = 2
-		additional_inventory_weight   = 75
-		additional_inventory_weight   = 75
+		artefact_count                = 3
+		additional_inventory_weight   = 35
 		bones_koeff_protection        = actor_armor_class3
-		inv_weight 					  = 24.48
 
 ![monolith_proto_exo_outfit] --- X-18 Exoskeleton
 		repair_type = outfit_heavy
@@ -1084,11 +966,9 @@
 		explosion_protection          = 0.356
 		wound_protection              = 0.338
 		fire_wound_protection         = 0.000
-		artefact_count                = 2
-		additional_inventory_weight   = 75
-		additional_inventory_weight   = 75
+		artefact_count                = 3
+		additional_inventory_weight   = 35
 		bones_koeff_protection        = actor_armor_class3
-		inv_weight 					  = 24.48
 
 ![svoboda_light_proto_exo_outfit] --- Wind of Freedom Exoskeleton
 		repair_type = outfit_heavy
@@ -1101,11 +981,9 @@
 		explosion_protection          = 0.28
 		wound_protection              = 0.27
 		fire_wound_protection         = 0.000
-		artefact_count                = 2
-		additional_inventory_weight   = 85
-		additional_inventory_weight   = 85
+		artefact_count                = 3
+		additional_inventory_weight   = 35
 		bones_koeff_protection        = actor_armor_class3
-		inv_weight 					  = 24.48
 
 
 ;========================    MEDIUM    ========================
@@ -1129,8 +1007,6 @@
 		bones_koeff_protection        = actor_armor_class3
 		repair_type = outfit_medium
 		additional_inventory_weight   = 10
-		additional_inventory_weight2   = 10
-		inv_weight 					  = 20.96
 
 ![cs_scientific_outfit_good] --- CS-4a Pathfinder, Clear Sky
 		burn_protection               = 0.29
@@ -1145,7 +1021,6 @@
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_seva
 		repair_type = outfit_medium
-		inv_weight 					  = 20.32
 
 ![dolg_scientific_wood_outfit] --- PS5-9Md Light Pathfinder
 		burn_protection               = 0.38
@@ -1159,9 +1034,8 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_seva
-		inv_weight 					  = 20.58
 
-![wastelander_outfit] --- Wastelander Outfit, Stalker - change to stalker Berrill, move Nomad here
+![wastelander_outfit] --- Wastelander Outfit, Stalker
 		repair_type = outfit_medium
 		burn_protection               = 0.33
 		shock_protection              = 0.33
@@ -1174,7 +1048,6 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 4
 		bones_koeff_protection        = actor_armor_cs3
-		inv_weight 					  = 19.68
 
 
 
@@ -1195,10 +1068,8 @@
 		wound_protection              = 0.349
 		fire_wound_protection         = 0.000
 		artefact_count                = 3
-		additional_inventory_weight   = 25
-		additional_inventory_weight2   = 25
+		additional_inventory_weight   = 10
 		bones_koeff_protection        = actor_armor_duty_suit
-		inv_weight 					  = 19.68
 
 ![travel_outfit] --- "Voyager" Stalker Suit
 		repair_type = outfit_medium
@@ -1213,9 +1084,7 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 4
 		additional_inventory_weight   = 25
-		additional_inventory_weight2   = 25
 		bones_koeff_protection        = actor_armor_class1
-		inv_weight 					  = 17.9
 
 
 
@@ -1235,7 +1104,6 @@
 		fire_wound_protection         = 0.016
 		artefact_count                = 4
 		bones_koeff_protection        = actor_armor_ssp99
-		inv_weight 					  = 14.5
 
 ![ecolog_outfit_blue]
 		burn_protection               = 0.35
@@ -1249,7 +1117,6 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 4
 		bones_koeff_protection        = actor_armor_ssp99m
-		inv_weight 					  = 14.5
 
 ![ecolog_outfit_green]
 		burn_protection               = 0.38
@@ -1263,7 +1130,6 @@
 		fire_wound_protection         = 0.0
 		artefact_count                = 4
 		bones_koeff_protection        = actor_armor_ssp99m
-		inv_weight 					  = 14.5
 
 ![ecolog_outfit_white]
 		burn_protection               = 0.45
@@ -1277,7 +1143,6 @@
 		fire_wound_protection         = 0.0
 		artefact_count                = 4
 		bones_koeff_protection        = actor_armor_ssp99m
-		inv_weight 					  = 14.5
 
 ![ecolog_outfit_yello]
 		burn_protection               = 0.38
@@ -1291,7 +1156,6 @@
 		fire_wound_protection         = 0.0
 		artefact_count                = 4
 		bones_koeff_protection        = actor_armor_ssp99m
-		inv_weight 					  = 14.5
 
 ![ecolog_outfit_red]
 		burn_protection               = 0.6
@@ -1305,7 +1169,6 @@
 		fire_wound_protection         = 0.0
 		artefact_count                = 4
 		bones_koeff_protection        = actor_armor_ssp99m
-		inv_weight 					  = 14.5
 
 
 ;===================================================
@@ -1324,8 +1187,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_seva
-		inv_weight 					  = 16.73
-		
 
 ![bandit_scientific_dark_outfit]  --- Patchwork Anomaly Suit, Bandit
 		burn_protection               = 0.31
@@ -1339,7 +1200,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 2
 		bones_koeff_protection        = actor_armor_seva
-		inv_weight 					  = 14.5
 
 ![bandit_scientific_outfit]  --- Looted SEVA Suit, Bandit
 		burn_protection               = 0.31
@@ -1353,7 +1213,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 2
 		bones_koeff_protection        = actor_armor_seva
-		inv_weight 					  = 14.5
 
 ![cs_scientific_outfit]  --- CS-4a SEVA Suit, Clear Sky
 		burn_protection               = 0.26
@@ -1367,7 +1226,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_seva
-		inv_weight 					  = 17.27
 
 ![merc_scientific_outfit] --- Merc SEVA Suit
 		burn_protection               = 0.3
@@ -1381,7 +1239,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_seva
-		inv_weight 					  = 17.81
 
 ![monolith_scientific_outfit] --- Monolith Science Suit
 		burn_protection               = 0.36
@@ -1395,7 +1252,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_seva
-		inv_weight 					  = 17.2
 
 ![renegade_scientific_outfit] --- Renegade Seva Suit 
 		burn_protection               = 0.38
@@ -1409,7 +1265,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 2
 		bones_koeff_protection        = actor_armor_seva
-		inv_weight 					  = 14.5
 
 ![svoboda_scientific_outfit] --- Watchman of Freedom, SEVA
 		burn_protection               = 0.24
@@ -1423,7 +1278,6 @@
 		fire_wound_protection         = 0.000
         artefact_count                = 3
 	    bones_koeff_protection        = actor_armor_seva
-		inv_weight 					  = 17.43
 
 
 ![dolg_scientific_outfit] --- PS5-9Md Universal Scientific Suit
@@ -1438,7 +1292,6 @@
 		fire_wound_protection         = 0.000
         artefact_count                = 3
 	    bones_koeff_protection        = actor_armor_seva
-		inv_weight 					  = 17.43
 
 ![isg_scientific_outfit] --- UNISG SEVA Suit
 		burn_protection               = 0.28
@@ -1452,7 +1305,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_seva
-		inv_weight 					  = 17.81
 
 
 ;-----Medium Light Science Suit -----
@@ -1469,7 +1321,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_seva
-		inv_weight 					  = 13.3
 		
 ![dolg_scientific_red_outfit] --- PS5-9Md light Scientific Suit
 		burn_protection               = 0.385
@@ -1483,7 +1334,6 @@
 		fire_wound_protection         = 0.000
         artefact_count                = 3
 	    bones_koeff_protection        = actor_armor_seva
-		inv_weight 					  = 14.4
 
 
 ;===================================================
@@ -1502,7 +1352,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 4
 		bones_koeff_protection        = actor_armor_berill
-		inv_weight 					  = 21.76
 
 ![specops_dolg_outfit] --- PS5-B Battle Armor, Duty
 		burn_protection               = 0.21
@@ -1516,7 +1365,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 4
 		bones_koeff_protection        = actor_armor_berill
-		inv_weight 					  = 21.76
 
 ![cs_medium_outfit] --- CS-3a Body Armor, Clear Sky
 		burn_protection               = 0.11
@@ -1530,7 +1378,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_class3
-		inv_weight 					  = 20.4
 
 ![specops_outfit] --- Berill-5M Armored Suit, Military
 		burn_protection               = 0.21
@@ -1544,7 +1391,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_berill
-		inv_weight 					  = 20.4
 
 ![specops_bandit_outfit] --- Deserter's B-5M Armored Suit
 		burn_protection               = 0.11
@@ -1558,7 +1404,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_berill
-		inv_weight 					  = 17.68
 
 ![specops_merc_outfit] --- Mercenary B-5M Armored Suit
 		burn_protection               = 0.15
@@ -1572,7 +1417,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_berill
-		inv_weight 					  = 23.12
 
 
 
@@ -1594,7 +1438,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 2
 		bones_koeff_protection        = actor_armor_bandit
-		inv_weight 					  = 19.65
 
 ![merc_jackal_outfit] ;---- Merc LTS-J Body Suit
 		burn_protection               = 0.12
@@ -1608,7 +1451,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 1
 		bones_koeff_protection        = actor_armor_duty_suit
-		inv_weight 					  = 19.65
 
 ![merc_sunset_outfit] ;---- Merc LCz Suit
 		burn_protection               = 0.15
@@ -1622,7 +1464,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 2
 		bones_koeff_protection        = actor_armor_duty_suit
-		inv_weight 					  = 19.65
 
 ![merc_coyote_outfit] ;---- Merc MTS-C Body Suit
 		burn_protection               = 0.13
@@ -1636,7 +1477,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 2
 		bones_koeff_protection        = actor_armor_duty_suit
-		inv_weight 					  = 19.65
 
 ![greh_armored_outfit] ;---- Vyriy Flak Armor, Sin
 		burn_protection               = 0.1
@@ -1650,7 +1490,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 2
 		bones_koeff_protection        = actor_armor_duty_suit
-		inv_weight 					  = 17.92
 
 ![greh_armored_camo_outfit] ;---- Irij Flak Armor, Sin
 		burn_protection               = 0.12
@@ -1664,7 +1503,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 2
 		bones_koeff_protection        = actor_armor_cs3
-		inv_weight 					  = 17.92
 
 ![isg_lcs_outfit] ;---- ISG LC Suit
 		burn_protection               = 0.14
@@ -1678,7 +1516,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 2
 		bones_koeff_protection        = actor_armor_bandit
-		inv_weight 					  = 19.65
 
 ![isg_lcs_urban_outfit] ;---- ISG LC-UC Suit
 		burn_protection               = 0.14
@@ -1692,7 +1529,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 2
 		bones_koeff_protection        = actor_armor_bandit
-		inv_weight 					  = 19.65
 
 ![renegademerc_outfit] ;---- Renegade LC Suit
 		burn_protection               = 0.1
@@ -1706,7 +1542,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 2
 		bones_koeff_protection        = actor_armor_bandit
-		inv_weight 					  = 15.03
 
 
 ;===================================================
@@ -1725,8 +1560,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_isg_seva
-		inv_weight 					  = 15.33
-
 
 ![dolg_voin_outfit] --- PS6-V Warrior Suit, Duty
 		burn_protection               = 0.32
@@ -1740,7 +1573,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_class3
-		inv_weight 					  = 15.33
 
 ![monolith_outfit] --- Monolith X-18 Suit
 		burn_protection               = 0.27
@@ -1754,7 +1586,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_suit
-		inv_weight 					  = 15.33
 
 ![isg_camo_outfit] --- ISG Mk2 Tactical Body Armor
 		burn_protection               = 0.230
@@ -1768,7 +1599,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_duty_suit
-		inv_weight 					  = 15.67
 
 ;===================================================
 ;---- MEDIUM Hybrid Suit (From SEVA Baseline) -----
@@ -1786,10 +1616,8 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_isg_seva
-		inv_weight 					  = 13.94
 
 ![dolg_red_outfit] --- PS5-M Hunter Suit, Duty
-		repair_type = outfit_medium
 		burn_protection               = 0.3
 		shock_protection              = 0.23
 		radiation_protection          = 0.01
@@ -1801,7 +1629,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_isg_seva
-		inv_weight 					  = 13.94
 
 ![greh_ps5_outfit] --- Volos Flak Armor, Sin
 		burn_protection               = 0.29
@@ -1815,7 +1642,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 2
 		bones_koeff_protection        = actor_armor_isg_seva
-		inv_weight 					  = 13.76
 
 ![bandit_ps5_outfit] --- Fenced PS5-M Universal Protection Suit
 		burn_protection               = 0.25
@@ -1829,7 +1655,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 2
 		bones_koeff_protection        = actor_armor_isg_seva
-		inv_weight 					  = 11.6
 
 ![isg_outfit] ---- ISG Mk1 Tactical Body Armor
 		burn_protection               = 0.27
@@ -1843,7 +1668,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_suit
-		inv_weight 					  = 14.25
 
 ![merc_sun_outfit] --- "Twilight" Tactical Suit, Merc
 		burn_protection               = 0.26
@@ -1857,7 +1681,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_suit
-		inv_weight 					  = 14.25
 
 ![svoboda_light_outfit] --- Wind of Freedom
 		burn_protection               = 0.23
@@ -1871,7 +1694,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_freedom_wind
-		inv_weight 					  = 13.94
 
 
 
@@ -1890,7 +1712,6 @@
 		fire_wound_protection         = 0.0
 		artefact_count                = 2
 		bones_koeff_protection        = actor_armor_suit
-		inv_weight 					  = 10.44
 
 ![stalker_bear_outfit] --- "Bear" Stalker Suit (Burn Specialist)
 		burn_protection               = 0.36
@@ -1904,7 +1725,6 @@
 		fire_wound_protection         = 0.0
 		artefact_count                = 2
 		bones_koeff_protection        = actor_armor_class2
-		inv_weight 					  = 12.04
 
 
 ![stalker_drought_outfit] --- "Drought" Stalker Suit (Shock Specialist)
@@ -1919,7 +1739,6 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 2
 		bones_koeff_protection        = actor_armor_class2
-		inv_weight 					  = 12.04
 
 
 ![stalker_graphite_outfit] --- "Graphite" Stalker Suit (slight rad, explosive buff)
@@ -1934,7 +1753,6 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 2
 		bones_koeff_protection        = actor_armor_class2
-		inv_weight 					  = 12.04
 
 
 ![stalker_tigerstripe_outfit] --- "Tigerstripe" Stalker Suit (Balanced)
@@ -1949,7 +1767,6 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 2
 		bones_koeff_protection        = actor_armor_class2
-		inv_weight 					  = 12.04
 
 
 ![cs_stalker_outfit] --- CS-2b Body Armor, Clear Sky (Chemical Specialist)
@@ -1964,7 +1781,6 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 2
 		bones_koeff_protection        = actor_armor_cs2
-		inv_weight 					  = 12.43
 
 
 ![ecolog_guard_outfit] --- ISRIT Guard Jumpsuit (Elemental Resistance High, others low)
@@ -1979,7 +1795,117 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 2
 		bones_koeff_protection        = actor_armor_cs2
-		inv_weight 					  = 10.44
+
+
+
+;===================================================
+;--------------- MEDIUM NBC ---------------
+;===================================================
+![nbc_outfit]
+		burn_protection               = 0.213
+		shock_protection              = 0.153
+		radiation_protection          = 0.005
+		chemical_burn_protection      = 0.23
+		telepatic_protection          = 0.00
+		strike_protection             = 0.247
+		explosion_protection          = 0.264
+		wound_protection              = 0.257
+		fire_wound_protection         = 0.0
+		artefact_count                = 3
+		additional_inventory_weight   = 20
+		bones_koeff_protection        = actor_armor_suit
+
+
+![bandit_nbc_outfit]
+		burn_protection               = 0.213
+		shock_protection              = 0.153
+		radiation_protection          = 0.003
+		chemical_burn_protection      = 0.23
+		telepatic_protection          = 0.00
+		strike_protection             = 0.247
+		explosion_protection          = 0.264
+		wound_protection              = 0.257
+		fire_wound_protection         = 0.0
+		artefact_count                = 3
+		additional_inventory_weight   = 15
+		bones_koeff_protection        = actor_armor_suit
+
+
+![cs_nbc_outfit]
+		burn_protection               = 0.18
+		shock_protection              = 0.153
+		radiation_protection          = 0.01
+		chemical_burn_protection      = 0.28
+		telepatic_protection          = 0
+		strike_protection             = 0.285
+		explosion_protection          = 0.235
+		wound_protection              = 0.285
+		fire_wound_protection         = 0.0
+		artefact_count                = 3
+		additional_inventory_weight   = 20
+		bones_koeff_protection        = actor_armor_suit
+
+
+![monolith_nbc_outfit]
+		burn_protection               = 0.23
+		shock_protection              = 0.21
+		radiation_protection          = 0.013
+		chemical_burn_protection      = 0.19
+		telepatic_protection          = 0.0
+		strike_protection             = 0.272
+		explosion_protection          = 0.298
+		wound_protection              = 0.255
+		fire_wound_protection         = 0.0
+		artefact_count                = 3
+		additional_inventory_weight   = 20
+		bones_koeff_protection        = actor_armor_suit
+
+
+![nbc_dolg_outfit]
+		burn_protection               = 0.153
+		shock_protection              = 0.306
+		radiation_protection          = 0.005
+		chemical_burn_protection      = 0.191
+		telepatic_protection          = 0.08
+		strike_protection             = 0.285
+		explosion_protection          = 0.23
+		wound_protection              = 0.285
+		fire_wound_protection         = 0.0
+		artefact_count                = 3
+		additional_inventory_weight   = 20
+		bones_koeff_protection        = actor_armor_suit
+
+
+![nbc_freedom_outfit]
+		burn_protection               = 0.306
+		shock_protection              = 0.153
+		radiation_protection          = 0.008
+		chemical_burn_protection      = 0.191
+		telepatic_protection          = 0.05
+		strike_protection             = 0.23
+		explosion_protection          = 0.247
+		wound_protection              = 0.298
+		fire_wound_protection         = 0.0
+		artefact_count                = 3
+		additional_inventory_weight   = 20
+		bones_koeff_protection        = actor_armor_suit
+
+
+![nbc_merc_outfit]
+		burn_protection               = 0.255
+		shock_protection              = 0.255
+		radiation_protection          = 0.00085
+		chemical_burn_protection      = 0.255
+		telepatic_protection          = 0
+		strike_protection             = 0.285
+		explosion_protection          = 0.285
+		wound_protection              = 0.285
+		fire_wound_protection         = 0.0
+		artefact_count                = 3
+		additional_inventory_weight   = 20
+		bones_koeff_protection        = actor_armor_suit
+
+
 
 ;===================================================
 ;--------------- MEDIUM Trenchcoat ---------------
@@ -1997,7 +1923,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_duty_suit
-		inv_weight 					  = 16.34
 
 
 ![trenchcoat_dolg_brown_outfit]
@@ -2012,7 +1937,6 @@
 		fire_wound_protection         = 0.000
         artefact_count                = 3
 		bones_koeff_protection        = actor_armor_duty_suit
-		inv_weight 					  = 16.56
 
 
 ![trenchcoat_freedom_brown_outfit]
@@ -2027,7 +1951,6 @@
 		fire_wound_protection         = 0.000
         artefact_count                = 3
 		bones_koeff_protection        = actor_armor_duty_suit
-		inv_weight 					  = 16.56
 
 
 ![ghillie_outfit]
@@ -2043,132 +1966,9 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_ghillie
-		inv_weight 					  = 11.2
 
 
 ;========================    LIGHT    ========================
-
-;===================================================
-;--------------- LIGHT NBC ---------------
-;===================================================
-
-![nbc_outfit] --- tactical stalker suit
-		burn_protection               = 0.061
-		shock_protection              = 0.052
-		radiation_protection          = 0.002
-		chemical_burn_protection      = 0.092
-		telepatic_protection          = 0.00
-		strike_protection             = 0.084
-		explosion_protection          = 0.096
-		wound_protection              = 0.096
-		fire_wound_protection         = 0.0
-		artefact_count                = 4
-		additional_inventory_weight   = 30
-		additional_inventory_weight2   = 30
-		bones_koeff_protection        = actor_armor_suit
-		inv_weight 					  = 9.63
-
-
-![bandit_nbc_outfit] ;--- Load Bearing Sunset Tactical Suit
-		burn_protection               = 0.1
-		shock_protection              = 0.07
-		radiation_protection          = 0.0004
-		chemical_burn_protection      = 0.04
-		telepatic_protection          = 0.00
-		strike_protection             = 0.072
-		explosion_protection          = 0.096
-		wound_protection              = 0.072
-		fire_wound_protection         = 0.0
-		artefact_count                = 4
-		additional_inventory_weight   = 30
-		additional_inventory_weight2   = 30
-		bones_koeff_protection        = actor_armor_suit
-		inv_weight 					  = 10.44
-
-
-![cs_nbc_outfit] ;--- CS-2t Suit
-		burn_protection               = 0.08
-		shock_protection              = 0.03
-		radiation_protection          = 0.006
-		chemical_burn_protection      = 0.1
-		telepatic_protection          = 0.00
-		strike_protection             = 0.12
-		explosion_protection          = 0.072
-		wound_protection              = 0.06
-		fire_wound_protection         = 0.00
-		artefact_count                = 4
-		additional_inventory_weight   = 30
-		additional_inventory_weight2   = 30
-		bones_koeff_protection        = actor_armor_cs2
-		inv_weight 					  = 12.43
-
-
-![monolith_nbc_outfit] ;--- Tactical Monolith Suit
-		burn_protection               = 0.05
-		shock_protection              = 0.08
-		radiation_protection          = 0.008
-		chemical_burn_protection      = 0.05
-		telepatic_protection          = 0.000
-		strike_protection             = 0.084
-		explosion_protection          = 0.12
-		wound_protection              = 0.084
-		fire_wound_protection         = 0.000
-		artefact_count                = 4
-		additional_inventory_weight   = 30
-		additional_inventory_weight2   = 30
-		bones_koeff_protection        = actor_armor_suit
-		inv_weight 					  = 13.91
-
-
-![nbc_dolg_outfit] ---- PS5-Mt Suit 
-		burn_protection               = 0.09
-		shock_protection              = 0.07
-		radiation_protection          = 0.004
-		chemical_burn_protection      = 0.04
-		telepatic_protection          = 0.06
-		strike_protection             = 0.108
-		explosion_protection          = 0.096
-		wound_protection              = 0.06
-		fire_wound_protection         = 0.000
-		artefact_count                = 4
-		additional_inventory_weight   = 30
-		additional_inventory_weight2   = 30
-		bones_koeff_protection        = actor_armor_suit
-		inv_weight 					  = 13.94
-
-
-![nbc_freedom_outfit] ;--- Keeper of Freedom
-		burn_protection               = 0.04
-		shock_protection              = 0.07
-		radiation_protection          = 0.006
-		chemical_burn_protection      = 0.09
-		telepatic_protection          = 0.044
-		strike_protection             = 0.06
-		explosion_protection          = 0.096
-		wound_protection              = 0.108
-		fire_wound_protection         = 0.000
-		artefact_count                = 4
-		additional_inventory_weight   = 30
-		additional_inventory_weight2   = 30
-		bones_koeff_protection        = actor_armor_suit
-		inv_weight 					  = 13.94
-
-
-![nbc_merc_outfit] ;--- Load Bearing Twilight Tactical Suit
-		burn_protection               = 0.06
-		shock_protection              = 0.06
-		radiation_protection          = 0.005
-		chemical_burn_protection      = 0.08
-		telepatic_protection          = 0.05
-		strike_protection             = 0.12
-		explosion_protection          = 0.084
-		wound_protection              = 0.084
-		fire_wound_protection         = 0.000
-		artefact_count                = 4
-		additional_inventory_weight   = 30
-		additional_inventory_weight2   = 30
-		bones_koeff_protection        = actor_armor_suit
-		inv_weight 					  = 14.25
 
 
 ;===================================================
@@ -2187,7 +1987,6 @@
 		fire_wound_protection         = 0.0
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_suit
-		inv_weight 					  = 9.63
 
 ![stalker_autumn_outfit] --- "Autumn" Stalker Suit (Chemical Specialist)
 		burn_protection               = 0.152
@@ -2201,7 +2000,6 @@
 		fire_wound_protection         = 0.0
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_class2
-		inv_weight 					  = 9.63
 
 
 ![stalker_salamander_outfit] --- "Salamander" Stalker Suit
@@ -2216,7 +2014,6 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_suit
-		inv_weight 					  = 9.63
 
 
 ![merc_scout_outfit] --- Merc LC-S Suit
@@ -2231,7 +2028,6 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_freedom_wind
-		inv_weight 					  = 10.68
 
 
 ![merc_wolven_outfit] ---- Merc STS-W Body Armor
@@ -2246,7 +2042,6 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 4
 		bones_koeff_protection        = actor_armor_cs2
-		inv_weight 					  = 10.68
 
 ![dolg_scout_outfit] --- PS5-R Scout Vest, Duty
 		repair_type = outfit_light	
@@ -2261,7 +2056,6 @@
 		fire_wound_protection         = 0.000
 		artefact_count                = 4
 		bones_koeff_protection        = actor_armor_isg_seva
-		inv_weight 					  = 10.45
 
 
 ;===================================================
@@ -2280,7 +2074,6 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 4
 		bones_koeff_protection        = actor_armor_cs2
-		inv_weight 					  = 12.1
 
 
 ![isg_lcs_camo_outfit] ;--- Unisig LC-C Suit
@@ -2295,7 +2088,6 @@
 		fire_wound_protection         = 0.0
 		artefact_count                = 4
 		bones_koeff_protection        = actor_armor_ssp99
-		inv_weight 					  = 13.75
 
 
 ![banditmerc_outfit] ;--- Fenced LC Suit
@@ -2310,7 +2102,6 @@
 		fire_wound_protection         = 0.0
 		artefact_count                = 2
 		bones_koeff_protection        = actor_armor_ssp99
-		inv_weight 					  = 10.52
 
 
 ![cs_light_outfit] ;--- CS-2a Body Armor
@@ -2325,7 +2116,6 @@
 		fire_wound_protection         = 0.2
 		artefact_count                = 2
 		bones_koeff_protection        = actor_armor_cs2
-		inv_weight 					  = 12.54
 
 
 ![merc_fighter_outfit] ;--- Mercenary LC-F Suit
@@ -2340,7 +2130,6 @@
 		fire_wound_protection         = 0.0
 		artefact_count                = 3
 		bones_koeff_protection        = actor_armor_suit
-		inv_weight 					  = 13.75
 
 
 ![army_outfit] ;--- Military Service Outfit
@@ -2355,7 +2144,6 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 2
 		bones_koeff_protection        = actor_armor_cs1
-		inv_weight 					  = 12.54
 
 
 ![cs_light_novice_outfit] ;--- CS-1 body armor
@@ -2370,7 +2158,6 @@
 		fire_wound_protection         = 0.00
 		artefact_count                = 2
 		bones_koeff_protection        = actor_armor_cs1
-		inv_weight 					  = 11.54
 
 
 
@@ -2392,7 +2179,6 @@
 		artefact_count                = 2
 		additional_inventory_weight   = 8
 		bones_koeff_protection        = actor_armor_trench
-		inv_weight 					  = 3.2
 
 
 ![monolith_trenchcoat_outfit] ;--- monolith overcoat
@@ -2409,7 +2195,6 @@
 		artefact_count                = 2
 		additional_inventory_weight   = 10
 		bones_koeff_protection        = actor_armor_duty_suit
-		inv_weight 					  = 3.4
 
 
 ![trenchcoat_brown_outfit] ;--- heavy brown overcoat
@@ -2426,7 +2211,6 @@
 		artefact_count                = 2
 		additional_inventory_weight   = 8
 		bones_koeff_protection        = actor_armor_duty_suit
-		inv_weight 					  = 3.2
 
 
 ![trenchcoat_green_outfit] ;--- heavy green overcoat
@@ -2443,7 +2227,6 @@
 		artefact_count                = 2
 		additional_inventory_weight   = 8
 		bones_koeff_protection        = actor_armor_duty_suit
-		inv_weight 					  = 3.2
 
 
 ![novice_outfit] ;--- leather jacket
@@ -2459,7 +2242,6 @@
 		artefact_count                = 1
 		additional_inventory_weight   = 5
 		bones_koeff_protection        = actor_armor_novice
-		inv_weight 					  = 2.5
 
 
 ![novice_outfit_camo] ;--- firearm enthusiast leather jacket
@@ -2475,7 +2257,6 @@
 		artefact_count                = 1
 		additional_inventory_weight   = 5
 		bones_koeff_protection        = actor_armor_novice
-		inv_weight 					  = 2.75
 
 
 ![novice_outfit_tourist] ;--- tourist's jacket
@@ -2491,7 +2272,6 @@
 		artefact_count                = 1
 		additional_inventory_weight   = 5
 		bones_koeff_protection        = actor_armor_novice
-		inv_weight 					  = 2.5
 
 
 ![bandit_novice_outfit] ;--- black leather jacket
@@ -2507,7 +2287,6 @@
 		artefact_count                = 1
 		additional_inventory_weight   = 5
 		bones_koeff_protection        = actor_armor_novice
-		inv_weight 					  = 2.6
 
 
 ![bandit_novice_outfit_alt] ;--- armored leather jacket
@@ -2523,7 +2302,6 @@
 		artefact_count                = 1
 		additional_inventory_weight   = 5
 		bones_koeff_protection        = actor_armor_novice
-		inv_weight 					  = 3.0
 
 
 ![cs_novice_outfit] ;--- clear sky leather jacket
@@ -2539,7 +2317,6 @@
 		artefact_count                = 1
 		additional_inventory_weight   = 5
 		bones_koeff_protection        = actor_armor_novice
-		inv_weight 					  = 2.9
 
 
 ![dolg_novice_outfit] ;--- duty leather jacket
@@ -2555,7 +2332,6 @@
 		artefact_count                = 1
 		additional_inventory_weight   = 5
 		bones_koeff_protection        = actor_armor_novice
-		inv_weight 					  = 3.1
 
 
 ![redline_novice_outfit] ;--- redline leather jacket
@@ -2571,7 +2347,6 @@
 		artefact_count                = 1
 		additional_inventory_weight   = 5
 		bones_koeff_protection        = actor_armor_novice
-		inv_weight 					  = 2.2
 
 
 ![svoboda_novice_outfit] ;--- freedom leather jacket
@@ -2587,5 +2362,4 @@
 		artefact_count                = 1
 		additional_inventory_weight   = 5
 		bones_koeff_protection        = actor_armor_novice
-		inv_weight 					  = 3.1
 

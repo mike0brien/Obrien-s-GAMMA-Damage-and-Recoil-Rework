@@ -7,13 +7,14 @@
 -- Damage_1 = Weapon Hit_Power * Ammo K_Hit * Game 
 -- Damage_2 = Damage_1 * (Ammo_AP/Armor_BR)
 -- Final_Damage = Damage_2 * (1 - Artifact_Protection) * Body_Part_Multiplier
--- Ballistic Rating, BR_Class, is now the main defense value. By default, Ballistic Rating is disabled for armor
--- Ballisitic Rating now only comes from Artifacts, pelts, and drugs.
--- I removed most of groks stacked multipliers, making it much easier to track how damage is calculated.
--- This required a full rework of all equipment in game. Weapons, ammo, armor, artifacts, all of it.
+-- Ballistic Rating, BR_Class, is now the main defense value. By default, Ballistic Rating is disabled.
+-- The system calculates a protection factor from different sources (armor, artefacts, boosters)
+-- and simply multiply the hit power by (1 - protection).
+-- Lots of hardcoded multiplier are used for the different damage sources so that even everything feels right
+-- using GAMMA modpack values (ammo pen and power, mutants damage, etc).
 -- This script do not change anomalies damages
 -- This script overrides most of the values customisable in the game option menu.
--- By default I set all difficulty scaling to 1.0, but you can see it just below and change it for yourself. THIS WILL ONLY CHANGE IT FOR DAMAGE TO YOU! Damage to enemies is in the grok_bo.script.
+-- Keep in mind that difficulty is still taken into account to simply divide incoming damages by a predifined value customisable below.
 -- Hopefully I'll add all multipliers into a MCM menu at some point.
 
 -- local ini_diff = ini_file("plugins\\difficulty.ltx")
@@ -787,7 +788,7 @@ function shit_booster(shit, bone_id, k_ap)
 	local pen_ratio = 0
 	local pbadamage = hit(shit)
 	PBA_a_obh(pbadamage, bone_id, flags)
-	shit.power = pbadamage.power
+	shit.power = pbadamage.power * difficulty_multiplier[game_num]
 
 -- Damage calculation
 
@@ -1050,27 +1051,27 @@ function actor_on_before_hit(shit,bone_id, flags)
 
 			if (string.find(ammo_section, "buck")) then
 				printf("/// Reducing buckshots damage")
-				shit.power = shit.power / 3
+				shit.power = shit.power --- / 3
 			end
 
 			if (string.find(ammo_section, "23x75")) then
 				printf("/// Reducing KS23 damage")
-				shit.power = shit.power / 5
+				shit.power = shit.power --- / 5
 			end
 
 			if (string.find(ammo_section, "dart")) then
 				printf("/// Reducing AP Slugs damage")
-				shit.power = shit.power / 3
+				shit.power = shit.power --- / 3
 			end
 
 			if (string.find(ammo_section, "zhekan")) then
 				printf("/// Reducing Slugs damage")
-				shit.power = shit.power / 3
+				shit.power = shit.power --- / 3
 			end
 			
 			if (string.find(ammo_section, "338_federal")) then
 				printf("/// Reducing 308 Federal damage")
-				shit.power = shit.power / 9
+				shit.power = shit.power --- / 9
 			end
 
 			k_ap = ini_sys:r_float_ex(ammo_section, "k_ap") or 0
