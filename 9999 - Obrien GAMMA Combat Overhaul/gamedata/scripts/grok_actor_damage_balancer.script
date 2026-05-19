@@ -713,32 +713,35 @@ end
 function shit_booster(shit, bone_id, k_ap)
 	local actor = db.actor
 	local damage = 0
-	--- local player_protection
-
-
-	-- get the ammo k_hit value to adjust the weapon hit power
-	local attacker = shit.draftsman
-	local weapon   = attacker and attacker:active_item()
-
---	local weapon_hit = 1.0
- --- need to add in logic to find weapon hit power
-
-
- 	local ammo_section
+	
+	local weapon
+	local ammo_section
 	local k_hit = 1.0
 	local k_ap = 1.0
+	
+	local total_protection, limiter, armor_protection, helmet_protection, total_armor, total_armor_helm = get_protection(shit, bone_id)
 
-	if weapon then
-		local ammo_idx = weapon:get_ammo_type()
-		local ammo_list = utils_item.get_ammo(weapon:section(), weapon:id())
-		ammo_section = ammo_list and ammo_list[ammo_idx + 1]
+	if shit.type == hit.fire_wound then
+
+		local attacker = shit.draftsman
+		weapon  = attacker and attacker:active_item()
+		
+		if weapon then
+			local ammo_idx = weapon:get_ammo_type()
+			local ammo_list = utils_item.get_ammo(weapon:section(), weapon:id())
+			ammo_section = ammo_list and ammo_list[ammo_idx + 1]
+		end
 
 		if ammo_section then
 			k_hit = ammo_section and system_ini():r_float_ex(ammo_section, "k_hit", 1.0) or 1.0
 			k_ap  = ammo_section and system_ini():r_float_ex(ammo_section, "k_ap", 0.1) or 0.1
 		end
-
 	end
+
+
+
+
+
 
 	-- Redirect consecutive headshots to Torso or Arms
 	if previous_hitbox and hitboxes[previous_hitbox] == "head" then
@@ -753,7 +756,7 @@ function shit_booster(shit, bone_id, k_ap)
 	end
 	
 
-	local total_protection, limiter, armor_protection, helmet_protection, total_armor, total_armor_helm = get_protection(shit, bone_id)
+
 	
 	if total_armor == 0 then
 		total_armor = 0.001
@@ -779,7 +782,7 @@ function shit_booster(shit, bone_id, k_ap)
 	end
 
 	if shit.type == hit.wound then
-		shit.power = shit.power * 0.65 -- Now that there's no immunity, damages need to be scaled down. Chimeras do 1.54 damage and boars do 0.90 !
+		shit.power = shit.power * 0.55 -- Now that there's no immunity, damages need to be scaled down. Chimeras do 1.54 damage and boars do 0.90 !
 	end
 	
 	-- etapomom: run on_before_hit before doing armor math
@@ -812,15 +815,28 @@ function shit_booster(shit, bone_id, k_ap)
 		damage = actor.health - 0.25
 	end
 
-	if zzz_player_injuries and zzz_player_injuries_mcm then
-		if damage and damage > 0.0293 and zzz_player_injuries.recieved_damage then
-			zzz_player_injuries.recieved_damage(damage, bone_id)
-		end
-	end
+local injuries_bhs = false
+
+if zzz_player_injuries and zzz_player_injuries.penalty_curve and zzz_player_injuries_mcm then
+    injuries_bhs = true
+end
+
+log(string.format("[BHS State] BHSRO=%s", tostring(injuries_bhs)))
+
+if zzz_player_injuries and zzz_player_injuries_mcm and not injuries_bhs then
+
+    if damage and damage > 0.0293 and zzz_player_injuries.recieved_damage then
+        zzz_player_injuries.recieved_damage(damage, bone_id)
+    end
+
+elseif zzz_player_injuries and zzz_player_injuries_mcm then
+ zzz_player_injuries.actor_on_before_hit(shit, bone_id) 
+ zzz_player_injuries.actor_on_hit_callback(db.actor, damage, shit.direction, shit.draftsman, bone_id)
+end
 
 log(string.format("[PLAYER DAMAGE] weapon=%s ammo=%s weapon_hit=%.3f k_hit=%.3f k_ap=%.3f prot=%.3f armor=%.3f bone_mult=%.3f damage=%.3f", weapon and weapon:section() or "nil", ammo_section or "nil", shit.power, k_hit, k_ap, total_protection, total_armor, body_part_mult, damage))
 	
-	shit.power = 0
+	--- shit.power = 0
 	
 	-- etapomom: run on_before_death, make the seraphim work with ironman. maybe the only cool thing about making damage this inflexible
 	if (actor.health - damage) <= 0 then
@@ -851,12 +867,15 @@ log(string.format("[PLAYER DAMAGE] weapon=%s ammo=%s weapon_hit=%.3f k_hit=%.3f 
 	
 	previous_hitbox = bone_id
 
-	if elemental == 1 then
+	local armor_damage = 0
+	if elemental == 1  then
 		helmet = actor:item_in_slot(12)
         if helmet then
 			local cond = helmet:condition()
 			local durability = get_outfit_durability_upgrades_increase(helmet)
-			helmet:set_condition(cond - damage * 0.07 * (1 - durability))
+			armor_damage = (damage * 0.05 * (1 - durability))
+			helmet:set_condition(cond - armor_damage)
+			---log(string.format("[ele HELM DAMAGE] cond=%.3f damage=%.5f durability=%.3f", cond, armor_damage, durability))
 			--printf('Helmet condition dmg = %s', damage * 0.07)
 		end
 
@@ -864,7 +883,9 @@ log(string.format("[PLAYER DAMAGE] weapon=%s ammo=%s weapon_hit=%.3f k_hit=%.3f 
 		if armor then
 			local cond = armor:condition()
 			local durability = get_outfit_durability_upgrades_increase(armor)
-		    armor:set_condition(cond - damage * 0.07 * (1 - durability))
+			armor_damage = (damage * 0.05 * (1 - durability))
+		    armor:set_condition(cond - armor_damage)
+			---log(string.format("[ele ARM DAMAGE] cond=%.3f damage=%.5f durability=%.3f", cond, armor_damage, durability))
 			--printf('Armor condition dmg = %s', damage * 0.07)
 		end
 	end
@@ -875,7 +896,9 @@ log(string.format("[PLAYER DAMAGE] weapon=%s ammo=%s weapon_hit=%.3f k_hit=%.3f 
 			if helmet then
 				local cond = helmet:condition()
 				local durability = get_outfit_durability_upgrades_increase(helmet)
-				helmet:set_condition(cond - damage * 0.07 * (1 - durability))
+				armor_damage = (damage * 0.05 * (1 - durability))
+				helmet:set_condition(cond - armor_damage)
+				---log(string.format("[bul HELM DAMAGE] cond=%.3f damage=%.5f durability=%.3f", cond, armor_damage, durability))
 				--printf('Helmet condition dmg = %s', damage * 0.07)
 			end
 		else
@@ -883,7 +906,9 @@ log(string.format("[PLAYER DAMAGE] weapon=%s ammo=%s weapon_hit=%.3f k_hit=%.3f 
 			if armor then
 				local cond = armor:condition()
 				local durability = get_outfit_durability_upgrades_increase(armor)
-				armor:set_condition(cond - damage * 0.07 * (1 - durability))
+				armor_damage = (damage * 0.05 * (1 - durability))
+				armor:set_condition(cond - armor_damage)
+				---log(string.format("[bul ARM DAMAGE] cond=%.3f damage=%.5f durability=%.3f", cond, armor_damage, durability))
 				--printf('Armor condition dmg = %s', damage * 0.07)
 			end
 		end
@@ -939,7 +964,7 @@ function psi_damage(draftman_sec, shit, bone_id, flags)
 end
 
 local trigger2 = 0
-local delay2 = 33
+local delay2 = 55
 local rad_grace = 1000
 local rad_damage = 10000
 local rad_trigger = 0
