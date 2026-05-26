@@ -137,12 +137,12 @@ stalker_damage = {
 	bip01_spine2 	= 1.0,
 
 	-- HEAD
-	bip01_neck 		= 2.0,
-	bip01_head 		= 2.0,
-	eyelid_1 		= 2.0,
-	eye_left 		= 2.0,
-	eye_right 		= 2.0,
-	jaw_1 			= 2.0,
+	bip01_neck 		= 3.0,
+	bip01_head 		= 3.0,
+	eyelid_1 		= 3.0,
+	eye_left 		= 3.0,
+	eye_right 		= 3.0,
+	jaw_1 			= 3.0,
 
 	-- LEFT ARM
 	bip01_l_clavicle 	= 0.7,
@@ -631,7 +631,7 @@ function npc_on_before_hit(npc,shit,bone_id)
 	ammo_mult = 1.00
 
 	if ammo_section == "ammo_7.62x25_p"  or ammo_section == "ammo_7.62x25_p_bad" then
-		ammo_mult = 1.75
+		ammo_mult = 1.00
 	end
 
 --	/////// AMMO SPECIFIC BONES REDIRECTION //////
