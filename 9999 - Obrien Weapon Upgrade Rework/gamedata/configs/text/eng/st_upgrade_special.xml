@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<string_table>
+    <string id="st_up_ak_gl_name">
+        <text>Underbarrel</text>
+    </string>
+    <string id="st_up_ak_gl_descr">
+        <text>Enables the use of a grenade launcher.</text>
+    </string>
+</string_table>

@@ -1,0 +1,532 @@
+;========================================================
+; Obrien GAMMA Overhaul Weapon Upgrade Rework
+;========================================================
+;--- Upgrade tree for ASH-12.
+;========================================================
+
+
+;========================================================
+; UPGRADE NODES
+;========================================================
+
+;===============================
+; Row 1
+;===============================
+
+;--- +5% Durability
+
+[up_firsta_br_ash12]
+scheme_index                           = 0, 0
+known                                  = 1
+effects                                = up_gr_firstcd_br_ash12
+section                                = up_sect_0008_dura_5
+
+property                               = prop_reliability
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firsta_br_ash12_name
+description                            = st_up_firsta_br_ash12_descr
+icon                                   = ui_inGame2_upgrade_IL86_12
+
+upgrade_item                           = upgr_w_1_internal
+
+;--- +10% dura AND -5% accuracy, or +20% acc AND -10% dura
+
+[up_firstc_br_ash12]
+scheme_index                           = 1, 0
+known                                  = 1
+effects                                = up_gr_firstef_br_ash12
+section                                = up_sect_0008_dura_disp_10
+
+property                               = prop_reliability
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firstc_br_ash12_name
+description                            = st_up_firstc_br_ash12_descr
+icon                                   = ui_inGame2_upgrade_IL86_12
+
+upgrade_item                           = upgr_w_2_internal
+
+
+
+[up_firstd_br_ash12]
+scheme_index                           = 1, 0
+known                                  = 1
+effects                                = up_gr_firstef_br_ash12
+section                                = up_sect_04_disp_dura_20
+
+property                               = prop_dispersion
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firstd_br_ash12_name
+description                            = st_up_firstd_br_ash12_descr
+icon                                   = ui_inGame2_upgrade_IL86_7
+
+upgrade_item                           = upgr_w_2_internal
+
+;--- +20% Accuracy
+
+[up_firste_br_ash12]
+scheme_index                           = 2, 0
+known                                  = 1
+effects                                =
+section                                = up_sect_04_fire_disp_20
+
+property                               = prop_dispersion
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firste_br_ash12_name
+description                            = st_up_firste_br_ash12_descr
+icon                                   = ui_inGame2_upgrade_IL86_12
+
+upgrade_item                           = upgr_w_3_internal
+
+;===============================
+; Row 2
+;===============================
+
+;--- +5% fire rate
+
+[up_secona_br_ash12]
+scheme_index                           = 0, 1
+known                                  = 1
+effects                                = up_gr_seconcd_br_ash12
+section                                = up_sect_650_rpm_5
+
+property                               = prop_rpm
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_secona_br_ash12_name
+description                            = st_up_secona_br_ash12_descr
+icon                                   = ui_inGame2_upgrade_SA_Lavina_15
+
+upgrade_item                           = upgr_w_1_internal
+
+
+;--- +10% fire rate AND -5% dura, +10% dura AND -5% fire rate
+
+[up_seconc_br_ash12]
+scheme_index                           = 1, 1
+known                                  = 1
+effects                                = up_gr_seconef_br_ash12
+section                                = up_sect_650_rpm_dura_10
+
+property                               = prop_rpm
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_seconc_br_ash12_name
+description                            = st_up_seconc_br_ash12_descr
+icon                                   = ui_inGame2_upgrade_SA_Lavina_15
+
+upgrade_item                           = upgr_w_2_internal
+
+
+
+[up_second_br_ash12]
+scheme_index                           = 1, 1
+known                                  = 1
+effects                                = up_gr_seconef_br_ash12
+section                                = up_sect_0008_dura_rpm_10
+
+property                               = prop_reliability
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_second_br_ash12_name
+description                            = st_up_second_br_ash12_descr
+icon                                   = ui_inGame2_upgrade_IL86_7
+
+upgrade_item                           = upgr_w_2_internal
+
+;--- +15% fire rate
+
+[up_secone_br_ash12]
+scheme_index                           = 2, 1
+known                                  = 1
+effects                                =
+section                                = up_sect_650_rpm_15
+
+property                               = prop_rpm
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_secone_br_ash12_name
+description                            = st_up_secone_br_ash12_descr
+icon                                   = ui_inGame2_upgrade_SA_Lavina_15
+
+upgrade_item                           = upgr_w_3_internal
+
+;===============================
+; Row 3
+;===============================
+
+;--- -10% PDM, or -0.5 kg
+
+[up_thirda_br_ash12]
+scheme_index                           = 0, 2
+known                                  = 1
+effects                                = up_gr_thirdcd_br_ash12
+section                                = up_sect_pdm_10
+
+property                               = prop_inertion
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirda_br_ash12_name
+description                            = st_up_thirda_br_ash12_descr
+icon                                   = ui_inGame2_upgrade_TRs_301_15
+
+upgrade_item                           = upgr_w_1_internal
+
+;--- +10% PDM AND +0.3 weight, OR +10% PDM AND +0.7 weight
+
+[up_thirdc_br_ash12]
+scheme_index                           = 1, 2
+known                                  = 1
+effects                                = up_gr_thirdef_br_ash12
+section                                = up_sect_pdm_wgt_sub_10
+
+property                               = prop_inertion
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirdc_br_ash12_name
+description                            = st_up_thirdc_br_ash12_descr
+icon                                   = ui_inGame2_upgrade_TRs_301_15
+
+upgrade_item                           = upgr_w_2_internal
+
+[up_thirdd_br_ash12]
+scheme_index                           = 1, 2
+known                                  = 1
+effects                                = up_gr_thirdef_br_ash12
+section                                = up_sect_pdm_wgt_add_20
+
+property                               = prop_inertion
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirdd_br_ash12_name
+description                            = st_up_thirdd_br_ash12_descr
+icon                                   = ui_inGame2_upgrade_TRs_301_15
+
+upgrade_item                           = upgr_w_2_internal
+
+;--- -1.0 Weight
+
+[up_thirde_br_ash12]
+scheme_index                           = 2, 2
+known                                  = 1
+effects                                =
+section                                = up_sect_weight_1
+
+property                               = prop_weight
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirde_br_ash12_name
+description                            = st_up_thirde_br_ash12_descr
+icon                                   = ui_inGame2_upgrade_TRs_301_13
+
+upgrade_item                           = upgr_w_3_internal
+
+;===============================
+; Row 4
+;===============================
+
+;--- -5% recoil, or -5% PDM
+
+[up_fourta_br_ash12]
+scheme_index                           = 0, 3
+known                                  = 1
+effects                                = up_gr_fourtcd_br_ash12
+section                                = up_sect_recoil_5
+
+property                               = prop_recoil
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_fourta_br_ash12_name
+description                            = st_up_fourta_br_ash12_descr
+icon                                   = ui_inGame2_upgrade_IL86_10
+
+upgrade_item                           = upgr_w_1_internal
+
+
+[up_fourtb_br_ash12]
+scheme_index                           = 0, 3
+known                                  = 1
+effects                                = up_gr_fourtcd_br_ash12
+section                                = up_sect_pdm_5
+
+property                               = prop_inertion
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_fourtb_br_ash12_name
+description                            = st_up_fourtb_br_ash12_descr
+icon                                   = ui_inGame2_upgrade_TRs_301_15
+
+upgrade_item                           = upgr_w_1_internal
+
+;--- -5% recoil, or +15% durability
+
+[up_fourtc_br_ash12]
+scheme_index                           = 1, 3
+known                                  = 1
+effects                                = up_gr_fourtef_br_ash12
+section                                = up_sect_recoil_5
+
+property                               = prop_recoil
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_fourtc_br_ash12_name
+description                            = st_up_fourtc_br_ash12_descr
+icon                                   = ui_inGame2_upgrade_IL86_10
+
+upgrade_item                           = upgr_w_2_internal
+
+
+
+[up_fourtd_br_ash12]
+scheme_index                           = 1, 3
+known                                  = 1
+effects                                = up_gr_fourtef_br_ash12
+section                                = up_sect_0008_dura_15
+
+property                               = prop_reliability
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_fourtd_br_ash12_name
+description                            = st_up_fourtd_br_ash12_descr
+icon                                   = ui_inGame2_upgrade_IL86_7
+
+upgrade_item                           = upgr_w_2_internal
+
+;--- -20% recoil AND +10% PDM, AND +0.7 kg, OR +10% recoil AND -10% PDM AND -0.7% kg
+
+[up_fourte_br_ash12]
+scheme_index                           = 2, 3
+known                                  = 1
+effects                                =
+section                                = up_sect_recoil_pdm_wgt_20
+
+property                               = prop_recoil
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_fourte_br_ash12_name
+description                            = st_up_fourte_br_ash12_descr
+icon                                   = ui_inGame2_upgrade_IL86_10
+
+upgrade_item                           = upgr_w_3_internal
+
+[up_fourtf_br_ash12]
+scheme_index                           = 2, 3
+known                                  = 1
+effects                                =
+section                                = up_sect_pdm_wgt_recoil_10
+
+property                               = prop_inertion
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_fourtf_br_ash12_name
+description                            = st_up_fourtf_br_ash12_descr
+icon                                   = ui_inGame2_upgrade_IL86_10
+
+upgrade_item                           = upgr_w_3_internal
+
+
+
+;========================================================
+; GROUPS
+;========================================================
+
+[up_gr_firstab_br_ash12]
+elements                               = up_firsta_br_ash12
+
+[up_gr_firstcd_br_ash12]
+elements                               = up_firstc_br_ash12, up_firstd_br_ash12
+
+[up_gr_firstef_br_ash12]
+elements                               = up_firste_br_ash12
+
+[up_gr_seconab_br_ash12]
+elements                               = up_secona_br_ash12
+
+[up_gr_seconcd_br_ash12]
+elements                               = up_seconc_br_ash12, up_second_br_ash12
+
+[up_gr_seconef_br_ash12]
+elements                               = up_secone_br_ash12
+
+[up_gr_thirdab_br_ash12]
+elements                               = up_thirda_br_ash12
+
+[up_gr_thirdcd_br_ash12]
+elements                               = up_thirdc_br_ash12, up_thirdd_br_ash12
+
+[up_gr_thirdef_br_ash12]
+elements                               = up_thirde_br_ash12
+
+[up_gr_fourtab_br_ash12]
+elements                               = up_fourta_br_ash12, up_fourtb_br_ash12
+
+[up_gr_fourtcd_br_ash12]
+elements                               = up_fourtc_br_ash12, up_fourtd_br_ash12
+
+[up_gr_fourtef_br_ash12]
+elements                               = up_fourte_br_ash12, up_fourtf_br_ash12

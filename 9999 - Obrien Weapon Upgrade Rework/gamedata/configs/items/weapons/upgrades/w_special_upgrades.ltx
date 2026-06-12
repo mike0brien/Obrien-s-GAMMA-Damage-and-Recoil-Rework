@@ -1,0 +1,39 @@
+;========================================================
+; Obrien GAMMA Overhaul Weapon Upgrade Rework
+;========================================================
+;--- Specialty stuff like grenade launchers or scopes
+;========================================================
+
+
+;========================================================
+; UPGRADE NODES
+;========================================================
+
+[up_fiftha_ak_gl]
+scheme_index                             = 0, 4
+known                                    = 1
+effects                                  =
+section                                  = up_sect_ak_gl
+property                                 = prop_underbarrel_slot
+known                                    = 1
+precondition_functor                     = inventory_upgrades.precondition_functor_a
+precondition_parameter                   = a & b
+effect_functor                           = inventory_upgrades.effect_functor_a
+effect_parameter                         = something_here
+prereq_functor                           = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                   = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                            =
+name                                     = st_up_ak_gl_name
+description                              = st_up_ak_gl_descr
+icon                                     = ui_inGame2_upgrade_AS96_2_17
+
+upgrade_item                           = upgr_w_2_external
+
+
+
+;========================================================
+; GROUPS
+;========================================================
+
+[up_gr_firstab_ak_gl]
+elements                               = up_fiftha_ak_gl
