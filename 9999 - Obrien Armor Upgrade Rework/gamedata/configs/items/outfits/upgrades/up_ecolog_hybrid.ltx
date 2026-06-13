@@ -1,0 +1,602 @@
+;=================================================================
+; hybrid upgrade tree for ecologist armor.
+;=================================================================
+
+
+;=================================================================
+; UPGRADE NODES
+;=================================================================
+
+
+;=========================================================
+; ROW 1
+;=========================================================
+
+
+;=========================================================
+; COLUMN 1
+; 10% Durability
+;=========================================================
+
+[up_firsta_hybrid_ecolog]
+scheme_index                           = 0, 0
+known                                  = 1
+effects                                = up_gr_firstcd_hybrid_ecolog
+section                                = up_sect_dura_secon
+
+property                               = prop_durability
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firsta_hybrid_ecolog_name
+description                            = st_up_firsta_hybrid_ecolog_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_durability_1
+upgrade_item                           = upgr_o_1_physical
+
+;=========================================================
+; COLUMN 2
+; 5% Rupture or 5% Impact
+;=========================================================
+
+[up_firstc_hybrid_ecolog]
+scheme_index                           = 1, 0
+known                                  = 1
+effects                                = up_gr_firstef_hybrid_ecolog
+section                                = up_sect_wound_one
+
+property                               = prop_damage
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firstc_hybrid_ecolog_name
+description                            = st_up_firstc_hybrid_ecolog_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_armour_1
+upgrade_item                           = upgr_o_2_physical
+
+
+
+[up_firstd_hybrid_ecolog]
+scheme_index                           = 1, 0
+known                                  = 1
+effects                                = up_gr_firstef_hybrid_ecolog
+section                                = up_sect_strike_one
+
+property                               = prop_damage
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firstd_hybrid_ecolog_name
+description                            = st_up_firstd_hybrid_ecolog_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_armour_1
+upgrade_item                           = upgr_o_2_physical
+
+;=========================================================
+; COLUMN 2
+; 10% Rupture or 10% Durability
+;=========================================================
+
+[up_firste_hybrid_ecolog]
+scheme_index                           = 2, 0
+known                                  = 1
+effects                                =
+section                                = up_sect_wound_secon
+
+property                               = prop_damage
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firste_hybrid_ecolog_name
+description                            = st_up_firste_hybrid_ecolog_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_armour_1
+upgrade_item                           = upgr_o_3_physical
+
+
+
+[up_firstf_hybrid_ecolog]
+scheme_index                           = 2, 0
+known                                  = 1
+effects                                =
+section                                = up_sect_dura_secon
+
+property                               = prop_durability
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firstf_hybrid_ecolog_name
+description                            = st_up_firstf_hybrid_ecolog_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_durability_1
+upgrade_item                           = upgr_o_3_utility
+
+;=================================================================
+; ROW 2
+;=================================================================
+
+
+;=========================================================
+; COLUMN 1
+; 5% BURN OR 5% CHEM
+;=========================================================
+
+[up_secona_hybrid_ecolog]
+scheme_index                           = 0, 1
+known                                  = 1
+effects                                = up_gr_seconcd_hybrid_ecolog
+section                                = up_sect_burn_one
+
+property                               = prop_thermo
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_secona_hybrid_ecolog_name
+description                            = st_up_secona_hybrid_ecolog_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_burn_1
+upgrade_item                           = upgr_o_1_magical
+
+
+
+[up_seconb_hybrid_ecolog]
+scheme_index                           = 0, 1
+known                                  = 1
+effects                                = up_gr_seconcd_hybrid_ecolog
+section                                = up_sect_chem_one
+
+property                               = prop_chem
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_seconb_hybrid_ecolog_name
+description                            = st_up_seconb_hybrid_ecolog_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_chem_1
+upgrade_item                           = upgr_o_1_magical
+
+
+
+;=========================================================
+; COLUMN 2
+; 10% BURN OR 10% CHEM
+;=========================================================
+
+[up_seconc_hybrid_ecolog]
+scheme_index                           = 1, 1
+known                                  = 1
+effects                                = up_gr_seconef_hybrid_ecolog
+section                                = up_sect_burn_secon
+
+property                               = prop_thermo
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_seconc_hybrid_ecolog_name
+description                            = st_up_seconc_hybrid_ecolog_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_burn_1
+upgrade_item                           = upgr_o_2_magical
+
+
+
+[up_second_hybrid_ecolog]
+scheme_index                           = 1, 1
+known                                  = 1
+effects                                = up_gr_seconef_hybrid_ecolog
+section                                = up_sect_chem_secon
+
+property                               = prop_chem
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_second_hybrid_ecolog_name
+description                            = st_up_second_hybrid_ecolog_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_chem_1
+upgrade_item                           = upgr_o_2_magical
+
+
+
+;=========================================================
+; COLUMN 3
+; ARTIFACT SLOT
+;=========================================================
+
+
+[up_secone_hybrid_ecolog]
+scheme_index                           = 2, 1
+known                                  = 1
+effects                                =
+section                                = up_sect_belt_one
+
+property                               = prop_artefact
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_secone_hybrid_ecolog_name
+description                            = st_up_secone_hybrid_ecolog_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_arty_1
+upgrade_item                           = upgr_o_3_utility
+
+
+
+
+;=================================================================
+; ROW 3
+;=================================================================
+
+
+;=========================================================
+; COLUMN 1
+; -2 REDUCE WEIGHT
+;=========================================================
+
+[up_thirda_hybrid_ecolog]
+scheme_index                           = 0, 2
+known                                  = 1
+effects                                = up_gr_thirdcd_hybrid_ecolog
+section                                = up_sect_weight_two
+
+property                               = prop_weightoutfit
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirda_hybrid_ecolog_name
+description                            = st_up_thirda_hybrid_ecolog_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_weight_1
+upgrade_item                           = upgr_o_1_utility
+
+
+
+;=========================================================
+; COLUMN 2
+; +10 CARRY WEIGHT OR +10% STAMINA
+;=========================================================
+
+[up_thirdc_hybrid_ecolog]
+scheme_index                           = 1, 2
+known                                  = 1
+effects                                = up_gr_thirdef_hybrid_ecolog
+section                                = up_sect_carry_secon
+
+property                               = prop_tonnage
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirdc_hybrid_ecolog_name
+description                            = st_up_thirdc_hybrid_ecolog_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_carry_1
+upgrade_item                           = upgr_o_2_utility
+
+
+
+[up_thirdd_hybrid_ecolog]
+scheme_index                           = 1, 2
+known                                  = 1
+effects                                = up_gr_thirdef_hybrid_ecolog
+section                                = up_sect_stam_one
+
+property                               = prop_power
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirdd_hybrid_ecolog_name
+description                            = st_up_thirdd_hybrid_ecolog_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_stamins_1
+upgrade_item                           = upgr_o_2_utility
+
+
+
+;=========================================================
+; COLUMN 3
+; +1 HEALTH RESTORE OR +10 BLEED REDUCTION
+;=========================================================
+
+[up_thirde_hybrid_ecolog]
+scheme_index                           = 2, 2
+known                                  = 1
+effects                                =
+section                                = up_sect_heal_one
+
+property                               = prop_restore_health
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirde_hybrid_ecolog_name
+description                            = st_up_thirde_hybrid_ecolog_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_health_1
+upgrade_item                           = upgr_o_3_utility
+
+
+
+[up_thirdf_hybrid_ecolog]
+scheme_index                           = 2, 2
+known                                  = 1
+effects                                =
+section                                = up_sect_bleed_secon
+
+property                               = prop_restore_bleeding
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirdf_hybrid_ecolog_name
+description                            = st_up_thirdf_hybrid_ecolog_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_bleed_1
+upgrade_item                           = upgr_o_3_utility
+
+
+
+
+;=================================================================
+; ROW 4
+;=================================================================
+
+
+;=========================================================
+; COLUMN 1
+; ARTEFACT SLOT
+;=========================================================
+
+[up_fourta_hybrid_ecolog]
+scheme_index                           = 0, 3
+known                                  = 1
+effects                                = up_gr_fourtcd_hybrid_ecolog
+section                                = up_sect_belt_one
+
+property                               = prop_artefact
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_fourta_hybrid_ecolog_name
+description                            = st_up_fourta_hybrid_ecolog_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_arty_1
+upgrade_item                           = upgr_o_1_utility
+
+
+
+;=========================================================
+; COLUMN 2
+; 10% RAD
+;=========================================================
+
+[up_fourtc_hybrid_ecolog]
+scheme_index                           = 1, 3
+known                                  = 1
+effects                                = up_gr_fourtef_hybrid_ecolog
+section                                = up_sect_rad_secon
+
+property                               = prop_radio
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_fourtc_hybrid_ecolog_name
+description                            = st_up_fourtc_hybrid_ecolog_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_rad_1
+upgrade_item                           = upgr_o_2_magical
+
+
+
+;=========================================================
+; COLUMN 3
+; 15% Shock
+;=========================================================
+
+[up_fourte_hybrid_ecolog]
+scheme_index                           = 2, 3
+known                                  = 1
+effects                                =
+section                                = up_sect_shock_third
+
+property                               = prop_electro
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_fourte_hybrid_ecolog_name
+description                            = st_up_fourte_hybrid_ecolog_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_shock_1
+upgrade_item                           = upgr_o_3_magical
+
+
+;=================================================================
+; GROUPS
+;=================================================================
+
+;--- Row 1
+
+[up_gr_firstab_hybrid_ecolog]
+elements                               = up_firsta_hybrid_ecolog
+
+[up_gr_firstcd_hybrid_ecolog]
+elements                               = up_firstc_hybrid_ecolog, up_firstd_hybrid_ecolog
+
+[up_gr_firstef_hybrid_ecolog]
+elements                               = up_firste_hybrid_ecolog, up_firstf_hybrid_ecolog
+
+;---- Row 2
+
+[up_gr_seconab_hybrid_ecolog]
+elements                               = up_secona_hybrid_ecolog, up_seconb_hybrid_ecolog
+
+[up_gr_seconcd_hybrid_ecolog]
+elements                               = up_seconc_hybrid_ecolog, up_second_hybrid_ecolog
+
+[up_gr_seconef_hybrid_ecolog]
+elements                               = up_secone_hybrid_ecolog
+
+;--- Row 3
+
+
+[up_gr_thirdab_hybrid_ecolog]
+elements                               = up_thirda_hybrid_ecolog
+
+[up_gr_thirdcd_hybrid_ecolog]
+elements                               = up_thirdc_hybrid_ecolog, up_thirdd_hybrid_ecolog
+
+[up_gr_thirdef_hybrid_ecolog]
+elements                               = up_thirde_hybrid_ecolog, up_thirdf_hybrid_ecolog
+
+;--- Row 4
+
+[up_gr_fourtab_hybrid_ecolog]
+elements                               = up_fourta_hybrid_ecolog
+
+[up_gr_fourtcd_hybrid_ecolog]
+elements                               = up_fourtc_hybrid_ecolog
+
+[up_gr_fourtef_hybrid_ecolog]
+elements                               = up_fourte_hybrid_ecolog
