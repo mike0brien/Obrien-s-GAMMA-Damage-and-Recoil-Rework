@@ -3,10 +3,65 @@
 ;========================================================
 
 ;========================================================
+; Dispersion Base 0.12
+;========================================================
+
+;--- Sniper rifles
+
+;--- 5/10/15/20% Accuracy
+
+[up_sect_012_fire_disp_5]
+cost                                   = 1000
+value                                  = +5
+
+fire_dispersion_base                 = -0.006
+
+
+[up_sect_012_fire_disp_10]
+cost                                   = 1000
+value                                  = +10
+
+fire_dispersion_base               = -0.012
+
+
+
+[up_sect_012_fire_disp_15]
+cost                                   = 1000
+value                                  = +15
+
+fire_dispersion_base                 = -0.018
+
+
+[up_sect_012_fire_disp_20]
+cost                                   = 1000
+value                                  = +20
+
+fire_dispersion_base                 = -0.024
+
+;--- 10/20% Accuracy, -5/-10% Durability, Dura Base 0.0005
+
+[up_sect_012_disp_dura_10]
+cost                                   = 1000
+value                                  = +10
+
+fire_dispersion_base                 = -0.015
+condition_shot_dec                   = +0.000025
+condition_queue_shot_dec             = +0.000025
+
+
+[up_sect_012_disp_dura_20]
+cost                                   = 1000
+value                                  = +20
+
+fire_dispersion_base                 = -0.03
+condition_shot_dec                   = +0.00005
+condition_queue_shot_dec             = +0.00005
+
+;========================================================
 ; Dispersion Base 0.25
 ;========================================================
 
-;--- x51AR/x51BP/9mmSMG/9mmBP
+;--- x51AR/x51BP/x54AR/x54BP
 
 ;--- 5/10/15/20% Accuracy
 
@@ -132,10 +187,84 @@ condition_shot_dec                   = +0.00008
 condition_queue_shot_dec                 = +0.00008
 
 ;========================================================
+; Dispersion Base 0.35
+;========================================================
+
+;--- 45Pist/45SMG/9mmSMG/9mmBP
+
+;--- 5/10/15/20% Accuracy
+
+[up_sect_035_fire_disp_5]
+cost                                   = 1000
+value                                  = +5
+
+fire_dispersion_base                 = -0.0175
+
+
+[up_sect_035_fire_disp_10]
+cost                                   = 1000
+value                                  = +10
+
+fire_dispersion_base               = -0.035
+
+
+
+[up_sect_035_fire_disp_15]
+cost                                   = 1000
+value                                  = +15
+
+fire_dispersion_base                 = -0.0475
+
+
+[up_sect_035_fire_disp_20]
+cost                                   = 1000
+value                                  = +20
+
+fire_dispersion_base                 = -0.07
+
+;--- 10/20% Accuracy, -5/-10% Durability, Dura Base 0.0005
+
+[up_sect_035_disp_dura_10]
+cost                                   = 1000
+value                                  = +10
+
+fire_dispersion_base                 = -0.035
+condition_shot_dec                   = +0.000025
+condition_queue_shot_dec                 = +0.000025
+
+
+[up_sect_035_disp_dura_20]
+cost                                   = 1000
+value                                  = +20
+
+fire_dispersion_base                 = -0.07
+condition_shot_dec                   = +0.00005
+condition_queue_shot_dec                 = +0.00005
+
+;--- 10/20% Accuracy, -5/-10% Durability, Dura Base 0.0008
+
+[up_sect_035_disp_dura_08_10]
+cost                                   = 1000
+value                                  = +10
+
+fire_dispersion_base                 = -0.035
+condition_shot_dec                   = +0.00004
+condition_queue_shot_dec                 = +0.00004
+
+
+[up_sect_035_disp_dura_08_20]
+cost                                   = 1000
+value                                  = +20
+
+fire_dispersion_base                 = -0.07
+condition_shot_dec                   = +0.00008
+condition_queue_shot_dec                 = +0.00008
+
+;========================================================
 ; Dispersion Base 0.4
 ;========================================================
 
-;--- ASH12
+;--- ASH12 / some SMGs
 
 ;--- 5/10/15/20% Accuracy
 
@@ -206,6 +335,80 @@ condition_shot_dec                   = +0.00008
 condition_queue_shot_dec                 = +0.00008
 
 ;========================================================
+; Dispersion Base 0.5
+;========================================================
+
+;--- Shotguns
+
+;--- 5/10/15/20% Accuracy
+
+[up_sect_05_fire_disp_5]
+cost                                   = 1000
+value                                  = +5
+
+fire_dispersion_base                 = -0.025
+
+
+[up_sect_05_fire_disp_10]
+cost                                   = 1000
+value                                  = +10
+
+fire_dispersion_base               = -0.05
+
+
+
+[up_sect_05_fire_disp_15]
+cost                                   = 1000
+value                                  = +15
+
+fire_dispersion_base                 = -0.075
+
+
+[up_sect_05_fire_disp_20]
+cost                                   = 1000
+value                                  = +20
+
+fire_dispersion_base                 = -0.1
+
+;--- 10/20% Accuracy, -5/-10% Durability, Dura Base 0.0005
+
+[up_sect_05_disp_dura_10]
+cost                                   = 1000
+value                                  = +10
+
+fire_dispersion_base                 = -0.05
+condition_shot_dec                   = +0.000025
+condition_queue_shot_dec                 = +0.000025
+
+
+[up_sect_05_disp_dura_20]
+cost                                   = 1000
+value                                  = +20
+
+fire_dispersion_base                 = -0.1
+condition_shot_dec                   = +0.00005
+condition_queue_shot_dec                 = +0.00005
+
+;--- 10/20% Accuracy, -5/-10% Durability, Dura Base 0.0008
+
+[up_sect_05_disp_dura_08_10]
+cost                                   = 1000
+value                                  = +10
+
+fire_dispersion_base                 = -0.05
+condition_shot_dec                   = +0.00004
+condition_queue_shot_dec                 = +0.00004
+
+
+[up_sect_05_disp_dura_08_20]
+cost                                   = 1000
+value                                  = +20
+
+fire_dispersion_base                 = -0.1
+condition_shot_dec                   = +0.00008
+condition_queue_shot_dec                 = +0.00008
+
+;========================================================
 ; Durability Base 0.0005
 ;========================================================
 ;--- 556AR/556BP/545AR/545BP
@@ -258,6 +461,63 @@ cost                                   = 1000
 value                                  = +20
 
 fire_dispersion_base                 = +0.03
+condition_shot_dec                   = -0.0001
+condition_queue_shot_dec             = -0.0001
+
+;--- 10/20% Durability, -5/-10% Accuracy, Fire_disp 0.35
+
+[up_sect_0005_dura_disp_035_10]
+cost                                   = 1000
+value                                  = +10
+
+fire_dispersion_base                 = +0.0175
+condition_shot_dec                   = -0.00005
+condition_queue_shot_dec             = -0.00005
+
+
+[up_sect_0005_dura_disp_035_20]
+cost                                   = 1000
+value                                  = +20
+
+fire_dispersion_base                 = +0.035
+condition_shot_dec                   = -0.0001
+condition_queue_shot_dec             = -0.0001
+
+;--- 10/20% Durability, -5/-10% Accuracy, Fire_disp 0.5
+
+[up_sect_0005_dura_disp_05_10]
+cost                                   = 1000
+value                                  = +10
+
+fire_dispersion_base                 = +0.025
+condition_shot_dec                   = -0.00005
+condition_queue_shot_dec             = -0.00005
+
+
+[up_sect_0005_dura_disp_05_20]
+cost                                   = 1000
+value                                  = +20
+
+fire_dispersion_base                 = +0.05
+condition_shot_dec                   = -0.0001
+condition_queue_shot_dec             = -0.0001
+
+;--- 10/20% Durability, -5/-10% Fire Rate, 100 RPM
+
+[up_sect_0005_dura_rpm_100_10]
+cost                                   = 1000
+value                                  = +10
+
+rpm                 = -5
+condition_shot_dec                   = -0.00005
+condition_queue_shot_dec             = -0.00005
+
+
+[up_sect_0005_dura_rpm_100_20]
+cost                                   = 1000
+value                                  = +20
+
+rpm                 = -10
 condition_shot_dec                   = -0.0001
 condition_queue_shot_dec             = -0.0001
 
@@ -361,18 +621,113 @@ condition_queue_shot_dec             = -0.00008
 cost                                   = 1000
 value                                  = +10
 
-fire_dispersion_base                 = +0.0125
-condition_shot_dec                   = -0.00005
-condition_queue_shot_dec             = -0.00005
+fire_dispersion_base                 = +0.0015
+condition_shot_dec                   = -0.00004
+condition_queue_shot_dec             = -0.00004
 
 
 [up_sect_0008_dura_disp_03_20]
 cost                                   = 1000
 value                                  = +20
 
+fire_dispersion_base                 = +0.03
+condition_shot_dec                   = -0.0008
+condition_queue_shot_dec             = -0.0008
+
+;--- 10/20% Durability, -5/-10% Accuracy, Fire_disp 0.35
+
+[up_sect_0008_dura_disp_035_10]
+cost                                   = 1000
+value                                  = +10
+
+fire_dispersion_base                 = +0.0175
+condition_shot_dec                   = -0.00004
+condition_queue_shot_dec             = -0.00004
+
+
+[up_sect_0008_dura_disp_035_20]
+cost                                   = 1000
+value                                  = +20
+
+fire_dispersion_base                 = +0.035
+condition_shot_dec                   = -0.0008
+condition_queue_shot_dec             = -0.0008
+
+;--- 10/20% Durability, -5/-10% Accuracy, Fire_disp 0.4
+
+[up_sect_0008_dura_disp_04_10]
+cost                                   = 1000
+value                                  = +10
+
+fire_dispersion_base                 = +0.02
+condition_shot_dec                   = -0.00004
+condition_queue_shot_dec             = -0.00004
+
+
+[up_sect_0008_dura_disp_04_20]
+cost                                   = 1000
+value                                  = +20
+
+fire_dispersion_base                 = +0.04
+condition_shot_dec                   = -0.0008
+condition_queue_shot_dec             = -0.0008
+
+;--- 10/20% Durability, -5/-10% Accuracy, Fire_disp 0.5
+
+[up_sect_0008_dura_disp_05_10]
+cost                                   = 1000
+value                                  = +10
+
 fire_dispersion_base                 = +0.025
-condition_shot_dec                   = -0.0001
-condition_queue_shot_dec             = -0.0001
+condition_shot_dec                   = -0.00004
+condition_queue_shot_dec             = -0.00004
+
+
+[up_sect_0008_dura_disp_05_20]
+cost                                   = 1000
+value                                  = +20
+
+fire_dispersion_base                 = +0.05
+condition_shot_dec                   = -0.0008
+condition_queue_shot_dec             = -0.0008
+
+;--- 10/20% Durability, -5/-10% Fire Rate, 250 RPM
+
+[up_sect_0008_dura_rpm_250_10]
+cost                                   = 1000
+value                                  = +10
+
+rpm                 = -12.5
+condition_shot_dec                   = -0.00008
+condition_queue_shot_dec             = -0.00008
+
+
+[up_sect_0008_dura_rpm_250_20]
+cost                                   = 1000
+value                                  = +20
+
+rpm                 = -25
+condition_shot_dec                   = -0.00016
+condition_queue_shot_dec             = -0.00016
+
+;--- 10/20% Durability, -5/-10% Fire Rate, 350 RPM
+
+[up_sect_0008_dura_rpm_350_10]
+cost                                   = 1000
+value                                  = +10
+
+rpm                 = -17.5
+condition_shot_dec                   = -0.00008
+condition_queue_shot_dec             = -0.00008
+
+
+[up_sect_0008_dura_rpm_350_20]
+cost                                   = 1000
+value                                  = +20
+
+rpm                 = -35
+condition_shot_dec                   = -0.00016
+condition_queue_shot_dec             = -0.00016
 
 ;--- 10/20% Durability, -5/-10% Fire Rate, 600 RPM
 
@@ -412,7 +767,7 @@ rpm                 = -65
 condition_shot_dec                   = -0.00016
 condition_queue_shot_dec             = -0.00016
 
-;--- 10/20% Durability, -5/-10% Fire Rate, 600 RPM
+;--- 10/20% Durability, -5/-10% Fire Rate, 700 RPM
 
 [up_sect_0008_dura_rpm_700_10]
 cost                                   = 1000
@@ -451,11 +806,230 @@ condition_shot_dec                   = -0.00008
 condition_queue_shot_dec             = -0.00008
 
 ;========================================================
+; Fire Rate 100 RPM Base
+;========================================================
+
+
+;--- 100 RPM firerate base
+
+[up_sect_100_rpm_5]
+cost                                   = 1000
+value                                  = +5
+
+rpm                  = +5
+
+[up_sect_100_rpm_10]
+cost                                   = 1000
+value                                  = +10
+
+rpm                   = +10
+
+[up_sect_100_rpm_15]
+cost                                   = 1000
+value                                  = +15
+
+rpm                   = +15
+
+[up_sect_100_rpm_20]
+cost                                   = 1000
+value                                  = +20
+
+rpm                   = +20
+
+;---- 10/20% RPM, -5/-10% Dura, Dura base 0.0005
+
+
+
+[up_sect_100_rpm_dura_10]
+cost                                   = 1000
+value                                  = +10
+
+rpm                   = +10
+condition_shot_dec                   = +0.00005
+condition_queue_shot_dec             = +0.00005
+
+
+[up_sect_100_rpm_dura_20]
+cost                                   = 1000
+value                                  = +20
+
+rpm                   = +20
+condition_shot_dec                   = +0.0001
+condition_queue_shot_dec             = +0.0001
+
+;---- 10/20% RPM, -5/-10% Dura, Dura base 0.0008
+
+
+
+[up_sect_100_rpm_dura_08_10]
+cost                                   = 1000
+value                                  = +10
+
+rpm                   = +10
+condition_shot_dec                   = +0.00004
+condition_queue_shot_dec             = +0.00004
+
+
+[up_sect_100_rpm_dura_08_20]
+cost                                   = 1000
+value                                  = +20
+
+rpm                   = +20
+condition_shot_dec                   = +0.00008
+condition_queue_shot_dec             = +0.00008
+
+;========================================================
+; Fire Rate 250 RPM Base
+;========================================================
+
+
+;--- 250 RPM firerate base
+
+[up_sect_250_rpm_5]
+cost                                   = 1000
+value                                  = +5
+
+rpm                  = +12.5
+
+[up_sect_250_rpm_10]
+cost                                   = 1000
+value                                  = +10
+
+rpm                   = +25
+
+[up_sect_250_rpm_15]
+cost                                   = 1000
+value                                  = +15
+
+rpm                   = +37.5
+
+[up_sect_250_rpm_20]
+cost                                   = 1000
+value                                  = +20
+
+rpm                   = +50
+
+;---- 10/20% RPM, -5/-10% Dura, Dura base 0.0005
+
+
+
+[up_sect_250_rpm_dura_10]
+cost                                   = 1000
+value                                  = +10
+
+rpm                   = +25
+condition_shot_dec                   = +0.00005
+condition_queue_shot_dec             = +0.00005
+
+
+[up_sect_250_rpm_dura_20]
+cost                                   = 1000
+value                                  = +20
+
+rpm                   = +50
+condition_shot_dec                   = +0.0001
+condition_queue_shot_dec             = +0.0001
+
+;---- 10/20% RPM, -5/-10% Dura, Dura base 0.0008
+
+
+
+[up_sect_250_rpm_dura_08_10]
+cost                                   = 1000
+value                                  = +10
+
+rpm                   = +25
+condition_shot_dec                   = +0.00004
+condition_queue_shot_dec             = +0.00004
+
+
+[up_sect_250_rpm_dura_08_20]
+cost                                   = 1000
+value                                  = +20
+
+rpm                   = +50
+condition_shot_dec                   = +0.00008
+condition_queue_shot_dec             = +0.00008
+
+;========================================================
+; Fire Rate 350 RPM Base
+;========================================================
+
+
+;--- 350 RPM firerate base
+
+[up_sect_350_rpm_5]
+cost                                   = 1000
+value                                  = +5
+
+rpm                  = +12.5
+
+[up_sect_350_rpm_10]
+cost                                   = 1000
+value                                  = +10
+
+rpm                   = +25
+
+[up_sect_350_rpm_15]
+cost                                   = 1000
+value                                  = +15
+
+rpm                   = +37.5
+
+[up_sect_350_rpm_20]
+cost                                   = 1000
+value                                  = +20
+
+rpm                   = +50
+
+;---- 10/20% RPM, -5/-10% Dura, Dura base 0.0005
+
+
+
+[up_sect_350_rpm_dura_10]
+cost                                   = 1000
+value                                  = +10
+
+rpm                   = +25
+condition_shot_dec                   = +0.00005
+condition_queue_shot_dec             = +0.00005
+
+
+[up_sect_350_rpm_dura_20]
+cost                                   = 1000
+value                                  = +20
+
+rpm                   = +50
+condition_shot_dec                   = +0.0001
+condition_queue_shot_dec             = +0.0001
+
+;---- 10/20% RPM, -5/-10% Dura, Dura base 0.0008
+
+
+
+[up_sect_350_rpm_dura_08_10]
+cost                                   = 1000
+value                                  = +10
+
+rpm                   = +25
+condition_shot_dec                   = +0.00004
+condition_queue_shot_dec             = +0.00004
+
+
+[up_sect_350_rpm_dura_08_20]
+cost                                   = 1000
+value                                  = +20
+
+rpm                   = +50
+condition_shot_dec                   = +0.00008
+condition_queue_shot_dec             = +0.00008
+
+;========================================================
 ; Fire Rate 500 RPM Base
 ;========================================================
 
 
-;--- 600 RPM firerate base
+;--- 500 RPM firerate base
 
 [up_sect_500_rpm_5]
 cost                                   = 1000
@@ -658,6 +1232,27 @@ rpm                   = +140
 condition_shot_dec                   = +0.0001
 condition_queue_shot_dec             = +0.0001
 
+;---- 10/20% RPM, -5/-10% Dura, Dura base 0.0008
+
+
+
+[up_sect_700_rpm_dura_08_10]
+cost                                   = 1000
+value                                  = +10
+
+rpm                   = +70
+condition_shot_dec                   = +0.00004
+condition_queue_shot_dec             = +0.00004
+
+
+[up_sect_700_rpm_dura_08_20]
+cost                                   = 1000
+value                                  = +20
+
+rpm                   = +140
+condition_shot_dec                   = +0.00008
+condition_queue_shot_dec             = +0.0001
+
 ;========================================================
 ; Fire Rate 800 RPM Base
 ;========================================================
@@ -802,6 +1397,50 @@ value                                  = 20
 pdm_disp_base                            = -0.2
 inv_weight                  = -0.7
 
+;---- PDM -10/-20%, Weight -0.5/-1.0 kg, +5/10% recoil use for 556/545 LMG rifles
+
+[up_sect_pdm_wgt_rec_10]
+cost                                   = 1000
+value                                  = 10
+
+cam_dispersion_frac                            = +0.05
+zoom_cam_dispersion_frac                            = +0.05
+
+pdm_disp_base                            = -0.1
+inv_weight                  = -0.5
+
+[up_sect_pdm_wgt_rec_20]
+cost                                   = 1000
+value                                  = 20
+
+cam_dispersion_frac                            = +0.1
+zoom_cam_dispersion_frac                            = +0.1
+
+pdm_disp_base                            = -0.2
+inv_weight                  = -1.0
+
+;---- PDM -10/-20%, Weight -1.0/-2.0 kg, +5/10% recoil use for x51/x54 LMG rifles
+
+[up_sect_pdm_wgt_x51_lmg_rec_10]
+cost                                   = 1000
+value                                  = 10
+
+cam_dispersion_frac                            = +0.05
+zoom_cam_dispersion_frac                            = +0.05
+
+pdm_disp_base                            = -0.1
+inv_weight                  = -1.0
+
+[up_sect_pdm_wgt_x51_lmg_rec_20]
+cost                                   = 1000
+value                                  = 20
+
+cam_dispersion_frac                            = +0.1
+zoom_cam_dispersion_frac                            = +0.1
+
+pdm_disp_base                            = -0.2
+inv_weight                  = -2.0
+
 
 ;========================================================
 ; Cam_dispersion_base and zoom_cam_dispersion_base reduction 5, 10, 15, 20%
@@ -861,6 +1500,54 @@ pdm_disp_base                            = +0.1
 
 inv_weight                  = +0.7
 
+;---- Recoil -10/-20%, PDM -5/-10%, +1.5/+3.0 Weight
+
+[up_sect_recoil_pdm_wgt_lmg_10]
+cost                                   = 1000
+value                                  = 10
+
+cam_dispersion_frac                            = -0.1
+zoom_cam_dispersion_frac                            = -0.1
+
+pdm_disp_base                            = +0.05
+
+inv_weight                  = +1.5
+
+[up_sect_recoil_pdm_wgt_lmg_20]
+cost                                   = 1000
+value                                  = 20
+
+cam_dispersion_frac                            = -0.2
+zoom_cam_dispersion_frac                            = -0.2
+
+pdm_disp_base                            = +0.1
+
+inv_weight                  = +3.0
+
+;---- Recoil -10/-20%, PDM -5/-10%, +1.5/+3.0 Weight
+
+[up_sect_recoil_pdm_wgt_x51_lmg_10]
+cost                                   = 1000
+value                                  = 10
+
+cam_dispersion_frac                            = -0.1
+zoom_cam_dispersion_frac                            = -0.1
+
+pdm_disp_base                            = +0.05
+
+inv_weight                  = +2.0
+
+[up_sect_recoil_pdm_wgt_x51_lmg_20]
+cost                                   = 1000
+value                                  = 20
+
+cam_dispersion_frac                            = -0.2
+zoom_cam_dispersion_frac                            = -0.2
+
+pdm_disp_base                            = +0.1
+
+inv_weight                  = +4.0
+
 ;---- Recoil +5/+10%, PDM +5%/+10%, Weight -0.3/-0.7 kg
 
 [up_sect_pdm_wgt_recoil_5]
@@ -896,3 +1583,31 @@ grenade_launcher_status                  = 2
 grenade_launcher_name                    = wpn_addon_grenade_launcher
 grenade_launcher_x                       = 120
 grenade_launcher_y                       = 21
+
+;========================================================
+; Suppressors
+;========================================================
+
+[up_sect_k98_suppressor]
+cost                                     = 2260
+silencer_status                          = 2
+silencer_name                            = wpn_sil_forester
+silencer_x                               = 185
+silencer_y                               = 13
+snd_silncer_shot                         = wpn_k98sp_new_snd_silenced
+snd_silncer_shot_actor      			 = wpn_k98sp_new_snd_silenced_actor
+
+upgrade_item                           = upgr_w_2_external
+grenade_launcher_y                       = 21
+
+;========================================================
+; Scopes
+;========================================================
+
+[up_sect_scope_dyn_zoom]
+cost                                     = 6000
+scope_dynamic_zoom                       = on
+
+[up_sect_scope_zoom_factor]
+cost                                     = 6000
+scope_zoom_factor                        = -4

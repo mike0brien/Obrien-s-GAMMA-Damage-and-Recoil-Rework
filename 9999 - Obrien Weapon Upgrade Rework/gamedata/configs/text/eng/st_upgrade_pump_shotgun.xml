@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<string_table>
+
+    <!-- Row 1 -->
+
+    <string id="st_up_firsta_pump_shotgun_name"><text>Durability</text></string>
+    <string id="st_up_firsta_pump_shotgun_descr"><text>This gives 5% weapon durability.</text></string>
+
+    <string id="st_up_firstc_pump_shotgun_name"><text>Accuracy</text></string>
+    <string id="st_up_firstc_pump_shotgun_descr"><text>This gives 10% accuracy.</text></string>
+
+    <string id="st_up_firstd_pump_shotgun_name"><text>Durability</text></string>
+    <string id="st_up_firstd_pump_shotgun_descr"><text>This gives 10% weapon durability.</text></string>
+
+    <string id="st_up_firste_pump_shotgun_name"><text>Accuracy</text></string>
+    <string id="st_up_firste_pump_shotgun_descr"><text>This gives 15% accuracy.</text></string>
+
+
+    <!-- Row 2 -->
+
+    <string id="st_up_secona_pump_shotgun_name"><text>Fire Rate</text></string>
+    <string id="st_up_secona_pump_shotgun_descr"><text>This gives 5% fire rate.</text></string>
+
+    <string id="st_up_seconc_pump_shotgun_name"><text>Durability</text></string>
+    <string id="st_up_seconc_pump_shotgun_descr"><text>This gives 10% weapon durability.</text></string>
+
+    <string id="st_up_second_pump_shotgun_name"><text>Fire Rate</text></string>
+    <string id="st_up_second_pump_shotgun_descr"><text>This gives 10% fire rate but reduces durability by 5%.</text></string>
+
+
+    <!-- Row 3 -->
+
+    <string id="st_up_thirda_pump_shotgun_name"><text>Handling</text></string>
+    <string id="st_up_thirda_pump_shotgun_descr"><text>This improves handling by 10%.</text></string>
+
+    <string id="st_up_thirdb_pump_shotgun_name"><text>Recoil</text></string>
+    <string id="st_up_thirdb_pump_shotgun_descr"><text>This reduces recoil by 5%.</text></string>
+
+    <string id="st_up_thirdc_pump_shotgun_name"><text>Handling</text></string>
+    <string id="st_up_thirdc_pump_shotgun_descr"><text>This improves handling by 20% and reduces weapon weight by 0.7 kg.</text></string>
+
+    <string id="st_up_thirdd_pump_shotgun_name"><text>Recoil</text></string>
+    <string id="st_up_thirdd_pump_shotgun_descr"><text>This reduces recoil by 10%.</text></string>
+
+    <string id="st_up_thirde_pump_shotgun_name"><text>Recoil</text></string>
+    <string id="st_up_thirde_pump_shotgun_descr"><text>This reduces recoil by 10%.</text></string>
+
+    <string id="st_up_thirdf_pump_shotgun_name"><text>Recoil</text></string>
+    <string id="st_up_thirdf_pump_shotgun_descr"><text>This reduces recoil by 20%, decreases handling by 10%, and increases weapon weight.</text></string>
+
+</string_table>

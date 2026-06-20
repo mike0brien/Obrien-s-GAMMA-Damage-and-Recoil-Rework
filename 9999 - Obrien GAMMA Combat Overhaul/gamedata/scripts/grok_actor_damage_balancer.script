@@ -2,19 +2,19 @@
 -- Obrien attempt at a damage script.
 -- =======================================================================================
 --
--- This overhauls groks calculation to a most more simplified equation
+-- This overhauls groks calculation to a more simplified equation
 -- The base calculation is now the following...
--- Damage_1 = Weapon Hit_Power * Ammo K_Hit * Game 
+-- Damage_1 = Weapon Hit_Power * Ammo K_Hit
 -- Damage_2 = Damage_1 * (Ammo_AP/Armor_BR)
 -- Final_Damage = Damage_2 * (1 - Artifact_Protection) * Body_Part_Multiplier
--- Ballistic Rating, BR_Class, is now the main defense value. By default, Ballistic Rating is disabled.
+-- Ballistic Rating, BR_Class, is now the main defense value. By default, Ballistic Rating is disabled for armor.
 -- The system calculates a protection factor from different sources (armor, artefacts, boosters)
 -- and simply multiply the hit power by (1 - protection).
--- Lots of hardcoded multiplier are used for the different damage sources so that even everything feels right
--- using GAMMA modpack values (ammo pen and power, mutants damage, etc).
+-- There were a lot of stacked multipliers making the damage calculation very confusing and hard to balance. This should be much more straightforward.
+-- All ammo damage and armor pen have been rebalanced to fit this new system, so you can expect some changes in the damage output of weapons.
 -- This script do not change anomalies damages
 -- This script overrides most of the values customisable in the game option menu.
--- Keep in mind that difficulty is still taken into account to simply divide incoming damages by a predifined value customisable below.
+-- Currently, all difficulties are set to a 1.0 multiplier, but this can be easily changed in the difficulty_multiplier table below.
 -- Hopefully I'll add all multipliers into a MCM menu at some point.
 
 -- local ini_diff = ini_file("plugins\\difficulty.ltx")
@@ -294,7 +294,7 @@ function get_adb_constants(st)
 		defense = "explosion_protection"
 	end
 
-	if st == hit.burn or st == "Burn" then
+	if st == hit.burn or st == hit.light_burn or st == "Burn" then
 		hit_type = HitTypeID["Burn"]
 		immunity = "burn_immunity"
 		protection = "Burn"
@@ -308,19 +308,19 @@ function get_adb_constants(st)
 		defense = "burn_protection"
 	end
 
-	if st == hit.light_burn or st == "Burn" then
-		hit_type = HitTypeID["LightBurn"]
-		immunity = "burn_immunity"
-		protection = "Burn"
-		booster_type_def = 8
-		adjuster = 1.00
-		-- arti_adjuster = adjuster * 2.0
-		arti_adjuster = adjuster
-		limiter = 0.65
-		elemental = 1
-		cap_stat = "burn_cap"
-		defense = "burn_protection"
-	end
+--	if st == hit.light_burn or st == "Burn" then
+--		hit_type = HitTypeID["LightBurn"]
+--		immunity = "burn_immunity"
+--		protection = "Burn"
+--		booster_type_def = 8
+--		adjuster = 1.00
+--		-- arti_adjuster = adjuster * 2.0
+--		arti_adjuster = adjuster
+--		limiter = 0.65
+--		elemental = 1
+--		cap_stat = "burn_cap"
+--		defense = "burn_protection"
+--	end
 
 	if st == hit.shock or st == "Shock" then
 		hit_type = HitTypeID["Shock"]
@@ -551,7 +551,7 @@ end
 protection_to_hit_type = {
 	["FireWound"] = hit.fire_wound,
 	["Wound"] = hit.wound,
-	["Burn"] = hit.burn ,
+	["Burn"] = hit.burn or hit.light_burn,
 	["Shock"] = hit.shock,
 	["Telepatic"] = hit.telepatic,
 	["Strike"] = hit.strike,

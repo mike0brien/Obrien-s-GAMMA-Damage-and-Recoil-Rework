@@ -6,4 +6,22 @@
     <string id="st_up_ak_gl_descr">
         <text>Enables the use of a grenade launcher.</text>
     </string>
+        <string id="st_up_k98_suppressor_name">
+        <text>Suppressor</text>
+    </string>
+    <string id="st_up_k98_suppressor_descr">
+        <text>Enables the use of a suppressor.</text>
+    </string>
+    <string id="st_up_scope_dyn_zoom_name">
+        <text>Dynamic Zoom Scope</text>
+    </string>
+    <string id="st_up_scope_dyn_zoom_descr">
+        <text>Enables dynamic zoom functionality.</text>
+    </string>
+    <string id="st_up_scope_zoom_factor_name">
+        <text>Max Zoom Scope</text>
+    </string>
+    <string id="st_up_scope_zoom_factor_descr">
+        <text>Increases the maximum zoom level of the scope.</text>
+    </string>
 </string_table>

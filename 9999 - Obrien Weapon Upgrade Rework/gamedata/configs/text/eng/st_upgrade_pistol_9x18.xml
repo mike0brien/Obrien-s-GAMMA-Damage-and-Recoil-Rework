@@ -35,6 +35,6 @@
     <string id="st_up_thirde_pistol_9x18_descr"><text>This reduces recoil by 10%.</text></string>
 
     <string id="st_up_thirdf_pistol_9x18_name"><text>Recoil</text></string>
-    <string id="st_up_thirdf_pistol_9x18_descr"><text>This reduces recoil by 20%, improves handling, and increases weapon weight.</text></string>
+    <string id="st_up_thirdf_pistol_9x18_descr"><text>This reduces recoil by 20%, reduces handling by 10%, and increases weapon weight by 0.7 kg.</text></string>
 
 </string_table>

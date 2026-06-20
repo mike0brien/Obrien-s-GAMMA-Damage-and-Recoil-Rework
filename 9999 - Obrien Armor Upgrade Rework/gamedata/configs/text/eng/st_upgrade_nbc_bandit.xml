@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<string_table>
+
+    <string id="st_up_firsta_nbc_bandit_name"><text>Durability</text></string>
+    <string id="st_up_firsta_nbc_bandit_descr"><text>This gives 10% suit durability.</text></string>
+
+    <string id="st_up_firstc_nbc_bandit_name"><text>Wound</text></string>
+    <string id="st_up_firstc_nbc_bandit_descr"><text>This gives 10% wound protection.</text></string>
+
+    <string id="st_up_firstd_nbc_bandit_name"><text>Impact</text></string>
+    <string id="st_up_firstd_nbc_bandit_descr"><text>This gives 5% impact protection.</text></string>
+
+    <string id="st_up_firste_nbc_bandit_name"><text>Wound</text></string>
+    <string id="st_up_firste_nbc_bandit_descr"><text>This gives 5% wound protection.</text></string>
+
+    <string id="st_up_firstf_nbc_bandit_name"><text>Durability</text></string>
+    <string id="st_up_firstf_nbc_bandit_descr"><text>This gives 10% suit durability.</text></string>
+
+    <string id="st_up_secona_nbc_bandit_name"><text>Burn</text></string>
+    <string id="st_up_secona_nbc_bandit_descr"><text>This gives 5% burn protection.</text></string>
+
+    <string id="st_up_seconb_nbc_bandit_name"><text>Chemical</text></string>
+    <string id="st_up_seconb_nbc_bandit_descr"><text>This gives 5% chemical protection.</text></string>
+
+    <string id="st_up_seconc_nbc_bandit_name"><text>Burn</text></string>
+    <string id="st_up_seconc_nbc_bandit_descr"><text>This gives 5% burn protection.</text></string>
+
+    <string id="st_up_second_nbc_bandit_name"><text>Chemical</text></string>
+    <string id="st_up_second_nbc_bandit_descr"><text>This gives 5% chemical protection.</text></string>
+
+    <string id="st_up_thirda_nbc_bandit_name"><text>Weight Reduction</text></string>
+    <string id="st_up_thirda_nbc_bandit_descr"><text>This reduces suit weight by 2kg.</text></string>
+
+    <string id="st_up_thirdc_nbc_bandit_name"><text>Carry Weight</text></string>
+    <string id="st_up_thirdc_nbc_bandit_descr"><text>This gives 15kg carry weight increase.</text></string>
+
+    <string id="st_up_thirdd_nbc_bandit_name"><text>Stamina Recovery</text></string>
+    <string id="st_up_thirdd_nbc_bandit_descr"><text>This gives 15% stamina recovery.</text></string>
+
+    <string id="st_up_thirde_nbc_bandit_name"><text>Health Restore</text></string>
+    <string id="st_up_thirde_nbc_bandit_descr"><text>This gives +1 health restore.</text></string>
+
+    <string id="st_up_thirdf_nbc_bandit_name"><text>Stamina Recovery</text></string>
+    <string id="st_up_thirdf_nbc_bandit_descr"><text>This gives 15% stamina recovery.</text></string>
+
+    <string id="st_up_fourta_nbc_bandit_name"><text>Belt Slot</text></string>
+    <string id="st_up_fourta_nbc_bandit_descr"><text>This gives +1 belt slot.</text></string>
+
+    <string id="st_up_fourtc_nbc_bandit_name"><text>Carry Weight</text></string>
+    <string id="st_up_fourtc_nbc_bandit_descr"><text>This gives 10kg carry weight increase.</text></string>
+
+    <string id="st_up_fourte_nbc_bandit_name"><text>Electro</text></string>
+    <string id="st_up_fourte_nbc_bandit_descr"><text>This gives 5% electrical protection.</text></string>
+
+</string_table>

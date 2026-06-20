@@ -1,7 +1,7 @@
 ;========================================================
 ; Obrien GAMMA Overhaul Weapon Upgrade Rework
 ;========================================================
-;--- Upgrade tree for 9mm Pistols, and maybe SMGs.
+;--- Upgrade tree for sniper rifles.
 ;========================================================
 
 
@@ -15,10 +15,10 @@
 
 ;--- +5% Durability
 
-[up_firsta_smg_9mm]
+[up_firsta_sniper]
 scheme_index                           = 0, 0
 known                                  = 1
-effects                                = up_gr_firstcd_smg_9mm
+effects                                = up_gr_firstcd_sniper
 section                                = up_sect_0005_dura_5
 
 property                               = prop_reliability
@@ -33,45 +33,19 @@ prereq_functor                         = inventory_upgrades.prereq_functor_a
 prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
 prereq_params                          =
 
-name                                   = st_up_firsta_smg_9mm_name
-description                            = st_up_firsta_smg_9mm_descr
-icon                                   = ui_inGame2_upgrade_Gadyuka_5_13
+name                                   = st_up_firsta_sniper_name
+description                            = st_up_firsta_sniper_descr
+icon                                   = ui_inGame2_upgrade_FT200M_2
 
 upgrade_item                           = upgr_w_1_internal
 
-;--- +10% Accuracy OR +10% Dura
+;--- +10% dura AND -5% accuracy, or +20% acc AND -10% dura
 
-[up_firstc_smg_9mm]
+[up_firstc_sniper]
 scheme_index                           = 1, 0
 known                                  = 1
-effects                                = up_gr_firstef_smg_9mm
-section                                = up_sect_035_fire_disp_10
-
-property                               = prop_dispersion
-
-precondition_functor                   = inventory_upgrades.precondition_functor_a
-precondition_parameter                 = a & b
-
-effect_functor                         = inventory_upgrades.effect_functor_a
-effect_parameter                       = something_here
-
-prereq_functor                         = inventory_upgrades.prereq_functor_a
-prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
-prereq_params                          =
-
-name                                   = st_up_firstc_smg_9mm_name
-description                            = st_up_firstc_smg_9mm_descr
-icon                                   = ui_inGame2_upgrade_Gadyuka_5_7
-
-upgrade_item                           = upgr_w_2_internal
-
-
-
-[up_firstd_smg_9mm]
-scheme_index                           = 1, 0
-known                                  = 1
-effects                                = up_gr_firstef_smg_9mm
-section                                = up_sect_0005_dura_10
+effects                                = up_gr_firstef_sniper
+section                                = up_sect_0005_dura_disp_10
 
 property                               = prop_reliability
 
@@ -85,19 +59,19 @@ prereq_functor                         = inventory_upgrades.prereq_functor_a
 prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
 prereq_params                          =
 
-name                                   = st_up_firstd_smg_9mm_name
-description                            = st_up_firstd_smg_9mm_descr
-icon                                   = ui_inGame2_upgrade_Gadyuka_5_13
+name                                   = st_up_firstc_sniper_name
+description                            = st_up_firstc_sniper_descr
+icon                                   = ui_inGame2_upgrade_FT200M_2
 
 upgrade_item                           = upgr_w_2_internal
 
-;--- +15% accuracy
 
-[up_firste_smg_9mm]
-scheme_index                           = 2, 0
+
+[up_firstd_sniper]
+scheme_index                           = 1, 0
 known                                  = 1
-effects                                = 
-section                                = up_sect_035_fire_disp_15
+effects                                = up_gr_firstef_sniper
+section                                = up_sect_012_disp_dura_20
 
 property                               = prop_dispersion
 
@@ -111,132 +85,48 @@ prereq_functor                         = inventory_upgrades.prereq_functor_a
 prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
 prereq_params                          =
 
-name                                   = st_up_firste_smg_9mm_name
-description                            = st_up_firste_smg_9mm_descr
-icon                                   = ui_inGame2_upgrade_Gadyuka_5_7
+name                                   = st_up_firstd_sniper_name
+description                            = st_up_firstd_sniper_descr
+icon                                   = ui_inGame2_upgrade_FT200M_5
+
+upgrade_item                           = upgr_w_2_internal
+
+;--- +20% Accuracy
+
+[up_firste_sniper]
+scheme_index                           = 2, 0
+known                                  = 1
+effects                                =
+section                                = up_sect_012_fire_disp_20
+
+property                               = prop_dispersion
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firste_sniper_name
+description                            = st_up_firste_sniper_descr
+icon                                   = ui_inGame2_upgrade_FT200M_5
 
 upgrade_item                           = upgr_w_3_internal
-
 
 ;===============================
 ; Row 2
 ;===============================
 
-;--- +5% fire rate
+;--- -10% PDM
 
-[up_secona_smg_9mm]
-scheme_index                           = 0, 1
-known                                  = 1
-effects                                = up_gr_seconcd_smg_9mm
-section                                = up_sect_800_rpm_5
-
-property                               = prop_rpm
-
-precondition_functor                   = inventory_upgrades.precondition_functor_a
-precondition_parameter                 = a & b
-
-effect_functor                         = inventory_upgrades.effect_functor_a
-effect_parameter                       = something_here
-
-prereq_functor                         = inventory_upgrades.prereq_functor_a
-prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
-prereq_params                          =
-
-name                                   = st_up_secona_smg_9mm_name
-description                            = st_up_secona_smg_9mm_descr
-icon                                   = ui_inGame2_upgrade_Gadyuka_5_12
-
-upgrade_item                           = upgr_w_1_internal
-
-
-;--- +10% Durability OR +20% Fire rate AND -10% Durability
-
-[up_seconc_smg_9mm]
-scheme_index                           = 1, 1
-known                                  = 1
-effects                                = up_gr_seconef_smg_9mm
-section                                = up_sect_0005_dura_10
-
-property                               = prop_reliability
-
-precondition_functor                   = inventory_upgrades.precondition_functor_a
-precondition_parameter                 = a & b
-
-effect_functor                         = inventory_upgrades.effect_functor_a
-effect_parameter                       = something_here
-
-prereq_functor                         = inventory_upgrades.prereq_functor_a
-prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
-prereq_params                          =
-
-name                                   = st_up_seconc_smg_9mm_name
-description                            = st_up_seconc_smg_9mm_descr
-icon                                   = ui_inGame2_upgrade_Gadyuka_5_13
-
-upgrade_item                           = upgr_w_2_internal
-
-
-[up_second_smg_9mm]
-scheme_index                           = 1, 1
-known                                  = 1
-effects                                = up_gr_seconef_smg_9mm
-section                                = up_sect_800_rpm_dura_20
-
-property                               = prop_rpm
-
-precondition_functor                   = inventory_upgrades.precondition_functor_a
-precondition_parameter                 = a & b
-
-effect_functor                         = inventory_upgrades.effect_functor_a
-effect_parameter                       = something_here
-
-prereq_functor                         = inventory_upgrades.prereq_functor_a
-prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
-prereq_params                          =
-
-name                                   = st_up_second_smg_9mm_name
-description                            = st_up_second_smg_9mm_descr
-icon                                   = ui_inGame2_upgrade_Gadyuka_5_12
-
-upgrade_item                           = upgr_w_2_internal
-
-;--- +10% Fire rate
-
-[up_secone_smg_9mm]
-scheme_index                           = 2, 1
-known                                  = 1
-effects                                = 
-section                                = up_sect_800_rpm_10
-
-property                               = prop_rpm
-
-precondition_functor                   = inventory_upgrades.precondition_functor_a
-precondition_parameter                 = a & b
-
-effect_functor                         = inventory_upgrades.effect_functor_a
-effect_parameter                       = something_here
-
-prereq_functor                         = inventory_upgrades.prereq_functor_a
-prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
-prereq_params                          =
-
-name                                   = st_up_secone_smg_9mm_name
-description                            = st_up_secone_smg_9mm_descr
-icon                                   = ui_inGame2_upgrade_Gadyuka_5_12
-
-upgrade_item                           = upgr_w_2_internal
-
-
-;===============================
-; Row 3
-;===============================
-
-;--- +10% PDM, or -5% recoil
-
-[up_thirda_smg_9mm]
+[up_secona_sniper]
 scheme_index                           = 0, 2
 known                                  = 1
-effects                                = up_gr_thirdcd_smg_9mm
+effects                                = up_gr_seconcd_sniper
 section                                = up_sect_pdm_10
 
 property                               = prop_inertion
@@ -251,16 +141,74 @@ prereq_functor                         = inventory_upgrades.prereq_functor_a
 prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
 prereq_params                          =
 
-name                                   = st_up_thirda_smg_9mm_name
-description                            = st_up_thirda_smg_9mm_descr
-icon                                   = ui_inGame2_upgrade_Marta_10
+name                                   = st_up_secona_sniper_name
+description                            = st_up_secona_sniper_descr
+icon                                   = ui_inGame2_upgrade_FT200M_4
 
 upgrade_item                           = upgr_w_1_internal
 
-[up_thirdb_smg_9mm]
-scheme_index                           = 0, 2
+;--- -10% PDM AND -0.3 weight
+
+[up_seconc_sniper]
+scheme_index                           = 1, 2
 known                                  = 1
-effects                                = up_gr_thirdcd_smg_9mm
+effects                                = up_gr_seconef_sniper
+section                                = up_sect_pdm_wgt_sub_10
+
+property                               = prop_inertion
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_seconc_sniper_name
+description                            = st_up_seconc_sniper_descr
+icon                                   = ui_inGame2_upgrade_FT200M_4
+
+upgrade_item                           = upgr_w_2_internal
+
+;--- -0.7 Weight
+
+[up_secone_sniper]
+scheme_index                           = 2, 2
+known                                  = 1
+effects                                =
+section                                = up_sect_weight_07
+
+property                               = prop_weight
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_secone_sniper_name
+description                            = st_up_secone_sniper_descr
+icon                                   = ui_inGame2_upgrade_TRs_301_13
+
+upgrade_item                           = upgr_w_3_internal
+
+;===============================
+; Row 3
+;===============================
+
+;--- -5% recoil, or -5% PDM
+
+[up_thirda_sniper]
+scheme_index                           = 0, 3
+known                                  = 1
+effects                                = up_gr_thirdcd_sniper
 section                                = up_sect_recoil_5
 
 property                               = prop_recoil
@@ -275,19 +223,18 @@ prereq_functor                         = inventory_upgrades.prereq_functor_a
 prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
 prereq_params                          =
 
-name                                   = st_up_thirdb_smg_9mm_name
-description                            = st_up_thirdb_smg_9mm_descr
-icon                                   = ui_inGame2_upgrade_Marta_3
+name                                   = st_up_thirda_sniper_name
+description                            = st_up_thirda_sniper_descr
+icon                                   = ui_inGame2_upgrade_FT200M_11
 
 upgrade_item                           = upgr_w_1_internal
 
-;--- +20% PDM AND -0.3 weight or -10% Recoil
 
-[up_thirdc_smg_9mm]
-scheme_index                           = 1, 2
+[up_thirdb_sniper]
+scheme_index                           = 0, 3
 known                                  = 1
-effects                                = up_gr_thirdef_smg_9mm
-section                                = up_sect_pdm_wgt_sub_20
+effects                                = up_gr_thirdcd_sniper
+section                                = up_sect_pdm_5
 
 property                               = prop_inertion
 
@@ -301,18 +248,19 @@ prereq_functor                         = inventory_upgrades.prereq_functor_a
 prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
 prereq_params                          =
 
-name                                   = st_up_thirdc_smg_9mm_name
-description                            = st_up_thirdc_smg_9mm_descr
-icon                                   = ui_inGame2_upgrade_Gadyuka_5_15
+name                                   = st_up_thirdb_sniper_name
+description                            = st_up_thirdb_sniper_descr
+icon                                   = ui_inGame2_upgrade_FT200M_4
 
-upgrade_item                           = upgr_w_2_internal
+upgrade_item                           = upgr_w_1_internal
 
+;--- -5% recoil, or +15% durability
 
-[up_thirdd_smg_9mm]
-scheme_index                           = 1, 2
+[up_thirdc_sniper]
+scheme_index                           = 1, 3
 known                                  = 1
-effects                                = up_gr_thirdef_smg_9mm
-section                                = up_sect_recoil_10
+effects                                = up_gr_thirdef_sniper
+section                                = up_sect_recoil_5
 
 property                               = prop_recoil
 
@@ -326,22 +274,21 @@ prereq_functor                         = inventory_upgrades.prereq_functor_a
 prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
 prereq_params                          =
 
-name                                   = st_up_thirdd_smg_9mm_name
-description                            = st_up_thirdd_smg_9mm_descr
-icon                                   = ui_inGame2_upgrade_Gadyuka_5_9
+name                                   = st_up_thirdc_sniper_name
+description                            = st_up_thirdc_sniper_descr
+icon                                   = ui_inGame2_upgrade_FT200M_11
 
 upgrade_item                           = upgr_w_2_internal
 
 
-;--- -10% Recoil or +10% Handling
 
-[up_thirde_smg_9mm]
-scheme_index                           = 2, 2
+[up_thirdd_sniper]
+scheme_index                           = 1, 3
 known                                  = 1
-effects                                =
-section                                = up_sect_recoil_10
+effects                                = up_gr_thirdef_sniper
+section                                = up_sect_0005_dura_15
 
-property                               = prop_recoil
+property                               = prop_reliability
 
 precondition_functor                   = inventory_upgrades.precondition_functor_a
 precondition_parameter                 = a & b
@@ -353,14 +300,16 @@ prereq_functor                         = inventory_upgrades.prereq_functor_a
 prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
 prereq_params                          =
 
-name                                   = st_up_thirde_smg_9mm_name
-description                            = st_up_thirde_smg_9mm_descr
-icon                                   = ui_inGame2_upgrade_Gadyuka_5_9
+name                                   = st_up_thirdd_sniper_name
+description                            = st_up_thirdd_sniper_descr
+icon                                   = ui_inGame2_upgrade_FT200M_12
 
-upgrade_item                           = upgr_w_3_internal
+upgrade_item                           = upgr_w_2_internal
 
-[up_thirdf_smg_9mm]
-scheme_index                           = 2, 2
+;--- -20% recoil AND +10% PDM, AND +0.7 kg, OR +10% recoil AND -10% PDM AND -0.7 kg
+
+[up_thirde_sniper]
+scheme_index                           = 2, 3
 known                                  = 1
 effects                                =
 section                                = up_sect_recoil_pdm_wgt_20
@@ -377,16 +326,35 @@ prereq_functor                         = inventory_upgrades.prereq_functor_a
 prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
 prereq_params                          =
 
-name                                   = st_up_thirdf_smg_9mm_name
-description                            = st_up_thirdf_smg_9mm_descr
-icon                                   = ui_inGame2_upgrade_Gadyuka_5_9
+name                                   = st_up_thirde_sniper_name
+description                            = st_up_thirde_sniper_descr
+icon                                   = ui_inGame2_upgrade_FT200M_11
 
 upgrade_item                           = upgr_w_3_internal
 
-;===============================
-; Row 4 - remove for now, add for specialty stuff like caliber, fire mode, or attachments
-;===============================
+[up_thirdf_sniper]
+scheme_index                           = 2, 3
+known                                  = 1
+effects                                =
+section                                = up_sect_pdm_wgt_recoil_10
 
+property                               = prop_inertion
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirdf_sniper_name
+description                            = st_up_thirdf_sniper_descr
+icon                                   = ui_inGame2_upgrade_FT200M_4
+
+upgrade_item                           = upgr_w_3_internal
 
 
 
@@ -394,30 +362,29 @@ upgrade_item                           = upgr_w_3_internal
 ; GROUPS
 ;========================================================
 
-[up_gr_firstab_smg_9mm]
-elements                               = up_firsta_smg_9mm
+[up_gr_firstab_sniper]
+elements                               = up_firsta_sniper
 
-[up_gr_firstcd_smg_9mm]
-elements                               = up_firstc_smg_9mm, up_firstd_smg_9mm
+[up_gr_firstcd_sniper]
+elements                               = up_firstc_sniper, up_firstd_sniper
 
-[up_gr_firstef_smg_9mm]
-elements                               = up_firste_smg_9mm
+[up_gr_firstef_sniper]
+elements                               = up_firste_sniper
 
-[up_gr_seconab_smg_9mm]
-elements                               = up_secona_smg_9mm
+[up_gr_seconab_sniper]
+elements                               = up_secona_sniper
 
-[up_gr_seconcd_smg_9mm]
-elements                               = up_seconc_smg_9mm, up_second_smg_9mm
+[up_gr_seconcd_sniper]
+elements                               = up_seconc_sniper
 
-[up_gr_seconef_smg_9mm]
-elements                               = up_secone_smg_9mm
+[up_gr_seconef_sniper]
+elements                               = up_secone_sniper
 
-[up_gr_thirdab_smg_9mm]
-elements                               = up_thirda_smg_9mm, up_thirdb_smg_9mm
+[up_gr_thirdab_sniper]
+elements                               = up_thirda_sniper, up_thirdb_sniper
 
-[up_gr_thirdcd_smg_9mm]
-elements                               = up_thirdc_smg_9mm, up_thirdd_smg_9mm
+[up_gr_thirdcd_sniper]
+elements                               = up_thirdc_sniper, up_thirdd_sniper
 
-[up_gr_thirdef_smg_9mm]
-elements                               = up_thirde_smg_9mm, up_thirdf_smg_9mm
-
+[up_gr_thirdef_sniper]
+elements                               = up_thirde_sniper, up_thirdf_sniper
