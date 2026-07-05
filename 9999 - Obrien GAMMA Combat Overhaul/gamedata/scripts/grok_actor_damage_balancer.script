@@ -8,20 +8,22 @@
 -- Damage_2 = Damage_1 * (Ammo_AP/Armor_BR)
 -- Final_Damage = Damage_2 * (1 - Artifact_Protection) * Body_Part_Multiplier
 -- Ballistic Rating, BR_Class, is now the main defense value. By default, Ballistic Rating is disabled for armor.
--- The system calculates a protection factor from different sources (armor, artefacts, boosters)
--- and simply multiply the hit power by (1 - protection).
+-- Ballistic rating will come from pelts, drugs, and artifacts.
+-- It will be applied just before the body part multiplier.
 -- There were a lot of stacked multipliers making the damage calculation very confusing and hard to balance. This should be much more straightforward.
 -- All ammo damage and armor pen have been rebalanced to fit this new system, so you can expect some changes in the damage output of weapons.
--- This script do not change anomalies damages
+-- This script doesn't change anomalies damages
 -- This script overrides most of the values customisable in the game option menu.
 -- Currently, all difficulties are set to a 1.0 multiplier, but this can be easily changed in the difficulty_multiplier table below.
 -- Hopefully I'll add all multipliers into a MCM menu at some point.
+-- This script has built-in support for Mirrowel Body Health System Realistic Overhaul, but it isn't needed.
 
 -- local ini_diff = ini_file("plugins\\difficulty.ltx")
 
 -- local factors_game = {}
 -- factors_game["actor_immunities"] = ini_diff:r_float_ex("gdiff_" .. diff , "actor_immunities") or 1
 printf("=== OBRIEN NPC to Player Damage Script Loaded ===")
+local obrien_debug = false
 
 local get_upgrades_installed = utils_item.get_upgrades_installed
 local get_ammo = utils_item.get_ammo
@@ -820,8 +822,9 @@ local injuries_bhs = false
 if zzz_player_injuries and zzz_player_injuries.penalty_curve and zzz_player_injuries_mcm then
     injuries_bhs = true
 end
-
-log(string.format("[BHS State] BHSRO=%s", tostring(injuries_bhs)))
+	if obrien_debug then
+		log(string.format("[BHS State] BHSRO=%s", tostring(injuries_bhs)))
+	end
 
 if zzz_player_injuries and zzz_player_injuries_mcm and not injuries_bhs then
 
@@ -834,7 +837,10 @@ elseif zzz_player_injuries and zzz_player_injuries_mcm then
  zzz_player_injuries.actor_on_hit_callback(db.actor, damage, shit.direction, shit.draftsman, bone_id)
 end
 
-log(string.format("[PLAYER DAMAGE] weapon=%s ammo=%s weapon_hit=%.3f k_hit=%.3f k_ap=%.3f prot=%.3f armor=%.3f bone_mult=%.3f damage=%.3f", weapon and weapon:section() or "nil", ammo_section or "nil", shit.power, k_hit, k_ap, total_protection, total_armor, body_part_mult, damage))
+	if obrien_debug then
+		log(string.format("[PLAYER DAMAGE] weapon=%s ammo=%s weapon_hit=%.3f k_hit=%.3f k_ap=%.3f prot=%.3f armor=%.3f bone_mult=%.3f damage=%.3f", weapon and weapon:section() or "nil", ammo_section or "nil", shit.power, k_hit, k_ap, total_protection, total_armor, body_part_mult, damage))
+	end
+
 	
 	--- shit.power = 0
 	

@@ -1,5 +1,13 @@
 ;-----Obrien Ammo Damage/AP changes-----
 ;---- this should dltx with the weapons_ammo.ltx in mods\G.A.M.M.A. Close Quarter Combat\gamedata\configs\items\weapons
+;--- general rules...
+;--- fmj baseline damage
+;--- ap is 0.8x the baseline damage
+;--- hp is 1.3x the baseline damage
+;--- slugs baseline damage
+;--- buck is 1.5x slug damage / pellets
+;--- ap slug is 0.8x slug damage
+
 
 ; =========================================================
 ; ===================== PISTOL AMMO =======================
@@ -85,15 +93,15 @@ k_cam_dispersion = 1.0
 
 ; --- .45 ACP
 ![ammo_11.43x23_fmj]
-k_hit = 0.51
-k_ap  = 0.07
+k_hit = 0.45 ;--- 0.51
+k_ap  = 0.08 ;--- 0.07
 k_cam_dispersion = 1.0
 ![ammo_11.43x23_fmj_bad]:ammo_11.43x23_fmj
 ![ammo_11.43x23_fmj_verybad]:ammo_11.43x23_fmj
 
 ![ammo_11.43x23_hydro]
-k_hit = 0.663
-k_ap  = 0.03
+k_hit = 0.585 ;---0.663
+k_ap  = 0.04 ;---0.03
 k_cam_dispersion = 1.0
 ![ammo_11.43x23_hydro_bad]:ammo_11.43x23_hydro
 ![ammo_11.43x23_hydro_verybad]:ammo_11.43x23_hydro
@@ -116,39 +124,39 @@ k_cam_dispersion = 1.0
 ; ===================== SHOTGUN AMMO ======================
 ; =========================================================
 
-![ammo_12x70_buck]
-k_hit = 0.3
+![ammo_12x70_buck] ;--- 9 pellets
+k_hit = 0.1 ;--- 0.3
 k_ap  = 0.05
 k_cam_dispersion = 1.0
 ![ammo_12x70_buck_bad]:ammo_12x70_buck
 ![ammo_12x70_buck_verybad]:ammo_12x70_buck
 
-![ammo_12x70_buck_self]
+![ammo_12x70_buck_self] ;--- idk what this is, is this the bullet used when you take the big sleep after a controller sucks out your soul?
 k_hit = 0.3
 k_ap  = 0.03
 k_cam_dispersion = 1.0
 
-![ammo_12x76_zhekan]
-k_hit = 0.51
+![ammo_12x76_zhekan] ;--- this is slugs
+k_hit = 0.6 ;-- 0.51
 k_ap  = 0.21
 k_cam_dispersion = 1.0
 ![ammo_12x76_zhekan_bad]:ammo_12x76_zhekan
 ![ammo_12x76_zhekan_verybad]:ammo_12x76_zhekan
 
-![ammo_12x76_dart]
-k_hit = 0.45
-k_ap  = 0.4
+![ammo_12x76_dart] ;--- these are ap rounds
+k_hit = 0.48 ;--- 0.45
+k_ap  = 0.41
 k_cam_dispersion = 1.0
 ![ammo_12x76_dart_bad]:ammo_12x76_dart
 ![ammo_12x76_dart_verybad]:ammo_12x76_dart
 
-![ammo_12x76_bull]
+![ammo_12x76_bull] ;--- these aren't used
 k_hit = 0.4
 k_ap  = 0.35
 k_cam_dispersion = 1.0
 
-![ammo_12x76_zhekan_heli]
-k_hit = 0.45
+![ammo_12x76_zhekan_heli] ;--- idk what these are, is this from the helicopter?
+k_hit = 0.5
 k_ap  = 0.25
 k_cam_dispersion = 1.0
 
@@ -157,13 +165,13 @@ k_hit = 0.25
 k_ap  = 0.03
 k_cam_dispersion = 1.0
 
-![ammo_23x75_barrikada]
-k_hit = 0.61
-k_ap  = 0.4
+![ammo_23x75_barrikada] ;--- technically it should be 2.5x the damage of a 12 gauge slug, but for balance... we're cutting that in half to 1.25x
+k_hit = 0.75
+k_ap  = 0.42
 k_cam_dispersion = 1.0
 
-![ammo_23x75_shrapnel]
-k_hit = 0.5
+![ammo_23x75_shrapnel] ;--- 6 pellets
+k_hit = 0.1875
 k_ap  = 0.05
 k_cam_dispersion = 1.0
 
@@ -242,7 +250,7 @@ k_cam_dispersion = 1.0
 ![ammo_7.62x51_fmj_verybad]:ammo_7.62x51_fmj
 
 ![ammo_7.62x51_ap]
-k_hit = 0.32
+k_hit = 0.32 ;--- maybe up to .34
 k_ap  = 0.45
 k_cam_dispersion = 1.0
 ![ammo_7.62x51_ap_bad]:ammo_7.62x51_ap
@@ -258,15 +266,15 @@ k_cam_dispersion = 1.0
 ![ammo_7.62x54_7h1_verybad]:ammo_7.62x54_7h1
 
 ![ammo_7.62x54_7h14]
-k_hit = 0.387
+k_hit = 0.387 
 k_ap  = 0.38
 k_cam_dispersion = 1.0
 ![ammo_7.62x54_7h14_bad]:ammo_7.62x54_7h14
 ![ammo_7.62x54_7h14_verybad]:ammo_7.62x54_7h14
 
 ![ammo_7.62x54_ap]
-k_hit = 0.344
-k_ap  = 0.48
+k_hit = 0.344 ;--- maybe up to 0.365
+k_ap  = 0.48 ;--- if damage up move down to 0.47
 ![ammo_7.62x54_ap_bad]:ammo_7.62x54_ap
 ![ammo_7.62x54_ap_verybad]:ammo_7.62x54_ap
 

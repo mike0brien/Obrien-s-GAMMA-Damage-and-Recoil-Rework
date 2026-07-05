@@ -37,7 +37,7 @@
     <string id="st_up_thirda_combat_loner_descr"><text>This reduces suit weight by 4 kg.</text></string>
 
     <string id="st_up_thirdc_combat_loner_name"><text>Carry Weight</text></string>
-    <string id="st_up_thirdc_combat_loner_descr"><text>This gives +20 kg carry weight.</text></string>
+    <string id="st_up_thirdc_combat_loner_descr"><text>This gives +15 kg carry weight.</text></string>
 
     <string id="st_up_thirdd_combat_loner_name"><text>Stamina</text></string>
     <string id="st_up_thirdd_combat_loner_descr"><text>This gives 20% stamina regeneration.</text></string>
