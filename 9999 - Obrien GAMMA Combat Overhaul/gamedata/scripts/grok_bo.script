@@ -12,7 +12,7 @@ ini_damage		= ini_file("creatures\\zzz_Obrien_Damages.ltx")
 leg_meta_sniper_null = 1
 sniper_bad_bone_shit_reduce = 1
 
-local Obrien_Debug = false
+local Obrien_Debug = true
 
 
 integrated_silencer = {

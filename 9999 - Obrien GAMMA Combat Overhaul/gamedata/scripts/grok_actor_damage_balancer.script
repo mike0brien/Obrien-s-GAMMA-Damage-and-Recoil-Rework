@@ -23,7 +23,7 @@
 -- local factors_game = {}
 -- factors_game["actor_immunities"] = ini_diff:r_float_ex("gdiff_" .. diff , "actor_immunities") or 1
 printf("=== OBRIEN NPC to Player Damage Script Loaded ===")
-local obrien_debug = false
+local obrien_debug = true
 
 local get_upgrades_installed = utils_item.get_upgrades_installed
 local get_ammo = utils_item.get_ammo
