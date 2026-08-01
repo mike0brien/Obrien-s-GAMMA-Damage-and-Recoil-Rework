@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<string_table>
+
+    <!-- Row 1 -->
+
+    <string id="st_up_firsta_pistol_9mm_name">
+        <text>Durability</text>
+    </string>
+    <string id="st_up_firsta_pistol_9mm_descr">
+        <text>This gives 5% weapon durability.</text>
+    </string>
+
+    <string id="st_up_firstc_pistol_9mm_name">
+        <text>Accuracy</text>
+    </string>
+    <string id="st_up_firstc_pistol_9mm_descr">
+        <text>This gives 10% accuracy.</text>
+    </string>
+
+    <string id="st_up_firstd_pistol_9mm_name">
+        <text>Durability</text>
+    </string>
+    <string id="st_up_firstd_pistol_9mm_descr">
+        <text>This gives 10% weapon durability.</text>
+    </string>
+
+
+    <!-- Row 2 -->
+
+    <string id="st_up_secona_pistol_9mm_name">
+        <text>Fire Rate</text>
+    </string>
+    <string id="st_up_secona_pistol_9mm_descr">
+        <text>This gives 10% fire rate.</text>
+    </string>
+
+    <string id="st_up_seconc_pistol_9mm_name">
+        <text>Durability</text>
+    </string>
+    <string id="st_up_seconc_pistol_9mm_descr">
+        <text>This gives 10% weapon durability.</text>
+    </string>
+
+    <string id="st_up_second_pistol_9mm_name">
+        <text>Fire Rate</text>
+    </string>
+    <string id="st_up_second_pistol_9mm_descr">
+        <text>This gives 20% fire rate but reduces durability by 10%.</text>
+    </string>
+
+    <string id="st_up_secone_pistol_9mm_name">
+        <text>Fire Rate</text>
+    </string>
+    <string id="st_up_secone_pistol_9mm_descr">
+        <text>This gives 10% fire rate.</text>
+    </string>
+
+
+    <!-- Row 3 -->
+
+    <string id="st_up_thirda_pistol_9mm_name">
+        <text>Handling</text>
+    </string>
+    <string id="st_up_thirda_pistol_9mm_descr">
+        <text>This improves handling by 5%.</text>
+    </string>
+
+    <string id="st_up_thirdb_pistol_9mm_name">
+        <text>Recoil</text>
+    </string>
+    <string id="st_up_thirdb_pistol_9mm_descr">
+        <text>This reduces recoil by 5%.</text>
+    </string>
+
+    <string id="st_up_thirdc_pistol_9mm_name">
+        <text>Handling</text>
+    </string>
+    <string id="st_up_thirdc_pistol_9mm_descr">
+        <text>This improves handling by 10% and reduces weapon weight by 0.3 kg.</text>
+    </string>
+
+    <string id="st_up_thirdd_pistol_9mm_name">
+        <text>Recoil</text>
+    </string>
+    <string id="st_up_thirdd_pistol_9mm_descr">
+        <text>This reduces recoil by 10%, reduces handling by 5%, and increases weapon weight by 0.3 kg.</text>
+    </string>
+
+    <string id="st_up_thirde_pistol_9mm_name">
+        <text>Recoil</text>
+    </string>
+    <string id="st_up_thirde_pistol_9mm_descr">
+        <text>This reduces recoil by 10%.</text>
+    </string>
+
+    <string id="st_up_thirdf_pistol_9mm_name">
+        <text>Handling</text>
+    </string>
+    <string id="st_up_thirdf_pistol_9mm_descr">
+        <text>This improves handling by 10%.</text>
+    </string>
+
+</string_table>

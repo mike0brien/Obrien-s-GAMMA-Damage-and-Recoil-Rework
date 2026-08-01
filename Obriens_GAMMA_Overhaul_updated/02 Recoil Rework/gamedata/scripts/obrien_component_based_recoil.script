@@ -1,0 +1,1602 @@
+local DEBUG = false
+
+local function dlog(message)
+    if DEBUG then
+        log(message)
+    end
+end
+
+-- Static recoil travel ceilings.
+-- These are intentionally script-owned rather than weapon-profile values so any weapon using this recoil system automatically receives safe clamp limits.
+local STATIC_CAM_MAX_ANGLE = 360.0
+local STATIC_CAM_MAX_ANGLE_HORZ = 50.0
+
+local STATIC_ZOOM_CAM_MAX_ANGLE = 360.0
+local STATIC_ZOOM_CAM_MAX_ANGLE_HORZ = 50.0
+
+--==============================================================
+-- Obrien Component Based Recoil
+--==============================================================
+
+dlog("OBRIEN_COMPONENT_RECOIL | V32 exclusive Fuzz/Platinum compatibility detection loaded")
+
+local ini_sys = system_ini()
+
+-- Relative to gamedata\configs\
+local recoil_ini = ini_file("items\\weapons\\obrien_component_based_recoil_config.ltx")
+
+local current_weapon_id = nil
+local current_suppressor_attached = nil
+local current_suppressor_name = nil
+local current_upgrade_signature = nil
+local suppressor_warning_once = {}
+
+--==============================================================
+-- Optional Enhanced Recoil Platinum compatibility state
+--==============================================================
+
+-- Final recoil targets are cached per weapon object. Platinum's public modifier API is evaluated when a shot is fired, so it can select the HIP or ADS target at that moment without recalculating the component system.
+local platinum_targets = {}
+local platinum_modifier_registered = false
+local platinum_registration_attempted = false
+local PLATINUM_MODIFIER_NAME = "obrien_component_recoil"
+
+-- Enhanced Recoil Platinum Pre5+ integration:
+-- Platinum's cam_recoil value is treated as the active profile baseline.
+-- My final recoil target is normalized against that baseline so the resulting magnitude remains consistent if inheritance, another patch, or an end user changes the profile value.
+--
+-- A cam_recoil baseline of 1.0 is recommended for straightforward editing.
+local DEFAULT_PLATINUM_BASELINE = 1.0
+local PLATINUM_EPSILON = 0.000001
+
+-- Cache the original profile cam_recoil values before the horizontal baseline is rewritten at shot time. In V30 these values are treated as independent axis multipliers:
+--
+--   final vertical target   = Obrien vertical   * profile vertical
+--   final horizontal target = Obrien horizontal * profile horizontal
+--
+-- Weak keys allow abandoned Platinum profile tables to be garbage-collected.
+local platinum_profile_axis_multipliers =
+    setmetatable({}, { __mode = "k" })
+
+-- When true, remove Platinum's built-in upgrade modifier by its public name.
+-- Component Recoil system already includes recoil upgrades in its final target values, so leaving Platinum's upgrade modifier active would stack recoil upgrades twice.
+local PLATINUM_DISABLE_NATIVE_UPGRADES = true
+
+-- armor_recoil.script is already folded into final recoil calculation. Platinum's powered_exos modifier would otherwise apply another armor-based recoil multiplier to exos, proto-exos and Nosorogs.
+local PLATINUM_DISABLE_NATIVE_ARMOR = true
+
+
+
+--==============================================================
+-- Helpers
+--==============================================================
+
+local function read_float(ini, section, key, fallback)
+    if not ini or not section or section == "" then
+        return fallback
+    end
+
+    if not ini:section_exist(section) then
+        return fallback
+    end
+
+    if not ini:line_exist(section, key) then
+        return fallback
+    end
+
+    return ini:r_float(section, key)
+end
+
+
+local function read_string(ini, section, key)
+    if not ini or not section or section == "" then
+        return nil
+    end
+
+    if not ini:section_exist(section) then
+        return nil
+    end
+
+    if not ini:line_exist(section, key) then
+        return nil
+    end
+
+    local value = ini:r_string(section, key)
+
+    if not value or value == "" then
+        return nil
+    end
+
+    -- Treat common "nothing assigned" strings as an omitted value.
+    value = tostring(value)
+
+    if value == "nil" or value == "none" or value == "false" then
+        return nil
+    end
+
+    return value
+end
+
+
+local function read_bool(ini, section, key, fallback)
+    if not ini or not section or section == "" then
+        return fallback
+    end
+
+    if not ini:section_exist(section) then
+        return fallback
+    end
+
+    if not ini:line_exist(section, key) then
+        return fallback
+    end
+
+    return ini:r_bool(section, key)
+end
+
+
+--==============================================================
+-- Multiplier safety floor
+--==============================================================
+
+local MIN_MULTIPLIER = 0.01
+
+local function clamp_multiplier(value, label)
+    if type(value) ~= "number" then
+        return MIN_MULTIPLIER
+    end
+
+    if value < MIN_MULTIPLIER then
+        dlog(string.format(
+            "OBRIEN_COMPONENT_RECOIL | WARNING: %s multiplier calculated at %.4f, below minimum %.2f; clamped to %.2f", tostring(label or "unknown"), value, MIN_MULTIPLIER, MIN_MULTIPLIER))
+
+        return MIN_MULTIPLIER
+    end
+
+    return value
+end
+
+
+--==============================================================
+-- Neutral modifier
+--==============================================================
+
+local function neutral_modifiers()
+    return {
+        zoom_rotate_time             = 1.0,
+
+        cam_dispersion               = 1.0,
+        cam_dispersion_inc           = 1.0,
+        cam_step_angle_horz          = 1.0,
+
+        zoom_cam_dispersion          = 1.0,
+        zoom_cam_dispersion_inc      = 1.0,
+        zoom_cam_step_angle_horz     = 1.0,
+    }
+end
+
+
+--==============================================================
+-- 1. Get recoil profile assigned to weapon
+--==============================================================
+
+local function get_recoil_profile(wpn)
+    if not wpn then
+        return nil
+    end
+
+    local section = wpn:section()
+
+    if not ini_sys:section_exist(section) then
+        return nil
+    end
+
+    local enabled = read_bool(
+        ini_sys,
+        section,
+        "obrien_recoil",
+        false
+    )
+
+    if not enabled then
+        return nil
+    end
+
+    local profile = read_string(
+        ini_sys,
+        section,
+        "obrien_recoil_profile"
+    )
+
+    if not profile then
+        dlog(string.format(
+            "OBRIEN_COMPONENT_RECOIL | WARNING: %s has obrien_recoil=true but no obrien_recoil_profile", tostring(section)))
+
+        return nil
+    end
+
+    if not recoil_ini:section_exist(profile) then
+        dlog(string.format("OBRIEN_COMPONENT_RECOIL | WARNING: %s references missing recoil profile %s", tostring(section), tostring(profile)))
+
+        return nil
+    end
+
+    return profile
+end
+
+
+--==============================================================
+-- 2. Read component assignments from weapon
+--==============================================================
+
+local function get_weapon_components(wpn)
+    local section = wpn:section()
+
+    return {
+        muzzle = read_string(
+            ini_sys,
+            section,
+            "obrien_muzzle"
+        ),
+
+        foregrip = read_string(
+            ini_sys,
+            section,
+            "obrien_foregrip"
+        ),
+
+        barrel = read_string(
+            ini_sys,
+            section,
+            "obrien_barrel"
+        ),
+
+        magazine = read_string(
+            ini_sys,
+            section,
+            "obrien_magazine"
+        ),
+
+        stock = read_string(
+            ini_sys,
+            section,
+            "obrien_stock"
+        ),
+    }
+end
+
+
+--==============================================================
+-- 3. Read one component's multipliers
+--==============================================================
+
+local function get_component_modifiers(component_name)
+    local m = neutral_modifiers()
+
+    -- No component assigned = neutral.
+    if not component_name then
+        return m
+    end
+
+    -- A component was assigned, but the matching config section is missing.
+    if not recoil_ini:section_exist(component_name) then
+        dlog(string.format(
+            "OBRIEN_COMPONENT_RECOIL | WARNING: Unknown component section: %s", tostring(component_name)))
+
+        return m
+    end
+
+    -- Component zoom rotate time is always a multiplier.
+    m.zoom_rotate_time =
+        read_float(recoil_ini, component_name, "zoom_rotate_time_mul", 1.0)
+
+    m.cam_dispersion =
+        read_float(recoil_ini, component_name, "cam_dispersion_mul", 1.0)
+
+    m.cam_dispersion_inc =
+        read_float(recoil_ini, component_name, "cam_dispersion_inc_mul", 1.0)
+
+    m.cam_step_angle_horz =
+        read_float(recoil_ini, component_name, "cam_step_angle_horz_mul", 1.0)
+
+    m.zoom_cam_dispersion =
+        read_float(recoil_ini, component_name, "zoom_cam_dispersion_mul", 1.0)
+
+    m.zoom_cam_dispersion_inc =
+        read_float(recoil_ini, component_name, "zoom_cam_dispersion_inc_mul", 1.0)
+
+    m.zoom_cam_step_angle_horz =
+        read_float(recoil_ini, component_name, "zoom_cam_step_angle_horz_mul", 1.0)
+
+    return m
+end
+
+
+--==============================================================
+-- Suppressor handling
+--==============================================================
+
+-- Returns:
+--   attached      = true only for a detachable suppressor currently attached
+--   silencer_name = the weapon's configured silencer_name section
+--
+-- silencer_status:
+--   0 = unavailable
+--   1 = permanent / built-in
+--   2 = attachable
+--
+-- Built-in suppressors are intentionally NOT handled here.  For those,
+-- assign obrien_muzzle directly to the appropriate suppressor component
+-- (for example obrien_professional_suppressor) in the weapon DLTX.
+local function get_suppressor_state(wpn)
+    if not wpn then
+        return false, nil
+    end
+
+    local section = wpn:section()
+
+    if not section or not ini_sys:section_exist(section) then
+        return false, nil
+    end
+
+    local silencer_status =
+        read_float(ini_sys, section, "silencer_status", 0)
+
+    -- Only dynamically replace the muzzle for detachable suppressors.
+    -- Built-in suppressors should be assigned directly as obrien_muzzle.
+    if silencer_status ~= 2 then
+        return false, nil
+    end
+
+    local attached = false
+
+    -- GAMMA / Anomaly helper exposed directly on the weapon object.
+    local ok_state, state = pcall(function()
+        return wpn:weapon_is_silencer()
+    end)
+
+    if not ok_state then
+        if not suppressor_warning_once[section] then
+            suppressor_warning_once[section] = true
+
+            dlog(string.format("OBRIEN_COMPONENT_RECOIL | WARNING: weapon_is_silencer failed for %s: %s", tostring(section), tostring(state)))
+        end
+
+        return false, nil
+    end
+
+    attached = state and true or false
+
+    if not attached then
+        return false, nil
+    end
+
+    local silencer_name =
+        read_string(ini_sys, section, "silencer_name")
+
+    if not silencer_name then
+        dlog(string.format("OBRIEN_COMPONENT_RECOIL | WARNING: %s has a suppressor attached but no silencer_name", tostring(section)))
+
+        return true, nil
+    end
+
+    return true, silencer_name
+end
+
+
+-- Suppressors are mapped through their real system.ini section, then into the recoil config.
+--
+-- Example:
+--
+-- [wpn_sil_surfire]
+-- obrien_muzzle = obrien_professional_suppressor
+--
+-- [obrien_professional_suppressor]
+-- cam_dispersion_mul = 0.96
+-- ...
+--
+-- Missing mappings/profiles log a warning and fall back to neutral 1.0.
+local function get_suppressor_component(silencer_name)
+    if not silencer_name then
+        return nil
+    end
+
+    -- silencer_name points to a real game section such as [wpn_sil_surfire].
+    -- The custom muzzle mapping is therefore read from system_ini(),
+    -- including any DLTX override applied to that suppressor section.
+    if not ini_sys:section_exist(silencer_name) then
+        dlog(string.format("OBRIEN_COMPONENT_RECOIL | WARNING: Unknown suppressor section: %s",tostring(silencer_name)))
+
+        return nil
+    end
+
+    local component_name =
+        read_string(ini_sys, silencer_name, "obrien_muzzle")
+
+    if not component_name then
+        dlog(string.format("OBRIEN_COMPONENT_RECOIL | WARNING: Suppressor %s has no obrien_muzzle recoil profile", tostring(silencer_name)))
+
+        return nil
+    end
+
+    -- The actual multiplier profile still lives in the dedicated recoil config.
+    if not recoil_ini:section_exist(component_name) then
+        dlog(string.format("OBRIEN_COMPONENT_RECOIL | WARNING: Unknown component section: %s", tostring(component_name)))
+
+        return nil
+    end
+
+    return component_name
+end
+
+
+local function get_suppressor_modifiers(silencer_name)
+    local component_name =
+        get_suppressor_component(silencer_name)
+
+    -- Missing suppressor mapping/profile falls back to neutral 1.0 modifiers, just like any other missing component.
+    if not component_name then
+        return neutral_modifiers()
+    end
+
+    return get_component_modifiers(component_name)
+end
+
+
+--==============================================================
+-- Installed weapon upgrade handling
+--==============================================================
+
+local function neutral_upgrade_adjustments()
+    return {
+        zoom_rotate_time             = 0.0,
+
+        cam_dispersion               = 0.0,
+        cam_dispersion_inc           = 0.0,
+        cam_step_angle_horz          = 0.0,
+
+        zoom_cam_dispersion          = 0.0,
+        zoom_cam_dispersion_inc      = 0.0,
+        zoom_cam_step_angle_horz     = 0.0,
+
+        -- These start at 1.0 because upgrade sections normally add/subtract from the engine's recoil fraction.
+        cam_dispersion_frac          = 1.0,
+        zoom_cam_dispersion_frac     = 1.0,
+
+        -- Platinum random_power multiplier derived from installed handling upgrades. PDM_disp_base = -0.10 becomes 0.90.
+        pdm_disp_base                = 1.0,
+    }
+end
+
+
+-- Build a stable signature from the installed upgrade IDs.
+-- This lets the runtime watcher notice an upgrade being installed while the same weapon remains active.
+local function get_upgrade_signature(wpn)
+    if not wpn or not wpn.iterate_installed_upgrades then
+        return ""
+    end
+
+    local installed = {}
+
+    local ok = pcall(function()
+        wpn:iterate_installed_upgrades(
+            function(upgr_sec)
+                if upgr_sec then
+                    installed[#installed + 1] = tostring(upgr_sec)
+                end
+            end
+        )
+    end)
+
+    if not ok then
+        return ""
+    end
+
+    table.sort(installed)
+
+    return table.concat(installed, "|")
+end
+
+
+-- Reads all installed recoil upgrade effects that matter to this script.
+--
+-- Direct changes (cam_dispersion, cam_dispersion_inc, horizontal step, ADS equivalents, zoom_rotate_time) remain additive adjustments.
+--
+-- cam_dispersion_frac and zoom_cam_dispersion_frac are also read here and folded into the final recoil calculation by this script.  
+-- After applying final recoil, the runtime engine frac values are forced back to 1.0 so the same upgrade effect cannot stack a second time or reapply inconsistently.
+local function get_upgrade_adjustments(wpn)
+    local upgrades = neutral_upgrade_adjustments()
+
+    if not wpn or not wpn.iterate_installed_upgrades then
+        return upgrades
+    end
+
+    local ok, err = pcall(function()
+        wpn:iterate_installed_upgrades(
+            function(upgr_sec)
+                if not upgr_sec then
+                    return
+                end
+
+                local effect_section =
+                    SYS_GetParam(0, upgr_sec, "section")
+
+                if not effect_section
+                or effect_section == ""
+                or not ini_sys:section_exist(effect_section) then
+                    return
+                end
+
+                local found_direct = false
+
+                local function add_direct(stat)
+                    if ini_sys:line_exist(effect_section, stat) then
+                        local value =
+                            SYS_GetParam(
+                                2,
+                                effect_section,
+                                stat
+                            )
+
+                        if value then
+                            upgrades[stat] =
+                                upgrades[stat] + value
+
+                            found_direct = true
+
+                            dlog(string.format("OBRIEN_COMPONENT_RECOIL | Upgrade=%s | Effect=%s | %s=%+.4f", tostring(upgr_sec), tostring(effect_section), tostring(stat), value))
+                        end
+                    end
+                end
+
+                add_direct("zoom_rotate_time")
+
+                add_direct("cam_dispersion")
+                add_direct("cam_dispersion_inc")
+                add_direct("cam_step_angle_horz")
+
+                add_direct("zoom_cam_dispersion")
+                add_direct("zoom_cam_dispersion_inc")
+                add_direct("zoom_cam_step_angle_horz")
+
+                -- Obrien-style recoil upgrades modify the engine recoil fractions.  
+                -- Read those additive changes and build the resulting multiplier ourselves.
+                local found_frac = false
+
+                if ini_sys:line_exist(effect_section, "cam_dispersion_frac") then
+                    local value =
+                        SYS_GetParam(
+                            2,
+                            effect_section,
+                            "cam_dispersion_frac"
+                        )
+
+                    if value then
+                        upgrades.cam_dispersion_frac =
+                            upgrades.cam_dispersion_frac + value
+
+                        found_frac = true
+
+                        dlog(string.format("OBRIEN_COMPONENT_RECOIL | Upgrade=%s | Effect=%s | cam_dispersion_frac=%+.4f | HipFracNow=%.4f", tostring(upgr_sec), tostring(effect_section), value, upgrades.cam_dispersion_frac))
+                    end
+                end
+
+                if ini_sys:line_exist(effect_section, "zoom_cam_dispersion_frac") then
+                    local value =
+                        SYS_GetParam(
+                            2,
+                            effect_section,
+                            "zoom_cam_dispersion_frac"
+                        )
+
+                    if value then
+                        upgrades.zoom_cam_dispersion_frac =
+                            upgrades.zoom_cam_dispersion_frac + value
+
+                        found_frac = true
+
+                        dlog(string.format(
+                            "OBRIEN_COMPONENT_RECOIL | Upgrade=%s | Effect=%s | zoom_cam_dispersion_frac=%+.4f | ADSFracNow=%.4f", tostring(upgr_sec), tostring(effect_section), value, upgrades.zoom_cam_dispersion_frac))
+                    end
+                end
+
+                -- Handling upgrades use PDM_disp_base. Treat the upgrade value as an additive change to Platinum's random_power multiplier: -0.10 -> 0.90, -0.20 -> 0.80, +0.10 -> 1.10.
+
+                if ini_sys:line_exist(effect_section, "PDM_disp_base")
+                or ini_sys:line_exist(effect_section, "pdm_disp_base") then
+                    local stat =
+                        ini_sys:line_exist(effect_section, "PDM_disp_base")
+                        and "PDM_disp_base"
+                        or "pdm_disp_base"
+
+                    local value =
+                        SYS_GetParam(2, effect_section, stat)
+
+                    if value then
+                        upgrades.pdm_disp_base =
+                            upgrades.pdm_disp_base + value
+
+                        found_direct = true
+
+                        dlog(string.format("OBRIEN_COMPONENT_RECOIL | Upgrade=%s | Effect=%s | %s=%+.4f | PlatinumHandlingMultNow=%.4f", tostring(upgr_sec), tostring(effect_section), tostring(stat), value, upgrades.pdm_disp_base))
+                    end
+                end
+
+                if not found_direct and not found_frac then
+                    -- Installed upgrade exists, but it does not touch any recoil field controlled by this script.
+                end
+            end
+        )
+    end)
+
+    if not ok then
+        dlog(string.format("OBRIEN_COMPONENT_RECOIL | WARNING: iterate_installed_upgrades failed for %s: %s", tostring(wpn:section()), tostring(err)))
+    end
+
+    upgrades.cam_dispersion_frac =
+        clamp_multiplier(upgrades.cam_dispersion_frac, "hip upgrade _frac")
+
+    upgrades.zoom_cam_dispersion_frac =
+        clamp_multiplier(upgrades.zoom_cam_dispersion_frac, "ADS upgrade _frac")
+
+    upgrades.pdm_disp_base =
+        clamp_multiplier(upgrades.pdm_disp_base, "Platinum handling random multiplier")
+
+    return upgrades
+end
+
+
+--==============================================================
+-- 4. Read base recoil profile
+--==============================================================
+
+local function get_base_profile(profile)
+    return {
+        zoom_rotate_time =
+            read_float(recoil_ini, profile, "zoom_rotate_time", 0),
+
+        cam_dispersion =
+            read_float(recoil_ini, profile, "cam_dispersion", 0),
+
+        cam_dispersion_inc =
+            read_float(recoil_ini, profile, "cam_dispersion_inc", 0),
+
+        cam_step_angle_horz =
+            read_float(recoil_ini, profile, "cam_step_angle_horz", 0),
+
+        zoom_cam_dispersion =
+            read_float(recoil_ini, profile, "zoom_cam_dispersion", 0),
+
+        zoom_cam_dispersion_inc =
+            read_float(recoil_ini, profile, "zoom_cam_dispersion_inc",0),
+
+        zoom_cam_step_angle_horz =
+            read_float(recoil_ini, profile, "zoom_cam_step_angle_horz", 0),
+    }
+end
+
+
+--==============================================================
+-- Optional armor recoil integration
+--==============================================================
+
+local function get_armor_recoil_multiplier()
+    -- armor_recoil.script exposes get_current_multiplier() through the armor_recoil module namespace.
+    if armor_recoil
+    and type(armor_recoil.get_current_multiplier) == "function" then
+
+        local ok, mult = pcall(
+            armor_recoil.get_current_multiplier
+        )
+
+        if ok and type(mult) == "number" then
+            return clamp_multiplier(mult, "armor recoil")
+        end
+    end
+
+    return 1.0
+end
+
+
+--==============================================================
+-- 5. Calculate final recoil
+--==============================================================
+
+local function calculate_recoil(profile, components, suppressor_attached, silencer_name, upgrades)
+    local base = get_base_profile(profile)
+
+    upgrades = upgrades or neutral_upgrade_adjustments()
+
+    local armor_mult =
+        get_armor_recoil_multiplier()
+
+    local muzzle
+    local suppressor
+
+    if suppressor_attached then
+        -- A detachable suppressor replaces the weapon's normal muzzle device.
+        muzzle = neutral_modifiers()
+        suppressor = get_suppressor_modifiers(silencer_name)
+    else
+        muzzle = get_component_modifiers(components.muzzle)
+        suppressor = neutral_modifiers()
+    end
+
+    local foregrip =
+        get_component_modifiers(components.foregrip)
+
+    local barrel =
+        get_component_modifiers(components.barrel)
+
+    local magazine =
+        get_component_modifiers(components.magazine)
+
+    local stock =
+        get_component_modifiers(components.stock)
+
+    local final = {}
+
+    -- Components are stored as multipliers around 1.0.
+    -- Convert each to its delta from 1.0, add those deltas together, then apply the resulting combined multiplier to the base value.
+    -- Example:
+    -- muzzle    = 0.90  -> -0.10
+    -- foregrip  = 0.85  -> -0.15
+    -- barrel    = 1.05  -> +0.05
+    -- magazine  = 1.00  ->  0.00
+    -- stock     = 0.95  -> -0.05
+    --
+    -- combined = 1.0 - 0.10 - 0.15 + 0.05 - 0.05 = 0.75
+    --
+    -- Safety:
+    -- If all component deltas sum to less than 0.01, clamp the final multiplier to 0.01. This prevents a negative multiplier from reversing the sign of stats such as cam_step_angle_horz.
+
+    local function combined_multiplier(stat)
+        local combined =
+            1.0
+            + (muzzle[stat] - 1.0)
+            + (suppressor[stat] - 1.0)
+            + (foregrip[stat] - 1.0)
+            + (barrel[stat] - 1.0)
+            + (magazine[stat] - 1.0)
+            + (stock[stat] - 1.0)
+
+        return clamp_multiplier(combined, "combined component " .. tostring(stat))
+    end
+
+    final.zoom_rotate_time =
+        (base.zoom_rotate_time * combined_multiplier("zoom_rotate_time")) + upgrades.zoom_rotate_time
+
+    final.cam_dispersion =
+        ((base.cam_dispersion * combined_multiplier("cam_dispersion")) + upgrades.cam_dispersion) * upgrades.cam_dispersion_frac
+
+    final.cam_dispersion_inc =
+        ((base.cam_dispersion_inc * combined_multiplier("cam_dispersion_inc")) + upgrades.cam_dispersion_inc) * upgrades.cam_dispersion_frac
+
+    final.cam_step_angle_horz =
+        ((base.cam_step_angle_horz * combined_multiplier("cam_step_angle_horz")) + upgrades.cam_step_angle_horz) * upgrades.cam_dispersion_frac
+
+    final.zoom_cam_dispersion =
+        ((base.zoom_cam_dispersion * combined_multiplier("zoom_cam_dispersion")) + upgrades.zoom_cam_dispersion) * upgrades.zoom_cam_dispersion_frac
+
+    final.zoom_cam_dispersion_inc =
+        ((base.zoom_cam_dispersion_inc * combined_multiplier("zoom_cam_dispersion_inc")) + upgrades.zoom_cam_dispersion_inc) * upgrades.zoom_cam_dispersion_frac
+
+    final.zoom_cam_step_angle_horz =
+        ((base.zoom_cam_step_angle_horz * combined_multiplier("zoom_cam_step_angle_horz")) + upgrades.zoom_cam_step_angle_horz) * upgrades.zoom_cam_dispersion_frac
+
+
+    -- Armor is the final script-side recoil multiplier.  
+    -- This is applied once after component modifiers and upgrade handling, preventing the old double-reduction caused by scaling both the raw recoil values and _frac.
+    final.cam_dispersion =
+        final.cam_dispersion * armor_mult
+
+    final.cam_dispersion_inc =
+        final.cam_dispersion_inc * armor_mult
+
+    final.cam_step_angle_horz =
+        final.cam_step_angle_horz * armor_mult
+
+    final.zoom_cam_dispersion =
+        final.zoom_cam_dispersion * armor_mult
+
+    final.zoom_cam_dispersion_inc =
+        final.zoom_cam_dispersion_inc * armor_mult
+
+    final.zoom_cam_step_angle_horz =
+        final.zoom_cam_step_angle_horz * armor_mult
+
+    return final
+end
+
+--==============================================================
+-- 6. Apply calculated recoil to weapon
+--==============================================================
+
+local function apply_recoil(wpn, values)
+    if not wpn or not values then
+        return false
+    end
+
+    local ok, weapon = pcall(function()
+        return wpn:cast_Weapon()
+    end)
+
+    if not ok or not weapon then
+        dlog("OBRIEN_COMPONENT_RECOIL | apply skipped: active item is not a weapon")
+        return false
+    end
+
+    -- Use the CWeapon object, matching the working armor_recoil script.
+    weapon:SetZoomRotateTime(values.zoom_rotate_time)
+
+    -- The LTX recoil values are authored in degrees, but the exported CWeapon recoil setters operate on the engine's internal angular values (radians). Convert only the angular recoil fields here.
+    weapon:SetCamDispersion(math.rad(values.cam_dispersion))
+    weapon:SetCamDispersionInc(math.rad(values.cam_dispersion_inc))
+    weapon:SetCamStepAngleHorz(math.rad(values.cam_step_angle_horz))
+
+    weapon:SetZoomCamDispersion(math.rad(values.zoom_cam_dispersion))
+    weapon:SetZoomCamDispersionInc(math.rad(values.zoom_cam_dispersion_inc))
+    weapon:SetZoomCamStepAngleHorz(math.rad(values.zoom_cam_step_angle_horz))
+
+    -- Keep the recoil travel clamps high enough that sustained recoil does not hit the engine ceiling and appear to stop. These are static by design.
+    weapon:SetCamMaxAngleVert(math.rad(STATIC_CAM_MAX_ANGLE))
+    weapon:SetCamMaxAngleHorz(math.rad(STATIC_CAM_MAX_ANGLE_HORZ))
+
+    weapon:SetZoomCamMaxAngleVert(math.rad(STATIC_ZOOM_CAM_MAX_ANGLE))
+    weapon:SetZoomCamMaxAngleHorz(math.rad(STATIC_ZOOM_CAM_MAX_ANGLE_HORZ))
+
+    -- Neutralize the engine-side fractions after setting final recoil so the upgrade cannot stack again or reappear inconsistently after reload/suppressor/weapon state changes.
+    weapon:SetCamDispersionFrac(1.0)
+    weapon:SetZoomCamDispersionFrac(1.0)
+
+    return true
+end
+
+--==============================================================
+-- Optional Enhanced Recoil Platinum compatibility
+--==============================================================
+
+-- Enhanced Recoil Platinum exposes:
+--
+--   enhanced_recoil_modifiers.add_modifier(func [, pos])
+--   enhanced_recoil_modifiers.remove_modifier(name)
+--
+-- Each modifier returns:
+--   effect_power_multiplier, random_power_multiplier
+--
+-- leave Platinum's vertical profile cam_recoil value untouched and returns Obrien's final vertical recoil as the single effect-power multiplier.
+-- Platinum therefore produces vertical recoil as: profile_vertical_baseline * Obrien_vertical_multiplier
+--
+-- The horizontal axis shares that same multiplier, so V31 back-solves and injects a new horizontal cam_recoil baseline:
+-- horizontal_base =
+--       (Obrien_horizontal * profile_horizontal_multiplier)/ Obrien_vertical_multiplier
+--
+-- Platinum then produces:
+--
+--   horizontal_base * Obrien_vertical_multiplier = Obrien_horizontal * profile_horizontal_multiplier
+--
+-- This prevents the vertical profile value from being folded into the returned multiplier and then applied a second time by Platinum.
+--
+-- max_recoil, max_shots, automatic cam_anim selection, reverse scaling and camera-angle attenuation remain entirely controlled by Platinum.
+--
+-- HIP uses final.cam_dispersion.
+-- ADS uses final.zoom_cam_dispersion.
+-- random_power is 1.0 unless PDM upgrades are present.
+
+local compat_last_fuzz = nil
+local compat_last_platinum = nil
+
+local function fuzz_recoil_enabled()
+    if not fuzz_recoil then
+        return false
+    end
+
+    if type(fuzz_recoil.force_recheck_weapon_external) ~= "function" then
+        return false
+    end
+
+    -- Fuzz exposes this once its callbacks have started. Merely having the script namespace present is not enough to count it as the active recoil system, because compatibility files can make namespaces visible.
+    if type(fuzz_recoil.is_game_started) == "function" then
+        local ok, started = pcall(fuzz_recoil.is_game_started)
+
+        if not ok or started ~= true then
+            return false
+        end
+    end
+
+    return true
+end
+
+
+local function platinum_api_available()
+    return enhanced_recoil_modifiers
+       and type(enhanced_recoil_modifiers.add_modifier) == "function"
+end
+
+
+local function platinum_recoil_enabled()
+    -- The two external recoil renderers must never be driven together.
+    -- When Fuzz is running, it owns the recoil presentation and Platinum is treated as inactive even if a compatibility/global API remains loaded.
+    if fuzz_recoil_enabled() then
+        return false
+    end
+
+    return platinum_api_available()
+end
+
+
+local function log_compatibility_state()
+    local fuzz_enabled = fuzz_recoil_enabled()
+    local platinum_enabled = platinum_recoil_enabled()
+
+    if compat_last_fuzz == fuzz_enabled
+    and compat_last_platinum == platinum_enabled then
+        return
+    end
+
+    compat_last_fuzz = fuzz_enabled
+    compat_last_platinum = platinum_enabled
+
+    local platinum_reason = "not detected"
+
+    if platinum_enabled then
+        platinum_reason = "enabled"
+    elseif fuzz_enabled and platinum_api_available() then
+        platinum_reason = "inactive; Fuzz has priority"
+    elseif platinum_api_available() then
+        platinum_reason = "API present but not selected"
+    end
+
+    dlog(string.format(
+        "OBRIEN_COMPONENT_RECOIL | COMPAT | Fuzz=%s | Platinum=%s", fuzz_enabled and "enabled" or "not enabled", platinum_reason))
+end
+
+
+local function platinum_available()
+    return platinum_recoil_enabled()
+end
+
+
+local function get_platinum_profile_axis_multipliers(wpn_fx)
+    if type(wpn_fx) ~= "table" then
+        return DEFAULT_PLATINUM_BASELINE, DEFAULT_PLATINUM_BASELINE, true
+    end
+
+    local cached = platinum_profile_axis_multipliers[wpn_fx]
+
+    if cached then
+        return cached.horizontal, cached.vertical, cached.used_fallback
+    end
+
+    -- Pre5+ calibrates all supported camera animations to roughly the same intensity scale. Accept automatic or forced cam_anim values 1 through 5.
+    local cam_anim = tonumber(wpn_fx.cam_anim)
+
+    if cam_anim
+    and (cam_anim < 1.0 - PLATINUM_EPSILON
+      or cam_anim > 5.0 + PLATINUM_EPSILON) then
+        dlog(string.format("OBRIEN_COMPONENT_RECOIL | PLATINUM V31 | unusual cam_anim=%s; continuing with profile axis multipliers", tostring(wpn_fx.cam_anim)))
+    end
+
+    local horizontal = DEFAULT_PLATINUM_BASELINE
+    local vertical = DEFAULT_PLATINUM_BASELINE
+    local used_fallback = false
+    local recoil = wpn_fx.cam_recoil
+
+    if type(recoil) == "table" then
+        if type(recoil[1]) == "table" then
+            local value = tonumber(recoil[1][1])
+
+            if value and math.abs(value) >= PLATINUM_EPSILON then
+                horizontal = math.abs(value)
+            else
+                used_fallback = true
+            end
+        else
+            used_fallback = true
+        end
+
+        if type(recoil[2]) == "table" then
+            local value = tonumber(recoil[2][1])
+
+            if value and math.abs(value) >= PLATINUM_EPSILON then
+                vertical = math.abs(value)
+            else
+                used_fallback = true
+            end
+        else
+            used_fallback = true
+        end
+    else
+        used_fallback = true
+    end
+
+    cached = {
+        horizontal = horizontal,
+        vertical = vertical,
+        used_fallback = used_fallback,
+    }
+
+    platinum_profile_axis_multipliers[wpn_fx] = cached
+
+    dlog(string.format("OBRIEN_COMPONENT_RECOIL | PLATINUM V31 PROFILE CAPTURE | CamAnim=%s | ProfileHorzMult=%.6f | ProfileVertMult=%.6f | UsedFallback=%s",tostring(wpn_fx.cam_anim), horizontal, vertical, tostring(used_fallback)))
+
+    return horizontal, vertical, used_fallback
+end
+
+
+local function obrien_platinum_modifier(effect_power, random_power, wpn, wpn_fx, info
+)
+    if info then
+        return PLATINUM_MODIFIER_NAME
+    end
+
+    if not wpn or not wpn_fx then
+        return 1.0, 1.0
+    end
+
+    local weapon_id = wpn:id()
+    local target = platinum_targets[weapon_id]
+
+    if not target then
+        return 1.0, 1.0
+    end
+
+    local profile_horz_mult, profile_vert_mult, used_fallback = get_platinum_profile_axis_multipliers(wpn_fx)
+
+    if used_fallback then
+        dlog(string.format("OBRIEN_COMPONENT_RECOIL | PLATINUM V31 | Weapon=%s | invalid/missing profile cam_recoil axis value; fallback multiplier %.6f used where needed", tostring(wpn:section()), DEFAULT_PLATINUM_BASELINE))
+    end
+
+    local is_ads = axr_main and axr_main.weapon_is_zoomed and true or false
+
+    local obrien_vert = is_ads and target.ads or target.hip
+
+    local obrien_horz = is_ads and target.ads_horz or target.hip_horz
+
+    if type(obrien_vert) ~= "number" then
+        return 1.0, 1.0
+    end
+
+    -- Platinum stores recoil magnitudes as positive values. Its animation system determines left/right presentation.
+    obrien_horz = math.abs(tonumber(obrien_horz) or 0)
+
+    -- Platinum multiplies its existing vertical cam_recoil profile value by the modifier returned here. 
+    local modifier =
+        clamp_multiplier(obrien_vert, "Platinum Obrien vertical multiplier")
+
+    -- The horizontal profile value is still used as an intentional presentation multiplier. 
+    -- Back-solve the horizontal cam_recoil baseline because Platinum applies the same vertical-derived modifier to both axes:
+    --   ((Obrien horizontal / modifier) * profile horizontal) * modifier = Obrien horizontal * profile horizontal
+    local final_vert_target =
+        profile_vert_mult * modifier
+
+    local final_horz_target =
+        obrien_horz * profile_horz_mult
+
+    local platinum_vertical_base = profile_vert_mult
+    local horizontal_base = 0.0
+
+    if math.abs(modifier) > PLATINUM_EPSILON then
+        horizontal_base =
+            (obrien_horz / modifier) * profile_horz_mult
+    end
+
+    if type(wpn_fx.cam_recoil) == "table"
+    and type(wpn_fx.cam_recoil[1]) == "table" then
+        wpn_fx.cam_recoil[1][1] = horizontal_base
+    end
+
+    local incoming_effect =
+        tonumber(effect_power) or 1.0
+
+    local predicted_vert_intensity =
+        platinum_vertical_base
+        * incoming_effect
+        * modifier
+
+    local predicted_horz_intensity =
+        horizontal_base
+        * incoming_effect
+        * modifier
+
+    dlog(string.format(
+        "OBRIEN_COMPONENT_RECOIL | PLATINUM V31 | Weapon=%s | Mode=%s | CamAnim=%s | ObrienVert=%.6f | ObrienHorz=%.6f | ProfileVertMult=%.6f | ProfileHorzMult=%.6f | FinalVertTarget=%.6f | FinalHorzTarget=%.6f | RawVertBase=%.6f | RawHorzBase=%.6f | IncomingEffect=%.6f | ReturnedMult=%.6f | PredVert=%.6f | PredHorz=%.6f | MaxRecoil=%s | MaxShots=%s | RandomPower=%.6f",
+        tostring(wpn:section()), is_ads and "ADS" or "HIP", tostring(wpn_fx.cam_anim), obrien_vert, obrien_horz, profile_vert_mult, profile_horz_mult, final_vert_target, final_horz_target, platinum_vertical_base, horizontal_base, incoming_effect, modifier, predicted_vert_intensity, predicted_horz_intensity, tostring(wpn_fx.max_recoil), tostring(wpn_fx.max_shots), tonumber(random_power) or 1.0))
+
+    local handling_random_mult =
+        clamp_multiplier(tonumber(target.handling_random_mult) or 1.0, "Platinum handling random multiplier")
+
+    return modifier, handling_random_mult
+end
+
+
+local function register_platinum_modifier()
+    if platinum_modifier_registered then
+        return true
+    end
+
+    if not platinum_available() then
+        if not platinum_registration_attempted then
+            dlog("OBRIEN_COMPONENT_RECOIL | PLATINUM | modifier API not available yet")
+        end
+
+        platinum_registration_attempted = true
+        return false
+    end
+
+    -- Final recoil targets already include installed recoil upgrades. 
+    -- Platinum's built-in "upgrades_power" modifier would therefore apply those upgrades a second time. 
+    -- Platinum exposes remove_modifier() by modifier info-name, so disable only that modifier while this is active.
+    if PLATINUM_DISABLE_NATIVE_UPGRADES
+    and type(enhanced_recoil_modifiers.remove_modifier) == "function" then
+        pcall(enhanced_recoil_modifiers.remove_modifier, "upgrades_power")
+
+        dlog("OBRIEN_COMPONENT_RECOIL | PLATINUM V31 | removed native upgrades_power modifier to prevent double-stacking")
+    end
+
+    if PLATINUM_DISABLE_NATIVE_ARMOR
+    and armor_recoil
+    and type(armor_recoil.get_current_multiplier) == "function"
+    and type(enhanced_recoil_modifiers.remove_modifier) == "function" then
+        pcall(enhanced_recoil_modifiers.remove_modifier,"powered_exos")
+
+        dlog("OBRIEN_COMPONENT_RECOIL | PLATINUM V31 | removed native powered_exos modifier to prevent armor recoil double-stacking")
+    end
+
+    -- Defensive cleanup in case the script was reloaded or registration was attempted more than once.
+    if type(enhanced_recoil_modifiers.remove_modifier) == "function" then
+        pcall(enhanced_recoil_modifiers.remove_modifier, PLATINUM_MODIFIER_NAME)
+    end
+
+    local ok, err = pcall(enhanced_recoil_modifiers.add_modifier, obrien_platinum_modifier)
+
+    if not ok then
+        dlog(string.format("OBRIEN_COMPONENT_RECOIL | PLATINUM | WARNING: add_modifier failed: %s", tostring(err)))
+        return false
+    end
+
+    platinum_modifier_registered = true
+
+    dlog("OBRIEN_COMPONENT_RECOIL | PLATINUM | modifier registered through enhanced_recoil_modifiers.add_modifier()")
+
+    return true
+end
+
+
+local function cache_platinum_target(wpn, values, upgrades)
+    if not wpn or not values or not platinum_recoil_enabled() then
+        return false
+    end
+
+    local handling_random_mult =
+        upgrades
+        and upgrades.pdm_disp_base
+        or 1.0
+
+    platinum_targets[wpn:id()] = {
+        hip = values.cam_dispersion,
+        ads = values.zoom_cam_dispersion,
+        hip_horz = values.cam_step_angle_horz,
+        ads_horz = values.zoom_cam_step_angle_horz,
+        handling_random_mult = handling_random_mult,
+    }
+
+    dlog(string.format("OBRIEN_COMPONENT_RECOIL | PLATINUM | target cached | Weapon=%s | Hip=%.4f | ADS=%.4f | HipH=%.4f | ADSH=%.4f | HandlingRandomMult=%.4f", tostring(wpn:section()), values.cam_dispersion, values.zoom_cam_dispersion, values.cam_step_angle_horz, values.zoom_cam_step_angle_horz, handling_random_mult))
+
+    return true
+end
+
+
+--==============================================================
+-- Optional FuzzRecoil compatibility
+--==============================================================
+
+-- FuzzRecoil builds its own recoil profile from the weapon's recoil state.
+-- When it is installed, force it to rebuild that profile only AFTER this
+-- script has finished writing the component/upgrade/armor-adjusted values.
+--
+-- If FuzzRecoil is not installed, this is just a couple of cheap checks and has no effect.
+local function refresh_fuzz_recoil(wpn)
+    if not wpn or not db.actor or not fuzz_recoil_enabled() then
+        return false
+    end
+
+    -- Only rebuild Fuzz for the actor's actual active weapon. Inventory/slot callbacks can also update a weapon that is entering a slot while Fuzz still holds the old weapon userdata.
+    local active_wpn = db.actor:active_item()
+    if not active_wpn then
+        return false
+    end
+
+    local active_id = active_wpn:id()
+    local updated_id = wpn:id()
+    if not active_id or not updated_id or active_id ~= updated_id then
+        return false
+    end
+
+    -- Pass Fuzz the fresh active-item reference instead of making it dereference its possibly stale cached cur_wpn during a slot transition.
+    if type(fuzz_recoil.force_recheck_weapon_external) == "function" then
+        local ok, result = pcall(
+            fuzz_recoil.force_recheck_weapon_external,
+            active_wpn
+        )
+
+        if not ok then
+            dlog(string.format("OBRIEN_COMPONENT_RECOIL | WARNING: FuzzRecoil external recheck failed: %s", tostring(result)))
+            return false
+        end
+
+        if result == false then
+            dlog("OBRIEN_COMPONENT_RECOIL | WARNING: FuzzRecoil external recheck returned false")
+            return false
+        end
+
+        dlog("OBRIEN_COMPONENT_RECOIL | FuzzRecoil detected -> external weapon recheck")
+        return true
+    end
+
+    -- Do NOT fall back to force_recheck_weapon(). Its current implementation restores Fuzz's previously cached vanilla recoil before rebuilding, which can overwrite the component values we just applied.
+    dlog("OBRIEN_COMPONENT_RECOIL | FuzzRecoil detected, but external recheck API is unavailable")
+    return false
+end
+
+
+--==============================================================
+-- Main weapon calculation
+--==============================================================
+
+local function update_weapon_recoil(wpn)
+    if not wpn then
+        return false
+    end
+
+    local profile = get_recoil_profile(wpn)
+
+    -- Weapon isn't part of this recoil system.
+    if not profile then
+        return false
+    end
+
+    local components =
+        get_weapon_components(wpn)
+
+    local suppressor_attached, silencer_name =
+        get_suppressor_state(wpn)
+
+    local upgrades =
+        get_upgrade_adjustments(wpn)
+
+    local final =
+        calculate_recoil(profile, components, suppressor_attached, silencer_name, upgrades)
+
+    local applied = apply_recoil(wpn, final)
+
+    if not applied then
+        return false
+    end
+
+    -- Resolve the active compatibility renderer once per recoil refresh.
+    -- Fuzz and Platinum are deliberately mutually exclusive.
+    log_compatibility_state()
+
+    if platinum_recoil_enabled() then
+        cache_platinum_target(
+            wpn,
+            final,
+            upgrades
+        )
+        register_platinum_modifier()
+    end
+
+    -- Component recoil values are now final on the weapon.
+    -- Let FuzzRecoil rebuild its profile from those updated values.
+    refresh_fuzz_recoil(wpn)
+
+    dlog(string.format("OBRIEN_COMPONENT_RECOIL | Weapon=%s | Profile=%s | Suppressed=%s | Silencer=%s | UpgSig=%s | HipFrac=%.3f | ADSFrac=%.3f | ArmorMult=%.3f | ZoomTime=%.3f | Hip=%.3f | ADS=%.3f | HipInc=%.3f | ADSInc=%.3f | HipH=%.3f | ADSH=%.3f",
+        tostring(wpn:section()), tostring(profile), tostring(suppressor_attached), tostring(silencer_name), tostring(get_upgrade_signature(wpn)), upgrades.cam_dispersion_frac, upgrades.zoom_cam_dispersion_frac, get_armor_recoil_multiplier(),
+        final.zoom_rotate_time, final.cam_dispersion, final.zoom_cam_dispersion, final.cam_dispersion_inc, final.zoom_cam_dispersion_inc, final.cam_step_angle_horz, final.zoom_cam_step_angle_horz))
+
+    return true
+end
+
+
+--==============================================================
+-- Active weapon refresh
+--==============================================================
+
+local function update_active_weapon(force)
+    if not db.actor then
+        return
+    end
+
+    local wpn = db.actor:active_item()
+
+    if not wpn then
+        current_weapon_id = nil
+        current_suppressor_attached = nil
+        current_suppressor_name = nil
+        current_upgrade_signature = nil
+        return
+    end
+
+    local weapon_id = wpn:id()
+
+    -- actor_on_changed_slot should only fire when something changed, but this guard avoids duplicate work from multiple callbacks.
+    if not force and current_weapon_id == weapon_id then
+        return
+    end
+
+    if update_weapon_recoil(wpn) then
+        local suppressed, silencer_name = get_suppressor_state(wpn)
+
+        current_weapon_id = weapon_id
+        current_suppressor_attached = suppressed
+        current_suppressor_name = silencer_name
+        current_upgrade_signature = get_upgrade_signature(wpn)
+    else
+        current_weapon_id = nil
+        current_suppressor_attached = nil
+        current_suppressor_name = nil
+        current_upgrade_signature = nil
+    end
+end
+
+
+-- Public helper for future suppressor/attachment callbacks.
+-- Calling this will force the currently equipped weapon to be recalculated.
+is_active = true
+
+function refresh_active_weapon()
+    update_active_weapon(true)
+end
+
+
+--==============================================================
+-- Callbacks
+--==============================================================
+
+-- This also acts as a fallback if a weapon-change callback is missed.
+local function actor_on_weapon_before_fire(params)
+    local wpn = params and params.weapon
+
+    if not wpn then
+        return
+    end
+
+    local weapon_id = wpn:id()
+    local suppressed, silencer_name = get_suppressor_state(wpn)
+
+    -- Keep the before-fire callback very cheap.  Upgrades are deliberately checked by the low-frequency runtime watcher instead of enumerating installed upgrades on every shot.
+    --
+    -- Weapon changes still force a full recalculation, which includes upgrades.
+    if current_weapon_id == weapon_id
+    and current_suppressor_attached == suppressed
+    and current_suppressor_name == silencer_name then
+        return
+    end
+
+    dlog(string.format(
+        "OBRIEN_COMPONENT_RECOIL | before-fire refresh -> %s | Suppressed=%s | Silencer=%s", tostring(wpn:section()), tostring(suppressed), tostring(silencer_name)))
+
+    if update_weapon_recoil(wpn) then
+        current_weapon_id = weapon_id
+        current_suppressor_attached = suppressed
+        current_suppressor_name = silencer_name
+        current_upgrade_signature = get_upgrade_signature(wpn)
+    end
+end
+
+
+-- Apply once when the actor/game is ready.
+local load_init_remaining = 0
+local load_init_tick = 0
+
+local function initialize_weapon_slots()
+    if not db.actor then
+        return
+    end
+
+    -- Initialize both normal weapon slots directly.  This avoids relying on active_item() during save restoration, where GAMMA can temporarily report the wrong active weapon even though both weapon objects exist.
+    -- GAMMA can place pistols in the normal melee slot, so initialize slots 1, 2, and 3. Non-recoil items (e.g. knives) are harmless here because update_weapon_recoil() immediately returns unless obrien_recoil = true is present on the item's section.
+    local slot_1 = db.actor:item_in_slot(1)
+    local slot_2 = db.actor:item_in_slot(2)
+    local slot_3 = db.actor:item_in_slot(3)
+
+    if slot_1 then
+        update_weapon_recoil(slot_1)
+    end
+
+    if slot_2 then
+        update_weapon_recoil(slot_2)
+    end
+
+    if slot_3 then
+        update_weapon_recoil(slot_3)
+    end
+
+    -- Also cover any active weapon that is not in the usual weapon slots.
+    local active = db.actor:active_item()
+
+    if active then
+        update_weapon_recoil(active)
+
+        local suppressed, silencer_name = get_suppressor_state(active)
+
+        current_weapon_id = active:id()
+        current_suppressor_attached = suppressed
+        current_suppressor_name = silencer_name
+        current_upgrade_signature = get_upgrade_signature(active)
+    end
+end
+
+
+local function actor_on_first_update()
+    dlog("OBRIEN_COMPONENT_RECOIL | actor_on_first_update -> starting load initialization")
+
+    -- Platinum may finish loading before or during actor initialization.
+    -- Try the public API here; update_weapon_recoil() will retry later if necessary.
+    register_platinum_modifier()
+
+    -- Apply immediately to both weapon slots.
+    initialize_weapon_slots()
+
+    -- Keep a short-lived startup watcher alive while GAMMA finishes restoring HUD/weapon state.  It reapplies only a few times, then shuts itself off.
+    load_init_remaining = 8
+    load_init_tick = 0
+end
+
+
+local suppressor_watch_tick = 0
+local upgrade_watch_tick = 0
+
+-- Suppressor state can change during normal play, so keep this responsive.
+local SUPPRESSOR_CHECK_INTERVAL = 15
+
+-- Upgrades can only be deliberately installed through the upgrade interface.
+-- There is no upgrade-specific callback in the current public callback set, so poll the active weapon's installed-upgrade signature much less often.
+-- At ~60 actor updates this is roughly once per second at 60 FPS.
+local UPGRADE_CHECK_INTERVAL = 120
+
+local function actor_on_update()
+    -- Short-lived load initialization.
+    if load_init_remaining > 0 then
+        load_init_tick = load_init_tick + 1
+
+        if load_init_tick >= 15 then
+            load_init_tick = 0
+            load_init_remaining = load_init_remaining - 1
+
+            dlog(string.format(
+                "OBRIEN_COMPONENT_RECOIL | load init refresh | remaining=%d", load_init_remaining))
+
+            initialize_weapon_slots()
+        end
+    end
+
+    suppressor_watch_tick = suppressor_watch_tick + 1
+    upgrade_watch_tick = upgrade_watch_tick + 1
+
+    local check_suppressor =
+        suppressor_watch_tick >= SUPPRESSOR_CHECK_INTERVAL
+
+    local check_upgrades =
+        upgrade_watch_tick >= UPGRADE_CHECK_INTERVAL
+
+    if not check_suppressor and not check_upgrades then
+        return
+    end
+
+    if check_suppressor then
+        suppressor_watch_tick = 0
+    end
+
+    if check_upgrades then
+        upgrade_watch_tick = 0
+    end
+
+    if not db.actor then
+        return
+    end
+
+    local wpn = db.actor:active_item()
+
+    if not wpn then
+        return
+    end
+
+    local profile = get_recoil_profile(wpn)
+
+    if not profile then
+        return
+    end
+
+    local weapon_id = wpn:id()
+    local suppressed = current_suppressor_attached
+    local silencer_name = current_suppressor_name
+    local upgrade_signature = current_upgrade_signature
+
+    if check_suppressor then
+        suppressed, silencer_name = get_suppressor_state(wpn)
+    end
+
+    if check_upgrades then
+        upgrade_signature = get_upgrade_signature(wpn)
+    end
+
+    if current_weapon_id ~= weapon_id
+    or current_suppressor_attached ~= suppressed
+    or current_suppressor_name ~= silencer_name
+    or current_upgrade_signature ~= upgrade_signature then
+
+        dlog(string.format(
+            "OBRIEN_COMPONENT_RECOIL | runtime state change -> %s | Suppressed=%s | Silencer=%s | UpgSig=%s", tostring(wpn:section()), tostring(suppressed), tostring(silencer_name), tostring(upgrade_signature)))
+
+        if update_weapon_recoil(wpn) then
+            current_weapon_id = weapon_id
+            current_suppressor_attached = suppressed
+            current_suppressor_name = silencer_name
+            current_upgrade_signature = get_upgrade_signature(wpn)
+        end
+    end
+end
+
+
+-- Older, widely-used inventory callback.  If a weapon is moved into a slot, defer one tick and then read the actor's actual active item.
+local function actor_item_to_slot(obj)
+    if not obj then
+        return
+    end
+
+    -- Apply directly to the weapon object entering the slot.
+    update_weapon_recoil(obj)
+
+    -- Then refresh the true active item on the next tick in case the slot move also changed which weapon is currently selected.
+    nextTick(function()
+        current_weapon_id = nil
+        update_active_weapon(true)
+        return true
+    end)
+end
+
+
+-- If the active weapon gets moved back to the rucksack, clear the cache so the next equipped weapon will always be recalculated.
+local function actor_item_to_ruck(obj)
+    if not obj then
+        return
+    end
+
+    current_weapon_id = nil
+    current_suppressor_attached = nil
+    current_suppressor_name = nil
+    current_upgrade_signature = nil
+end
+
+
+function on_game_start()
+    RegisterScriptCallback(
+        "actor_on_weapon_before_fire",
+        actor_on_weapon_before_fire
+    )
+
+    RegisterScriptCallback(
+        "actor_on_first_update",
+        actor_on_first_update
+    )
+
+    RegisterScriptCallback(
+        "actor_on_update",
+        actor_on_update
+    )
+
+    RegisterScriptCallback(
+        "actor_item_to_slot",
+        actor_item_to_slot
+    )
+
+    RegisterScriptCallback(
+        "actor_item_to_ruck",
+        actor_item_to_ruck
+    )
+
+    dlog("OBRIEN_COMPONENT_RECOIL | callbacks registered")
+end
+

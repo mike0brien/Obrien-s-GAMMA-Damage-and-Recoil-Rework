@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<string_table>
+
+    <string id="st_up_firsta_nbc_monolith_name"><text>Durability</text></string>
+    <string id="st_up_firsta_nbc_monolith_descr"><text>This gives 10% suit durability.</text></string>
+
+    <string id="st_up_firstc_nbc_monolith_name"><text>Rupture</text></string>
+    <string id="st_up_firstc_nbc_monolith_descr"><text>This gives 5% rupture resistance.</text></string>
+
+    <string id="st_up_firstd_nbc_monolith_name"><text>Impact</text></string>
+    <string id="st_up_firstd_nbc_monolith_descr"><text>This gives 10% impact resistance.</text></string>
+
+    <string id="st_up_firste_nbc_monolith_name"><text>Rupture</text></string>
+    <string id="st_up_firste_nbc_monolith_descr"><text>This gives 10% rupture resistance.</text></string>
+
+    <string id="st_up_firstf_nbc_monolith_name"><text>Durability</text></string>
+    <string id="st_up_firstf_nbc_monolith_descr"><text>This gives 10% suit durability.</text></string>
+
+    <string id="st_up_secona_nbc_monolith_name"><text>Shock</text></string>
+    <string id="st_up_secona_nbc_monolith_descr"><text>This gives 5% shock resistance.</text></string>
+
+    <string id="st_up_seconb_nbc_monolith_name"><text>Burn</text></string>
+    <string id="st_up_seconb_nbc_monolith_descr"><text>This gives 5% burn resistance.</text></string>
+
+    <string id="st_up_seconc_nbc_monolith_name"><text>Shock</text></string>
+    <string id="st_up_seconc_nbc_monolith_descr"><text>This gives 5% shock resistance.</text></string>
+
+    <string id="st_up_second_nbc_monolith_name"><text>Burn</text></string>
+    <string id="st_up_second_nbc_monolith_descr"><text>This gives 5% burn resistance.</text></string>
+
+    <string id="st_up_thirda_nbc_monolith_name"><text>Reduce Weight</text></string>
+    <string id="st_up_thirda_nbc_monolith_descr"><text>This reduces weight by 2kg.</text></string>
+
+    <string id="st_up_thirdc_nbc_monolith_name"><text>Carry Weight</text></string>
+    <string id="st_up_thirdc_nbc_monolith_descr"><text>This gives 15kg carry weight increase.</text></string>
+
+    <string id="st_up_thirdd_nbc_monolith_name"><text>Stamina Recovery</text></string>
+    <string id="st_up_thirdd_nbc_monolith_descr"><text>This gives 15% stamina recovery.</text></string>
+
+    <string id="st_up_thirde_nbc_monolith_name"><text>Health Restore</text></string>
+    <string id="st_up_thirde_nbc_monolith_descr"><text>This gives +1 health restore.</text></string>
+
+    <string id="st_up_thirdf_nbc_monolith_name"><text>Stamina Recovery</text></string>
+    <string id="st_up_thirdf_nbc_monolith_descr"><text>This gives 15% stamina recovery.</text></string>
+
+    <string id="st_up_fourta_nbc_monolith_name"><text>Belt Slot</text></string>
+    <string id="st_up_fourta_nbc_monolith_descr"><text>This gives 1 additional belt slot.</text></string>
+
+    <string id="st_up_fourtc_nbc_monolith_name"><text>Carry Weight</text></string>
+    <string id="st_up_fourtc_nbc_monolith_descr"><text>This gives 10kg carry weight increase.</text></string>
+
+    <string id="st_up_fourte_nbc_monolith_name"><text>Chem</text></string>
+    <string id="st_up_fourte_nbc_monolith_descr"><text>This gives 10% chemical resistance.</text></string>
+
+</string_table>

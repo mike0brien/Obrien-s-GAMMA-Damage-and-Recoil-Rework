@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<string_table>
+
+    <string id="st_up_firsta_semi_shotgun_350_name"><text>Accuracy</text></string>
+    <string id="st_up_firsta_semi_shotgun_350_descr"><text>This gives 5% accuracy.</text></string>
+
+    <string id="st_up_firstc_semi_shotgun_350_name"><text>Accuracy</text></string>
+    <string id="st_up_firstc_semi_shotgun_350_descr"><text>This gives 10% accuracy but reduces durability by 5%.</text></string>
+
+    <string id="st_up_firstd_semi_shotgun_350_name"><text>Durability</text></string>
+    <string id="st_up_firstd_semi_shotgun_350_descr"><text>This gives 20% durability but reduces accuracy by 5%.</text></string>
+
+    <string id="st_up_firste_semi_shotgun_350_name"><text>Accuracy</text></string>
+    <string id="st_up_firste_semi_shotgun_350_descr"><text>This gives 10% accuracy.</text></string>
+
+    <string id="st_up_secona_semi_shotgun_350_name"><text>Fire Rate</text></string>
+    <string id="st_up_secona_semi_shotgun_350_descr"><text>This gives 10% fire rate.</text></string>
+
+    <string id="st_up_seconc_semi_shotgun_350_name"><text>Fire Rate</text></string>
+    <string id="st_up_seconc_semi_shotgun_350_descr"><text>This gives 20% fire rate but reduces durability by 10%.</text></string>
+
+    <string id="st_up_second_semi_shotgun_350_name"><text>Durability</text></string>
+    <string id="st_up_second_semi_shotgun_350_descr"><text>This gives 10% durability but reduces fire rate by 5%.</text></string>
+
+    <string id="st_up_secone_semi_shotgun_350_name"><text>Fire Rate</text></string>
+    <string id="st_up_secone_semi_shotgun_350_descr"><text>This gives 15% fire rate.</text></string>
+
+    <string id="st_up_thirda_semi_shotgun_350_name"><text>Handling</text></string>
+    <string id="st_up_thirda_semi_shotgun_350_descr"><text>This improves handling by 5%.</text></string>
+
+    <string id="st_up_thirdc_semi_shotgun_350_name"><text>Handling</text></string>
+    <string id="st_up_thirdc_semi_shotgun_350_descr"><text>This improves handling by 10% and reduces weapon weight by 0.3 kg.</text></string>
+
+    <string id="st_up_thirde_semi_shotgun_350_name"><text>Weight Reduction</text></string>
+    <string id="st_up_thirde_semi_shotgun_350_descr"><text>This reduces weapon weight by 0.5 kg.</text></string>
+
+    <string id="st_up_fourta_semi_shotgun_350_name"><text>Recoil</text></string>
+    <string id="st_up_fourta_semi_shotgun_350_descr"><text>This reduces recoil by 5%.</text></string>
+
+    <string id="st_up_fourtb_semi_shotgun_350_name"><text>Handling</text></string>
+    <string id="st_up_fourtb_semi_shotgun_350_descr"><text>This improves handling by 5%.</text></string>
+
+    <string id="st_up_fourtc_semi_shotgun_350_name"><text>Recoil</text></string>
+    <string id="st_up_fourtc_semi_shotgun_350_descr"><text>This reduces recoil by 5%.</text></string>
+
+    <string id="st_up_fourtd_semi_shotgun_350_name"><text>Durability</text></string>
+    <string id="st_up_fourtd_semi_shotgun_350_descr"><text>This gives 10% weapon durability.</text></string>
+
+    <string id="st_up_fourte_semi_shotgun_350_name"><text>Recoil</text></string>
+    <string id="st_up_fourte_semi_shotgun_350_descr"><text>This reduces recoil by 10%, reduces handling by 5%, and increases weapon weight by 0.3 kg.</text></string>
+
+    <string id="st_up_fourtf_semi_shotgun_350_name"><text>Recoil</text></string>
+    <string id="st_up_fourtf_semi_shotgun_350_descr"><text>This reduces recoil by 5%.</text></string>
+
+</string_table>

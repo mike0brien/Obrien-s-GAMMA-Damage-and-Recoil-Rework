@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<string_table>
+
+    <string id="st_up_firsta_hybrid_isg_name"><text>Durability</text></string>
+    <string id="st_up_firsta_hybrid_isg_descr"><text>This gives 10% suit durability.</text></string>
+
+    <string id="st_up_firstc_hybrid_isg_name"><text>Explosion</text></string>
+    <string id="st_up_firstc_hybrid_isg_descr"><text>This gives 10% explosion protection.</text></string>
+
+    <string id="st_up_firstd_hybrid_isg_name"><text>Impact</text></string>
+    <string id="st_up_firstd_hybrid_isg_descr"><text>This gives 5% impact protection.</text></string>
+
+    <string id="st_up_firste_hybrid_isg_name"><text>Explosion</text></string>
+    <string id="st_up_firste_hybrid_isg_descr"><text>This gives 15% explosion protection.</text></string>
+
+    <string id="st_up_firstf_hybrid_isg_name"><text>Durability</text></string>
+    <string id="st_up_firstf_hybrid_isg_descr"><text>This gives 10% suit durability.</text></string>
+
+
+    <string id="st_up_secona_hybrid_isg_name"><text>Burn</text></string>
+    <string id="st_up_secona_hybrid_isg_descr"><text>This gives 5% burn protection.</text></string>
+
+    <string id="st_up_seconb_hybrid_isg_name"><text>Chemical</text></string>
+    <string id="st_up_seconb_hybrid_isg_descr"><text>This gives 5% chemical protection.</text></string>
+
+    <string id="st_up_seconc_hybrid_isg_name"><text>Burn</text></string>
+    <string id="st_up_seconc_hybrid_isg_descr"><text>This gives 5% burn protection.</text></string>
+
+    <string id="st_up_second_hybrid_isg_name"><text>Chemical</text></string>
+    <string id="st_up_second_hybrid_isg_descr"><text>This gives 10% chemical protection.</text></string>
+
+    <string id="st_up_secone_hybrid_isg_name"><text>Belt Slot</text></string>
+    <string id="st_up_secone_hybrid_isg_descr"><text>This gives +1 belt slot.</text></string>
+
+
+    <string id="st_up_thirda_hybrid_isg_name"><text>Weight Reduction</text></string>
+    <string id="st_up_thirda_hybrid_isg_descr"><text>This reduces suit weight by 2 kg.</text></string>
+
+    <string id="st_up_thirdc_hybrid_isg_name"><text>Carry Weight</text></string>
+    <string id="st_up_thirdc_hybrid_isg_descr"><text>This gives +15 kg carry weight.</text></string>
+
+    <string id="st_up_thirdd_hybrid_isg_name"><text>Stamina</text></string>
+    <string id="st_up_thirdd_hybrid_isg_descr"><text>This gives 15% stamina regeneration.</text></string>
+
+    <string id="st_up_thirde_hybrid_isg_name"><text>Health</text></string>
+    <string id="st_up_thirde_hybrid_isg_descr"><text>This gives +1 health restoration.</text></string>
+
+    <string id="st_up_thirdf_hybrid_isg_name"><text>Bleeding</text></string>
+    <string id="st_up_thirdf_hybrid_isg_descr"><text>This gives 15% bleeding recovery.</text></string>
+
+
+    <string id="st_up_fourta_hybrid_isg_name"><text>Belt Slot</text></string>
+    <string id="st_up_fourta_hybrid_isg_descr"><text>This gives +1 belt slot.</text></string>
+
+    <string id="st_up_fourtc_hybrid_isg_name"><text>Radiation</text></string>
+    <string id="st_up_fourtc_hybrid_isg_descr"><text>This gives 5% radiation protection.</text></string>
+
+    <string id="st_up_fourte_hybrid_isg_name"><text>Burn</text></string>
+    <string id="st_up_fourte_hybrid_isg_descr"><text>This gives 10% burn protection.</text></string>
+
+</string_table>
