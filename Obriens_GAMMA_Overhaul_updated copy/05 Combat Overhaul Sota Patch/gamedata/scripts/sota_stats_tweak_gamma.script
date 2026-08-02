@@ -1,0 +1,1206 @@
+-- Sota UI Gamma tweak rework for Obriens Combat overhaul.
+local gts				= game.translate_string
+local stats_round_idp	= ui_inventory.stats_round_idp
+
+local color_settings	= ui_inventory.color_settings
+local stat_colors		= ui_inventory.stat_colors
+local ui_rework_support	= ui_inventory.ui_rework_support
+
+local font_t			= ui_inventory.font_t
+
+local clr_stats_t		= ui_inventory.clr_stats_t
+
+local st_perc			= ui_inventory.st_perc
+
+local thirst_max		= ui_inventory.thirst_max
+local thirst_mul		= ui_inventory.thirst_mul
+local sleep_max			= ui_inventory.sleep_max
+local sleep_mul			= ui_inventory.sleep_mul
+
+local stat_radia		= ui_inventory.stat_radia
+
+local simple_stats = {
+	["health"]	= true,
+	["hunger"]	= true,
+	["thirst"]	= true,
+	["sleep"]	= true,
+}
+
+local prot_stats = {
+	["radia"]			= "Radiation"   ,
+	["acid"]			= "ChemicalBurn",
+	["shock"]			= "Shock"       ,
+	["fire"]			= "Burn"        ,
+	["psi"]				= "Telepatic"   ,
+	["wound"]			= "Wound"       ,
+	["strike"]			= "Strike"      ,
+	["explosion"]		= "Explosion"   ,
+	["head_fire_wound"]	= "FireWound"   ,
+	["head_br_class"]	= "FireWound"   ,
+	["fire_wound"]		= "FireWound"   ,
+	["br_class"]		= "FireWound"   ,
+}
+
+local grbd				= grok_remove_belt_duplicates
+local categories		= grbd and grbd.categories or {
+	["af_kevlar"]			= "plate",
+	["af_plates"]			= "plate",
+	["af_kevlar_up"]		= "plate",
+	["af_plates_up"]		= "plate",
+	["af_camelbak"]			= "camel",
+	["af_camelbak_up"]		= "camel",
+	["af_grid"]				= "grid",
+	["af_grid_up"]			= "grid",
+	["af_frames"]			= "frame",
+	["af_frames_up"]		= "frame",
+	["af_surge"]			= "surge",
+	["af_surge_up"]			= "surge",
+	["af_cooler"]			= "cooler",
+	["af_cooler_up"]		= "cooler",
+	["af_freon"]			= "freon",
+	["af_freon_up"]			= "freon",
+	["hide_pseudogiant"]	= "pelt",
+	["hide_chimera"]		= "pelt",
+	["hide_controller"]		= "pelt",
+	["hide_burer"]			= "pelt",
+	["hide_lurker"]			= "pelt",
+	["hide_psysucker"]		= "pelt",
+	["hide_bloodsucker"]	= "pelt",
+	["hide_psy_dog"]		= "pelt",
+	["hide_pseudodog"]		= "pelt",
+	["hide_boar"]			= "pelt",
+	["hide_flesh"]			= "pelt",
+}
+
+-- ========== OBRIEN DAMAGE REWORK COMPATIBILITY ================================================================
+-- The damage script is the sole source of protection math.
+-- This file does not overwrite any grok_actor_damage_balancer combat functions.
+local gadb = grok_actor_damage_balancer
+
+-- Keep SOTA's lookup table complete, but do not alter the damage-script constants.
+gadb.protection_to_hit_type["Radiation"] = hit.radiation
+local prot_to_hit_type = gadb.protection_to_hit_type
+
+local mitigation_table_body = gadb.mitigation_table_body
+local mitigation_table_head = gadb.mitigation_table_head
+
+-- Values consumed by the rest of this UI script. They are populated exclusively
+-- from the return values of the current damage script.
+local hit_type
+local immunity
+local protection
+local booster_type_def
+local adjuster
+local arti_adjuster
+local limiter
+local elemental
+local psy
+local cap_stat
+local defense
+local premitigation
+
+local function get_adb_constants(st)
+    -- Radiation uses SOTA's proven UI-only conversion. All other damage types
+    -- come directly from the O'Brien damage script without SOTA multipliers.
+    if st == hit.radiation or st == "Radiation" or st == "radiation" then
+        hit_type = 3 -- UI-only engine Radiation hit type
+        immunity = "radiation_immunity"
+        protection = "Radiation"
+        booster_type_def = 5
+        adjuster = 10 * stat_radia.magn
+        arti_adjuster = (1) * 100 * stat_radia.magn
+        limiter = 1.0
+        elemental = 1
+        psy = 0
+        cap_stat = nil
+        defense = "radiation_protection"
+        premitigation = 0
+    else
+        hit_type,
+        immunity,
+        protection,
+        booster_type_def,
+        adjuster,
+        arti_adjuster,
+        limiter,
+        elemental,
+        psy,
+        cap_stat,
+        defense = gadb.get_adb_constants(st)
+
+        adjuster = adjuster or 1.0
+        arti_adjuster = arti_adjuster or 1.0
+        limiter = limiter or 0
+        elemental = elemental or 0
+        psy = psy or 0
+        premitigation = 0
+    end
+
+    return hit_type, immunity, protection, booster_type_def, adjuster,
+           arti_adjuster, limiter, elemental, psy, cap_stat, defense
+end
+-- Shared constants for SOTA's booster/upgrade UI. No SOTA-specific balance
+-- multipliers are introduced here.
+gadb_const = {
+    ["Radiation"]    = { booster_name = "boost_radiation_protection" },
+    ["ChemicalBurn"] = { booster_name = "boost_chemburn_protection" },
+    ["Shock"]        = { booster_name = "boost_shock_immunity" },
+    ["Burn"]         = { booster_name = "boost_burn_immunity" },
+    ["Telepatic"]    = { booster_name = "boost_telepat_protection" },
+    ["Wound"]        = { booster_name = "boost_wound_immunity" },
+    ["Strike"]       = { booster_name = "boost_strike_immunity" },
+    ["Explosion"]    = { booster_name = "boost_explosion_immunity" },
+    ["FireWound"]    = { booster_name = "boost_fire_wound_immunity" },
+}
+
+for name, values in pairs(gadb_const) do
+    get_adb_constants(name)
+    values.booster_type_def = booster_type_def
+    values.adjuster = adjuster
+    values.arti_adjuster = arti_adjuster
+
+    -- Actual damage uses the raw booster value for every type except telepathic,
+    -- where the damage script multiplies it by both adjusters.
+    values.boost_adjuster = 1.0
+    if name == "Radiation" then
+        values.boost_adjuster = 100 / 0.7
+    elseif name == "Telepatic" then
+        values.boost_adjuster = adjuster * arti_adjuster
+    end
+end
+
+-- Use the isolated O'Brien protection function for SOTA's equipped-stat preview.
+-- We do not assign it back to gadb.get_protection, so SOTA cannot affect combat.
+-- Any k_ap supplied here is UI-only and never reaches shit_booster.
+local get_protection = gadb.get_protection_obrien or gadb.get_protection
+
+-- The damage-script getter already includes condition in FireWound object values. Sota was adding it again, removing that so UI only applies it once.
+-- returned as full-condition base values by the damage script.
+local damage_get_outfit_value = gadb.get_outfit_value
+local damage_get_outfit_ap_res = gadb.get_outfit_ap_res
+local damage_get_af_value = gadb.get_af_value
+
+local function normalize_damage_stat_name(name)
+    -- The damage script uses lowercase "radiation", while SOTA's UI tables, not fixing that, basically or it.
+    return (name == "Radiation") and "radiation" or name
+end
+
+local function get_outfit_value(obj, sec, name, def)
+    -- Do not route Radiation through the generic damage getter. In the current
+    -- damage script its lowercase Radiation branch supplies a nil HitTypeID,
+    -- while the vanilla UI correctly reads engine hit type 3 (Radiation).
+    -- Return the same base units as the other outfit getter: raw value * 100,
+    -- with object condition removed because SOTA applies condition externally.
+    if name == "Radiation" or name == "radiation" then
+        get_adb_constants("Radiation")
+
+        if obj then
+            local outfit = IsOutfit(obj)
+            local helmet = IsHeadgear(obj)
+            local cond = obj:condition()
+            local cobj = outfit and obj:cast_CustomOutfit() or helmet and obj:cast_Helmet()
+            if not cobj then
+                return def or 0
+            end
+            if (not cond) or cond <= 0 then
+                cond = 1
+            end
+            return (cobj:GetDefHitTypeProtection(hit_type) or 0) * adjuster * 100 / cond
+        elseif sec then
+            return (SYS_GetParam(2, sec, defense, def or 0) or 0) * adjuster * 100
+        end
+
+        return def or 0
+    end
+
+    local damage_name = normalize_damage_stat_name(name)
+    local value = damage_get_outfit_value(obj, sec, damage_name, def)
+    if value == nil then
+        return def or 0
+    end
+
+    if obj and name == "FireWound" then
+        local cond = obj:condition()
+        if cond and cond > 0 then
+            value = value / cond
+        end
+    end
+
+    return value
+end
+
+-- These damage-script getters return base values without item condition.
+-- SOTA's existing UI code applies condition exactly once.
+local function get_outfit_ap_res(obj)
+    return damage_get_outfit_ap_res(obj) or 0
+end
+
+local function get_af_value(obj, sec, name, def)
+    -- Radiation artefacts use their raw immunity value. SOTA/vanilla applies
+    -- condition outside this getter and normalizes it against radiation max.
+    if name == "Radiation" or name == "radiation" then
+        if not sec and obj then
+            sec = obj:section()
+        end
+        if not sec then
+            return def or 0
+        end
+
+        get_adb_constants("Radiation")
+        local immunities_sec = SYS_GetParam(0, sec, "hit_absorbation_sect", sec)
+        local prot = SYS_GetParam(2, immunities_sec, immunity, def or 0) or 0
+        return prot * arti_adjuster
+    end
+
+    local damage_name = normalize_damage_stat_name(name)
+    local value = damage_get_af_value(obj, sec, damage_name, def)
+    if value == nil then
+        return def or 0
+    end
+    return value
+end
+
+-- SOTA's item tooltip system resolves these names dynamically through the
+-- damage-script namespace. Export only the condition-safe UI adapters; combat
+-- does not call these functions.
+gadb.get_outfit_value = get_outfit_value
+gadb.get_outfit_ap_res = get_outfit_ap_res
+gadb.get_af_value = get_af_value
+-- ========== END OBRIEN DAMAGE REWORK COMPATIBILITY ============================================================
+
+
+local og_override_stats_table = ish_item_stats.override_stats_table
+ish_item_stats.override_stats_table = function()
+	og_override_stats_table()
+	
+-- fix of stats values and magnitude, also re-sorting of stats in tooltip
+	utils_ui.stats_table["outfit"] = {
+		["health_restore_speed"]		= { index= 1,	typ= "float",	name= "ui_inv_health",							icon_p= "ui_am_propery_05",					icon_n= "",									track= false, magnitude= 10000,							unit= "",				condition= true,	compare= false,	sign= true,		show_always= false	},
+		["bleeding_restore_speed"]		= { index= 2,	typ= "float",	name= "ui_inv_bleeding",						icon_p= "ui_am_prop_restore_bleeding",		icon_n= "",									track= false, magnitude= 150000,						unit= "st_ml_min",		condition= true,	compare= false,	sign= true,		show_always= false	},
+		
+		["fire_wound_protection"]		= { index= 12,	typ= "float",	name= "ui_inv_outfit_fire_wound_protection",	icon_p= "ui_am_propery_01",					icon_n= "",									track= false, magnitude= 1,								unit= "st_perc",		condition= true,	compare= false,	sign= true,		show_always= true,	value_functor= {"grok_actor_damage_balancer","get_outfit_value", "FireWound"		}	},
+		["radiation_protection"]		= { index= 20,	typ= "float",	name= "ui_inv_outfit_radiation_protection",		icon_p= "ui_am_propery_09",					icon_n= "",									track= false, magnitude= 1,								unit= "st_perc",		condition= true,	compare= false,	sign= true,		show_always= true,	value_functor= {"grok_actor_damage_balancer","get_outfit_value", "Radiation"		}	},
+		["chemical_burn_protection"]	= { index= 30,	typ= "float",	name= "ui_inv_outfit_chemical_burn_protection",	icon_p= "ui_am_prop_chem",					icon_n= "",									track= false, magnitude= 1,								unit= "st_perc",		condition= true,	compare= false,	sign= true,		show_always= true,	value_functor= {"grok_actor_damage_balancer","get_outfit_value", "ChemicalBurn"		}	},
+		["shock_protection"]			= { index= 40,	typ= "float",	name= "ui_inv_outfit_shock_protection",			icon_p= "ui_am_prop_electro",				icon_n= "",									track= false, magnitude= 1,								unit= "st_perc",		condition= true,	compare= false,	sign= true,		show_always= true,	value_functor= {"grok_actor_damage_balancer","get_outfit_value", "Shock"			}	},
+		["burn_protection"]				= { index= 50,	typ= "float",	name= "ui_inv_outfit_burn_protection",			icon_p= "ui_am_prop_thermo",				icon_n= "",									track= false, magnitude= 1,								unit= "st_perc",		condition= true,	compare= false,	sign= true,		show_always= true,	value_functor= {"grok_actor_damage_balancer","get_outfit_value", "Burn"				}	},
+		["telepatic_protection"]		= { index= 60,	typ= "float",	name= "ui_inv_outfit_telepatic_protection",		icon_p= "ui_am_propery_11",					icon_n= "",									track= false, magnitude= 1,								unit= "st_perc",		condition= true,	compare= false,	sign= true,		show_always= true,	value_functor= {"grok_actor_damage_balancer","get_outfit_value", "Telepatic"		}	},
+		["wound_protection"]			= { index= 70,	typ= "float",	name= "ui_inv_outfit_wound_protection",			icon_p= "ui_am_prop_wound",					icon_n= "",									track= false, magnitude= 1,								unit= "st_perc",		condition= true,	compare= false,	sign= true,		show_always= true,	value_functor= {"grok_actor_damage_balancer","get_outfit_value", "Wound"			}	},
+		["strike_protection"]			= { index= 80,	typ= "float",	name= "ui_inv_outfit_strike_protection",		icon_p= "ui_am_prop_strike",				icon_n= "",									track= false, magnitude= 1,								unit= "st_perc",		condition= true,	compare= false,	sign= true,		show_always= true,	value_functor= {"grok_actor_damage_balancer","get_outfit_value", "Strike"			}	},
+		["explosion_protection"]		= { index= 90,	typ= "float",	name= "ui_inv_outfit_explosion_protection",		icon_p= "ui_am_prop_explo",					icon_n= "",									track= false, magnitude= 1,								unit= "st_perc",		condition= true,	compare= false,	sign= true,		show_always= true,	value_functor= {"grok_actor_damage_balancer","get_outfit_value", "Explosion"		}	},
+		
+		["artefact_count"]				= { index= 100,	typ= "float",	name= "ui_inv_outfit_artefact_count",			icon_p= "ui_am_prop_artefact",				icon_n= "",									track= false, magnitude= 1,								unit= "",									compare= false,	sign= false,	show_always= true,	value_functor= {"utils_item","get_outfit_belt_size"									}	},
+		["additional_inventory_weight"]	= { index= 110,	typ= "float",	name= "ui_inv_outfit_additional_weight",		icon_p= "ui_am_propery_08",					icon_n= "ui_am_prop_carry_weight_negative",	track= false, magnitude= 1,								unit= "st_kg",								compare= false,	sign= true,		show_always= true,	value_functor= {"utils_item","get_outfit_property", "additional_inventory_weight"	}	},
+	}
+	
+	utils_ui.stats_table["artefact"] = {
+		["condition"]					= { index= 1,	typ= "float",	name= "ui_inv_af_condition",					icon_p= "ui_am_condition",					icon_n= "",									track= false, magnitude= 100,							unit= "st_perc",							compare= false,	sign= true,		show_always= true,	value_functor= {"utils_ui","prop_condition"}	},
+		["health_restore_speed"]		= { index= 2,	typ= "float",	name= "ui_inv_health",							icon_p= "ui_am_propery_05",					icon_n= "ui_am_prop_health_negative",		track= false, magnitude= 10000,							unit= "",				condition= true,	compare= false,	sign= true,		show_always= false	},
+		["bleeding_restore_speed"]		= { index= 3,	typ= "float",	name= "ui_inv_bleeding",						icon_p= "ui_am_prop_restore_bleeding",		icon_n= "ui_am_prop_bleeding_restore",		track= false, magnitude= 150000,						unit= "st_ml_min",		condition= true,	compare= false,	sign= true,		show_always= false	},
+		["satiety_restore_speed"]		= { index= 4,	typ= "float",	name= "ui_inv_satiety",							icon_p= "ui_am_prop_satiety_restore_speed",	icon_n= "ui_am_prop_satiety",				track= false, magnitude= 100,							unit= "",				condition= true,	compare= false,	sign= true,		show_always= false	},
+		["power_restore_speed"]			= { index= 5,	typ= "float",	name= "ui_inv_power",							icon_p= "ui_am_propery_07",					icon_n= "ui_am_prop_power_restore",			track= false, magnitude= 30000,							unit= "st_perc",		condition= true,	compare= false,	sign= true,		show_always= false	},
+		["radiation_restore_speed"]		= { index= 6,	typ= "float",	name= "ui_inv_radiation",						icon_p= "ui_am_propery_09",					icon_n= "ui_am_prop_radio_restore",			track= false, magnitude= 47000,							unit= "st_msv_sec",		condition= true,	compare= false,	sign= true,		show_always= false, sign_inverse= true	},
+		
+		["radiation_immunity"]			= { index= 7,	typ= "float",	name= "ui_inv_outfit_radiation_protection",		icon_p= "ui_am_propery_09",					icon_n= "ui_am_prop_radiation_immunity",	track= false, magnitude= 100,							unit= "st_perc",		condition= true,	compare= false,	sign= true,		show_always= false,	value_functor= {"grok_actor_damage_balancer","get_af_value", "Radiation"	}	},
+		["chemical_burn_immunity"]		= { index= 8,	typ= "float",	name= "ui_inv_outfit_chemical_burn_protection",	icon_p= "ui_am_prop_chem",					icon_n= "ui_am_prop_chemburn_immunity",		track= false, magnitude= 100,							unit= "st_perc",		condition= true,	compare= false,	sign= true,		show_always= false,	value_functor= {"grok_actor_damage_balancer","get_af_value", "ChemicalBurn"	}	},
+		["shock_immunity"]				= { index= 9,	typ= "float",	name= "ui_inv_outfit_shock_protection",			icon_p= "ui_am_prop_electro",				icon_n= "ui_am_prop_shock_immunity",		track= false, magnitude= 100,							unit= "st_perc",		condition= true,	compare= false,	sign= true,		show_always= false,	value_functor= {"grok_actor_damage_balancer","get_af_value", "Shock"		}	},
+		["burn_immunity"]				= { index= 10,	typ= "float",	name= "ui_inv_outfit_burn_protection",			icon_p= "ui_am_prop_thermo",				icon_n= "ui_am_prop_burn_immunity",			track= false, magnitude= 100,							unit= "st_perc",		condition= true,	compare= false,	sign= true,		show_always= false,	value_functor= {"grok_actor_damage_balancer","get_af_value", "Burn"			}	},
+		["telepatic_immunity"]			= { index= 11,	typ= "float",	name= "ui_inv_outfit_telepatic_protection",		icon_p= "ui_am_propery_11",					icon_n= "ui_am_prop_telepat_immunity",		track= false, magnitude= 100,							unit= "st_perc",		condition= true,	compare= false,	sign= true,		show_always= false,	value_functor= {"grok_actor_damage_balancer","get_af_value", "Telepatic"	}	},
+		["wound_immunity"]				= { index= 12,	typ= "float",	name= "ui_inv_outfit_wound_protection",			icon_p= "ui_am_prop_wound",					icon_n= "ui_am_prop_wound_minus",			track= false, magnitude= 100,							unit= "st_perc",		condition= true,	compare= false,	sign= true,		show_always= false,	value_functor= {"grok_actor_damage_balancer","get_af_value", "Wound"		}	},
+		["strike_immunity"]				= { index= 13,	typ= "float",	name= "ui_inv_outfit_strike_protection",		icon_p= "ui_am_prop_strike",				icon_n= "ui_am_prop_strike_minus",			track= false, magnitude= 100,							unit= "st_perc",		condition= true,	compare= false,	sign= true,		show_always= false,	value_functor= {"grok_actor_damage_balancer","get_af_value", "Strike"		}	},
+		["explosion_immunity"]			= { index= 14,	typ= "float",	name= "ui_inv_outfit_explosion_protection",		icon_p= "ui_am_prop_explo",					icon_n= "ui_am_prop_explo_minus",			track= false, magnitude= 100,							unit= "st_perc",		condition= true,	compare= false,	sign= true,		show_always= false,	value_functor= {"grok_actor_damage_balancer","get_af_value", "Explosion"	}	},
+		["fire_wound_immunity"]			= { index= 15,	typ= "float",	name= "ui_inv_outfit_fire_wound_protection",	icon_p= "ui_am_propery_01",					icon_n= "ui_am_prop_fire_wound_negative",	track= false, magnitude= 100,							unit= "st_perc",		condition= true,	compare= false,	sign= true,		show_always= false,	value_functor= {"grok_actor_damage_balancer","get_af_value", "FireWound"	}	},
+		
+		["additional_inventory_weight"]	= { index= 16,	typ= "float",	name= "ui_inv_outfit_additional_weight",		icon_p= "ui_am_propery_08",					icon_n= "ui_am_prop_carry_weight_negative",	track= false, magnitude= 1,								unit= "st_kg",			condition= true,	compare= false,	sign= true,		show_always= false	},
+		
+		["chemical_burn_cap"]			= { index= 17,	typ= "float",	name= "gamma_chemical_burn_cap",				icon_p= "gamma_chemical_burn",				icon_n= "ui_am_prop_chemburn_immunity",		track= false, magnitude= 100,							unit= "st_perc",		condition= false,	compare= false,	sign= true,		show_always= false	},
+		["shock_cap"]					= { index= 18,	typ= "float",	name= "gamma_shock_cap",						icon_p= "gamma_shock",						icon_n= "ui_am_prop_shock_immunity",		track= false, magnitude= 100,							unit= "st_perc",		condition= false,	compare= false,	sign= true,		show_always= false	},
+		["burn_cap"]					= { index= 19,	typ= "float",	name= "gamma_burn_cap",							icon_p= "gamma_burn",						icon_n= "ui_am_prop_burn_immunity",			track= false, magnitude= 100,							unit= "st_perc",		condition= false,	compare= false,	sign= true,		show_always= false	},
+		["telepatic_cap"]				= { index= 20,	typ= "float",	name= "gamma_telepatic_cap",					icon_p= "gamma_telepatic",					icon_n= "ui_am_prop_telepat_immunity",		track= false, magnitude= 100,							unit= "st_perc",		condition= false,	compare= false,	sign= true,		show_always= false	},
+		["wound_cap"]					= { index= 21,	typ= "float",	name= "gamma_wound_cap",						icon_p= "gamma_wound",						icon_n= "ui_am_prop_wound_minus",			track= false, magnitude= 100,							unit= "st_perc",		condition= false,	compare= false,	sign= true,		show_always= false	},
+		["strike_cap"]					= { index= 22,	typ= "float",	name= "gamma_strike_cap",						icon_p= "gamma_strike",						icon_n= "ui_am_prop_strike_minus",			track= false, magnitude= 100,							unit= "st_perc",		condition= false,	compare= false,	sign= true,		show_always= false	},
+		["explosion_cap"]				= { index= 23,	typ= "float",	name= "gamma_explosion_cap",					icon_p= "gamma_explosion",					icon_n= "ui_am_prop_explo_minus",			track= false, magnitude= 100,							unit= "st_perc",		condition= false,	compare= false,	sign= true,		show_always= false	},
+		["fire_wound_cap"]				= { index= 24,	typ= "float",	name= "gamma_fire_wound_cap",					icon_p= "gamma_fire_wound",					icon_n= "ui_am_prop_fire_wound_negative",	track= false, magnitude= 100,							unit= "st_perc",		condition= false,	compare= false,	sign= true,		show_always= false	},
+	}
+	
+	utils_ui.stats_table["booster"] = {
+		["boost_time"]					= { index= 1,	typ= "float",	name= "ui_inv_effect_time",						icon_p= "ui_am_prop_time_period",			icon_n= "",									track= false, magnitude= 1,													unit= "ui_inv_seconds",						compare= false,	sign= true,		show_always= false	},
+		["boost_health_restore"]		= { index= 2,	typ= "float",	name= "ui_inv_health",							icon_p= "ui_am_propery_05",					icon_n= "",									track= false, magnitude= 1000,												unit= "",									compare= false,	sign= true,		show_always= false	},
+		["boost_bleeding_restore"]		= { index= 3,	typ= "float",	name= "ui_inv_bleeding",						icon_p= "ui_am_prop_restore_bleeding",		icon_n= "ui_am_prop_bleeding_restore",		track= false, magnitude= 150000,											unit= "st_ml_min",							compare= false,	sign= true,		show_always= false	},
+		["eat_satiety"]					= { index= 4,	typ= "float",	name= "ui_inv_satiety",							icon_p= "ui_am_prop_satiety_restore_speed",	icon_n= "ui_am_prop_satiety",				track= false, magnitude= 1000,												unit= "st_kcal",							compare= false,	sign= true,		show_always= false	},
+		["eat_thirstiness"]				= { index= 5,	typ= "float",	name= "ui_inv_thirst",							icon_p= "ui_am_prop_thirst_n",				icon_n= "ui_am_prop_thirst_p",				track= false, magnitude= -(100*thirst_mul/thirst_max),						unit= "st_perc",							compare= false,	sign= true,		show_always= false	},
+		["eat_sleepiness"]				= { index= 6,	typ= "float",	name= "ui_inv_sleep",							icon_p= "ui_am_prop_sleep_n",				icon_n= "ui_am_prop_sleep_p",				track= false, magnitude= -(100*sleep_mul/sleep_max),						unit= "st_perc",							compare= false,	sign= true,		show_always= false	},
+		["boost_power_restore"]			= { index= 7,	typ= "float",	name= "ui_inv_power",							icon_p= "ui_am_propery_07",					icon_n= "ui_am_prop_power_restore",			track= false, magnitude= 10000,												unit= "st_perc",							compare= false,	sign= true,		show_always= false	},
+		["boost_radiation_restore"]		= { index= 8,	typ= "float",	name= "ui_inv_radiation",						icon_p= "ui_am_propery_09",					icon_n= "",									track= false, magnitude= 23204,												unit= "st_msv_sec",							compare= false,	sign= true,		show_always= false,	sign_inverse_txt= true	},
+		
+		["boost_radiation_immunity"]	= { index= 9,	typ= "float",	name= "ui_inv_outfit_radiation_protection",		icon_p= "ui_am_propery_09",					icon_n= "ui_am_prop_radiation_immunity",	track= false, magnitude= 1000,												unit= "st_perc",							compare= false,	sign= true,		show_always= false	},
+		["boost_radiation_protection"]	= { index= 10,	typ= "float",	name= "ui_inv_outfit_radiation_protection",		icon_p= "ui_am_propery_09",					icon_n= "ui_am_prop_radiation_protection",	track= false, magnitude= (100 * gadb_const["Radiation"].boost_adjuster),	unit= "st_perc",							compare= false,	sign= true,		show_always= false	},
+		["boost_chemburn_immunity"]		= { index= 11,	typ= "float",	name= "ui_inv_outfit_chemical_burn_protection",	icon_p= "ui_am_prop_chem",					icon_n= "ui_am_prop_chemburn_immunity",		track= false, magnitude= 500,												unit= "st_perc",							compare= false,	sign= true,		show_always= false	},
+		["boost_chemburn_protection"]	= { index= 12,	typ= "float",	name= "ui_inv_outfit_chemical_burn_protection",	icon_p= "ui_am_prop_chem",					icon_n= "ui_am_prop_chemburn_protection",	track= false, magnitude= (100 * gadb_const["ChemicalBurn"].boost_adjuster),	unit= "st_perc",							compare= false,	sign= true,		show_always= false	},
+		["boost_shock_immunity"]		= { index= 13,	typ= "float",	name= "ui_inv_outfit_shock_protection",			icon_p= "ui_am_prop_electro",				icon_n= "ui_am_prop_shock_immunity",		track= false, magnitude= 100,												unit= "st_perc",							compare= false,	sign= true,		show_always= false	},
+		["boost_burn_immunity"]			= { index= 14,	typ= "float",	name= "ui_inv_outfit_burn_protection",			icon_p= "ui_am_prop_thermo",				icon_n= "ui_am_prop_burn_immunity",			track= false, magnitude= 1000,												unit= "st_perc",							compare= false,	sign= true,		show_always= false	},
+		["boost_telepat_immunity"]		= { index= 15,	typ= "float",	name= "ui_inv_outfit_telepatic_protection",		icon_p= "ui_am_propery_11",					icon_n= "ui_am_prop_telepat_immunity",		track= false, magnitude= 1000,												unit= "st_perc",							compare= false,	sign= true,		show_always= false	},
+		["boost_telepat_protection"]	= { index= 16,	typ= "float",	name= "ui_inv_outfit_telepatic_protection",		icon_p= "ui_am_propery_11",					icon_n= "ui_am_prop_telepat_protection",	track= false, magnitude= (100 * gadb_const["Telepatic"].boost_adjuster),	unit= "st_perc",							compare= false,	sign= true,		show_always= false	},
+		["boost_wound_immunity"]		= { index= 17,	typ= "float",	name= "ui_inv_outfit_wound_protection",			icon_p= "ui_am_prop_wound",					icon_n= "ui_am_prop_wound_minus",			track= false, magnitude= 100,												unit= "st_perc",							compare= false,	sign= true,		show_always= false	},
+		["boost_strike_immunity"]		= { index= 18,	typ= "float",	name= "ui_inv_outfit_strike_protection",		icon_p= "ui_am_prop_strike",				icon_n= "ui_am_prop_strike_minus",			track= false, magnitude= 100,												unit= "st_perc",							compare= false,	sign= true,		show_always= false	},
+		["boost_explosion_immunity"]	= { index= 19,	typ= "float",	name= "ui_inv_outfit_explosion_protection",		icon_p= "ui_am_prop_explo",					icon_n= "ui_am_prop_explo_minus",			track= false, magnitude= 100,												unit= "st_perc",							compare= false,	sign= true,		show_always= false	},
+		["boost_fire_wound_immunity"]	= { index= 20,	typ= "float",	name= "ui_inv_outfit_fire_wound_protection",	icon_p= "ui_am_propery_01",					icon_n= "ui_am_prop_fire_wound_negative",	track= false, magnitude= 100,												unit= "st_perc",							compare= false,	sign= true,		show_always= false	},
+		
+		["boost_anabiotic"]				= { index= 21,	typ= "float",	name= "",										icon_p= "ui_am_prop_Vibros",				icon_n= "ui_am_prop_anabiotic",				track= false, magnitude= 1000,												unit= "",									compare= false,	sign= true,		show_always= false	},
+		["boost_max_weight"]			= { index= 22,	typ= "float",	name= "ui_inv_outfit_additional_weight",		icon_p= "ui_am_propery_08",					icon_n= "ui_am_prop_max_weight",			track= false, magnitude= 1,													unit= "st_kg",								compare= false,	sign= true,		show_always= false	},
+	}
+	
+	ish_item_stats.apply_compatibility_patches()
+end
+
+-- GAMMA v0.9.3 compatibility, now no need change stats layout for GAMMA
+function ui_inventory.UIInventory:UpdateStatsLayout()
+	
+	local radia_in_msv	= color_settings.radia_in_msv
+	stat_radia.magn		= radia_in_msv and 3.875 or 1
+	stat_radia.unit		= radia_in_msv and "st_msv" or "st_perc"
+	
+	gadb_const["Radiation"].adjuster		= stat_radia.magn * 10
+	gadb_const["Radiation"].arti_adjuster	= stat_radia.magn * 1 * 100
+	gadb_const["Radiation"].boost_adjuster	= stat_radia.magn * 100 / 0.7
+	
+	 -- radia magnitude is already taken into account in value_functor: grok_actor_damage_balancer
+--	utils_ui.stats_table["outfit"]["radiation_protection"].magnitude		= stat_radia.magn
+--	utils_ui.stats_table["artefact"]["radiation_immunity"].magnitude		= stat_radia.magn * 100
+	
+	utils_ui.stats_table["booster"]["boost_radiation_protection"].magnitude	= gadb_const["Radiation"].boost_adjuster * 100
+	
+	utils_ui.stats_table["outfit"]["radiation_protection"].unit				= stat_radia.unit
+	utils_ui.stats_table["artefact"]["radiation_immunity"].unit				= stat_radia.unit
+	utils_ui.stats_table["booster"]["boost_radiation_protection"].unit		= stat_radia.unit
+	
+	local stat = self.stat
+	stat["power"].base:Show(false)
+	
+	local num_font		= color_settings.num_stats_font
+	local str_font_lst	= ui_rework_support.str_stats_font_lst
+	local fnt			= font_t[ str_font_lst[ num_font ] ]
+	
+	for _,v in pairs(stat) do
+		v.text:SetFont( fnt )
+		v.text_bonus:SetFont( fnt )
+	end
+end
+
+function change_color_brightness(clr, mul)
+	if (not clr) then
+		return GetARGB(255, 255, 255, 255)
+	elseif (not mul) then
+		return clr
+	elseif (mul < 0) then
+		mul = -1 * mul
+	end
+	
+	local b = bit.band(clr, 255)
+	local g = bit.band(bit.rshift(clr, 8), 255)
+	local r = bit.band(bit.rshift(clr, 16), 255)
+	local a = bit.band(bit.rshift(clr, 24), 255)
+	
+	b = clamp( math.ceil(b * mul), 0, 255 )
+	g = clamp( math.ceil(g * mul), 0, 255 )
+	r = clamp( math.ceil(r * mul), 0, 255 )
+--	a = clamp( math.ceil(a * mul), 0, 255 )
+	
+	return GetARGB(a, r, g, b)
+end
+
+function ui_inventory.UIInventory:RecolorStats()
+	
+	local clr_w					= clr_stats_t.w
+	
+	local use_faction_color		= color_settings.stat_colors
+	local use_colored_icons		= color_settings.colored_stat_icons
+	local use_colored_stats		= color_settings.colored_stats
+	local use_colored_caps		= color_settings.colored_stats_cap
+	
+	local icons_brightness		= color_settings.bright_stat_icons
+	local stats_brightness		= color_settings.bright_stats
+	local caps_brightness		= color_settings.bright_stats_cap
+	
+	for name,v in pairs(self.stat) do
+		local color = use_faction_color and self.faction_color or stat_colors[name]
+		
+		local final_color = use_colored_icons and color or clr_w
+		final_color = change_color_brightness(final_color, icons_brightness)
+		v.ico_def:SetTextureColor( final_color )
+		
+		local final_color = use_colored_stats and color or clr_w
+		final_color = change_color_brightness(final_color, stats_brightness)
+		v.text:SetTextColor( final_color )
+		
+		local final_color = use_colored_caps and color or clr_w
+		final_color = change_color_brightness(final_color, caps_brightness)
+		v.text_bonus:SetTextColor( final_color )
+	end
+end
+
+function ui_inventory.UIInventory:UpdateStats()
+	
+	self:RecolorStats()
+	
+	local actor = db.actor
+	
+-- Outfit
+	for name,_ in pairs(self.stat_outfit) do
+		self.stat_outfit[name] = 0
+	end
+	self.stat_outfit["health_restore"] = 0
+	self.stat_outfit["bleeding_restore"] = 0
+	self.stat_outfit["radia_restore"] = 0
+	
+	local outfit = actor:item_in_slot(7)
+	if outfit then
+		local c_outfit = outfit:cast_CustomOutfit()
+		local sec = outfit:section()
+		local cond = outfit:condition()
+		
+		self.stat_outfit["health_restore"]		= c_outfit.m_fHealthRestoreSpeed or 0
+		self.stat_outfit["bleeding_restore"]	= c_outfit.m_fBleedingRestoreSpeed or 0
+		self.stat_outfit["radia_restore"]		= c_outfit.m_fRadiationRestoreSpeed or 0
+		self.stat_outfit["power"]				= cond * (c_outfit.m_fPowerRestoreSpeed or 0)
+		
+		self.stat_outfit["radia"]				= cond * get_outfit_value(outfit, sec, "Radiation",		0) / 100
+		self.stat_outfit["acid"]				= cond * get_outfit_value(outfit, sec, "ChemicalBurn",	0) / 100
+		self.stat_outfit["shock"]				= cond * get_outfit_value(outfit, sec, "Shock",			0) / 100
+		self.stat_outfit["fire"]				= cond * get_outfit_value(outfit, sec, "Burn",			0) / 100
+		self.stat_outfit["psi"]					= cond * get_outfit_value(outfit, sec, "Telepatic",		0) / 100
+		self.stat_outfit["wound"]				= cond * get_outfit_value(outfit, sec, "Wound",			0) / 100
+		self.stat_outfit["strike"]				= cond * get_outfit_value(outfit, sec, "Strike",		0) / 100
+		self.stat_outfit["explosion"]			= cond * get_outfit_value(outfit, sec, "Explosion",		0) / 100
+--		self.stat_outfit["head_fire_wound"]		= 0
+--		self.stat_outfit["head_br_class"]		= 0
+		self.stat_outfit["fire_wound"]			= cond * get_outfit_value(outfit, sec, "FireWound",		0) / 100
+		self.stat_outfit["br_class"]			= cond * get_outfit_ap_res(outfit)
+	end
+	
+-- Helmet
+	for name,_ in pairs(self.stat_helm) do
+		self.stat_helm[name] = 0
+	end
+	self.stat_helm["health_restore"] = 0
+	self.stat_helm["bleeding_restore"] = 0
+	self.stat_helm["radia_restore"] = 0
+	
+	local helm = actor:item_in_slot(12)
+	if helm then
+		local c_helm = helm:cast_Helmet()
+		local sec = helm:section()
+		local cond = helm:condition()
+		
+		self.stat_helm["health_restore"]		= c_helm.m_fHealthRestoreSpeed or 0
+		self.stat_helm["bleeding_restore"]		= c_helm.m_fBleedingRestoreSpeed or 0
+		self.stat_helm["radia_restore"]			= c_helm.m_fRadiationRestoreSpeed or 0
+		self.stat_helm["power"]					= cond * (c_helm.m_fPowerRestoreSpeed or 0) * 100
+		
+		self.stat_helm["radia"]					= cond * get_outfit_value(helm, sec, "Radiation",		0) / 100
+		self.stat_helm["acid"]					= cond * get_outfit_value(helm, sec, "ChemicalBurn",	0) / 100
+		self.stat_helm["shock"]					= cond * get_outfit_value(helm, sec, "Shock",			0) / 100
+		self.stat_helm["fire"]					= cond * get_outfit_value(helm, sec, "Burn",			0) / 100
+		self.stat_helm["psi"]					= cond * get_outfit_value(helm, sec, "Telepatic",		0) / 100
+		self.stat_helm["wound"]					= cond * get_outfit_value(helm, sec, "Wound",			0) / 100
+		self.stat_helm["strike"]				= cond * get_outfit_value(helm, sec, "Strike",			0) / 100
+		self.stat_helm["explosion"]				= cond * get_outfit_value(helm, sec, "Explosion",		0) / 100
+		self.stat_helm["head_fire_wound"]		= cond * get_outfit_value(helm, sec, "FireWound",		0) / 100
+		self.stat_helm["head_br_class"]			= cond * get_outfit_ap_res(helm)
+--		self.stat_helm["fire_wound"]			= 0
+--		self.stat_helm["br_class"]				= 0
+	end
+	
+-- Artefacts
+	for name,_ in pairs(self.stat_arty) do
+		self.stat_arty[name] = 0
+	end
+	self.stat_arty["health_restore"] = 0
+	self.stat_arty["bleeding_restore"] = 0
+	self.stat_arty["radia_restore"] = 0
+	
+	actor:iterate_belt( function(owner, obj)
+		local sec = obj:section()
+		local cond = obj:condition()
+		
+		self.stat_arty["health_restore"]	= self.stat_arty["health_restore"]		+ cond * SYS_GetParam(2, sec, "health_restore_speed",		0)
+		self.stat_arty["bleeding_restore"]	= self.stat_arty["bleeding_restore"]	+ cond * SYS_GetParam(2, sec, "bleeding_restore_speed",		0)
+		self.stat_arty["radia_restore"]		= self.stat_arty["radia_restore"]		+ cond * SYS_GetParam(2, sec, "radiation_restore_speed",	0)
+		self.stat_arty["power"]				= self.stat_arty["power"]				+ cond * SYS_GetParam(2, sec, "power_restore_speed",		0)
+		
+		self.stat_arty["radia"]				= self.stat_arty["radia"]				+ cond * get_af_value(obj, sec, "Radiation",				0)
+		self.stat_arty["acid"]				= self.stat_arty["acid"]				+ cond * get_af_value(obj, sec, "ChemicalBurn",				0)
+		self.stat_arty["shock"]				= self.stat_arty["shock"]				+ cond * get_af_value(obj, sec, "Shock",					0)
+		self.stat_arty["fire"]				= self.stat_arty["fire"]				+ cond * get_af_value(obj, sec, "Burn",						0)
+		self.stat_arty["psi"]				= self.stat_arty["psi"]					+ cond * get_af_value(obj, sec, "Telepatic",				0)
+		self.stat_arty["wound"]				= self.stat_arty["wound"]				+ cond * get_af_value(obj, sec, "Wound",					0)
+		self.stat_arty["strike"]			= self.stat_arty["strike"]				+ cond * get_af_value(obj, sec, "Strike",					0)
+		self.stat_arty["explosion"]			= self.stat_arty["explosion"]			+ cond * get_af_value(obj, sec, "Explosion",				0)
+		self.stat_arty["head_fire_wound"]	= self.stat_arty["head_fire_wound"]		+ cond * get_af_value(obj, sec, "FireWound",				0)
+		self.stat_arty["head_br_class"]		= self.stat_arty["head_br_class"]		+ cond * (get_outfit_ap_res(obj) + (mitigation_table_head[sec] and mitigation_table_head[sec][1] or 0))
+		self.stat_arty["fire_wound"]		= self.stat_arty["fire_wound"]			+ cond * get_af_value(obj, sec, "FireWound",				0)
+		self.stat_arty["br_class"]			= self.stat_arty["br_class"]			+ cond * (get_outfit_ap_res(obj) + (mitigation_table_body[sec] and mitigation_table_body[sec][1] or 0))
+	end)
+	
+-- Boosters
+	for name,_ in pairs(self.stat_boost) do
+		self.stat_boost[name] = 0
+	end
+	self.stat_boost["health_restore"] = 0
+	self.stat_boost["bleeding_restore"] = 0
+	self.stat_boost["radia_restore"] = 0
+	
+	actor:cast_Actor():conditions():BoosterForEach( function(booster_type, booster_time, booster_value)
+		local boost_id = self.boost_id[booster_type]
+		if boost_id then
+			local prot = prot_stats[boost_id]
+			local adj = prot and gadb_const[prot].boost_adjuster
+			if adj then
+				booster_value = booster_value * adj
+			end
+			if boost_id == "radia" then
+				booster_value = booster_value
+			end
+			self.stat_boost[boost_id] = booster_value
+		end
+	end)
+	self.stat_boost["head_fire_wound"] = self.stat_boost["fire_wound"]
+	
+-- Simple stats
+	local idp_stats_inv = color_settings.idp_stats_inv
+	
+	for name,_ in pairs(simple_stats) do
+		local stat = self.stat[name]
+		
+		if (name == "health") then
+			stat.value = actor.health
+		else
+			stat.value = self.stat_list[name].value_functor()
+		end
+		
+		stat.text:SetText( stats_round_idp( stat.value * 100 , idp_stats_inv ) .. st_perc )
+	end
+	-- get irradiation value
+	self.irradia = math.ceil(actor.radiation*10000*0.387)
+	
+-- Protection stats
+	local s_hit = hit()
+	s_hit.bone = "bip01_spine"
+	s_hit.bone_id = 13
+	s_hit.power = 0.05
+	s_hit.draftsman = actor
+	s_hit.direction = VEC_Z
+	
+	local h_hit = hit()
+	h_hit.bone = "bip01_head"
+	h_hit.bone_id = 19
+	h_hit.power = 0.05
+	h_hit.draftsman = actor
+	h_hit.direction = VEC_Z
+	
+	local radia_in_msv = color_settings.radia_in_msv
+	
+	for name,prot_name in pairs(prot_stats) do
+		local stat = self.stat[name]
+		
+		stat.value = 0
+		stat.value_cap = nil
+		
+		local hit_type = prot_to_hit_type[ prot_name ]
+		s_hit.type = hit_type
+		h_hit.type = hit_type
+		
+		-- calculation of protection values from grok_actor_damage_balancer.script
+		if (name == "radia") then
+			-- Radiation bypasses Grok's generic protection calculation in actual
+			-- gameplay. Reproduce the vanilla inventory path from the already
+			-- condition-adjusted, radiation-max-normalized component values.
+			local equipment = self.stat_outfit[name] + self.stat_helm[name]
+			local bonus = self.stat_arty[name] + self.stat_boost[name]
+			if radia_in_msv then
+				stat.value, stat.boost = equipment + bonus, nil
+			else
+				stat.value, stat.boost = equipment, bonus
+			end
+		elseif (name == "head_fire_wound") then
+			stat.value,stat.value_cap = get_protection(h_hit,h_hit.bone_id,100)
+		elseif (name == "head_br_class") then	
+			_,_,_,_,_,stat.value,stat.premitigation = get_protection(h_hit,h_hit.bone_id,0.01)-- 0.01 to show premitigation only with armor
+		elseif (name == "fire_wound") then
+			stat.value,stat.value_cap = get_protection(s_hit,s_hit.bone_id,100)
+		elseif (name == "br_class") then
+			_,_,_,_,stat.value,_,stat.premitigation = get_protection(s_hit,s_hit.bone_id,0.01)-- 0.01 to show premitigation only with armor
+		else
+			stat.value,stat.value_cap = get_protection(s_hit,s_hit.bone_id)
+		end
+		
+		-- output of stat values in inventory ui
+		if stat.base:IsShown() then
+			local main_unit = (name == "radia") and gts(stat_radia.unit) or (stat.value_cap or stat.boost) and st_perc or ""
+			-- main value
+			stat.text:SetText( stats_round_idp( stat.value * 100 , idp_stats_inv ) .. main_unit )
+			
+			-- bonus/cap/premitigation value
+			local str_bns = ""
+			local val_bns,delim,unit
+			
+			if stat.value_cap then
+				val_bns = stat.value_cap
+				delim = "/"
+				unit = main_unit
+			elseif stat.boost and (stat.boost ~= 0) then
+				val_bns = stat.boost
+				delim = (val_bns > 0) and "+" or ""
+				unit = main_unit
+			elseif stat.premitigation then
+				val_bns = stat.premitigation
+				delim = "<"
+				unit = st_perc
+			end
+			
+			if val_bns then
+				str_bns = delim .. stats_round_idp( val_bns * 100 , idp_stats_inv ) .. unit
+			end
+			
+			stat.text_bonus:SetText( str_bns )
+		end
+	end
+	
+	local power_max = self.stat_list["power"].max
+	local power_clamp = 15 -- to bring power to vanilla values
+	local power = actor:cast_Actor():conditions():V_SatietyPower()
+	
+	-- calculate of suit effect before adding boosters
+--	power = power + self.stat_arty["power"]
+	power = power - self.stat_boost["power"]
+	local power_no_outfit = power / 0.5 -- power value without outfit
+	
+	if outfit then
+		power = power + self.stat_outfit["power"]
+		local power_loss = outfit:cast_CustomOutfit().m_fPowerLoss or 0
+		if (power_loss ~= 0) then
+			power = power / power_loss
+			self.stat_outfit["power"] = (power - power_no_outfit) / power_clamp / power_max
+		else
+			power = power_no_outfit
+		end
+	else
+		power = power_no_outfit
+	end
+	power = power / power_clamp / power_max
+	
+	-- add boosters after calculate of suit effect + adjust to match value in tooltip
+	self.stat_arty["power"] = self.stat_arty["power"] * utils_ui.stats_table["artefact"]["power_restore_speed"].magnitude / 100
+	self.stat_boost["power"] = self.stat_boost["power"] * utils_ui.stats_table["booster"]["boost_power_restore"].magnitude / 100
+	
+	self.stat["power"].value = power + self.stat_helm["power"] + self.stat_arty["power"] + self.stat_boost["power"]
+	-- actor power without equipments (body power for tooltip)
+	self.actor_power = power_no_outfit / power_clamp / power_max
+	
+-- Blinking Icons
+	for name,v in pairs(self.stat) do
+		if ( not v.base:IsShown() ) then
+			goto continue
+		end
+		
+		local boost_n = false
+		local boost_p = false
+		
+		if (name == "health") then
+			local health_restore = self.stat_outfit["health_restore"] + self.stat_helm["health_restore"] + self.stat_arty["health_restore"] + self.stat_boost["health_restore"]
+			boost_n = (actor.bleeding > 0) or (health_restore < 0)
+			boost_p = (health_restore > 0)
+		elseif (name == "radia") then
+			local radia_restore = self.stat_outfit["radia_restore"] + self.stat_helm["radia_restore"] + self.stat_arty["radia_restore"] + self.stat_boost["radia_restore"]
+			boost_n = (actor.radiation > 0)
+			boost_p = (radia_restore < 0) or (self.stat_boost[name] > 0)
+		else
+			boost_n = (self.stat_boost[name] < 0)
+			boost_p = (self.stat_boost[name] > 0)
+		end
+		
+		v.ico_n:Show(false)
+		v.ico_p:Show(false)
+		
+		if boost_n then
+			v.ico_n:Show(true)
+		elseif boost_p then
+			v.ico_p:Show(true)
+		end
+		
+		::continue::
+	end
+	
+	self:UpdateStatsBonus()
+end
+
+function ui_inventory.UIInventory:UpdateStatsBonus()
+	
+	local obj = hovered_object and get_object_by_id(hovered_object)
+	
+	if (not obj) then return end
+	
+	local sec			= obj:section()
+	local is_outfit		= IsOutfit(obj)
+	local is_helm		= IsHeadgear(obj)
+	local is_arty		= IsArtefact(obj)
+	local is_cons		= IsItem("consumable", sec)
+	
+	-- quick check for items that affect stats
+	if (not is_outfit)
+	and (not is_helm)
+	and (not is_arty)
+	and (not is_cons)
+	then
+		return
+	end
+	
+	local radia_in_msv = color_settings.radia_in_msv
+	
+-- init of bonus stats values
+	for name,_ in pairs(simple_stats) do
+		local stat = self.stat[name]
+		
+		stat.value_bonus = stat.value
+	end
+	-- get protection values without cap
+	for name,_ in pairs(prot_stats) do
+		local stat = self.stat[name]
+		
+		local prot = self.stat_outfit[name] + self.stat_helm[name]
+		local boost = self.stat_arty[name] + self.stat_boost[name]
+		if (name == "radia") and (not radia_in_msv) then
+			stat.value_bonus = prot
+			stat.boost = boost
+		else
+			stat.value_bonus = prot + boost
+		end
+	end
+	
+-- calculation of bonuses and boosters
+	local actor = db.actor
+	local cond = ui_inventory.show_full_stats and 1 or obj:condition()
+	
+	if is_outfit then
+		local in_slot_modifier = item_backpack.is_in_slot(obj) and 0 or 1
+		
+		for name,prot_name in pairs(prot_stats) do
+			local stat = self.stat[name]
+			
+			-- reset cap values, because new outfit unequip all artefacts on the belt
+			get_adb_constants(prot_name)
+			stat.value_cap = not name:find("br_class") and limiter or nil -- no need to copy the cap value for all "FireWound" hit types into the br_class stats
+			-- to subtract artefact bonus (except radia), because new outfit unequip all artefacts on the belt
+			local arty_bonus = (name == "radia") and (not radia_in_msv) and 0 or self.stat_arty[name]
+			-- to subtract artefact bonus from helmet stats
+			local is_helm_modifier = ((name == "head_fire_wound") or (name == "head_br_class")) and 0 or 1
+			
+			local old_outfit = self.stat_outfit[name] * is_helm_modifier
+			local new_outfit = 0
+			
+			if (name == "br_class") then
+				new_outfit = get_outfit_ap_res(obj)
+			else
+				new_outfit = get_outfit_value(obj, sec, prot_name, 0) / 100
+				if name == "radia" then new_outfit = new_outfit end
+			end
+			new_outfit = cond * new_outfit * in_slot_modifier * is_helm_modifier - arty_bonus
+			
+			stat.value_bonus = stat.value_bonus - old_outfit + new_outfit
+		end
+	elseif is_helm then
+		local in_slot_modifier = item_backpack.is_in_slot(obj) and 0 or 1
+		
+		for name,prot_name in pairs(prot_stats) do
+			if (name == "fire_wound") or (name == "br_class") then
+				goto continue
+			end
+			
+			local stat = self.stat[name]
+			
+			local old_helm = self.stat_helm[name]
+			local new_helm = 0
+			
+			if (name == "head_br_class") then
+				new_helm = get_outfit_ap_res(obj)
+			else
+				new_helm = get_outfit_value(obj, sec, prot_name, 0) / 100
+				if name == "radia" then new_helm = new_helm end
+			end
+			new_helm = cond * new_helm * in_slot_modifier
+			
+			stat.value_bonus = stat.value_bonus - old_helm + new_helm
+			
+			::continue::
+		end
+	elseif is_arty then
+		
+		local is_on_belt = actor:is_on_belt(obj) -- selected artefact is on the belt
+		local in_belt_modifier = is_on_belt and -1 or 1
+		
+		local cat = categories[sec] -- category of the selected artefact
+		local same_on_belt -- to store an artefact object on the belt similar to the selected one
+		
+		-- if the selected artefact is not on the belt, then we look for the same one on the belt
+		-- (according to the new logic from grok_remove_belt_duplicates.script, the selected artefact should replace the same one on the belt)
+		if (not is_on_belt) then
+			
+			local has_free_slot
+			local cnt_arty = actor:belt_count()
+			local cc = self.CC["actor_belt"]
+			local cnt_cell = #cc.cell
+			
+			-- search for at least one free slot
+			for i=1,cnt_cell do
+				if (i > cnt_arty) and (not self.blocker_arty[i]:IsShown()) then
+					has_free_slot = true
+					break
+				end
+			end
+			
+			-- if there is no free slot, then the new artefact will not fit on the belt
+			if (not has_free_slot) then return end
+			
+			-- search for duplicate artefact on belt
+			if grbd then
+				local get_arty_from_cont = grbd.get_artefact_from_container
+				
+				for i=1,cnt_cell do
+					local arty_on_belt = (i <= cnt_arty) and actor:item_on_belt(i-1)
+					
+					-- we know for sure that there is at least one free slot
+					-- and if there is no artefact in it
+					-- and if we didn't exit the cycle before this
+					-- then this is another artefact and it's bonuses will need to be added
+					if (not arty_on_belt) then
+						break
+					end
+					
+					local sec_on_belt = arty_on_belt:section()
+					local cat_on_belt = categories[sec_on_belt]
+					
+					-- if the artefact is in a container
+					if (SYS_GetParam(0, sec_on_belt, "kind", "") == "i_arty_cont") then
+						sec_on_belt = get_arty_from_cont(sec_on_belt) -- get sec of artefact in container
+						cat_on_belt = categories[sec_on_belt] -- get category of artefact in container
+					end
+					
+					-- if it's a junk artefact, then there's nothing to compare (it has no useful properties)
+					if (SYS_GetParam(0, sec_on_belt, "kind", "") == "i_arty_junk") then
+						return
+					end
+					
+					local is_same_sec = (sec == sec_on_belt)
+					if is_same_sec or cat and cat_on_belt and (cat == cat_on_belt) then
+						
+						-- if conditions of the same artefacts are equal, then there's nothing to compare
+						local cond_on_belt = arty_on_belt:condition()
+						if (cond == cond_on_belt) and is_same_sec then
+							return
+						end
+						
+						-- save the object of the same (by section or by category) artefact on the belt
+						same_on_belt = {
+							obj = arty_on_belt,
+							sec = sec_on_belt,
+							cond = cond_on_belt
+						}
+						break
+					end
+				end
+			end
+		end
+		
+		for name,prot_name in pairs(prot_stats) do
+			
+			local stat = self.stat[name]
+			
+			-- get actual cap values based on artefact
+			-- if there is the same artefact on the belt, don't increase limiter
+			if stat.value_cap and (not same_on_belt) then
+				-- call to get "cap_stat" string of ltx parameter name
+				get_adb_constants(prot_name)
+				-- keep grok_actor_damage_balancer limiter logic
+				local af_limit = ini_sys:r_float_ex(sec, cap_stat) or 0
+				stat.value_cap = math.min( 0.90 , stat.value_cap + af_limit * in_belt_modifier )
+			end
+			
+			local value = (name == "radia") and (not radia_in_msv) and stat.boost or stat.value_bonus
+			local bonus_func = get_af_value
+			-- to add plate effect to br class
+			local af_bone_value = 0
+			local same_af_bone_value = 0
+			if name:find("br_class") then
+				bonus_func = get_outfit_ap_res
+				local mitigation_table = (name == "head_br_class") and mitigation_table_head or mitigation_table_body
+				af_bone_value = mitigation_table[sec] and mitigation_table[sec][1] or 0
+				same_af_bone_value = same_on_belt and mitigation_table[same_on_belt.sec] and mitigation_table[same_on_belt.sec][1] or 0
+			end
+			-- get bonus of the selected artefact
+			local bonus = bonus_func(obj, sec, prot_name, 0) + af_bone_value
+			if name == "radia" then bonus = bonus end
+			bonus = cond * bonus * in_belt_modifier
+			-- get bonus of the same artefact on the belt (if any)
+			local same_bonus = 0
+			if same_on_belt then
+				same_bonus = bonus_func(same_on_belt.obj, same_on_belt.sec, prot_name, 0) + same_af_bone_value
+				if name == "radia" then same_bonus = same_bonus end
+				same_bonus = same_on_belt.cond * same_bonus
+			end
+			
+			-- add bonus from the selected artefact and subtract bonus of the same artefact on the belt (if any)
+			-- (according to the new logic from grok_remove_belt_duplicates.script, the selected artefact should replace the same one on the belt)
+			stat.value_bonus = value + bonus - same_bonus
+		end
+	elseif is_cons then
+		
+		for name,prot_name in pairs(prot_stats) do
+			if name:find("br_class") then
+				goto continue
+			end
+			
+			local stat = self.stat[name]
+			
+			local value = (name == "radia") and (not radia_in_msv) and stat.boost or stat.value_bonus
+			local bonus = get_booster_protection(obj, sec, prot_name, 0)
+			local booster = self.stat_boost[name]
+			
+			-- remove unnecessary precision of values
+			bonus = round_idp( bonus, 6 )
+			booster = round_idp( booster, 6 )
+			
+			-- boosters don't stack, only increase to a large boost
+			if (booster < bonus) then
+				bonus = bonus - booster
+			else
+				bonus = 0
+			end
+			
+			stat.value_bonus = value + bonus
+			
+			::continue::
+		end
+		
+		for name,_ in pairs(simple_stats) do
+			local stat = self.stat[name]
+			
+			stat.value_bonus = stat.value + (simple_stat_values(obj, name) or 0)
+		end
+	end
+	
+-- compare and recolor stats
+	local idp_stats_inv			= color_settings.idp_stats_inv 
+	local bright_stats_compare	= color_settings.bright_stats_compare
+	
+	for name,v in pairs(self.stat) do
+		if ( not v.base:IsShown() ) then
+			goto continue
+		end
+		
+		local is_simple_stats	= simple_stats[name] ~= nil
+		local is_radia			= name == "radia"
+		local is_br_stats		= name:find("br_class")
+		
+		local old = stats_round_idp( v.value * 100 , idp_stats_inv )
+		local new = stats_round_idp( v.value_bonus * 100 , idp_stats_inv )
+		local cap = v.value_cap and stats_round_idp( v.value_cap * 100 , idp_stats_inv )
+		
+		-- old values are already capped
+		new = cap and math.min(new, cap) or is_simple_stats and clamp(new, 0, 100) or new
+		
+		local bonus_symbol = ">"-- is_simple_stats and "" or ">"
+		
+		if is_radia and (not radia_in_msv) and (is_arty or is_cons) then
+			old = v.boost
+			bonus_symbol = (new >= 0) and "+" or ""
+		end
+		
+		if (new ~= old) then
+			local ctrl_txt = (is_radia and radia_in_msv or is_simple_stats) and "text" or "text_bonus"
+			local unit = is_radia and gts(stat_radia.unit) or is_br_stats and "" or st_perc
+			
+			local clr_txt = (new > old) and clr_stats_t.p or clr_stats_t.n
+			-- when the limit is reached - golden color
+			clr_txt = cap and (new >= cap) and clr_stats_t.g or clr_txt
+			
+			clr_txt = change_color_brightness( clr_txt , bright_stats_compare )
+			
+			-- new = stats_round_idp( new * 100 , idp_stats_inv )
+			v[ctrl_txt]:SetText( bonus_symbol .. new .. unit )
+			v[ctrl_txt]:SetTextColor( clr_txt )
+		end
+		
+		::continue::
+	end
+end
+
+-- ========== start of utils from Accurate Stats Extended - G_FLAT x momopate (small edit by Sota) ================
+function get_booster_protection(obj, sec, name, def)
+	def = def or 0
+	
+	if (not name) then
+		return def
+	end
+	
+	local param = gadb_const[name].booster_name
+	if (not param) then
+		return def
+	end
+	
+	if (not sec) then
+		if (not obj) then
+			return def
+		end
+		sec = obj:section()
+	end
+	
+	local prot = SYS_GetParam(2, sec, param, 0)
+	
+	local adj = gadb_const[name].boost_adjuster
+	if adj then
+		prot = prot * adj
+	end
+	if name == "Radiation" then
+		prot = prot
+	end
+	
+	return prot
+end
+
+function simple_stat_values(obj, name)
+	if obj then
+		local sec = obj:section()
+		if (name == "health") then
+			local hp_num = 0
+			local thp_num = 0
+			local boost_time = ini_sys:r_float_ex(sec, "boost_time")
+			
+			local eat_health = ini_sys:r_float_ex(sec, "eat_health")
+			if eat_health then
+				hp_num = eat_health
+			end
+			
+			if boost_time and (boost_time ~= 0) then
+				local boost_health_restore = ini_sys:r_float_ex(sec, "boost_health_restore")
+				if boost_health_restore then
+					thp_num = boost_health_restore * 6 * boost_time
+				end
+			end
+			
+			return hp_num + thp_num
+		elseif (name == "hunger") then
+			local eat_sat = ini_sys:r_float_ex(sec, "eat_satiety")
+			if eat_sat then
+				return eat_sat
+			end		
+		elseif (name == "thirst") then
+			local eat_thirstiness = ini_sys:r_float_ex(sec, "eat_thirstiness")
+			if eat_thirstiness then
+				return -(eat_thirstiness * thirst_mul / thirst_max)
+			end		
+		elseif (name == "sleep") then
+			local eat_sleepiness = ini_sys:r_float_ex(sec, "eat_sleepiness")
+			if eat_sleepiness then
+				return -(eat_sleepiness * sleep_mul / sleep_max)
+			end		
+		end
+	else
+		if (name == "health") then
+			return db.actor.health
+		elseif (name == "hunger") then
+			return hts_inventory_bars.get_satiety_val()
+		elseif (name == "thirst") then
+			return hts_inventory_bars.get_thirst_val()
+		elseif (name == "sleep") then
+			return hts_inventory_bars.get_sleep_val()
+		end
+	end
+end
+
+hovered_object = nil
+local function update_with_focus(obj)
+	-- if db.actor:is_on_belt(obj) then return end
+	hovered_object = obj:id()
+	local gui = ui_inventory.GUI
+	if gui then
+		gui:UpdateStats()
+	end
+end
+
+local function update_no_focus()
+	hovered_object = nil
+	local gui = ui_inventory.GUI
+	if gui then
+		gui:UpdateStats()
+	end
+end
+-- ========== end of utils from Accurate Stats Extended - G_FLAT x momopate (small edit by Sota) ==================
+
+-- update only tooltip and stats, also control blocking if full stats key is pressed (taken (with edits by Sota) from momopate_accurate_stats.script)
+local function update_gui(gui)
+	if gui and gui.item_info then
+		gui:UpdateStats()
+		gui.item_info:Update()
+		local is_kcrouch = ui_inventory.color_settings.full_stats_key == bind_to_dik(key_bindings.kCROUCH)
+		gui:AllowMovement( not (ui_inventory.show_full_stats and is_kcrouch) and (gui.mode == "inventory") )
+	end
+end
+
+-- function to return tooltip delay back (taken unchanged from momopate_accurate_stats.script)
+local nextTick = _G.nextTick or function(f, n)
+	n = math.floor(math.max(n or 1, 1))
+	AddUniqueCall(function()
+		if n == 1 then
+			return f()
+		else
+			n = n - 1
+			return false
+		end
+	end)
+end
+
+-- show full stats of item (taken (with edits by Sota) from momopate_accurate_stats.script)
+local function on_key_press(key)
+	local gui = ui_inventory.GUI
+	if gui and hovered_object then -- Edited by Sota - no need show full stats if no object is hovered
+		if (key == ui_inventory.color_settings.full_stats_key) and (actor_menu.get_last_mode() > 0) then -- edited by G_FLAT, no stutter when inventory is closed
+			--printf("full stats key pressed")
+			ui_inventory.show_full_stats = true
+			gui.item_info.delay = 0
+			update_gui(gui)
+			nextTick(function()
+					gui.item_info.delay = instant_tooltip and instant_tooltip.delay or 350
+					end, 5)
+		end
+	end
+end
+
+-- hide full stats of item (taken (with edits by Sota) from momopate_accurate_stats.script)
+local function on_key_release(key)
+	local gui = ui_inventory.GUI
+	if gui then
+		if (key == ui_inventory.color_settings.full_stats_key) and (actor_menu.get_last_mode() > 0) then -- edited by G_FLAT, no stutter when inventory is closed
+			--printf("full stats key released")
+			ui_inventory.show_full_stats = false
+			gui.item_info.delay = 0
+			update_gui(gui)
+			nextTick(function()
+					gui.item_info.delay = instant_tooltip and instant_tooltip.delay or 350
+					end, 5)
+		end
+	end
+end
+
+function on_game_start()
+	-- callbacks for comparison hovered items (from Accurate Stats Extended - G_FLAT x momopate)
+	RegisterScriptCallback("ActorMenu_on_item_focus_receive", update_with_focus)
+	RegisterScriptCallback("ActorMenu_on_item_focus_lost", update_no_focus)
+	RegisterScriptCallback("actor_item_to_belt", update_no_focus)
+	RegisterScriptCallback("actor_item_to_slot", update_no_focus)
+	RegisterScriptCallback("actor_item_to_ruck", update_no_focus)
+	RegisterScriptCallback("actor_on_item_drop", update_no_focus)
+	RegisterScriptCallback("actor_on_item_use", update_no_focus)
+	RegisterScriptCallback("GUI_on_hide", update_no_focus)
+	-- callbacks for show full stats
+	RegisterScriptCallback("on_key_press", on_key_press)
+	RegisterScriptCallback("on_key_release", on_key_release)
+end

@@ -1,0 +1,98 @@
+local gts				= game.translate_string
+
+local gadb_const		= sota_stats_tweak_gamma.gadb_const
+local stats_round_idp	= ui_inventory.stats_round_idp
+local color_settings	= ui_inventory.color_settings
+local stat_radia		= ui_inventory.stat_radia
+
+local char_ini			= ini_file("item_upgrades.ltx")
+
+local property_table	= inventory_upgrades.property_table
+property_table["prop_restore_health"][5]	= 1.5
+property_table["prop_restore_bleeding"][5]	= 15
+property_table["prop_power"][5]				= 1											-- in vanilla mul is 2 (todo: adjust it for true upgrade bonus)
+property_table["prop_chem"][5]				= gadb_const["ChemicalBurn"].adjuster	-- / 4	-- 0.33
+property_table["prop_psy"][5]				= gadb_const["Telepatic"].adjuster		-- / 4	-- 0.425
+property_table["prop_radio"][5]				= 1.0 -- 0.55										-- "Radiation"
+property_table["prop_thermo"][5]			= 1.0 -- 1.15										-- "Burn"
+property_table["prop_electro"][5]			= gadb_const["Shock"].adjuster			-- * 4	-- 0.408
+property_table["prop_damage"][5]			= gadb_const["Wound"].adjuster				-- 0.696
+property_table["prop_armor"][5]				= gadb_const["FireWound"].adjuster		-- ^ 2	-- 0.64
+
+function inventory_upgrades.property_functor_a(param1, name)
+	--printf("-property_functor_a(%s,%s)",param1,name)
+	local prorerty_name		= char_ini:r_string(name, "name")
+	local t_prorerty_name	= gts(prorerty_name)
+	local section_table		= parse_names(param1)
+	local section_table_n	= #section_table
+	local section			= section_table[1]
+	if (section_table_n == 0) then
+		return ""
+	end
+	if (name == "prop_night_vision_1")
+	or (name == "prop_night_vision_2")
+	or (name == "prop_night_vision_3")
+	or (name == "prop_sprint")
+	or (name == "prop_scanner")
+	or (name == "prop_dozimeter")
+	or (name == "prop_psy_controller")
+	then
+		return t_prorerty_name
+	end
+	local value	= 0
+	local sum	= 0
+	for i=1,section_table_n do
+		if (not char_ini:line_exist(section_table[i], "value")) or (not char_ini:r_string(section_table[i], "value")) then
+			return t_prorerty_name
+		end
+		value = char_ini:r_string(section_table[i], "value")
+		if (name ~= "prop_night_vision") then
+			sum = sum + tonumber(value)
+		else
+			sum = tonumber(value)
+		end
+	end
+	
+	local idp_stats_tt = color_settings.idp_stats_tt
+	local adj = property_table[name] and property_table[name][5]
+	if adj then
+		sum = stats_round_idp( sum * adj , idp_stats_tt )
+	end
+	
+	value = sum
+	local sign = (value > 0) and "+" or ""
+	
+	if (name == "prop_restore_bleeding") then
+		value = value.." "..gts("st_ml_min")
+	elseif (name == "prop_tonnage")
+		or (name == "prop_weightoutfit")
+		or (name == "prop_weighthelm")
+		or (name == "prop_weight")
+	then
+		value = round_idp(value,2).." "..gts("st_kg")
+	elseif (name == "prop_night_vision") then
+		return (value == 1) and t_prorerty_name or gts(prorerty_name.."_"..value)
+	elseif (name == "prop_no_buck") or (name == "prop_autofire") then
+		return t_prorerty_name
+	elseif (name == "prop_radio") then
+		value = stats_round_idp( value * stat_radia.magn , idp_stats_tt ).." "..gts(stat_radia.unit)
+	elseif (name == "prop_reliability")
+		or (name == "prop_recoil")
+		or (name == "prop_dispersion")
+		or (name == "prop_bullet_speed")
+		or (name == "prop_restore_health")
+		or (name == "prop_power")
+		or (name == "prop_chem")
+		or (name == "prop_psy")
+		or (name == "prop_thermo")
+		or (name == "prop_electro")
+		or (name == "prop_damage")
+		or (name == "prop_armor")
+		or (name == "prop_rpm")
+		or (name == "prop_durability")
+		or (name == "prop_inertion")
+	then
+		value = value.." ".."%"
+	end
+	return t_prorerty_name.." "..sign..value
+end

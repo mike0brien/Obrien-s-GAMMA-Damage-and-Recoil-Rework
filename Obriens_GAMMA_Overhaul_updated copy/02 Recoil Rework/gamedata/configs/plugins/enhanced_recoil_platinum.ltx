@@ -1,0 +1,1402 @@
+; obrien enhanced recoil DLTX
+
+; copying base ammo and info from original ltx.
+[cam_anim_1]
+    frames_peak     = 0.33                          ;; Can't measure it at 30hz, it also looks terrible
+
+[cam_anim_2]
+    frames_peak     = 0.67                          ;; This one also looks terrible
+
+[cam_anim_3]
+    frames_peak     = 1
+
+[cam_anim_4]
+    frames_peak     = 2
+
+[cam_anim_5]
+    frames_peak     = 3
+
+[base_recoil]
+    cam_anim    = 5                                 ;; Pick one of the 5 cam_anim_ sections
+    cam_shake   = 0.5, 0.5, 0.25                    ;; Horizontal shake, vertical shake, camera roll
+    cam_recoil  = 0.5, 1.0:0                        ;; Horizontal recoil, vertical recoil
+    cam_fov     = 1.0                               ;; How far back to pull the camera 
+    gun_shake_k = -0.1                              ;; Gun movement coefficient -- (cam_shake * gun_shake_k)
+    max_recoil  = 1.0                               ;; Max recoil divisor -- (1 + max_recoil)
+    max_shots   = 1                                 ;; Consecutive shots needed to reach max_recoil
+    hburst_k    = 1.0                               ;; Neutral misc. modifiers
+    variance_k  = 1.0
+    h_max_r_k   = 1.0
+    h_var_k     = 1.0
+    cam_return  = false                             ;; Disable GOLD's recoil auto reset "feature" by default
+    reset_k     = 1.0
+    force_norm  = false
+    postprocess =                                   ;; No default post process effects
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                                           _       __            _ _        ;;
+;;     /\                                   | |     / _|          | | |       ;;
+;;    /  \   _ __ ___  _ __ ___   ___     __| | ___| |_ __ _ _   _| | |_ ___  ;;
+;;   / /\ \ | '_ ` _ \| '_ ` _ \ / _ \   / _` |/ _ \  _/ _` | | | | | __/ __| ;;
+;;  / ____ \| | | | | | | | | | | (_) | | (_| |  __/ || (_| | |_| | | |_\__ \ ;;
+;; /_/    \_\_| |_| |_|_| |_| |_|\___/   \__,_|\___|_| \__,_|\__,_|_|\__|___/ ;;
+;;                                                                            ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Inherit from these to get easy default shake, roll, FOV pull, and post process effects.
+
+[9x18]
+    cam_shake   = 0.5, 0.5, 0.25
+    cam_fov     = 5.0
+
+[9x19]
+    cam_shake   = 0.5, 0.5, 0.25
+    cam_fov     = 7.5
+
+[7.62x25]
+    cam_shake   = 0.75, 0.75, 0.375
+    cam_fov     = 6.25
+
+[5.7x28]
+    cam_shake   = 0.67, 0.67, 0.333
+    cam_fov     = 6.665
+
+[45acp]
+    cam_shake   = 1.0, 1.0, 0.5
+    cam_fov     = 8.75
+
+[357mag]
+    cam_shake   = 2.0, 2.0, 1.0
+    cam_fov     = 10.0
+    postprocess = duality_h=0.0125, duality_v=0.0125
+
+[12ga]
+    cam_shake   = 2.5, 2.5, 1.25
+    cam_fov     = 12.5
+    postprocess = duality_h=0.015, duality_v=0.015
+
+[5.45x39]
+    cam_shake   = 2.0, 2.0, 1.0
+    cam_fov     = 10.0
+
+[5.56x45]
+    cam_shake   = 2.0, 2.0, 1.0
+    cam_fov     = 10.0
+
+[7.62x39]
+    cam_shake   = 2.5, 2.5, 1.125
+    cam_fov     = 11.25
+    postprocess = duality_h=0.0025, duality_v=0.0025
+
+[9x39]
+    cam_shake   = 2.25, 2.25, 1.125
+    cam_fov     = 11.25
+    postprocess = duality_h=0.002, duality_v=0.002
+
+[7.62x51]
+    cam_shake   = 2.5, 2.5, 1.25
+    cam_fov     = 12.5
+    postprocess = duality_h=0.005, duality_v=0.005
+
+[7.62x54]
+    cam_shake   = 2.5, 2.5, 1.25
+    cam_fov     = 12.5
+    postprocess = duality_h=0.005, duality_v=0.005
+
+[7.92x33]
+    cam_shake   = 3.0, 3.0, 1.5
+    cam_fov     = 13.25
+    postprocess = duality_h=0.0067, duality_v=0.0067
+
+[12.7x55]
+    cam_shake   = 3.0, 3.0, 1.5
+    cam_fov     = 13.25
+    postprocess = duality_h=0.0075, duality_v=0.0075
+
+;; Use the _slow variants for bolt actions or slow shooting weapons (i.e.: below 90RPM.)
+
+[7.62x51_slow]
+    cam_shake   = 5.0, 5.0, 2.5
+    cam_fov     = 12.5
+    postprocess = duality_h=0.015, duality_v=0.015
+
+[7.62x54_slow]
+    cam_shake   = 5.0, 5.0, 2.5
+    cam_fov     = 12.5
+    postprocess = duality_h=0.015, duality_v=0.015
+
+[7.92x33_slow]
+    cam_shake   = 6.0, 6.0, 3.0
+    cam_fov     = 13.25
+    postprocess = duality_h=0.0167, duality_v=0.0167
+
+[12.7x55_slow]
+    cam_shake   = 7.5, 7.5, 3.75
+    cam_fov     = 13.25
+    postprocess = duality_h=0.0175, duality_v=0.0175
+
+[gauss]
+    cam_shake   = 10.0, 10.0, 10.0
+    cam_fov     = 50.0
+    postprocess = duality_h=0.15, duality_v=0.15
+
+[lapua]
+    cam_shake   = 7.5, 7.5, 3.75
+    cam_fov     = 16.65
+    postprocess = duality_h=0.1, duality_v=0.1
+
+[ubgl]
+    cam_recoil  = 2.5:0, 25.0:0
+    cam_shake   = 5.0, 5.0, 2.5
+    cam_fov     = 20.0
+    max_recoil  = 0.0
+    max_shots   = 1000
+    postprocess = duality_h=0.05, duality_v=0.05
+
+;; Unused base game ammo types
+
+[4.6x30]
+    cam_shake   = 0.6, 0.6, 0.3
+    cam_fov     = 6.25
+
+[50bmg]
+    cam_shake   = 10.0, 10.0, 5.0
+    cam_fov     = 20.0
+    postprocess = duality_h=0.15, duality_v=0.15
+
+;; BAS ammo types
+
+[9x21]
+    cam_shake   = 0.75, 0.75, 0.375
+    cam_fov     = 7.5
+
+[4ga]
+    cam_shake   = 3.0, 3.0, 1.5
+    cam_fov     = 15.0
+    postprocess = duality_h=0.055, duality_v=0.055
+
+[20ga]
+    cam_shake   = 2.25, 2.25, 1.125
+    cam_fov     = 11.125
+    postprocess = duality_h=0.025, duality_v=0.025
+
+[338fed]
+    cam_shake   = 4.0, 4.0, 2.0
+    cam_fov     = 13.25
+    postprocess = duality_h=0.15, duality_v=0.15
+
+;===============================================================
+; BASE RECOIL PROFILES
+;===============================================================
+
+[obrien_m4_platinum_recoil]:base_recoil, 5.56x45
+    cam_anim = 5
+    cam_recoil  = 1.4, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_aug_platinum_recoil]:base_recoil, 5.56x45
+    cam_anim = 5
+    cam_recoil  = 1.3, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_val_platinum_recoil]:base_recoil, 9x39
+    cam_anim = 5
+    cam_recoil  = 1.3, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_valbp_platinum_recoil]:base_recoil, 9x39
+    cam_anim = 5
+    cam_recoil  = 1.2, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_ak74_platinum_recoil]:base_recoil, 5.45x39
+    cam_anim = 5
+    cam_recoil  = 1.4, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_74bp_platinum_recoil]:base_recoil, 5.45x39
+    cam_anim = 5
+    cam_recoil  = 1.3, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_akm_platinum_recoil]:base_recoil, 7.62x39
+    cam_anim = 5
+    cam_recoil  = 1.5, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_300blk_platinum_recoil]:base_recoil, 7.62x39
+    cam_anim = 5
+    cam_recoil  = 1.4, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_fal_platinum_recoil]:base_recoil, 7.62x51
+    cam_anim = 5
+    cam_recoil  = 1.0, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_falbp_platinum_recoil]:base_recoil, 7.62x51
+    cam_anim = 5
+    cam_recoil  = 1.0, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_svd_platinum_recoil]:base_recoil, 7.62x54
+    cam_anim = 5
+    cam_recoil  = 1.0, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_svdbp_platinum_recoil]:base_recoil, 7.62x54
+    cam_anim = 5
+    cam_recoil  = 1.0, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_ash12_platinum_recoil]:base_recoil, 12.7x55
+    cam_anim = 5
+    cam_recoil  = 1.0, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_r700_platinum_recoil]:base_recoil, 7.62x51
+    cam_anim = 5
+    cam_recoil  = 1.0, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_338lp_platinum_recoil]:base_recoil, 338fed
+    cam_anim = 5
+    cam_recoil  = 1.0, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_m249_platinum_recoil]:base_recoil, 5.56x45
+    cam_anim = 5
+    cam_recoil  = 1.0, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_m240_platinum_recoil]:base_recoil, 7.62x51
+    cam_anim = 5
+    cam_recoil  = 1.0, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_rpk74_platinum_recoil]:base_recoil, 5.45x39
+    cam_anim = 5
+    cam_recoil  = 1.0, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_rpk_platinum_recoil]:base_recoil, 7.62x39
+    cam_anim = 5
+    cam_recoil  = 1.0, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_pkm_platinum_recoil]:base_recoil, 7.62x54
+    cam_anim = 5
+    cam_recoil  = 1.0, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_pkp_platinum_recoil]:base_recoil, 7.62x54
+    cam_anim = 5
+    cam_recoil  = 1.0, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_4ga_sg_platinum_recoil]:base_recoil, 4ga
+    cam_anim = 5
+    cam_recoil  = 1.5, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_4ga_sgbp_platinum_recoil]:base_recoil, 4ga
+    cam_anim = 5
+    cam_recoil  = 1.4, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_12ga_sg_platinum_recoil]:base_recoil, 12ga
+    cam_anim = 5
+    cam_recoil  = 1.3, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_20ga_sg_platinum_recoil]:base_recoil, 20ga
+    cam_anim = 5
+    cam_recoil  = 1.2, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_sr2_platinum_recoil]:base_recoil, 9x21
+    cam_anim = 5
+    cam_recoil  = 1.8, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_mp5_platinum_recoil]:base_recoil, 9x19
+    cam_anim = 5
+    cam_recoil  = 1.7, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_aug9mm_platinum_recoil]:base_recoil, 9x19
+    cam_anim = 5
+    cam_recoil  = 1.6, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_ump_platinum_recoil]:base_recoil, 45acp
+    cam_anim = 5
+    cam_recoil  = 1.7, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_usp_platinum_recoil]:base_recoil, 45acp
+    cam_anim = 5
+    cam_recoil  = 1.9, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_m1911_platinum_recoil]:base_recoil, 45acp
+    cam_anim = 5
+    cam_recoil  = 1.9, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_de_platinum_recoil]:base_recoil, 357mag
+    cam_anim = 5
+    cam_recoil  = 2.0, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_9x18_platinum_recoil]:base_recoil, 9x18
+    cam_anim = 5
+    cam_recoil  = 1.5, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+[obrien_glock_platinum_recoil]:base_recoil, 9x19
+    cam_anim = 5
+    cam_recoil  = 1.6, 1.0:0
+    max_recoil  = -0.5
+    max_shots   = 10
+    variance_k  = 1.0
+    h_max_r_k = 1.0
+    force_cam = false
+
+;=============================================================
+;-------------------------Pistols----------------------
+;=============================================================
+
+[wpn_colt1911_anarchy]:obrien_m1911_platinum_recoil
+
+
+[wpn_m45a1]:obrien_m1911_platinum_recoil
+
+
+[wpn_korth]:obrien_m1911_platinum_recoil
+
+
+[wpn_korth_custom]:obrien_m1911_platinum_recoil
+
+[wpn_colt1911_merc]:obrien_m1911_platinum_recoil
+
+
+[wpn_colt1911_custom]:obrien_m1911_platinum_recoil
+
+[wpn_usp]:obrien_usp_platinum_recoil
+
+[wpn_usp_match]:obrien_usp_platinum_recoil
+
+[wpn_usp_nimble]:obrien_usp_platinum_recoil
+
+[wpn_usp_tac_45]:obrien_usp_platinum_recoil
+
+[wpn_walther_p99]:obrien_glock_platinum_recoil
+
+[wpn_walther_p99_mod9]:obrien_glock_platinum_recoil
+
+[wpn_glock]:obrien_glock_platinum_recoil
+
+[wpn_glock17]:obrien_glock_platinum_recoil
+
+[wpn_glock17_m1]:obrien_glock_platinum_recoil
+
+[wpn_glock_custom]:obrien_glock_platinum_recoil
+
+[wpn_glock_modern]:obrien_glock_platinum_recoil
+
+[wpn_pl15_tan]:obrien_glock_platinum_recoil
+
+[wpn_pl15_tan_pl15_scolaz]:obrien_glock_platinum_recoil
+
+[wpn_gsh18]:obrien_glock_platinum_recoil
+
+[wpn_mp443]:obrien_glock_platinum_recoil
+
+[wpn_fn57]:obrien_glock_platinum_recoil
+
+[wpn_fort17]:obrien_glock_platinum_recoil
+
+[wpn_pm]:obrien_9x18_platinum_recoil
+
+[wpn_pm_custom]:obrien_9x18_platinum_recoil
+
+[wpn_pb]:obrien_9x18_platinum_recoil
+
+[wpn_aps_bas]:obrien_9x18_platinum_recoil
+
+[wpn_aps_bas_apsabigo]:obrien_9x18_platinum_recoil
+
+[wpn_oc33]:obrien_9x18_platinum_recoil
+
+[wpn_sr1m]:obrien_glock_platinum_recoil
+
+[wpn_sr1m_gurza_up]:obrien_glock_platinum_recoil
+
+[wpn_sr1m_sr1ugr1]:obrien_glock_platinum_recoil
+
+[wpn_beretta]:obrien_glock_platinum_recoil
+
+[wpn_beretta_camo]:obrien_glock_platinum_recoil
+
+[wpn_beretta_m9_upgr_kit]:obrien_glock_platinum_recoil
+
+[wpn_colt1911_camo]:obrien_m1911_platinum_recoil
+
+[wpn_colt1911_n]:obrien_m1911_platinum_recoil
+
+[wpn_desert_eagle]:obrien_de_platinum_recoil
+
+[wpn_desert_eagle_nimble]:obrien_de_platinum_recoil
+
+[wpn_eft_rsh12]:obrien_de_platinum_recoil
+
+[wpn_fnp45]:obrien_usp_platinum_recoil
+
+[wpn_fnx45_custom]:obrien_usp_platinum_recoil
+
+[wpn_p220]:obrien_usp_platinum_recoil
+
+[wpn_p220_n]:obrien_usp_platinum_recoil
+
+[wpn_p220_n_upg220]:obrien_usp_platinum_recoil
+
+[wpn_p220_n_u2g2p0r]:obrien_glock_platinum_recoil
+
+[wpn_tt33]:obrien_glock_platinum_recoil
+
+[wpn_tt33_modern]:obrien_glock_platinum_recoil
+
+;=============================================================
+;-------------------------SMGS-------------------------
+;=============================================================
+
+[wpn_mp5_kurtz]:obrien_mp5_platinum_recoil
+
+[wpn_mp5]:obrien_mp5_platinum_recoil
+
+[wpn_mp5_nimble]:obrien_mp5_platinum_recoil
+
+[wpn_mp5sd]:obrien_mp5_platinum_recoil
+
+[wpn_sr2_veresk]:obrien_sr2_platinum_recoil
+
+[wpn_sr2_m1]:obrien_sr2_platinum_recoil
+
+[wpn_aug_freedom]:obrien_aug9mm_platinum_recoil
+
+[wpn_bizon]:obrien_mp5_platinum_recoil
+
+[wpn_kiparis]:obrien_mp5_platinum_recoil
+
+[wpn_kiparis_ots2_upgr_kit]:obrien_mp5_platinum_recoil
+
+[wpn_kriss_vector]:obrien_ump_platinum_recoil
+
+[wpn_mp7]:obrien_mp5_platinum_recoil
+
+[wpn_mp9]:obrien_mp5_platinum_recoil
+
+[wpn_p90_gs]:obrien_aug9mm_platinum_recoil
+
+[wpn_p90gamma]:obrien_aug9mm_platinum_recoil
+
+[wpn_pp2000]:obrien_mp5_platinum_recoil
+
+[wpn_pp2000_operator]:obrien_mp5_platinum_recoil
+
+[wpn_ppsh41]:obrien_mp5_platinum_recoil
+
+[wpn_ppsh41_rednew]:obrien_mp5_platinum_recoil
+
+[wpn_ppsh41_woodnew]:obrien_mp5_platinum_recoil
+
+[wpn_thompson_1921]:obrien_ump_platinum_recoil
+
+[wpn_thompson_m1a1]:obrien_ump_platinum_recoil
+
+[wpn_udp9]:obrien_mp5_platinum_recoil
+
+[wpn_ump45_custom]:obrien_ump_platinum_recoil
+
+[wpn_vityaz]:obrien_mp5_platinum_recoil
+
+[wpn_vityaz_vitup]:obrien_mp5_platinum_recoil
+
+[wpn_vz61]:obrien_mp5_platinum_recoil
+
+[wpn_uzi]:obrien_mp5_platinum_recoil
+
+[wpn_uzi_mini]:obrien_mp5_platinum_recoil
+
+[wpn_uzi_micro]:obrien_glock_platinum_recoil
+
+[wpn_mac10]:obrien_mp5_platinum_recoil
+
+;================================================================
+;-------------------------Assault Rifles-------------------------
+;================================================================
+
+;---------------AR Style Rifles------------------
+[wpn_adar2_15]:obrien_m4_platinum_recoil
+
+[wpn_m4a1_siber]:obrien_m4_platinum_recoil
+
+[wpn_m4_tac]:obrien_m4_platinum_recoil
+
+[wpn_m4_ru556]:obrien_m4_platinum_recoil
+
+[wpn_xm4]:obrien_m4_platinum_recoil
+
+[wpn_xm4_bd]:obrien_m4_platinum_recoil
+
+[wpn_xm4_admin]:obrien_m4_platinum_recoil
+
+[wpn_brn180]:obrien_akm_platinum_recoil
+
+[wpn_mk47]:obrien_akm_platinum_recoil
+
+[wpn_mk47_sup]:obrien_akm_platinum_recoil
+
+[wpn_grot_short]:obrien_m4_platinum_recoil
+
+[wpn_grot]:obrien_m4_platinum_recoil
+
+[wpn_grot_short_tan]:obrien_m4_platinum_recoil
+
+[wpn_grot_tan]:obrien_m4_platinum_recoil
+
+
+;----------------------- Bullpup Rifles------------------------------
+
+[wpn_dtmdr]:obrien_aug_platinum_recoil
+
+[wpn_dtmdr_sup]:obrien_aug_platinum_recoil
+
+[wpn_aug]:obrien_aug_platinum_recoil
+
+[wpn_aug_merc]:obrien_aug_platinum_recoil
+
+[wpn_aug_modern]:obrien_aug_platinum_recoil
+
+[wpn_fn2000]:obrien_aug_platinum_recoil
+
+[wpn_fn2000_nimble]:obrien_aug_platinum_recoil
+
+[wpn_l85_m2]:obrien_aug_platinum_recoil
+
+[wpn_l85_modern]:obrien_aug_platinum_recoil
+
+[wpn_groza]:obrien_valbp_platinum_recoil
+
+[wpn_groza_nimble]:obrien_74bp_platinum_recoil
+
+[wpn_aug_modern_obrien]:obrien_aug_platinum_recoil
+
+;------------------ Other Rifles----------------------
+
+[wpn_howa20]:obrien_m4_platinum_recoil
+
+[wpn_ak5c_bas]:obrien_m4_platinum_recoil
+
+[wpn_ak5c_bas_5c_tik]:obrien_m4_platinum_recoil
+
+[wpn_sig550]:obrien_m4_platinum_recoil
+
+[wpn_sig550_custom]:obrien_m4_platinum_recoil
+
+[wpn_g36v_rwap]:obrien_m4_platinum_recoil
+
+[wpn_g36ka4_rwap]:obrien_m4_platinum_recoil
+
+[wpn_g36nimble_rwap]:obrien_m4_platinum_recoil
+
+[wpn_g36v_rwap_cut_kit]:obrien_m4_platinum_recoil
+
+
+;-------------------------AK74 Style Rifles--------------------------------
+
+[wpn_ak74u]:obrien_ak74_platinum_recoil
+
+[wpn_ak74u_tac]:obrien_ak74_platinum_recoil
+
+[wpn_ak74u_isg]:obrien_ak74_platinum_recoil
+
+[wpn_ak74]:obrien_ak74_platinum_recoil
+
+[wpn_ak74m]:obrien_ak74_platinum_recoil
+[wpn_ak74m_n]:obrien_ak74_platinum_recoil  
+
+[wpn_ak12_m1]:obrien_ak74_platinum_recoil
+
+[wpn_ak101]:obrien_ak74_platinum_recoil
+
+[wpn_ak74_pmc]:obrien_ak74_platinum_recoil
+
+[wpn_ak74m_beard]:obrien_ak74_platinum_recoil
+
+[wpn_ak105]:obrien_ak74_platinum_recoil
+
+[wpn_ak105_shakal]:obrien_ak74_platinum_recoil
+
+[wpn_ak105_swamp]:obrien_ak74_platinum_recoil
+
+[wpn_ak74_isg]:obrien_ak74_platinum_recoil
+
+;------ specialty AKs -------
+
+[wpn_abakan_n]:obrien_ak74_platinum_recoil
+
+[wpn_aek]:obrien_ak74_platinum_recoil
+
+;-------------------AKM Style Rifles---------------------
+
+[wpn_akms_alt]:obrien_akm_platinum_recoil
+
+[wpn_ak103]:obrien_akm_platinum_recoil
+
+[wpn_akm_alfa]:obrien_akm_platinum_recoil
+
+[wpn_ak74u_m1_isg]:obrien_ak74_platinum_recoil
+
+[wpn_akm_isg]:obrien_akm_platinum_recoil
+
+[wpn_ak104_alfa]:obrien_akm_platinum_recoil
+
+;--------------- 9x39 rifles -------------
+
+[wpn_9a91]:obrien_val_platinum_recoil
+
+[wpn_vintorez_m1]:obrien_val_platinum_recoil
+
+[wpn_vintorez_m2]:obrien_val_platinum_recoil
+
+[wpn_am17]:obrien_val_platinum_recoil
+
+[wpn_amb17]:obrien_val_platinum_recoil
+
+[wpn_val]:obrien_val_platinum_recoil
+
+[wpn_vihr]:obrien_val_platinum_recoil
+
+[wpn_vintorez_isg]:obrien_val_platinum_recoil
+
+[wpn_vintorez_n1]:obrien_val_platinum_recoil
+
+;===============================================================
+;-------------------------Battle Rifles-------------------------
+;===============================================================
+
+[wpn_dtmdr_black]:obrien_aug_platinum_recoil
+
+[wpn_dtmdr_black_sup]:obrien_aug_platinum_recoil
+
+[wpn_scar_siber]:obrien_fal_platinum_recoil
+
+[wpn_scar_new]:obrien_fal_platinum_recoil
+
+[wpn_fal_aus]:obrien_fal_platinum_recoil
+
+[wpn_fal_aus_kit_sa5x_spec]:obrien_fal_platinum_recoil
+
+[wpn_fal_aus_kit_aus_tri]:obrien_fal_platinum_recoil
+
+[wpn_fal_aus_kit_fal_leup]:obrien_fal_platinum_recoil
+
+[wpn_fal_sa58_osw]:obrien_fal_platinum_recoil
+
+[wpn_ace52]:obrien_fal_platinum_recoil
+
+[wpn_ash12]:obrien_ash12_platinum_recoil
+
+[wpn_ash12_sup]:obrien_ash12_platinum_recoil
+
+[wpn_g3]:obrien_fal_platinum_recoil
+
+[wpn_g3sg1]:obrien_fal_platinum_recoil
+
+[wpn_cetme]:obrien_fal_platinum_recoil
+
+[wpn_cetme_infiltrator_kit]:obrien_fal_platinum_recoil
+
+[wpn_hk51]:obrien_fal_platinum_recoil
+
+[wpn_hk51_whisper_kit]:obrien_fal_platinum_recoil
+
+;==============================================================
+;-------------------------LMGs---------------------------------
+;==============================================================
+
+[wpn_m249]:obrien_m249_platinum_recoil
+
+[wpn_pkm_siber]:obrien_pkm_platinum_recoil
+
+[wpn_pkm_zenit_siber]:obrien_pkm_platinum_recoil
+
+[wpn_pkp_siber]:obrien_pkp_platinum_recoil
+
+[wpn_rpd]:obrien_rpk_platinum_recoil
+
+[wpn_rpk]:obrien_rpk_platinum_recoil
+
+[wpn_rpk74]:obrien_rpk_platinum_recoil
+
+[wpn_rpk74_16]:obrien_rpk_platinum_recoil
+
+[wpn_rpk74_16_drum]:obrien_rpk_platinum_recoil
+
+[wpn_hk21]:obrien_m240_platinum_recoil
+
+;=============================================================
+;----------------------Shotguns-------------------------------
+;=============================================================
+
+[wpn_eft_mts_255]:obrien_20ga_sg_platinum_recoil
+
+[wpn_benelli_m1014]:obrien_12ga_sg_platinum_recoil
+
+[wpn_mp153_m1]:obrien_12ga_sg_platinum_recoil
+
+[wpn_bm16]:obrien_12ga_sg_platinum_recoil
+
+[wpn_bm16_full]:obrien_12ga_sg_platinum_recoil
+
+[wpn_ithacam37_mag]:obrien_12ga_sg_platinum_recoil
+
+[wpn_ithacam37_sawnoff]:obrien_12ga_sg_platinum_recoil
+
+[wpn_ithacam37_stakeout]:obrien_12ga_sg_platinum_recoil
+
+[wpn_ithacam37_stakeout_20x70]:obrien_20ga_sg_platinum_recoil
+
+[wpn_ithacam37_trench]:obrien_12ga_sg_platinum_recoil
+
+[wpn_ks23]:obrien_4ga_sg_platinum_recoil
+
+[wpn_ks23_vorkuta]:obrien_4ga_sg_platinum_recoil
+
+[wpn_ks23_23_up]:obrien_4ga_sg_platinum_recoil
+
+[wpn_ks23_kaban]:obrien_4ga_sg_platinum_recoil
+
+[wpn_ks23_kaban_kab_up]:obrien_4ga_sg_platinum_recoil
+
+[wpn_ksg23]:obrien_4ga_sgbp_platinum_recoil
+
+[wpn_mossberg590]:obrien_12ga_sg_platinum_recoil
+
+[wpn_mossberg590_rail]:obrien_12ga_sg_platinum_recoil
+
+[wpn_mossberg590_wood]:obrien_12ga_sg_platinum_recoil
+
+[wpn_mp155]:obrien_12ga_sg_platinum_recoil
+
+[wpn_protecta]:obrien_12ga_sg_platinum_recoil
+
+[wpn_protecta_custom]:obrien_12ga_sg_platinum_recoil
+
+[wpn_protecta_nimble]:obrien_12ga_sg_platinum_recoil
+
+[wpn_raptr]:obrien_12ga_sg_platinum_recoil
+
+[wpn_remington870]:obrien_12ga_sg_platinum_recoil
+
+[wpn_saiga12s_isg]:obrien_12ga_sg_platinum_recoil
+
+[wpn_saiga12s_m1]:obrien_12ga_sg_platinum_recoil
+
+[wpn_saiga12s_m2]:obrien_12ga_sg_platinum_recoil
+
+[wpn_spas12]:obrien_12ga_sg_platinum_recoil
+
+[wpn_spas12_nimble]:obrien_12ga_sg_platinum_recoil
+
+[wpn_toz34]:obrien_12ga_sg_platinum_recoil
+
+[wpn_toz34_mark4_23]:obrien_4ga_sg_platinum_recoil
+
+[wpn_toz34_obrez]:obrien_12ga_sg_platinum_recoil
+
+[wpn_toz106]:obrien_20ga_sg_platinum_recoil
+
+[wpn_toz106_m1]:obrien_20ga_sg_platinum_recoil
+
+[wpn_wincheaster_1300]:obrien_12ga_sg_platinum_recoil
+
+;=============================================================
+;-------------------------Snipers-----------------------------
+;=============================================================
+
+[wpn_sr25]:obrien_fal_platinum_recoil
+
+[wpn_k98]:obrien_338lp_platinum_recoil
+
+[wpn_k98_mod]:obrien_338lp_platinum_recoil
+
+[wpn_k98_mauser_kit]:obrien_338lp_platinum_recoil
+
+[wpn_k98_mod_silen98]:obrien_338lp_platinum_recoil
+
+[wpn_vssk]:obrien_ash12_platinum_recoil
+
+[wpn_gauss]:obrien_r700_platinum_recoil
+
+[wpn_gauss_quest]:obrien_r700_platinum_recoil
+
+[wpn_l96a1]:obrien_r700_platinum_recoil
+
+[wpn_svt40]:obrien_svd_platinum_recoil
+
+[wpn_svd]:obrien_svd_platinum_recoil
+
+[wpn_svd_m1]:obrien_svd_platinum_recoil
+
+[wpn_svd_nimble]:obrien_svd_platinum_recoil
+
+[wpn_svds]:obrien_svd_platinum_recoil
+
+[wpn_svds_pmc]:obrien_svd_platinum_recoil
+
+[wpn_sv98]:obrien_r700_platinum_recoil
+
+[wpn_remington700]:obrien_r700_platinum_recoil
+
+[wpn_remington700_archangel]:obrien_r700_platinum_recoil
+
+[wpn_remington700_magpul_pro]:obrien_r700_platinum_recoil
+
+[wpn_remington700_mod_x_gen3]:obrien_r700_platinum_recoil
+
+[wpn_remington700_lapua700]:obrien_338lp_platinum_recoil
+
+[wpn_trg]:obrien_338lp_platinum_recoil
+
+[wpn_l96a1m]:obrien_338lp_platinum_recoil
+
+[wpn_m98b]:obrien_338lp_platinum_recoil
+
+[wpn_steyr_scout_big]:obrien_r700_platinum_recoil
+
+[wpn_mosin]:obrien_r700_platinum_recoil
+
+[wpn_sks_b]:obrien_akm_platinum_recoil
+
+[wpn_sks_molot]:obrien_akm_platinum_recoil
+
+[wpn_dvl10]:obrien_r700_platinum_recoil
+
+[wpn_dvl10_m1]:obrien_r700_platinum_recoil
+
+[wpn_winchester1873]:obrien_m4_platinum_recoil
+
+
+;============== Kmack Weapons ==============
+
+;------ Pistol ------
+
+[wpn_browninghp]:obrien_glock_platinum_recoil
+
+[wpn_cr920]:obrien_glock_platinum_recoil
+
+[wpn_fort14]:obrien_9x18_platinum_recoil
+
+[wpn_fort14_bloodoath]:obrien_9x18_platinum_recoil
+
+[wpn_pdp]:obrien_glock_platinum_recoil
+
+[wpn_ppq5]:obrien_glock_platinum_recoil
+
+[wpn_ppq5_cinder]:obrien_glock_platinum_recoil
+
+[wpn_usms]:obrien_glock_platinum_recoil
+
+[wpn_usms_liberty]:obrien_m1911_platinum_recoil
+
+[wpn_usp45pm]:obrien_usp_platinum_recoil
+
+[wpn_usp45c]:obrien_usp_platinum_recoil
+
+
+;------ SMGs ------
+
+
+;------ Assault Rifles ------
+
+[wpn_lvaw]:obrien_300blk_platinum_recoil
+
+[wpn_honeybadger]:obrien_300blk_platinum_recoil
+
+[wpn_pdx]:obrien_m4_platinum_recoil
+
+[wpn_pdx_terminal]:obrien_300blk_platinum_recoil
+
+;------ Snipers ------
+
+[wpn_obrez]:obrien_r700_platinum_recoil
+
+[wpn_shiv]:obrien_r700_platinum_recoil
+
+[wpn_mosin_k]:obrien_r700_platinum_recoil
+
+[wpn_mosin_carbine]:obrien_r700_platinum_recoil
+
+
+;======================================================================
+; OBRIEN - MISSING BASE ENHANCED RECOIL WEAPON MAPPINGS
+; Added by comparison against the base Enhanced Recoil Platinum LTX.
+; Existing Obrien mappings were used as the primary family/profile guide.
+;======================================================================
+
+[wpn_aps]:obrien_9x18_platinum_recoil
+[wpn_beretta_alt]:obrien_glock_platinum_recoil
+[wpn_beretta_modern]:obrien_glock_platinum_recoil
+[wpn_colt1911]:obrien_m1911_platinum_recoil
+[wpn_colt1911_alt]:obrien_m1911_platinum_recoil
+[wpn_colt1911_duty]:obrien_m1911_platinum_recoil
+[wpn_colt1911_modern]:obrien_m1911_platinum_recoil
+[wpn_colt1911_new]:obrien_m1911_platinum_recoil
+[wpn_colt_kimber]:obrien_m1911_platinum_recoil
+[wpn_cz52]:obrien_glock_platinum_recoil
+[wpn_cz75]:obrien_glock_platinum_recoil
+[wpn_cz75_auto]:obrien_glock_platinum_recoil
+[wpn_desert_eagle_custom]:obrien_de_platinum_recoil
+[wpn_desert_eagle_modern]:obrien_de_platinum_recoil
+[wpn_fnp45_custom]:obrien_usp_platinum_recoil
+[wpn_fnx45]:obrien_usp_platinum_recoil
+[wpn_fnx45_alt]:obrien_usp_platinum_recoil
+[wpn_fort]:obrien_9x18_platinum_recoil
+[wpn_fort_snag]:obrien_9x18_platinum_recoil
+[wpn_gsh18_custom]:obrien_glock_platinum_recoil
+[wpn_hpsa]:obrien_glock_platinum_recoil
+[wpn_hpsa_alt]:obrien_glock_platinum_recoil
+[wpn_pb_custom]:obrien_9x18_platinum_recoil
+[wpn_pm_actor]:obrien_9x18_platinum_recoil
+[wpn_pmm]:obrien_9x18_platinum_recoil
+[wpn_sig220]:obrien_usp_platinum_recoil
+[wpn_sig220_custom]:obrien_usp_platinum_recoil
+[wpn_sig220_nimble]:obrien_usp_platinum_recoil
+[wpn_usp_custom]:obrien_usp_platinum_recoil
+[wpn_walther]:obrien_glock_platinum_recoil
+[wpn_walther_custom]:obrien_glock_platinum_recoil
+[wpn_mp5_alt]:obrien_mp5_platinum_recoil
+[wpn_mp5_custom]:obrien_mp5_platinum_recoil
+[wpn_mp5sd_custom]:obrien_mp5_platinum_recoil
+[wpn_mp5sd_new]:obrien_mp5_platinum_recoil
+[wpn_ump45]:obrien_ump_platinum_recoil
+[wpn_vz61_alt]:obrien_mp5_platinum_recoil
+[wpn_vz61_camo]:obrien_mp5_platinum_recoil
+[wpn_vz61_freedom]:obrien_mp5_platinum_recoil
+[wpn_p90]:obrien_aug9mm_platinum_recoil
+[wpn_mp153]:obrien_12ga_sg_platinum_recoil
+[wpn_protecta_aim]:obrien_12ga_sg_platinum_recoil
+[wpn_protecta_camo]:obrien_12ga_sg_platinum_recoil
+[wpn_usas12]:obrien_12ga_sg_platinum_recoil
+[wpn_vepr]:obrien_12ga_sg_platinum_recoil
+[wpn_saiga12s]:obrien_12ga_sg_platinum_recoil
+[wpn_wincheaster1300]:obrien_12ga_sg_platinum_recoil
+[wpn_wincheaster1300_trapper]:obrien_12ga_sg_platinum_recoil
+[wpn_fort500]:obrien_12ga_sg_platinum_recoil
+[wpn_mp133]:obrien_12ga_sg_platinum_recoil
+[wpn_bm16_full_alt]:obrien_12ga_sg_platinum_recoil
+[wpn_toz34_bull]:obrien_12ga_sg_platinum_recoil
+[wpn_toz34_custom]:obrien_12ga_sg_platinum_recoil
+[wpn_toz34_decor]:obrien_12ga_sg_platinum_recoil
+[wpn_toz34_mark4]:obrien_12ga_sg_platinum_recoil
+[wpn_bm16_alt]:obrien_12ga_sg_platinum_recoil
+[wpn_toz34_obrez_custom]:obrien_12ga_sg_platinum_recoil
+[wpn_toz34_obrez_decor]:obrien_12ga_sg_platinum_recoil
+[wpn_spas12_custom]:obrien_12ga_sg_platinum_recoil
+[wpn_mk14]:obrien_fal_platinum_recoil
+[wpn_pkm]:obrien_pkm_platinum_recoil
+[wpn_pkm_zulus]:obrien_pkm_platinum_recoil
+[wpn_pkp]:obrien_pkp_platinum_recoil
+[wpn_abakan]:obrien_ak74_platinum_recoil
+[wpn_abakan_camo]:obrien_ak74_platinum_recoil
+[wpn_aek_camo]:obrien_ak74_platinum_recoil
+[wpn_aek_duty]:obrien_ak74_platinum_recoil
+[wpn_ak]:obrien_akm_platinum_recoil
+[wpn_ak101_camo]:obrien_ak74_platinum_recoil
+[wpn_ak102]:obrien_ak74_platinum_recoil
+[wpn_ak103_camo]:obrien_akm_platinum_recoil
+[wpn_ak104]:obrien_akm_platinum_recoil
+[wpn_ak12]:obrien_ak74_platinum_recoil
+[wpn_ak74_alt]:obrien_ak74_platinum_recoil
+[wpn_ak74_custom]:obrien_ak74_platinum_recoil
+[wpn_ak74_modern]:obrien_ak74_platinum_recoil
+[wpn_ak74_old]:obrien_ak74_platinum_recoil
+[wpn_ak74_rpk]:obrien_ak74_platinum_recoil
+[wpn_ak74m_alt]:obrien_ak74_platinum_recoil
+[wpn_ak74m_camo]:obrien_ak74_platinum_recoil
+[wpn_ak74m_custom]:obrien_ak74_platinum_recoil
+[wpn_ak74m_duty]:obrien_ak74_platinum_recoil
+[wpn_ak74m_pka]:obrien_ak74_platinum_recoil
+[wpn_akm]:obrien_akm_platinum_recoil
+[wpn_akms]:obrien_akm_platinum_recoil
+[wpn_aks]:obrien_akm_platinum_recoil
+[wpn_aks74]:obrien_ak74_platinum_recoil
+[wpn_aks74_new]:obrien_ak74_platinum_recoil
+[wpn_aug_custom]:obrien_aug_platinum_recoil
+[wpn_aug_a3]:obrien_aug_platinum_recoil
+[wpn_fal]:obrien_fal_platinum_recoil
+[wpn_fnc]:obrien_m4_platinum_recoil
+[wpn_g36]:obrien_m4_platinum_recoil
+[wpn_g36_camo]:obrien_m4_platinum_recoil
+[wpn_g36_nimble]:obrien_m4_platinum_recoil
+[wpn_g36k]:obrien_m4_platinum_recoil
+[wpn_galil]:obrien_fal_platinum_recoil
+[wpn_galil_custom]:obrien_fal_platinum_recoil
+[wpn_galil_modern]:obrien_fal_platinum_recoil
+[wpn_hk416]:obrien_m4_platinum_recoil
+[wpn_l85]:obrien_aug_platinum_recoil
+[wpn_l85_alt]:obrien_aug_platinum_recoil
+[wpn_l85_custom]:obrien_aug_platinum_recoil
+[wpn_l85a2]:obrien_aug_platinum_recoil
+[wpn_l85a2_alt]:obrien_aug_platinum_recoil
+[wpn_l85a2_custom]:obrien_aug_platinum_recoil
+[wpn_l85a2_modern]:obrien_aug_platinum_recoil
+[wpn_lr300]:obrien_m4_platinum_recoil
+[wpn_lr300_camo]:obrien_m4_platinum_recoil
+[wpn_lr300_custom]:obrien_m4_platinum_recoil
+[wpn_m16]:obrien_m4_platinum_recoil
+[wpn_m16a2]:obrien_m4_platinum_recoil
+[wpn_m4]:obrien_m4_platinum_recoil
+[wpn_m4a1]:obrien_m4_platinum_recoil
+[wpn_m4a1_camo]:obrien_m4_platinum_recoil
+[wpn_m4a1_custom]:obrien_m4_platinum_recoil
+[wpn_m4a1_freedom]:obrien_m4_platinum_recoil
+[wpn_scar]:obrien_fal_platinum_recoil
+[wpn_scar_custom]:obrien_fal_platinum_recoil
+[wpn_hk417]:obrien_fal_platinum_recoil
+[wpn_sig550_camo]:obrien_m4_platinum_recoil
+[wpn_sig550_luckygun]:obrien_m4_platinum_recoil
+[wpn_vintorez]:obrien_val_platinum_recoil
+[wpn_vintorez_1pn93]:obrien_val_platinum_recoil
+[wpn_vintorez_alt]:obrien_val_platinum_recoil
+[wpn_vintorez_nimble]:obrien_val_platinum_recoil
+[wpn_val_modern]:obrien_val_platinum_recoil
+[wpn_vsk94]:obrien_val_platinum_recoil
+[wpn_xm8]:obrien_m4_platinum_recoil
+[wpn_type63]:obrien_akm_platinum_recoil
+[wpn_ace21]:obrien_fal_platinum_recoil
+[wpn_ak74u_camo]:obrien_ak74_platinum_recoil
+[wpn_ak74u_custom]:obrien_ak74_platinum_recoil
+[wpn_ak74u_old]:obrien_ak74_platinum_recoil
+[wpn_ak74u_snag]:obrien_ak74_platinum_recoil
+[wpn_famas3]:obrien_aug_platinum_recoil
+[wpn_fn2000_camo]:obrien_aug_platinum_recoil
+[wpn_fn2000_custom]:obrien_aug_platinum_recoil
+[wpn_sig552]:obrien_m4_platinum_recoil
+[wpn_m60]:obrien_m240_platinum_recoil
+[wpn_m24]:obrien_338lp_platinum_recoil
+[wpn_sig550_sniper]:obrien_m4_platinum_recoil
+[wpn_sv98_custom]:obrien_r700_platinum_recoil
+[wpn_svd_custom]:obrien_svd_platinum_recoil
+[wpn_wa2000]:obrien_r700_platinum_recoil
+[wpn_svu]:obrien_svd_platinum_recoil
+[wpn_svu_alt]:obrien_svd_platinum_recoil
+[wpn_svu_nimble]:obrien_svd_platinum_recoil
+[wpn_g43]:obrien_338lp_platinum_recoil
+[wpn_sks]:obrien_akm_platinum_recoil
+[wpn_sks_modern]:obrien_akm_platinum_recoil
+[wpn_svt40_modern]:obrien_svd_platinum_recoil
+[wpn_val_tac]:obrien_val_platinum_recoil
+[wpn_sks_tac]:obrien_akm_platinum_recoil
+[wpn_m4_butcher]:obrien_m4_platinum_recoil
+[wpn_ks23_ecolog]:obrien_de_platinum_recoil
+[wpn_ak74u_n1]:obrien_ak74_platinum_recoil
+[wpn_ak74_n]:obrien_ak74_platinum_recoil
+[wpn_ak12_custom]:obrien_ak74_platinum_recoil
+[wpn_ak12_custom_mono_kit]:obrien_ak74_platinum_recoil
+[wpn_ak105_sp]:obrien_ak74_platinum_recoil
+[wpn_akm_bas]:obrien_akm_platinum_recoil
+[wpn_akms_bas]:obrien_akm_platinum_recoil
+[wpn_aug_a1_bas]:obrien_aug_platinum_recoil
+[wpn_aug_a1_custom_bas]:obrien_aug_platinum_recoil
+[wpn_aug_a3_bas]:obrien_aug_platinum_recoil
+[wpn_aug_a3_custom_bas]:obrien_aug_platinum_recoil
+[wpn_usp_tac]:obrien_usp_platinum_recoil
+[wpn_sig220_n]:obrien_usp_platinum_recoil
+[wpn_sig226]:obrien_usp_platinum_recoil
+[wpn_pl15]:obrien_glock_platinum_recoil
+[wpn_ak5c_isg]:obrien_ak74_platinum_recoil
+[wpn_l85_m1]:obrien_aug_platinum_recoil
+[wpn_l85_m3]:obrien_aug_platinum_recoil
+[wpn_pb_bas]:obrien_9x18_platinum_recoil
+[wpn_pm_bas]:obrien_9x18_platinum_recoil
+[wpn_scar_siber_black]:obrien_fal_platinum_recoil
+[wpn_scar_siber_m1]:obrien_fal_platinum_recoil
+[wpn_scar_siber_m1_black]:obrien_fal_platinum_recoil
+[wpn_scar_siber_m2]:obrien_fal_platinum_recoil
+[wpn_scar_siber_m2_custom]:obrien_fal_platinum_recoil
+[wpn_p90_cw]:obrien_aug_platinum_recoil
+[wpn_sr2m_cw]:obrien_glock_platinum_recoil
+[wpn_p90dev_cw]:obrien_aug_platinum_recoil
+[wpn_fn57_cw]:obrien_glock_platinum_recoil
+[wpn_spas12_cw]:obrien_12ga_sg_platinum_recoil
+[wpn_saiga_cw]:obrien_12ga_sg_platinum_recoil
+[wpn_fabarm_cw]:obrien_12ga_sg_platinum_recoil
+[wpn_ksg_cw]:obrien_12ga_sg_platinum_recoil
+[wpn_m1014_cw]:obrien_12ga_sg_platinum_recoil
+[wpn_mp133_cw]:obrien_12ga_sg_platinum_recoil
+[wpn_izh43_cw]:obrien_12ga_sg_platinum_recoil
+[wpn_tkpd_cw]:obrien_r700_platinum_recoil
+[wpn_tkpds_cw]:obrien_r700_platinum_recoil
+[wpn_mosin_cw]:obrien_r700_platinum_recoil
+[wpn_isr_cw]:obrien_r700_platinum_recoil
+[wpn_m40_cw]:obrien_r700_platinum_recoil
+[wpn_vssk_cw]:obrien_r700_platinum_recoil
+[wpn_awp_cw]:obrien_r700_platinum_recoil
+[wpn_qbu_cw]:obrien_akm_platinum_recoil
+[wpn_rfb_cw]:obrien_fal_platinum_recoil
+[wpn_x95_cw]:obrien_aug_platinum_recoil
+[wpn_pdrc_cw]:obrien_aug_platinum_recoil
+[wpn_mdrc_cw]:obrien_aug_platinum_recoil
+[wpn_akmsgold_cw]:obrien_akm_platinum_recoil
+[wpn_ebrmarksman_cw]:obrien_aug_platinum_recoil
+[wpn_sks_cw]:obrien_r700_platinum_recoil
+[wpn_svd_cw]:obrien_r700_platinum_recoil
+[wpn_sv98_cw]:obrien_r700_platinum_recoil
+[wpn_scarl_cw]:obrien_aug_platinum_recoil
+[wpn_sa58_cw]:obrien_fal_platinum_recoil
+[wpn_rpkt_cw]:obrien_rpk_platinum_recoil
+[wpn_rpk_cw]:obrien_valbp_platinum_recoil
+[wpn_rpd_cw]:obrien_rpk_platinum_recoil
+[wpn_m60_cw]:obrien_m240_platinum_recoil
+[wpn_m4_cw]:obrien_aug_platinum_recoil
+[wpn_hk416c_cw]:obrien_valbp_platinum_recoil
+[wpn_hk417_cw]:obrien_valbp_platinum_recoil
+[wpn_hk243_cw]:obrien_valbp_platinum_recoil
+[wpn_kac_cw]:obrien_valbp_platinum_recoil
+[wpn_g36c_cw]:obrien_valbp_platinum_recoil
+[wpn_hcar_cw]:obrien_fal_platinum_recoil
+[wpn_ebr_cw]:obrien_fal_platinum_recoil
+[wpn_aug_cw]:obrien_aug_platinum_recoil
+[wpn_aksu_cw]:obrien_valbp_platinum_recoil
+[wpn_akms_cw]:obrien_akm_platinum_recoil
+[wpn_ace31_cw]:obrien_valbp_platinum_recoil
+[wpn_ak74_cw]:obrien_valbp_platinum_recoil
+[wpn_ak12_cw]:obrien_ak74_platinum_recoil
+[wpn_abakan_cw]:obrien_ak74_platinum_recoil
+[wpn_9a91_cw]:obrien_val_platinum_recoil
+[wpn_asvalmod_cw]:obrien_val_platinum_recoil
+[wpn_val_cw]:obrien_val_platinum_recoil
+[wpn_vihr_cw]:obrien_val_platinum_recoil
+[wpn_vss_cw]:obrien_val_platinum_recoil
+[wpn_coltpython_cw]:obrien_de_platinum_recoil
+[wpn_deagle_cw]:obrien_de_platinum_recoil
+[wpn_sw_cw]:obrien_de_platinum_recoil
+[wpn_p226_cw]:obrien_glock_platinum_recoil
+[wpn_ppsh41_cw]:obrien_akm_platinum_recoil
+[wpn_coltgold_cw]:obrien_glock_platinum_recoil
+[wpn_kriss_cw]:obrien_mp5_platinum_recoil
+[wpn_usp_cw]:obrien_glock_platinum_recoil
+[wpn_uspm_cw]:obrien_glock_platinum_recoil
+[wpn_ump45_cw]:obrien_mp5_platinum_recoil
+[wpn_fnp45_cw]:obrien_glock_platinum_recoil
+[wpn_colt_cw]:obrien_glock_platinum_recoil
+[wpn_trp_cw]:obrien_glock_platinum_recoil
+[wpn_vityaz_cw]:obrien_aug_platinum_recoil
+[wpn_glock18_cw]:obrien_glock_platinum_recoil
+[wpn_mp5sdx5_cw]:obrien_aug_platinum_recoil
+[wpn_evo_cw]:obrien_aug_platinum_recoil
+[wpn_mp5sd_cw]:obrien_aug_platinum_recoil
+[wpn_mp5sd_sk1_cw]:obrien_aug_platinum_recoil
+[wpn_mp7_cw]:obrien_aug_platinum_recoil
+[wpn_mpx_cw]:obrien_aug_platinum_recoil
+[wpn_uzi_pro]:obrien_aug_platinum_recoil
+[wpn_beretta_cw]:obrien_glock_platinum_recoil
+[wpn_enforcer_cw]:obrien_glock_platinum_recoil
+[wpn_bizon_cw]:obrien_mp5_platinum_recoil
+[wpn_kedr_cw]:obrien_9x18_platinum_recoil
+[wpn_pm_cw]:obrien_9x18_platinum_recoil
+[wpn_oc33_cw]:obrien_9x18_platinum_recoil
+[wpn_aps_cw]:obrien_9x18_platinum_recoil
+[wpn_ak105_bas]:obrien_ak74_platinum_recoil
+[wpn_ak12_bas]:obrien_ak74_platinum_recoil
+[wpn_ak12_mono_com]:obrien_ak74_platinum_recoil
+[wpn_fn57_bas]:obrien_glock_platinum_recoil
+[wpn_g28]:obrien_fal_platinum_recoil
+[wpn_kar98_retrotac]:obrien_338lp_platinum_recoil
+[wpn_karabiner98k]:obrien_338lp_platinum_recoil
+[wpn_karabiner98k_silen98]:obrien_338lp_platinum_recoil
+[wpn_kiparis_m1]:obrien_mp5_platinum_recoil
+[wpn_kiparis_m1_okep77]:obrien_mp5_platinum_recoil
+[wpn_kiparis_m2]:obrien_mp5_platinum_recoil
+[wpn_kiparis_m2_okep77]:obrien_mp5_platinum_recoil
+[wpn_kiparis_m3]:obrien_mp5_platinum_recoil
+[wpn_kiparis_m3_okep77]:obrien_mp5_platinum_recoil
+[wpn_kiparis_s]:obrien_mp5_platinum_recoil
+[wpn_m4_skryaga]:obrien_m4_platinum_recoil
+[wpn_mp133_bas]:obrien_12ga_sg_platinum_recoil
+[wpn_mp153_bas]:obrien_12ga_sg_platinum_recoil
+[wpn_pkm_zenit_shorty]:obrien_pkm_platinum_recoil
+[wpn_pkp_tac_siber]:obrien_pkp_platinum_recoil
+[wpn_pk_siber]:obrien_pkp_platinum_recoil
+[wpn_ppsh_bas]:obrien_mp5_platinum_recoil
+[wpn_ppsh_bas_uptacppsh]:obrien_mp5_platinum_recoil
+[wpn_rem700_aics]:obrien_338lp_platinum_recoil
+[wpn_rem700_mcmillan]:obrien_338lp_platinum_recoil
+[wpn_remington700_bas]:obrien_r700_platinum_recoil
+[wpn_remington700_bas_archangel]:obrien_r700_platinum_recoil
+[wpn_remington700_bas_magpul_pro]:obrien_r700_platinum_recoil
+[wpn_remington700_bas_mod_x_gen3]:obrien_r700_platinum_recoil
+[wpn_remington700_bas_lapua700]:obrien_338lp_platinum_recoil
+[wpn_scar_l_tac]:obrien_m4_platinum_recoil
+[wpn_sig550_siber]:obrien_m4_platinum_recoil
+[wpn_sig550_tac_siber]:obrien_m4_platinum_recoil
+[wpn_sig552_isg_siber]:obrien_m4_platinum_recoil
+[wpn_sig552_siber]:obrien_m4_platinum_recoil
+[wpn_sig552_tac_siber]:obrien_m4_platinum_recoil
+[wpn_sr2_m2]:obrien_sr2_platinum_recoil
+[wpn_vz61_scorpion]:obrien_mp5_platinum_recoil
+[wpn_vz61_scorpion_m1]:obrien_mp5_platinum_recoil
+[wpn_vz61_scorpion_m2]:obrien_mp5_platinum_recoil
+
+;----------------------------------------------------------------------
+; MAPPINGS REQUIRING MANUAL REVIEW
+;----------------------------------------------------------------------
+[wpn_mp412]:obrien_de_platinum_recoil ;--- NOT SURE
+[wpn_m82]:obrien_338lp_platinum_recoil ;--- NOT SURE
+[wpn_rpg7]:obrien_m4_platinum_recoil ;--- NOT SURE
+[wpn_rg-6]:obrien_m4_platinum_recoil ;--- NOT SURE
+[wpn_m79]:obrien_m4_platinum_recoil ;--- NOT SURE
+[wpn_addon_grenade_launcher]:obrien_m4_platinum_recoil ;--- NOT SURE
+[wpn_addon_grenade_launcher_m203]:obrien_m4_platinum_recoil ;--- NOT SURE
+[wpn_addon_grenade_launcher_l85]:obrien_m4_platinum_recoil ;--- NOT SURE
+[wpn_addon_grenade_launcher_monolit]:obrien_m4_platinum_recoil ;--- NOT SURE
+[wpn_addon_grenade_launcher_scar]:obrien_m4_platinum_recoil ;--- NOT SURE
+[wpn_rg6_cw]:obrien_m4_platinum_recoil ;--- NOT SURE
+[wpn_thor_cw]:obrien_m4_platinum_recoil ;--- NOT SURE
+[wpn_tac50_cw]:obrien_m4_platinum_recoil ;--- NOT SURE

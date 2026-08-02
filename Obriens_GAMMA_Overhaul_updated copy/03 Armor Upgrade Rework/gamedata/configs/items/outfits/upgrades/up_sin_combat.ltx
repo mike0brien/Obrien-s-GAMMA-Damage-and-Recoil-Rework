@@ -1,0 +1,494 @@
+;=================================================================
+; combat upgrade tree for sin armor.
+;=================================================================
+
+
+;=================================================================
+; UPGRADE NODES
+;=================================================================
+
+
+;=========================================================
+; ROW 1
+;=========================================================
+
+
+;=========================================================
+; COLUMN 1
+; 10% Durability
+;=========================================================
+
+[up_firsta_combat_sin]
+scheme_index                           = 0, 0
+known                                  = 1
+effects                                = up_gr_firstcd_combat_sin
+section                                = up_sect_dura_secon
+
+property                               = prop_durability
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firsta_combat_sin_name
+description                            = st_up_firsta_combat_sin_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_durability_1
+upgrade_item                           = upgr_o_1_physical
+
+;=========================================================
+; COLUMN 2
+; 10% Explosion or 10% Impact
+;=========================================================
+
+[up_firstc_combat_sin]
+scheme_index                           = 1, 0
+known                                  = 1
+effects                                = up_gr_firstef_combat_sin
+section                                = up_sect_expl_secon
+
+property                               = prop_damage
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firstc_combat_sin_name
+description                            = st_up_firstc_combat_sin_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_armour_1
+upgrade_item                           = upgr_o_2_physical
+
+
+
+[up_firstd_combat_sin]
+scheme_index                           = 1, 0
+known                                  = 1
+effects                                = up_gr_firstef_combat_sin
+section                                = up_sect_strike_secon
+
+property                               = prop_damage
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firstd_combat_sin_name
+description                            = st_up_firstd_combat_sin_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_armour_1
+upgrade_item                           = upgr_o_2_physical
+
+;=========================================================
+; COLUMN 2
+; 20% Explosion or 10% Durability
+;=========================================================
+
+[up_firste_combat_sin]
+scheme_index                           = 2, 0
+known                                  = 1
+effects                                =
+section                                = up_sect_expl_fourt
+
+property                               = prop_damage
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firste_combat_sin_name
+description                            = st_up_firste_combat_sin_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_armour_1
+upgrade_item                           = upgr_o_3_physical
+
+
+
+[up_firstf_combat_sin]
+scheme_index                           = 2, 0
+known                                  = 1
+effects                                =
+section                                = up_sect_dura_secon
+
+property                               = prop_durability
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firstf_combat_sin_name
+description                            = st_up_firstf_combat_sin_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_durability_1
+upgrade_item                           = upgr_o_3_utility
+
+;=================================================================
+; ROW 2
+;=================================================================
+
+
+;=========================================================
+; COLUMN 1
+; 5% Chem OR Artifact Slot
+;=========================================================
+
+[up_secona_combat_sin]
+scheme_index                           = 0, 1
+known                                  = 1
+effects                                = up_gr_seconcd_combat_sin
+section                                = up_sect_chem_one
+
+property                               = prop_chem
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_secona_combat_sin_name
+description                            = st_up_secona_combat_sin_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_chem_1
+upgrade_item                           = upgr_o_1_magical
+
+
+
+[up_seconb_combat_sin]
+scheme_index                           = 0, 1
+known                                  = 1
+effects                                = up_gr_seconcd_combat_sin
+section                                = up_sect_belt_one
+
+property                               = prop_artefact
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_seconb_combat_sin_name
+description                            = st_up_seconb_combat_sin_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_arty_1
+upgrade_item                           = upgr_o_3_utility
+
+
+
+;=========================================================
+; COLUMN 2
+; 5% SHOCK OR 5% Chem
+;=========================================================
+
+[up_seconc_combat_sin]
+scheme_index                           = 1, 1
+known                                  = 1
+effects                                = up_gr_seconef_combat_sin
+section                                = up_sect_shock_one
+
+property                               = prop_electro
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_seconc_combat_sin_name
+description                            = st_up_seconc_combat_sin_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_shock_1
+upgrade_item                           = upgr_o_2_magical
+
+
+
+[up_second_combat_sin]
+scheme_index                           = 1, 1
+known                                  = 1
+effects                                = up_gr_seconef_combat_sin
+section                                = up_sect_chem_one
+
+property                               = prop_chem
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_second_combat_sin_name
+description                            = st_up_second_combat_sin_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_chem_1
+upgrade_item                           = upgr_o_2_magical
+
+
+
+;=========================================================
+; COLUMN 3
+; ARTIFACT SLOT
+;=========================================================
+
+
+[up_secone_combat_sin]
+scheme_index                           = 2, 1
+known                                  = 1
+effects                                =
+section                                = up_sect_belt_one
+
+property                               = prop_artefact
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_secone_combat_sin_name
+description                            = st_up_secone_combat_sin_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_arty_1
+upgrade_item                           = upgr_o_3_utility
+
+
+
+
+;=================================================================
+; ROW 3
+;=================================================================
+
+
+;=========================================================
+; COLUMN 1
+; -4 kg REDUCE WEIGHT
+;=========================================================
+
+[up_thirda_combat_sin]
+scheme_index                           = 0, 2
+known                                  = 1
+effects                                = up_gr_thirdcd_combat_sin
+section                                = up_sect_weight_four
+
+property                               = prop_weightoutfit
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirda_combat_sin_name
+description                            = st_up_thirda_combat_sin_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_weight_1
+upgrade_item                           = upgr_o_1_utility
+
+
+
+;=========================================================
+; COLUMN 2
+; +20 kg CARRY WEIGHT OR 20% Stam Recovery
+;=========================================================
+
+[up_thirdc_combat_sin]
+scheme_index                           = 1, 2
+known                                  = 1
+effects                                = up_gr_thirdef_combat_sin
+section                                = up_sect_carry_fourt
+
+property                               = prop_tonnage
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirdc_combat_sin_name
+description                            = st_up_thirdc_combat_sin_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_carry_1
+upgrade_item                           = upgr_o_2_utility
+
+
+
+[up_thirdd_combat_sin]
+scheme_index                           = 1, 2
+known                                  = 1
+effects                                = up_gr_thirdef_combat_sin
+section                                = up_sect_stam_four
+
+property                               = prop_power
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirdd_combat_sin_name
+description                            = st_up_thirdd_combat_sin_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_stamins_1
+upgrade_item                           = upgr_o_2_utility
+
+
+
+;=========================================================
+; COLUMN 3
+; +1 HEALTH RESTORE OR + 20 BLEED REDUCTION
+;=========================================================
+
+[up_thirde_combat_sin]
+scheme_index                           = 2, 2
+known                                  = 1
+effects                                =
+section                                = up_sect_heal_one
+
+property                               = prop_restore_health
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirde_combat_sin_name
+description                            = st_up_thirde_combat_sin_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_health_1
+upgrade_item                           = upgr_o_3_utility
+
+
+
+[up_thirdf_combat_sin]
+scheme_index                           = 2, 2
+known                                  = 1
+effects                                =
+section                                = up_sect_bleed_fourt
+
+property                               = prop_restore_bleeding
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirdf_combat_sin_name
+description                            = st_up_thirdf_combat_sin_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_bleed_1
+upgrade_item                           = upgr_o_3_utility
+
+
+
+
+;=================================================================
+; GROUPS
+;=================================================================
+
+;--- Row 1
+
+[up_gr_firstab_combat_sin]
+elements                               = up_firsta_combat_sin
+
+[up_gr_firstcd_combat_sin]
+elements                               = up_firstc_combat_sin, up_firstd_combat_sin
+
+[up_gr_firstef_combat_sin]
+elements                               = up_firste_combat_sin, up_firstf_combat_sin
+
+;---- Row 2
+
+[up_gr_seconab_combat_sin]
+elements                               = up_secona_combat_sin, up_seconb_combat_sin
+
+[up_gr_seconcd_combat_sin]
+elements                               = up_seconc_combat_sin, up_second_combat_sin
+
+[up_gr_seconef_combat_sin]
+elements                               = up_secone_combat_sin
+
+;--- Row 3
+
+
+[up_gr_thirdab_combat_sin]
+elements                               = up_thirda_combat_sin
+
+[up_gr_thirdcd_combat_sin]
+elements                               = up_thirdc_combat_sin, up_thirdd_combat_sin
+
+[up_gr_thirdef_combat_sin]
+elements                               = up_thirde_combat_sin, up_thirdf_combat_sin
