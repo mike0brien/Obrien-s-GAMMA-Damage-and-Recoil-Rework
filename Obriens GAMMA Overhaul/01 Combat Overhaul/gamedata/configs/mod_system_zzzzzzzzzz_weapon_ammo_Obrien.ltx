@@ -3,7 +3,7 @@
 ;--- general rules...
 ;--- fmj baseline damage
 ;--- ap is 0.8x the baseline damage
-;--- hp is 1.3x the baseline damage
+;--- hp is 1.2x the baseline damage
 ;--- slugs baseline damage
 ;--- buck is 1.5x slug damage / pellets
 ;--- ap slug is 0.8x slug damage
@@ -49,7 +49,7 @@ k_ap  = 0.6
 ; --- 9x18
 ![ammo_9x18_fmj]
 k_hit = 0.3
-k_ap  = 0.09
+k_ap  = 0.08
 k_cam_dispersion = 1.0
 ![ammo_9x18_fmj_bad]:ammo_9x18_fmj
 ![ammo_9x18_fmj_verybad]:ammo_9x18_fmj
@@ -62,7 +62,7 @@ k_cam_dispersion = 1.0
 ![ammo_9x18_pmm_verybad]:ammo_9x18_pmm
 
 ![ammo_9x18_ap]
-k_hit = 0.255
+k_hit = 0.24
 k_ap  = 0.13
 k_cam_dispersion = 1.0
 ![ammo_9x18_ap_bad]:ammo_9x18_ap
@@ -71,54 +71,54 @@ k_cam_dispersion = 1.0
 
 ; --- 9x19
 ![ammo_9x19_fmj]
-k_hit = 0.36
-k_ap  = 0.11
+k_hit = 0.34
+k_ap  = 0.1
 k_cam_dispersion = 1.0
 ![ammo_9x19_fmj_bad]:ammo_9x19_fmj
 ![ammo_9x19_fmj_verybad]:ammo_9x19_fmj
 
 ![ammo_9x19_pbp]
-k_hit = 0.432
-k_ap  = 0.05
+k_hit = 0.408
+k_ap  = 0.04
 k_cam_dispersion = 1.0
 ![ammo_9x19_pbp_bad]:ammo_9x19_pbp
 ![ammo_9x19_pbp_verybad]:ammo_9x19_pbp
 
 ![ammo_9x19_ap]
-k_hit = 0.288
-k_ap  = 0.15
+k_hit = 0.272
+k_ap  = 0.18
 k_cam_dispersion = 1.0
 ![ammo_9x19_ap_bad]:ammo_9x19_ap
 ![ammo_9x19_ap_verybad]:ammo_9x19_ap
 
 
 ; --- 5.7x28
-![ammo_5.7x28_ss190]
-k_hit = 0.28
-k_ap  = 0.18
+![ammo_5.7x28_ss190] ;--- This is AP
+k_hit = 0.224
+k_ap  = 0.3
 k_cam_dispersion = 1.0
 ![ammo_5.7x28_ss190_bad]:ammo_5.7x28_ss190
 ![ammo_5.7x28_ss190_verybad]:ammo_5.7x28_ss190
 
-![ammo_5.7x28_ss195]
-k_hit = 0.224
-k_ap  = 0.26
+![ammo_5.7x28_ss195] ;--- This is FMJ
+k_hit = 0.28
+k_ap  = 0.18
 k_cam_dispersion = 1.0
 ![ammo_5.7x28_ss195_bad]:ammo_5.7x28_ss195
 ![ammo_5.7x28_ss195_verybad]:ammo_5.7x28_ss195
 
 
 ; --- 7.62x25
-![ammo_7.62x25_p]
-k_hit = 0.37
-k_ap  = 0.08
+![ammo_7.62x25_p] ;--- this is a hollow point
+k_hit = 0.372
+k_ap  = 0.05
 k_cam_dispersion = 1.0
 ![ammo_7.62x25_p_bad]:ammo_7.62x25_p
 ![ammo_7.62x25_p_verybad]:ammo_7.62x25_p
 
-![ammo_7.62x25_ps]
-k_hit = 0.259
-k_ap  = 0.18
+![ammo_7.62x25_ps] ;--- this is AP
+k_hit = 0.248
+k_ap  = 0.2
 k_cam_dispersion = 1.0
 ![ammo_7.62x25_ps_bad]:ammo_7.62x25_ps
 ![ammo_7.62x25_ps_verybad]:ammo_7.62x25_ps
@@ -126,15 +126,15 @@ k_cam_dispersion = 1.0
 
 ; --- .45 ACP
 ![ammo_11.43x23_fmj]
-k_hit = 0.45 ;--- 0.51
-k_ap  = 0.08 ;--- 0.07
+k_hit = 0.45
+k_ap  = 0.08
 k_cam_dispersion = 1.0
 ![ammo_11.43x23_fmj_bad]:ammo_11.43x23_fmj
 ![ammo_11.43x23_fmj_verybad]:ammo_11.43x23_fmj
 
 ![ammo_11.43x23_hydro]
-k_hit = 0.585 ;---0.663
-k_ap  = 0.04 ;---0.03
+k_hit = 0.54
+k_ap  = 0.02
 k_cam_dispersion = 1.0
 ![ammo_11.43x23_hydro_bad]:ammo_11.43x23_hydro
 ![ammo_11.43x23_hydro_verybad]:ammo_11.43x23_hydro
@@ -142,8 +142,8 @@ k_cam_dispersion = 1.0
 
 ; --- .357
 ![ammo_357_hp_mag]
-k_hit = 0.663
-k_ap  = 0.08
+k_hit = 0.648
+k_ap  = 0.06
 k_cam_dispersion = 1.0
 ![ammo_357_hp_mag_bad]:ammo_357_hp_mag
 ![ammo_357_hp_mag_verybad]:ammo_357_hp_mag
@@ -158,7 +158,7 @@ k_cam_dispersion = 1.0
 ; =========================================================
 
 ![ammo_12x70_buck] ;--- 9 pellets
-k_hit = 0.1 ;--- 0.3
+k_hit = 0.1
 k_ap  = 0.05
 k_cam_dispersion = 1.0
 ![ammo_12x70_buck_bad]:ammo_12x70_buck
@@ -170,14 +170,14 @@ k_ap  = 0.03
 k_cam_dispersion = 1.0
 
 ![ammo_12x76_zhekan] ;--- this is slugs
-k_hit = 0.6 ;-- 0.51
+k_hit = 0.6
 k_ap  = 0.21
 k_cam_dispersion = 1.0
 ![ammo_12x76_zhekan_bad]:ammo_12x76_zhekan
 ![ammo_12x76_zhekan_verybad]:ammo_12x76_zhekan
 
 ![ammo_12x76_dart] ;--- these are ap rounds
-k_hit = 0.48 ;--- 0.45
+k_hit = 0.48
 k_ap  = 0.41
 k_cam_dispersion = 1.0
 ![ammo_12x76_dart_bad]:ammo_12x76_dart
@@ -194,18 +194,18 @@ k_ap  = 0.25
 k_cam_dispersion = 1.0
 
 ![ammo_20x70_buck]
-k_hit = 0.25
-k_ap  = 0.03
+k_hit = 0.07
+k_ap  = 0.02
 k_cam_dispersion = 1.0
 
-![ammo_23x75_barrikada] ;--- technically it should be 2.5x the damage of a 12 gauge slug, but for balance... we're cutting that in half to 1.25x
-k_hit = 0.75
-k_ap  = 0.42
+![ammo_23x75_barrikada] ;--- technically it should be 2.5x the damage of a 12 gauge slug, but for balance... we're using 1.5x
+k_hit = 0.9
+k_ap  = 0.31
 k_cam_dispersion = 1.0
 
 ![ammo_23x75_shrapnel] ;--- 6 pellets
-k_hit = 0.1875
-k_ap  = 0.05
+k_hit = 0.15
+k_ap  = 0.08
 k_cam_dispersion = 1.0
 
 ; =========================================================
@@ -256,6 +256,22 @@ k_ap  = 0.3
 k_cam_dispersion = 1.0
 ![ammo_5.56x45_ap_bad]:ammo_5.56x45_ap
 ![ammo_5.56x45_ap_verybad]:ammo_5.56x45_ap
+
+; --- 300 Blackout
+
+![ammo_300blk_fmj] ;--- added from Pillii honey badger and 300blk framework.
+k_hit = 0.32
+k_ap  = 0.23
+k_cam_dispersion = 1.0
+![ammo_300blk_fmj_bad]:ammo_300blk_fmj
+![ammo_300blk_fmj_verybad]:ammo_300blk_fmj
+
+![ammo_300blk_ap] ;--- added from Pillii honey badger and 300blk framework.
+k_hit = 0.256
+k_ap  = 0.33
+k_cam_dispersion = 1.0
+![ammo_300blk_ap_bad]:ammo_300blk_ap
+![ammo_300blk_ap_verybad]:ammo_300blk_ap
 
 
 ; --- 7.62x39
@@ -328,7 +344,7 @@ k_cam_dispersion = 1.0
 
 ![ammo_7.92x33_ap]
 k_hit = 0.304
-k_ap = 0.39
+k_ap = 0.37
 k_cam_dispersion = 1.0
 ![ammo_7.92x33_ap_bad]:ammo_7.92x33_ap
 
@@ -364,38 +380,26 @@ k_cam_dispersion = 1.0
 ![ammo_12.7x55_ap_bad]:ammo_12.7x55_ap
 ![ammo_12.7x55_ap_verybad]:ammo_12.7x55_ap
 
-![ammo_magnum_300]
-k_hit = 0.56
-k_ap  = 0.6
+![ammo_magnum_300] ; --- 338 Lapua
+k_hit = 0.65
+k_ap  = 0.65
 k_cam_dispersion = 1.0
 ![ammo_magnum_300_bad]:ammo_magnum_300
 ![ammo_magnum_300_verybad]:ammo_magnum_300
 
-![ammo_338_federal]
-k_hit = 0.7
-k_ap  = 0.35
+![ammo_338_federal] ; --- technically a hollow point/hunting round of 338.
+k_hit = 0.78
+k_ap  = 0.2
 k_cam_dispersion = 1.0
 
 ![ammo_50_bmg]
-k_hit = 0.8
-k_ap  = 0.75
+k_hit = 1.0
+k_ap  = 0.6
 k_cam_dispersion = 1.0
 ![ammo_50_bmg_bad]:ammo_50_bmg
 ![ammo_50_bmg_verybad]:ammo_50_bmg
 
-![ammo_300blk_fmj] ;--- added from Pillii honey badger and 300blk framework.
-k_hit = 0.32
-k_ap  = 0.23
-k_cam_dispersion = 1.0
-![ammo_300blk_fmj_bad]:ammo_300blk_fmj
-![ammo_300blk_fmj_verybad]:ammo_300blk_fmj
 
-![ammo_300blk_ap] ;--- added from Pillii honey badger and 300blk framework.
-k_hit = 0.256
-k_ap  = 0.33
-k_cam_dispersion = 1.0
-![ammo_300blk_ap_bad]:ammo_300blk_ap
-![ammo_300blk_ap_verybad]:ammo_300blk_ap
 
 ; =========================================================
 ; ======================= OTHER ===========================
@@ -423,8 +427,8 @@ k_cam_dispersion = 1.0
 ![ammo_og-7b_verybad]:ammo_og-7b
 
 ![ammo_gauss]
-k_hit = 0.9
-k_ap  = 0.8
+k_hit = 0.75
+k_ap  = 1.0
 k_cam_dispersion = 1.0
 ![ammo_gauss_bad]:ammo_gauss
 ![ammo_gauss_verybad]:ammo_gauss

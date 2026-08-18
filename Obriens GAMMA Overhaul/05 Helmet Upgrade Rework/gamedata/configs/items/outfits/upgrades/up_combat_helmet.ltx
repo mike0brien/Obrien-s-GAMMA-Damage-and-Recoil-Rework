@@ -1,0 +1,539 @@
+;=================================================================
+; Combat Helmet upgrade tree.
+;=================================================================
+
+
+;=================================================================
+; UPGRADE NODES
+;=================================================================
+
+;=========================================================
+; ROW 1
+;=========================================================
+
+
+;=========================================================
+; COLUMN 1
+; 10% Durability
+;=========================================================
+
+[up_firsta_combat_helmet]
+scheme_index                           = 0, 0
+known                                  = 1
+effects                                = up_gr_firstcd_combat_helmet
+section                                = up_sect_dura_secon
+
+property                               = prop_durability
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firsta_combat_helmet_name
+description                            = st_up_firsta_combat_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_durability_1
+upgrade_item                           = upgr_o_1_physical
+
+;=========================================================
+; COLUMN 2
+; 10% Impact or 10% Rupture
+;=========================================================
+
+[up_firstc_combat_helmet]
+scheme_index                           = 1, 0
+known                                  = 1
+effects                                = up_gr_firstef_combat_helmet
+section                                = up_sect_strike_secon
+
+property                               = prop_damage
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firstc_combat_helmet_name
+description                            = st_up_firstc_combat_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_armour_1
+upgrade_item                           = upgr_o_2_physical
+
+
+
+[up_firstd_combat_helmet]
+scheme_index                           = 1, 0
+known                                  = 1
+effects                                = up_gr_firstef_combat_helmet
+section                                = up_sect_wound_secon
+
+property                               = prop_damage
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firstd_combat_helmet_name
+description                            = st_up_firstd_combat_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_armour_1
+upgrade_item                           = upgr_o_2_physical
+
+;=========================================================
+; COLUMN 3
+; +10% Explosion or +10% Durability
+;=========================================================
+
+[up_firste_combat_helmet]
+scheme_index                           = 2, 0
+known                                  = 1
+effects                                = 
+section                                = up_sect_expl_secon
+
+property                               = prop_damage
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firste_combat_helmet_name
+description                            = st_up_firste_combat_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_armour_1
+upgrade_item                           = upgr_o_3_physical
+
+[up_firstf_combat_helmet]
+scheme_index                           = 2, 0
+known                                  = 1
+effects                                = 
+section                                = up_sect_dura_secon
+
+property                               = prop_durability
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firstf_combat_helmet_name
+description                            = st_up_firstf_combat_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_durability_1
+upgrade_item                           = upgr_o_3_physical
+
+;=================================================================
+; ROW 2
+;=================================================================
+
+
+;=========================================================
+; COLUMN 1
+; 5% Burn OR 5% Shock
+;=========================================================
+
+[up_secona_combat_helmet]
+scheme_index                           = 0, 1
+known                                  = 1
+effects                                = up_gr_seconcd_combat_helmet
+section                                = up_sect_burn_one
+
+property                               = prop_thermo
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_secona_combat_helmet_name
+description                            = st_up_secona_combat_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_burn_1
+upgrade_item                           = upgr_o_1_magical
+
+
+
+[up_seconb_combat_helmet]
+scheme_index                           = 0, 1
+known                                  = 1
+effects                                = up_gr_seconcd_combat_helmet
+section                                = up_sect_shock_one
+
+property                               = prop_electro
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_seconb_combat_helmet_name
+description                            = st_up_seconb_combat_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_shock_1
+upgrade_item                           = upgr_o_1_magical
+
+
+
+;=========================================================
+; COLUMN 2
+; 5% Chem OR 5% Burn
+;=========================================================
+
+[up_seconc_combat_helmet]
+scheme_index                           = 1, 1
+known                                  = 1
+effects                                = up_gr_seconef_combat_helmet
+section                                = up_sect_chem_one
+
+property                               = prop_chem
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_seconc_combat_helmet_name
+description                            = st_up_seconc_combat_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_helm_chem_1
+upgrade_item                           = upgr_o_2_magical
+
+
+
+[up_second_combat_helmet]
+scheme_index                           = 1, 1
+known                                  = 1
+effects                                = up_gr_seconef_combat_helmet
+section                                = up_sect_burn_one
+
+property                               = prop_thermo
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_second_combat_helmet_name
+description                            = st_up_second_combat_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_burn_1
+upgrade_item                           = upgr_o_2_magical
+
+
+
+;=========================================================
+; COLUMN 3
+; 10% Chem
+;=========================================================
+
+
+[up_secone_combat_helmet]
+scheme_index                           = 2, 1
+known                                  = 1
+effects                                =
+section                                = up_sect_chem_secon
+
+property                               = prop_chem
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_secone_combat_helmet_name
+description                            = st_up_secone_combat_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_helm_chem_1
+upgrade_item                           = upgr_o_3_magical
+
+
+;=================================================================
+; ROW 3 - light/medium
+;=================================================================
+
+
+;=========================================================
+; COLUMN 1
+; -0.5 kg REDUCE WEIGHT
+;=========================================================
+
+[up_thirda_combat_lm_helmet]
+scheme_index                           = 0, 2
+known                                  = 1
+effects                                = up_gr_thirdcd_combat_lm_helmet
+section                                = up_sect_weight_half
+
+property                               = prop_weightoutfit
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirda_combat_lm_helmet_name
+description                            = st_up_thirda_combat_lm_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_weight_1
+upgrade_item                           = upgr_o_1_utility
+
+
+
+;=========================================================
+; COLUMN 2
+; 20% Stam Recovery
+;=========================================================
+
+[up_thirdc_combat_lm_helmet]
+scheme_index                           = 1, 2
+known                                  = 1
+effects                                = up_gr_thirdef_combat_lm_helmet
+section                                = up_sect_stam_four
+
+property                               = prop_power
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirdc_combat_lm_helmet_name
+description                            = st_up_thirdc_combat_lm_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_helm_stamina_1
+upgrade_item                           = upgr_o_2_utility
+
+;=========================================================
+; COLUMN 3
+; 10% Psi
+;=========================================================
+
+[up_thirde_combat_lm_helmet]
+scheme_index                           = 2, 2
+known                                  = 1
+effects                                =
+section                                = up_sect_psi_secon
+
+property                               = prop_psy
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirde_combat_lm_helmet_name
+description                            = st_up_thirde_combat_lm_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_helm_psi_1
+upgrade_item                           = upgr_o_3_magical
+
+;=================================================================
+; ROW 3 - heavy
+;=================================================================
+
+
+;=========================================================
+; COLUMN 1
+; -1 kg REDUCE WEIGHT
+;=========================================================
+
+[up_thirda_combat_h_helmet]
+scheme_index                           = 0, 2
+known                                  = 1
+effects                                = up_gr_thirdcd_combat_h_helmet
+section                                = up_sect_weight_one
+
+property                               = prop_weightoutfit
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirda_combat_h_helmet_name
+description                            = st_up_thirda_combat_h_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_weight_1
+upgrade_item                           = upgr_o_1_utility
+
+
+
+;=========================================================
+; COLUMN 2
+; 15% Stam Recovery
+;=========================================================
+
+[up_thirdc_combat_h_helmet]
+scheme_index                           = 1, 2
+known                                  = 1
+effects                                = up_gr_thirdef_combat_h_helmet
+section                                = up_sect_stam_three
+
+property                               = prop_power
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirdc_combat_h_helmet_name
+description                            = st_up_thirdc_combat_h_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_helm_stamina_1
+upgrade_item                           = upgr_o_2_utility
+
+;=========================================================
+; COLUMN 3
+; +5% Psi
+;=========================================================
+
+[up_thirde_combat_h_helmet]
+scheme_index                           = 2, 2
+known                                  = 1
+effects                                =
+section                                = up_sect_psi_one
+
+property                               = prop_psy
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirde_combat_h_helmet_name
+description                            = st_up_thirde_combat_h_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_helm_psi_1
+upgrade_item                           = upgr_o_3_magical
+
+
+;=================================================================
+; GROUPS
+;=================================================================
+
+;--- Row 1
+
+[up_gr_firstab_combat_helmet]
+elements                               = up_firsta_combat_helmet
+
+[up_gr_firstcd_combat_helmet]
+elements                               = up_firstc_combat_helmet, up_firstd_combat_helmet
+
+[up_gr_firstef_combat_helmet]
+elements                               = up_firste_combat_helmet, up_firstf_combat_helmet
+
+;---- Row 2
+
+[up_gr_seconab_combat_helmet]
+elements                               = up_secona_combat_helmet, up_seconb_combat_helmet
+
+[up_gr_seconcd_combat_helmet]
+elements                               = up_seconc_combat_helmet, up_second_combat_helmet
+
+[up_gr_seconef_combat_helmet]
+elements                               = up_secone_combat_helmet
+
+;--- Row 3 - light/medium
+
+
+[up_gr_thirdab_combat_lm_helmet]
+elements                               = up_thirda_combat_lm_helmet
+
+[up_gr_thirdcd_combat_lm_helmet]
+elements                               = up_thirdc_combat_lm_helmet
+
+[up_gr_thirdef_combat_lm_helmet]
+elements                               = up_thirde_combat_lm_helmet
+
+;--- Row 3 - heavy
+
+
+[up_gr_thirdab_combat_h_helmet]
+elements                               = up_thirda_combat_h_helmet
+
+[up_gr_thirdcd_combat_h_helmet]
+elements                               = up_thirdc_combat_h_helmet
+
+[up_gr_thirdef_combat_h_helmet]
+elements                               = up_thirde_combat_h_helmet

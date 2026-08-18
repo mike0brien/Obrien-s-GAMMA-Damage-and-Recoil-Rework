@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<string_table>
+
+    <string id="st_up_firsta_cloth_name"><text>Durability</text></string>
+    <string id="st_up_firsta_cloth_descr"><text>This gives 10% suit durability.</text></string>
+
+    <string id="st_up_firstc_cloth_name"><text>Shock</text></string>
+    <string id="st_up_firstc_cloth_descr"><text>This gives 5% shock protection.</text></string>
+
+    <string id="st_up_firstd_cloth_name"><text>Burn</text></string>
+    <string id="st_up_firstd_cloth_descr"><text>This gives 5% burn protection.</text></string>
+
+    <string id="st_up_firste_cloth_name"><text>Radiation</text></string>
+    <string id="st_up_firste_cloth_descr"><text>This gives 5% radiation protection.</text></string>
+
+    <string id="st_up_firsta_resp_name"><text>Durability</text></string>
+    <string id="st_up_firsta_resp_descr"><text>This gives 10% suit durability.</text></string>
+
+    <string id="st_up_firstc_resp_name"><text>Chemical</text></string>
+    <string id="st_up_firstc_resp_descr"><text>This gives 10% chemical protection.</text></string>
+
+    <string id="st_up_firstd_resp_name"><text>Burn</text></string>
+    <string id="st_up_firstd_resp_descr"><text>This gives 5% burn protection.</text></string>
+
+    <string id="st_up_firste_resp_name"><text>Radiation</text></string>
+    <string id="st_up_firste_resp_descr"><text>This gives 10% radiation protection.</text></string>
+
+</string_table>

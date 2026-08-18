@@ -1,0 +1,1185 @@
+;=================================================================
+; gas mask upgrade tree.
+;=================================================================
+
+
+;=================================================================
+; UPGRADE NODES
+;=================================================================
+
+;=========================================================
+; GP5/PPM88/Ranger tree - res order low to high chem=rad>burn>shock>tele expl>wound>strike
+;=========================================================
+
+
+;=========================================================
+; ROW 1
+;=========================================================
+
+
+;=========================================================
+; COLUMN 1
+; 10% Durability
+;=========================================================
+
+[up_firsta_gp5_mask]
+scheme_index                           = 0, 0
+known                                  = 1
+effects                                = up_gr_firstcd_gp5_mask
+section                                = up_sect_dura_secon
+
+property                               = prop_durability
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firsta_gp5_mask_name
+description                            = st_up_firsta_gp5_mask_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_durability_1
+upgrade_item                           = upgr_o_1_physical
+
+;=========================================================
+; COLUMN 2
+; 5% Rupture or 5% Impact
+;=========================================================
+
+[up_firstc_gp5_mask]
+scheme_index                           = 0, 1
+known                                  = 1
+effects                                = up_gr_firstef_gp5_mask
+section                                = up_sect_wound_one
+
+property                               = prop_damage
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firstc_gp5_mask_name
+description                            = st_up_firstc_gp5_mask_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_armour_1
+upgrade_item                           = upgr_o_1_magical
+
+
+
+[up_firstd_gp5_mask]
+scheme_index                           = 0, 1
+known                                  = 1
+effects                                = up_gr_firstef_gp5_mask
+section                                = up_sect_strike_one
+
+property                               = prop_damage
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firstd_gp5_mask_name
+description                            = st_up_firstd_gp5_mask_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_armour_1
+upgrade_item                           = upgr_o_1_magical
+
+;=========================================================
+; COLUMN 3
+; +10% Impact or +10% Durability
+;=========================================================
+
+[up_firste_gp5_mask]
+scheme_index                           = 1, 1
+known                                  = 1
+effects                                = 
+section                                = up_sect_strike_secon
+
+property                               = prop_damage
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firste_gp5_mask_name
+description                            = st_up_firste_gp5_mask_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_armour_1
+upgrade_item                           = upgr_o_2_magical
+
+[up_firstf_gp5_mask]
+scheme_index                           = 1, 0
+known                                  = 1
+effects                                = 
+section                                = up_sect_dura_secon
+
+property                               = prop_durability
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firstf_gp5_mask_name
+description                            = st_up_firstf_gp5_mask_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_durability_1
+upgrade_item                           = upgr_o_2_physical
+
+;=================================================================
+; ROW 2
+;=================================================================
+
+
+;=========================================================
+; COLUMN 1
+; 5% Chem OR 5% Fire
+;=========================================================
+
+[up_secona_gp5_mask]
+scheme_index                           = 0, 1
+known                                  = 1
+effects                                = up_gr_seconcd_gp5_mask
+section                                = up_sect_chem_one
+
+property                               = prop_chem
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_secona_gp5_mask_name
+description                            = st_up_secona_gp5_mask_descr
+
+icon                                   = ui_inGame2_upgrade_helm_chem_1
+upgrade_item                           = upgr_o_1_magical
+
+
+
+[up_seconb_gp5_mask]
+scheme_index                           = 0, 1
+known                                  = 1
+effects                                = up_gr_seconcd_gp5_mask
+section                                = up_sect_burn_one
+
+property                               = prop_thermo
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_seconb_gp5_mask_name
+description                            = st_up_seconb_gp5_mask_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_burn_1
+upgrade_item                           = upgr_o_1_magical
+
+
+
+;=========================================================
+; COLUMN 2
+; 10% Chem OR 5% Fire
+;=========================================================
+
+[up_seconc_gp5_mask]
+scheme_index                           = 1, 1
+known                                  = 1
+effects                                = up_gr_seconef_gp5_mask
+section                                = up_sect_chem_secon
+
+property                               = prop_chem
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_seconc_gp5_mask_name
+description                            = st_up_seconc_gp5_mask_descr
+
+icon                                   = ui_inGame2_upgrade_helm_chem_1
+upgrade_item                           = upgr_o_2_magical
+
+
+
+[up_second_gp5_mask]
+scheme_index                           = 1, 1
+known                                  = 1
+effects                                = up_gr_seconef_gp5_mask
+section                                = up_sect_burn_one
+
+property                               = prop_thermo
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_second_gp5_mask_name
+description                            = st_up_second_gp5_mask_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_burn_1
+upgrade_item                           = upgr_o_2_magical
+
+
+
+;=========================================================
+; COLUMN 3
+; 10% Shock
+;=========================================================
+
+
+[up_secone_gp5_mask]
+scheme_index                           = 2, 1
+known                                  = 1
+effects                                =
+section                                = up_sect_shock_secon
+
+property                               = prop_electro
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_secone_gp5_mask_name
+description                            = st_up_secone_gp5_mask_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_shock_1
+upgrade_item                           = upgr_o_3_utility
+
+
+;=================================================================
+; ROW 3 - light/medium
+;=================================================================
+
+
+;=========================================================
+; COLUMN 1
+; -0.5 kg REDUCE WEIGHT
+;=========================================================
+
+[up_thirda_gp5_lm_mask]
+scheme_index                           = 0, 2
+known                                  = 1
+effects                                = up_gr_thirdcd_gp5_lm_mask
+section                                = up_sect_weight_half
+
+property                               = prop_weightoutfit
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirda_gp5_lm_mask_name
+description                            = st_up_thirda_gp5_lm_mask_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_weight_1
+upgrade_item                           = upgr_o_1_utility
+
+
+
+;=========================================================
+; COLUMN 2
+; 10% Stam Recovery
+;=========================================================
+
+[up_thirdc_gp5_lm_mask]
+scheme_index                           = 1, 2
+known                                  = 1
+effects                                = up_gr_thirdef_gp5_lm_mask
+section                                = up_sect_stam_two
+
+property                               = prop_power
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirdc_gp5_lm_mask_name
+description                            = st_up_thirdc_gp5_lm_mask_descr
+
+icon                                   = ui_inGame2_upgrade_helm_stamina_1
+upgrade_item                           = upgr_o_2_utility
+
+;=========================================================
+; COLUMN 3
+; +10% Psi OR +5% Radiation
+;=========================================================
+
+[up_thirde_gp5_lm_mask]
+scheme_index                           = 2, 2
+known                                  = 1
+effects                                =
+section                                = up_sect_psi_secon
+
+property                               = prop_psy
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirde_gp5_lm_mask_name
+description                            = st_up_thirde_gp5_lm_mask_descr
+
+icon                                   = ui_inGame2_upgrade_helm_psi_1
+upgrade_item                           = upgr_o_3_utility
+
+
+
+[up_thirdf_gp5_lm_mask]
+scheme_index                           = 2, 2
+known                                  = 1
+effects                                =
+section                                = up_sect_rad_one
+
+property                               = prop_radio
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirdf_gp5_lm_mask_name
+description                            = st_up_thirdf_gp5_lm_mask_descr
+
+icon                                   = ui_inGame2_upgrade_helm_rad_1
+upgrade_item                           = upgr_o_3_utility
+
+;=================================================================
+; ROW 3 - heavy
+;=================================================================
+
+
+;=========================================================
+; COLUMN 1
+; -0.5 kg REDUCE WEIGHT
+;=========================================================
+
+[up_thirda_gp5_h_mask]
+scheme_index                           = 0, 2
+known                                  = 1
+effects                                = up_gr_thirdcd_gp5_h_mask
+section                                = up_sect_weight_half
+
+property                               = prop_weightoutfit
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirda_gp5_h_mask_name
+description                            = st_up_thirda_gp5_h_mask_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_weight_1
+upgrade_item                           = upgr_o_1_utility
+
+
+
+;=========================================================
+; COLUMN 2
+; 5% Stam Recovery
+;=========================================================
+
+[up_thirdc_gp5_h_mask]
+scheme_index                           = 1, 2
+known                                  = 1
+effects                                = up_gr_thirdef_gp5_h_mask
+section                                = up_sect_stam_one
+
+property                               = prop_power
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirdc_gp5_h_mask_name
+description                            = st_up_thirdc_gp5_h_mask_descr
+
+icon                                   = ui_inGame2_upgrade_helm_stamina_1
+upgrade_item                           = upgr_o_2_utility
+
+;=========================================================
+; COLUMN 3
+; +5% Psi OR +5% Radiation
+;=========================================================
+
+[up_thirde_gp5_h_mask]
+scheme_index                           = 2, 2
+known                                  = 1
+effects                                =
+section                                = up_sect_psi_one
+
+property                               = prop_psy
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirde_gp5_h_mask_name
+description                            = st_up_thirde_gp5_h_mask_descr
+
+icon                                   = ui_inGame2_upgrade_helm_psi_1
+upgrade_item                           = upgr_o_3_utility
+
+
+
+[up_thirdf_gp5_h_mask]
+scheme_index                           = 2, 2
+known                                  = 1
+effects                                =
+section                                = up_sect_rad_one
+
+property                               = prop_radio
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirdf_gp5_h_mask_name
+description                            = st_up_thirdf_gp5_h_mask_descr
+
+icon                                   = ui_inGame2_upgrade_helm_rad_1
+upgrade_item                           = upgr_o_3_utility
+
+
+
+;=================================================================
+; GROUPS
+;=================================================================
+
+;--- Row 1
+
+[up_gr_firstab_gp5_mask]
+elements                               = up_firsta_gp5_mask
+
+[up_gr_firstcd_gp5_mask]
+elements                               = up_firstc_gp5_mask, up_firstd_gp5_mask
+
+[up_gr_firstef_gp5_mask]
+elements                               = up_firste_gp5_mask, up_firstf_gp5_mask
+
+;---- Row 2
+
+[up_gr_seconab_gp5_mask]
+elements                               = up_secona_gp5_mask, up_seconb_gp5_mask
+
+[up_gr_seconcd_gp5_mask]
+elements                               = up_seconc_gp5_mask, up_second_gp5_mask
+
+[up_gr_seconef_gp5_mask]
+elements                               = up_secone_gp5_mask
+
+;--- Row 3 - light/medium
+
+
+[up_gr_thirdab_gp5_lm_mask]
+elements                               = up_thirda_gp5_lm_mask
+
+[up_gr_thirdcd_gp5_lm_mask]
+elements                               = up_thirdc_gp5_lm_mask
+
+[up_gr_thirdef_gp5_lm_mask]
+elements                               = up_thirde_gp5_lm_mask, up_thirdf_gp5_lm_mask
+
+;--- Row 3 - heavy
+
+
+[up_gr_thirdab_gp5_h_mask]
+elements                               = up_thirda_gp5_h_mask
+
+[up_gr_thirdcd_gp5_h_mask]
+elements                               = up_thirdc_gp5_h_mask
+
+[up_gr_thirdef_gp5_h_mask]
+elements                               = up_thirde_gp5_h_mask, up_thirdf_gp5_h_mask
+
+
+;=========================================================
+; Respirator/M40/M50 tree - res order low to high tele>shock>burn>chem>rad expl>strike>wound
+;=========================================================
+
+
+;=========================================================
+; ROW 1
+;=========================================================
+
+
+;=========================================================
+; COLUMN 1
+; 10% Durability
+;=========================================================
+
+[up_firsta_mx0_mask]
+scheme_index                           = 0, 0
+known                                  = 1
+effects                                = up_gr_firstcd_mx0_mask
+section                                = up_sect_dura_secon
+
+property                               = prop_durability
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firsta_mx0_mask_name
+description                            = st_up_firsta_mx0_mask_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_durability_1
+upgrade_item                           = upgr_o_1_physical
+
+;=========================================================
+; COLUMN 2
+; 5% Rupture or 5% Impact
+;=========================================================
+
+[up_firstc_mx0_mask]
+scheme_index                           = 0, 1
+known                                  = 1
+effects                                = up_gr_firstef_mx0_mask
+section                                = up_sect_wound_one
+
+property                               = prop_damage
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firstc_mx0_mask_name
+description                            = st_up_firstc_mx0_mask_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_armour_1
+upgrade_item                           = upgr_o_1_magical
+
+
+
+[up_firstd_mx0_mask]
+scheme_index                           = 0, 1
+known                                  = 1
+effects                                = up_gr_firstef_mx0_mask
+section                                = up_sect_strike_one
+
+property                               = prop_damage
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firstd_mx0_mask_name
+description                            = st_up_firstd_mx0_mask_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_armour_1
+upgrade_item                           = upgr_o_1_magical
+
+;=========================================================
+; COLUMN 3
+; +10% Wound or +10% Durability
+;=========================================================
+
+[up_firste_mx0_mask]
+scheme_index                           = 1, 1
+known                                  = 1
+effects                                = 
+section                                = up_sect_wound_secon
+
+property                               = prop_damage
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firste_mx0_mask_name
+description                            = st_up_firste_mx0_mask_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_armour_1
+upgrade_item                           = upgr_o_2_magical
+
+[up_firstf_mx0_mask]
+scheme_index                           = 1, 0
+known                                  = 1
+effects                                = 
+section                                = up_sect_dura_secon
+
+property                               = prop_durability
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firstf_mx0_mask_name
+description                            = st_up_firstf_mx0_mask_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_durability_1
+upgrade_item                           = upgr_o_2_physical
+
+;=================================================================
+; ROW 2
+;=================================================================
+
+
+;=========================================================
+; COLUMN 1
+; 5% Shock OR 5% Fire
+;=========================================================
+
+[up_secona_mx0_mask]
+scheme_index                           = 0, 1
+known                                  = 1
+effects                                = up_gr_seconcd_mx0_mask
+section                                = up_sect_shock_one
+
+property                               = prop_electro
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_secona_mx0_mask_name
+description                            = st_up_secona_mx0_mask_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_shock_1
+upgrade_item                           = upgr_o_1_magical
+
+
+
+[up_seconb_mx0_mask]
+scheme_index                           = 0, 1
+known                                  = 1
+effects                                = up_gr_seconcd_mx0_mask
+section                                = up_sect_burn_one
+
+property                               = prop_thermo
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_seconb_mx0_mask_name
+description                            = st_up_seconb_mx0_mask_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_burn_1
+upgrade_item                           = upgr_o_1_magical
+
+
+
+;=========================================================
+; COLUMN 2
+; 10% Shock OR 5% Fire
+;=========================================================
+
+[up_seconc_mx0_mask]
+scheme_index                           = 1, 1
+known                                  = 1
+effects                                = up_gr_seconef_mx0_mask
+section                                = up_sect_shock_secon
+
+property                               = prop_electro
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_seconc_mx0_mask_name
+description                            = st_up_seconc_mx0_mask_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_shock_1
+upgrade_item                           = upgr_o_2_magical
+
+
+
+[up_second_mx0_mask]
+scheme_index                           = 1, 1
+known                                  = 1
+effects                                = up_gr_seconef_mx0_mask
+section                                = up_sect_burn_one
+
+property                               = prop_thermo
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_second_mx0_mask_name
+description                            = st_up_second_mx0_mask_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_burn_1
+upgrade_item                           = upgr_o_2_magical
+
+
+
+;=========================================================
+; COLUMN 3
+; 10% Chem
+;=========================================================
+
+
+[up_secone_mx0_mask]
+scheme_index                           = 2, 1
+known                                  = 1
+effects                                =
+section                                = up_sect_chem_secon
+
+property                               = prop_chem
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_secone_mx0_mask_name
+description                            = st_up_secone_mx0_mask_descr
+
+icon                                   = ui_inGame2_upgrade_helm_chem_1
+upgrade_item                           = upgr_o_3_utility
+
+
+;=================================================================
+; ROW 3 - light/medium
+;=================================================================
+
+
+;=========================================================
+; COLUMN 1
+; -0.5 kg REDUCE WEIGHT
+;=========================================================
+
+[up_thirda_mx0_lm_mask]
+scheme_index                           = 0, 2
+known                                  = 1
+effects                                = up_gr_thirdcd_mx0_lm_mask
+section                                = up_sect_weight_half
+
+property                               = prop_weightoutfit
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirda_mx0_lm_mask_name
+description                            = st_up_thirda_mx0_lm_mask_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_weight_1
+upgrade_item                           = upgr_o_1_utility
+
+
+
+;=========================================================
+; COLUMN 2
+; 10% Stam Recovery
+;=========================================================
+
+[up_thirdc_mx0_lm_mask]
+scheme_index                           = 1, 2
+known                                  = 1
+effects                                = up_gr_thirdef_mx0_lm_mask
+section                                = up_sect_stam_two
+
+property                               = prop_power
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirdc_mx0_lm_mask_name
+description                            = st_up_thirdc_mx0_lm_mask_descr
+
+icon                                   = ui_inGame2_upgrade_helm_stamina_1
+upgrade_item                           = upgr_o_2_utility
+
+;=========================================================
+; COLUMN 3
+; +10% Rad OR +5% Psi
+;=========================================================
+
+[up_thirde_mx0_lm_mask]
+scheme_index                           = 2, 2
+known                                  = 1
+effects                                =
+section                                = up_sect_rad_secon
+
+property                               = prop_radio
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirde_mx0_lm_mask_name
+description                            = st_up_thirde_mx0_lm_mask_descr
+
+icon                                   = ui_inGame2_upgrade_helm_rad_1
+upgrade_item                           = upgr_o_3_utility
+
+
+
+[up_thirdf_mx0_lm_mask]
+scheme_index                           = 2, 2
+known                                  = 1
+effects                                =
+section                                = up_sect_psi_one
+
+property                               = prop_psy
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirdf_mx0_lm_mask_name
+description                            = st_up_thirdf_mx0_lm_mask_descr
+
+icon                                   = ui_inGame2_upgrade_helm_psi_1
+upgrade_item                           = upgr_o_3_utility
+
+;=================================================================
+; ROW 3 - heavy
+;=================================================================
+
+
+;=========================================================
+; COLUMN 1
+; -0.5 kg REDUCE WEIGHT
+;=========================================================
+
+[up_thirda_mx0_h_mask]
+scheme_index                           = 0, 2
+known                                  = 1
+effects                                = up_gr_thirdcd_mx0_h_mask
+section                                = up_sect_weight_half
+
+property                               = prop_weightoutfit
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirda_mx0_h_mask_name
+description                            = st_up_thirda_mx0_h_mask_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_weight_1
+upgrade_item                           = upgr_o_1_utility
+
+
+
+;=========================================================
+; COLUMN 2
+; 5% Stam Recovery
+;=========================================================
+
+[up_thirdc_mx0_h_mask]
+scheme_index                           = 1, 2
+known                                  = 1
+effects                                = up_gr_thirdef_mx0_h_mask
+section                                = up_sect_stam_one
+
+property                               = prop_power
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirdc_mx0_h_mask_name
+description                            = st_up_thirdc_mx0_h_mask_descr
+
+icon                                   = ui_inGame2_upgrade_helm_stamina_1
+upgrade_item                           = upgr_o_2_utility
+
+;=========================================================
+; COLUMN 3
+; +5% Rad OR +5% Psi
+;=========================================================
+
+[up_thirde_mx0_h_mask]
+scheme_index                           = 2, 2
+known                                  = 1
+effects                                =
+section                                = up_sect_rad_one
+
+property                               = prop_radio
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirde_mx0_h_mask_name
+description                            = st_up_thirde_mx0_h_mask_descr
+
+icon                                   = ui_inGame2_upgrade_helm_rad_1
+upgrade_item                           = upgr_o_3_utility
+
+
+
+[up_thirdf_mx0_h_mask]
+scheme_index                           = 2, 2
+known                                  = 1
+effects                                =
+section                                = up_sect_psi_one
+
+property                               = prop_psy
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirdf_mx0_h_mask_name
+description                            = st_up_thirdf_mx0_h_mask_descr
+
+icon                                   = ui_inGame2_upgrade_helm_psi_1
+upgrade_item                           = upgr_o_3_utility
+
+;=================================================================
+; GROUPS
+;=================================================================
+
+;--- Row 1
+
+[up_gr_firstab_mx0_mask]
+elements                               = up_firsta_mx0_mask
+
+[up_gr_firstcd_mx0_mask]
+elements                               = up_firstc_mx0_mask, up_firstd_mx0_mask
+
+[up_gr_firstef_mx0_mask]
+elements                               = up_firste_mx0_mask, up_firstf_mx0_mask
+
+;---- Row 2
+
+[up_gr_seconab_mx0_mask]
+elements                               = up_secona_mx0_mask, up_seconb_mx0_mask
+
+[up_gr_seconcd_mx0_mask]
+elements                               = up_seconc_mx0_mask, up_second_mx0_mask
+
+[up_gr_seconef_mx0_mask]
+elements                               = up_secone_mx0_mask
+
+;--- Row 3 light/medium
+
+
+[up_gr_thirdab_mx0_lm_mask]
+elements                               = up_thirda_mx0_lm_mask
+
+[up_gr_thirdcd_mx0_lm_mask]
+elements                               = up_thirdc_mx0_lm_mask
+
+[up_gr_thirdef_mx0_lm_mask]
+elements                               = up_thirde_mx0_lm_mask, up_thirdf_mx0_lm_mask
+
+;--- Row 3 heavy
+
+
+[up_gr_thirdab_mx0_h_mask]
+elements                               = up_thirda_mx0_h_mask
+
+[up_gr_thirdcd_mx0_h_mask]
+elements                               = up_thirdc_mx0_h_mask
+
+[up_gr_thirdef_mx0_h_mask]
+elements                               = up_thirde_mx0_h_mask, up_thirdf_mx0_h_mask

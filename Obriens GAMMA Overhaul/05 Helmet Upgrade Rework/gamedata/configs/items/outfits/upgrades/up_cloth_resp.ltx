@@ -1,0 +1,276 @@
+;=================================================================
+; cloth/respirator upgrade tree.
+;=================================================================
+
+
+;=================================================================
+; UPGRADE NODES
+;=================================================================
+
+
+;=========================================================
+; ROW 1 - cloth masks
+;=========================================================
+
+
+;=========================================================
+; COLUMN 1
+; 10% Durability
+;=========================================================
+
+[up_firsta_cloth]
+scheme_index                           = 0, 0
+known                                  = 1
+effects                                = up_gr_firstcd_cloth
+section                                = up_sect_dura_secon
+
+property                               = prop_durability
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firsta_cloth_name
+description                            = st_up_firsta_cloth_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_durability_1
+upgrade_item                           = upgr_o_1_physical
+
+;=========================================================
+; COLUMN 2
+; 5% Shock OR 5% Fire
+;=========================================================
+
+[up_firstc_cloth]
+scheme_index                           = 0, 1
+known                                  = 1
+effects                                = up_gr_firstef_cloth
+section                                = up_sect_shock_one
+
+property                               = prop_electro
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firstc_cloth_name
+description                            = st_up_firstc_cloth_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_shock_1 ;--- broke
+upgrade_item                           = upgr_o_1_magical
+
+
+
+[up_firstd_cloth]
+scheme_index                           = 0, 1
+known                                  = 1
+effects                                = up_gr_firstef_cloth
+section                                = up_sect_burn_one
+
+property                               = prop_thermo
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firstd_cloth_name
+description                            = st_up_firstd_cloth_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_burn_1 ;--- broke
+upgrade_item                           = upgr_o_1_magical
+
+;=========================================================
+; COLUMN 3
+; +5% Radiation
+;=========================================================
+
+[up_firste_cloth]
+scheme_index                           = 1, 1
+known                                  = 1
+effects                                = 
+section                                = up_sect_rad_one
+
+property                               = prop_radio
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firste_cloth_name
+description                            = st_up_firste_cloth_descr
+
+icon                                   = ui_inGame2_upgrade_helm_rad_1
+upgrade_item                           = upgr_o_2_magical
+
+;=================================================================
+; GROUPS
+;=================================================================
+
+;--- Row 1 - cloth masks
+
+[up_gr_firstab_cloth]
+elements                               = up_firsta_cloth
+
+[up_gr_firstcd_cloth]
+elements                               = up_firstc_cloth, up_firstd_cloth
+
+[up_gr_firstef_cloth]
+elements                               = up_firste_cloth
+
+
+;=========================================================
+; ROW 1 - respirators
+;=========================================================
+
+
+;=========================================================
+; COLUMN 1
+; 10% Durability
+;=========================================================
+
+[up_firsta_resp]
+scheme_index                           = 0, 0
+known                                  = 1
+effects                                = up_gr_firstcd_resp
+section                                = up_sect_dura_secon
+
+property                               = prop_durability
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firsta_resp_name
+description                            = st_up_firsta_resp_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_durability_1
+upgrade_item                           = upgr_o_1_physical
+
+;=========================================================
+; COLUMN 2
+; 10% Chem OR 5% Fire
+;=========================================================
+
+[up_firstc_resp]
+scheme_index                           = 0, 1
+known                                  = 1
+effects                                = up_gr_firstef_resp
+section                                = up_sect_chem_secon
+
+property                               = prop_chem
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firstc_resp_name
+description                            = st_up_firstc_resp_descr
+
+icon                                   = ui_inGame2_upgrade_helm_chem_1
+upgrade_item                           = upgr_o_1_magical
+
+
+
+[up_firstd_resp]
+scheme_index                           = 0, 1
+known                                  = 1
+effects                                = up_gr_firstef_resp
+section                                = up_sect_burn_one
+
+property                               = prop_thermo
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firstd_resp_name
+description                            = st_up_firstd_resp_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_burn_1
+upgrade_item                           = upgr_o_1_magical
+
+;=========================================================
+; COLUMN 3
+; +10% Radiation Protection
+;=========================================================
+
+[up_firste_resp]
+scheme_index                           = 1, 1
+known                                  = 1
+effects                                = 
+section                                = up_sect_rad_secon
+
+property                               = prop_radio
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firste_resp_name
+description                            = st_up_firste_resp_descr
+
+icon                                   = ui_inGame2_upgrade_helm_rad_1
+upgrade_item                           = upgr_o_2_magical
+
+;=================================================================
+; GROUPS
+;=================================================================
+
+;--- Row 1 - respirators
+
+[up_gr_firstab_resp]
+elements                               = up_firsta_resp
+
+[up_gr_firstcd_resp]
+elements                               = up_firstc_resp, up_firstd_resp
+
+[up_gr_firstef_resp]
+elements                               = up_firste_resp

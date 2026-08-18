@@ -139,12 +139,12 @@ stalker_damage = {
 	bip01_spine2 	= 1.0,
 
 	-- HEAD
-	bip01_neck 		= 3.0,
-	bip01_head 		= 3.0,
-	eyelid_1 		= 3.0,
-	eye_left 		= 3.0,
-	eye_right 		= 3.0,
-	jaw_1 			= 3.0,
+	bip01_neck 		= 4.0,
+	bip01_head 		= 4.0,
+	eyelid_1 		= 4.0,
+	eye_left 		= 4.0,
+	eye_right 		= 4.0,
+	jaw_1 			= 4.0,
 
 	-- LEFT ARM
 	bip01_l_clavicle 	= 0.7,

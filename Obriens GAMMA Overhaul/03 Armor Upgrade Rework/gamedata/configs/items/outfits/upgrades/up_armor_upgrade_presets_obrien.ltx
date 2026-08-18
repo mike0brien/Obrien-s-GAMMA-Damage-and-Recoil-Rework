@@ -283,6 +283,12 @@ fire_wound_immunity							    = -0.001
 ; Armor Weight Reduction
 ;=========================================================
 
+[up_sect_weight_half]
+cost                                   = 2000
+value                                  = -0.5
+
+inv_weight                             = -0.5
+
 [up_sect_weight_one]
 cost                                   = 4000
 value                                  = -1
@@ -367,39 +373,40 @@ artefact_count                         = 1
 
 [up_sect_stam_one]
 cost                                   = 1000
-value                                  = +5
+value                                  = +5 ;--- +5
 
-power_restore_speed                    = 0.00033
+power_restore_speed                    = 0.0001625 ;--- 0.00033
 
 [up_sect_stam_two]
 cost                                   = 1500
-value                                  = +7.5
+value                                  = +10 ;--- +7.5
 
-power_restore_speed                    = 0.000495
+power_restore_speed                    = 0.000325 ;--- 0.000495
 
 [up_sect_stam_three]
 cost                                   = 2000
-value                                  = +10
+value                                  = +15 ;--- +10
 
-power_restore_speed                    = 0.00066
+power_restore_speed                    = 0.0004875 ;--- 0.00066
 
 [up_sect_stam_four]
 cost                                   = 2500
-value                                  = +12.5
+value                                  = +20 ;--- +12.5
 
-power_restore_speed                    = 0.000825
+power_restore_speed                    = 0.000650 ;--- 0.000825
 
 [up_sect_stam_five]
 cost                                   = 3000
-value                                  = +15
+value                                  = +25 ;--- +15
 
-power_restore_speed                    = 0.00099
+power_restore_speed                    = 0.0008125 ;--- 0.00099
 
 
 
 ;=========================================================
 ; Health Restoration
-; 1 HP is .0001, I think.
+; health restore speed is health_restore_speed * game_time_factor, which from what I can find is 6, so 6 ingame seconds per 1 second IRL. So if you want 1 HP per sec .00166667 should be 1. SotaUI incorrectly scales to 4.25, idk why. 
+; I'm using .0001 for +1 HP because the pelt/artifact UI shows that as +1, and I don't feel like correcting it. So basically you'll get 0.6 HP/sec. It's fine...
 ;=========================================================
 
 [up_sect_heal_one]

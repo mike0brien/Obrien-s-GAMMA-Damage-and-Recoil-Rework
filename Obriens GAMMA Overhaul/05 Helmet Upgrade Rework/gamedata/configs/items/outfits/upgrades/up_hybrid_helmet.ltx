@@ -1,0 +1,593 @@
+;=================================================================
+; hybrid helmet upgrade tree.
+;=================================================================
+
+
+;=================================================================
+; UPGRADE NODES
+;=================================================================
+
+
+;=========================================================
+; ROW 1
+;=========================================================
+
+
+;=========================================================
+; COLUMN 1
+; 10% Durability
+;=========================================================
+
+[up_firsta_hybrid_helmet]
+scheme_index                           = 0, 0
+known                                  = 1
+effects                                = up_gr_firstcd_hybrid_helmet
+section                                = up_sect_dura_secon
+
+property                               = prop_durability
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firsta_hybrid_helmet_name
+description                            = st_up_firsta_hybrid_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_durability_1
+upgrade_item                           = upgr_o_1_physical
+
+;=========================================================
+; COLUMN 2
+; 10% Rupture or 5% Impact
+;=========================================================
+
+[up_firstc_hybrid_helmet]
+scheme_index                           = 1, 0
+known                                  = 1
+effects                                = up_gr_firstef_hybrid_helmet
+section                                = up_sect_wound_secon
+
+property                               = prop_damage
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firstc_hybrid_helmet_name
+description                            = st_up_firstc_hybrid_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_armour_1
+upgrade_item                           = upgr_o_1_magical
+
+
+
+[up_firstd_hybrid_helmet]
+scheme_index                           = 1, 0
+known                                  = 1
+effects                                = up_gr_firstef_hybrid_helmet
+section                                = up_sect_strike_one
+
+property                               = prop_damage
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firstd_hybrid_helmet_name
+description                            = st_up_firstd_hybrid_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_armour_1
+upgrade_item                           = upgr_o_1_magical
+
+;=========================================================
+; COLUMN 3
+; +10% Explosion or +10% Durability
+;=========================================================
+
+[up_firste_hybrid_helmet]
+scheme_index                           = 2, 0
+known                                  = 1
+effects                                = 
+section                                = up_sect_expl_secon
+
+property                               = prop_damage
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firste_hybrid_helmet_name
+description                            = st_up_firste_hybrid_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_armour_1
+upgrade_item                           = upgr_o_2_magical
+
+[up_firstf_hybrid_helmet]
+scheme_index                           = 2, 0
+known                                  = 1
+effects                                = 
+section                                = up_sect_dura_secon
+
+property                               = prop_durability
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_firstf_hybrid_helmet_name
+description                            = st_up_firstf_hybrid_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_durability_1
+upgrade_item                           = upgr_o_2_physical
+
+;=================================================================
+; ROW 2
+;=================================================================
+
+
+;=========================================================
+; COLUMN 1
+; 5% Shock OR 5% Chem
+;=========================================================
+
+[up_secona_hybrid_helmet]
+scheme_index                           = 0, 1
+known                                  = 1
+effects                                = up_gr_seconcd_hybrid_helmet
+section                                = up_sect_shock_one
+
+property                               = prop_electro
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_secona_hybrid_helmet_name
+description                            = st_up_secona_hybrid_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_shock_1
+upgrade_item                           = upgr_o_1_magical
+
+
+
+[up_seconb_hybrid_helmet]
+scheme_index                           = 0, 1
+known                                  = 1
+effects                                = up_gr_seconcd_hybrid_helmet
+section                                = up_sect_chem_one
+
+property                               = prop_chem
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_seconb_hybrid_helmet_name
+description                            = st_up_seconb_hybrid_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_helm_chem_1
+upgrade_item                           = upgr_o_1_magical
+
+
+
+;=========================================================
+; COLUMN 2
+; 10% Shock OR 5% Chem
+;=========================================================
+
+[up_seconc_hybrid_helmet]
+scheme_index                           = 1, 1
+known                                  = 1
+effects                                = up_gr_seconef_hybrid_helmet
+section                                = up_sect_shock_secon
+
+property                               = prop_electro
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_seconc_hybrid_helmet_name
+description                            = st_up_seconc_hybrid_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_shock_1
+upgrade_item                           = upgr_o_2_magical
+
+
+
+[up_second_hybrid_helmet]
+scheme_index                           = 1, 1
+known                                  = 1
+effects                                = up_gr_seconef_hybrid_helmet
+section                                = up_sect_chem_one
+
+property                               = prop_chem
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_second_hybrid_helmet_name
+description                            = st_up_second_hybrid_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_helm_chem_1
+upgrade_item                           = upgr_o_2_magical
+
+
+
+;=========================================================
+; COLUMN 3
+; 10% Burn
+;=========================================================
+
+
+[up_secone_hybrid_helmet]
+scheme_index                           = 2, 1
+known                                  = 1
+effects                                =
+section                                = up_sect_burn_secon
+
+property                               = prop_thermo
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_secone_hybrid_helmet_name
+description                            = st_up_secone_hybrid_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_burn_1
+upgrade_item                           = upgr_o_3_utility
+
+
+;=================================================================
+; ROW 3 - light/medium
+;=================================================================
+
+
+;=========================================================
+; COLUMN 1
+; -0.5 kg REDUCE WEIGHT
+;=========================================================
+
+[up_thirda_hybrid_lm_helmet]
+scheme_index                           = 0, 2
+known                                  = 1
+effects                                = up_gr_thirdcd_hybrid_lm_helmet
+section                                = up_sect_weight_half
+
+property                               = prop_weightoutfit
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirda_hybrid_lm_helmet_name
+description                            = st_up_thirda_hybrid_lm_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_weight_1
+upgrade_item                           = upgr_o_1_utility
+
+
+
+;=========================================================
+; COLUMN 2
+; 15% Stam Recovery
+;=========================================================
+
+[up_thirdc_hybrid_lm_helmet]
+scheme_index                           = 1, 2
+known                                  = 1
+effects                                = up_gr_thirdef_hybrid_lm_helmet
+section                                = up_sect_stam_three
+
+property                               = prop_power
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirdc_hybrid_lm_helmet_name
+description                            = st_up_thirdc_hybrid_lm_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_helm_stamina_1
+upgrade_item                           = upgr_o_2_utility
+
+;=========================================================
+; COLUMN 3
+; +10% Radiation Or 10% Psi
+;=========================================================
+
+[up_thirde_hybrid_lm_helmet]
+scheme_index                           = 2, 2
+known                                  = 1
+effects                                =
+section                                = up_sect_rad_secon
+
+property                               = prop_radio
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirde_hybrid_lm_helmet_name
+description                            = st_up_thirde_hybrid_lm_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_helm_rad_1
+upgrade_item                           = upgr_o_3_magical
+
+
+
+[up_thirdf_hybrid_lm_helmet]
+scheme_index                           = 2, 2
+known                                  = 1
+effects                                =
+section                                = up_sect_psi_secon
+
+property                               = prop_psy
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirdf_hybrid_lm_helmet_name
+description                            = st_up_thirdf_hybrid_lm_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_helm_psi_1
+upgrade_item                           = upgr_o_3_magical
+
+;=================================================================
+; ROW 3 - heavy
+;=================================================================
+
+
+;=========================================================
+; COLUMN 1
+; -0.5 kg REDUCE WEIGHT
+;=========================================================
+
+[up_thirda_hybrid_h_helmet]
+scheme_index                           = 0, 2
+known                                  = 1
+effects                                = up_gr_thirdcd_hybrid_h_helmet
+section                                = up_sect_weight_half
+
+property                               = prop_weightoutfit
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirda_hybrid_h_helmet_name
+description                            = st_up_thirda_hybrid_h_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_outfit_weight_1
+upgrade_item                           = upgr_o_1_utility
+
+
+
+;=========================================================
+; COLUMN 2
+; 10% Stam Recovery
+;=========================================================
+
+[up_thirdc_hybrid_h_helmet]
+scheme_index                           = 1, 2
+known                                  = 1
+effects                                = up_gr_thirdef_hybrid_h_helmet
+section                                = up_sect_stam_two
+
+property                               = prop_power
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirdc_hybrid_h_helmet_name
+description                            = st_up_thirdc_hybrid_h_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_helm_stamina_1
+upgrade_item                           = upgr_o_2_utility
+
+;=========================================================
+; COLUMN 3
+; +5% Radiation OR +5% Psi
+;=========================================================
+
+[up_thirde_hybrid_h_helmet]
+scheme_index                           = 2, 2
+known                                  = 1
+effects                                =
+section                                = up_sect_rad_one
+
+property                               = prop_radio
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirde_hybrid_h_helmet_name
+description                            = st_up_thirde_hybrid_h_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_helm_rad_1
+upgrade_item                           = upgr_o_3_magical
+
+
+
+[up_thirdf_hybrid_h_helmet]
+scheme_index                           = 2, 2
+known                                  = 1
+effects                                =
+section                                = up_sect_psi_one
+
+property                               = prop_psy
+
+precondition_functor                   = inventory_upgrades.precondition_functor_a
+precondition_parameter                 = a & b
+
+effect_functor                         = inventory_upgrades.effect_functor_a
+effect_parameter                       = something_here
+
+prereq_functor                         = inventory_upgrades.prereq_functor_a
+prereq_tooltip_functor                 = inventory_upgrades.prereq_tooltip_functor_a
+prereq_params                          =
+
+name                                   = st_up_thirdf_hybrid_h_helmet_name
+description                            = st_up_thirdf_hybrid_h_helmet_descr
+
+icon                                   = ui_inGame2_upgrade_helm_psi_1
+upgrade_item                           = upgr_o_3_magical
+
+
+
+;=================================================================
+; GROUPS
+;=================================================================
+
+;--- Row 1
+
+[up_gr_firstab_hybrid_helmet]
+elements                               = up_firsta_hybrid_helmet
+
+[up_gr_firstcd_hybrid_helmet]
+elements                               = up_firstc_hybrid_helmet, up_firstd_hybrid_helmet
+
+[up_gr_firstef_hybrid_helmet]
+elements                               = up_firste_hybrid_helmet, up_firstf_hybrid_helmet
+
+;---- Row 2
+
+[up_gr_seconab_hybrid_helmet]
+elements                               = up_secona_hybrid_helmet, up_seconb_hybrid_helmet
+
+[up_gr_seconcd_hybrid_helmet]
+elements                               = up_seconc_hybrid_helmet, up_second_hybrid_helmet
+
+[up_gr_seconef_hybrid_helmet]
+elements                               = up_secone_hybrid_helmet
+
+;--- Row 3 - light/medium
+
+
+[up_gr_thirdab_hybrid_lm_helmet]
+elements                               = up_thirda_hybrid_lm_helmet
+
+[up_gr_thirdcd_hybrid_lm_helmet]
+elements                               = up_thirdc_hybrid_lm_helmet
+
+[up_gr_thirdef_hybrid_lm_helmet]
+elements                               = up_thirde_hybrid_lm_helmet, up_thirdf_hybrid_lm_helmet
+
+;--- Row 3 - heavy
+
+
+[up_gr_thirdab_hybrid_h_helmet]
+elements                               = up_thirda_hybrid_h_helmet
+
+[up_gr_thirdcd_hybrid_h_helmet]
+elements                               = up_thirdc_hybrid_h_helmet
+
+[up_gr_thirdef_hybrid_h_helmet]
+elements                               = up_thirde_hybrid_h_helmet, up_thirdf_hybrid_h_helmet
