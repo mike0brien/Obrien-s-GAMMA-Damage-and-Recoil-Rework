@@ -96,8 +96,8 @@ end
 -- If that namespace/function exists, component recoil owns the final
 -- SetCam... values and armor should only provide its multiplier.
 local function component_recoil_active()
-    return obrien_component_based_recoil
-       and type(obrien_component_based_recoil.refresh_active_weapon) == "function"
+    return ocr_recoil
+       and type(ocr_recoil.refresh_active_weapon) == "function"
 end
 
 
@@ -236,7 +236,7 @@ function armor_recoil.update_if_needed(force)
             new_mult
         ))
 
-        obrien_component_based_recoil.refresh_active_weapon()
+        ocr_recoil.refresh_active_weapon()
         return
     end
 

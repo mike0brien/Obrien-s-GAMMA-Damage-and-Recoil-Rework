@@ -46,13 +46,13 @@
     <string id="st_up_thirdc_hybrid_ecolog_descr"><text>This gives +10 kg carry weight.</text></string>
 
     <string id="st_up_thirdd_hybrid_ecolog_name"><text>Stamina</text></string>
-    <string id="st_up_thirdd_hybrid_ecolog_descr"><text>This gives 10% stamina regeneration.</text></string>
+    <string id="st_up_thirdd_hybrid_ecolog_descr"><text>This gives 15% stamina regeneration.</text></string>
 
     <string id="st_up_thirde_hybrid_ecolog_name"><text>Health</text></string>
-    <string id="st_up_thirde_hybrid_ecolog_descr"><text>This gives +1 health restoration.</text></string>
+    <string id="st_up_thirde_hybrid_ecolog_descr"><text>This gives +0.25 health restoration.</text></string>
 
     <string id="st_up_thirdf_hybrid_ecolog_name"><text>Bleeding</text></string>
-    <string id="st_up_thirdf_hybrid_ecolog_descr"><text>This gives 10% bleeding recovery.</text></string>
+    <string id="st_up_thirdf_hybrid_ecolog_descr"><text>This gives 300 mL/min bleeding control.</text></string>
 
 
     <!-- Row 4 -->

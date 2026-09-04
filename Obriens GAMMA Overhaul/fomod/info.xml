@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <fomod>
   <Name>Obrien GAMMA Overhaul</Name>
   <Author>Mike Obrien</Author>
   <Version MachineVersion="1.0.0">1.0.0</Version>
   <Description>
     Modular installer for the Obrien GAMMA combat, recoil, armor upgrade,
-    weapon upgrade, and SOTA UI compatibility modules.
+    weapon upgrade, OWC weapon component, and SOTA UI compatibility modules.
+    The OWC weapon component system may be installed with or without the recoil rework.
   </Description>
 </fomod>

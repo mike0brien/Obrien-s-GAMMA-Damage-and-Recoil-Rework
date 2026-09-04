@@ -275,8 +275,9 @@ ish_item_stats.override_stats_table = function()
 	
 -- fix of stats values and magnitude, also re-sorting of stats in tooltip
 	utils_ui.stats_table["outfit"] = {
-		["health_restore_speed"]		= { index= 1,	typ= "float",	name= "ui_inv_health",							icon_p= "ui_am_propery_05",					icon_n= "",									track= false, magnitude= 10000,							unit= "",				condition= true,	compare= false,	sign= true,		show_always= false	},
-		["bleeding_restore_speed"]		= { index= 2,	typ= "float",	name= "ui_inv_bleeding",						icon_p= "ui_am_prop_restore_bleeding",		icon_n= "",									track= false, magnitude= 150000,						unit= "st_ml_min",		condition= true,	compare= false,	sign= true,		show_always= false	},
+		["health_restore_speed"]		= { index= 1,	typ= "float",	name= "ui_inv_health",							icon_p= "ui_am_propery_05",					icon_n= "",									track= false, magnitude= 600,							unit= "",				condition= true,	compare= false,	sign= true,		show_always= false	},
+		["bleeding_restore_speed"]		= { index= 2,	typ= "float",	name= "ui_inv_bleeding",						icon_p= "ui_am_prop_restore_bleeding",		icon_n= "",									track= false, magnitude= 98000,						unit= "st_ml_min",		condition= true,	compare= false,	sign= true,		show_always= false	},
+		["power_restore_speed"]		= { index= 3,	typ= "float",	name= "ui_inv_power",							icon_p= "ui_am_propery_07",				icon_n= "ui_am_prop_power_restore",		track= false, magnitude= 30303.03,					unit= "st_perc",		condition= true,	compare= false,	sign= true,		show_always= false	},
 		
 		["fire_wound_protection"]		= { index= 12,	typ= "float",	name= "ui_inv_outfit_fire_wound_protection",	icon_p= "ui_am_propery_01",					icon_n= "",									track= false, magnitude= 1,								unit= "st_perc",		condition= true,	compare= false,	sign= true,		show_always= true,	value_functor= {"grok_actor_damage_balancer","get_outfit_value", "FireWound"		}	},
 		["radiation_protection"]		= { index= 20,	typ= "float",	name= "ui_inv_outfit_radiation_protection",		icon_p= "ui_am_propery_09",					icon_n= "",									track= false, magnitude= 1,								unit= "st_perc",		condition= true,	compare= false,	sign= true,		show_always= true,	value_functor= {"grok_actor_damage_balancer","get_outfit_value", "Radiation"		}	},
@@ -294,10 +295,10 @@ ish_item_stats.override_stats_table = function()
 	
 	utils_ui.stats_table["artefact"] = {
 		["condition"]					= { index= 1,	typ= "float",	name= "ui_inv_af_condition",					icon_p= "ui_am_condition",					icon_n= "",									track= false, magnitude= 100,							unit= "st_perc",							compare= false,	sign= true,		show_always= true,	value_functor= {"utils_ui","prop_condition"}	},
-		["health_restore_speed"]		= { index= 2,	typ= "float",	name= "ui_inv_health",							icon_p= "ui_am_propery_05",					icon_n= "ui_am_prop_health_negative",		track= false, magnitude= 10000,							unit= "",				condition= true,	compare= false,	sign= true,		show_always= false	},
-		["bleeding_restore_speed"]		= { index= 3,	typ= "float",	name= "ui_inv_bleeding",						icon_p= "ui_am_prop_restore_bleeding",		icon_n= "ui_am_prop_bleeding_restore",		track= false, magnitude= 150000,						unit= "st_ml_min",		condition= true,	compare= false,	sign= true,		show_always= false	},
+		["health_restore_speed"]		= { index= 2,	typ= "float",	name= "ui_inv_health",							icon_p= "ui_am_propery_05",					icon_n= "ui_am_prop_health_negative",		track= false, magnitude= 600,							unit= "",				condition= true,	compare= false,	sign= true,		show_always= false	},
+		["bleeding_restore_speed"]		= { index= 3,	typ= "float",	name= "ui_inv_bleeding",						icon_p= "ui_am_prop_restore_bleeding",		icon_n= "ui_am_prop_bleeding_restore",		track= false, magnitude= 98000,						unit= "st_ml_min",		condition= true,	compare= false,	sign= true,		show_always= false	},
 		["satiety_restore_speed"]		= { index= 4,	typ= "float",	name= "ui_inv_satiety",							icon_p= "ui_am_prop_satiety_restore_speed",	icon_n= "ui_am_prop_satiety",				track= false, magnitude= 100,							unit= "",				condition= true,	compare= false,	sign= true,		show_always= false	},
-		["power_restore_speed"]			= { index= 5,	typ= "float",	name= "ui_inv_power",							icon_p= "ui_am_propery_07",					icon_n= "ui_am_prop_power_restore",			track= false, magnitude= 30000,							unit= "st_perc",		condition= true,	compare= false,	sign= true,		show_always= false	},
+		["power_restore_speed"]			= { index= 5,	typ= "float",	name= "ui_inv_power",							icon_p= "ui_am_propery_07",					icon_n= "ui_am_prop_power_restore",			track= false, magnitude= 30303.03,							unit= "st_perc",		condition= true,	compare= false,	sign= true,		show_always= false	},
 		["radiation_restore_speed"]		= { index= 6,	typ= "float",	name= "ui_inv_radiation",						icon_p= "ui_am_propery_09",					icon_n= "ui_am_prop_radio_restore",			track= false, magnitude= 47000,							unit= "st_msv_sec",		condition= true,	compare= false,	sign= true,		show_always= false, sign_inverse= true	},
 		
 		["radiation_immunity"]			= { index= 7,	typ= "float",	name= "ui_inv_outfit_radiation_protection",		icon_p= "ui_am_propery_09",					icon_n= "ui_am_prop_radiation_immunity",	track= false, magnitude= 100,							unit= "st_perc",		condition= true,	compare= false,	sign= true,		show_always= false,	value_functor= {"grok_actor_damage_balancer","get_af_value", "Radiation"	}	},
@@ -494,7 +495,7 @@ function ui_inventory.UIInventory:UpdateStats()
 		self.stat_helm["health_restore"]		= c_helm.m_fHealthRestoreSpeed or 0
 		self.stat_helm["bleeding_restore"]		= c_helm.m_fBleedingRestoreSpeed or 0
 		self.stat_helm["radia_restore"]			= c_helm.m_fRadiationRestoreSpeed or 0
-		self.stat_helm["power"]					= cond * (c_helm.m_fPowerRestoreSpeed or 0) * 100
+		self.stat_helm["power"]					= cond * (c_helm.m_fPowerRestoreSpeed or 0)
 		
 		self.stat_helm["radia"]					= cond * get_outfit_value(helm, sec, "Radiation",		0) / 100
 		self.stat_helm["acid"]					= cond * get_outfit_value(helm, sec, "ChemicalBurn",	0) / 100
@@ -669,32 +670,25 @@ function ui_inventory.UIInventory:UpdateStats()
 	local power_clamp = 15 -- to bring power to vanilla values
 	local power = actor:cast_Actor():conditions():V_SatietyPower()
 	
-	-- calculate of suit effect before adding boosters
---	power = power + self.stat_arty["power"]
+	-- Body stamina recovery without equipment.
+	-- Do not fold outfit power_loss into the STAMINA REC. display: power_loss
+	-- changes stamina consumption/efficiency, while this panel is intended to
+	-- report power_restore_speed only.
 	power = power - self.stat_boost["power"]
-	local power_no_outfit = power / 0.5 -- power value without outfit
+	local power_no_outfit = power / 0.5
+	power = power_no_outfit / power_clamp / power_max
 	
-	if outfit then
-		power = power + self.stat_outfit["power"]
-		local power_loss = outfit:cast_CustomOutfit().m_fPowerLoss or 0
-		if (power_loss ~= 0) then
-			power = power / power_loss
-			self.stat_outfit["power"] = (power - power_no_outfit) / power_clamp / power_max
-		else
-			power = power_no_outfit
-		end
-	else
-		power = power_no_outfit
-	end
-	power = power / power_clamp / power_max
-	
-	-- add boosters after calculate of suit effect + adjust to match value in tooltip
-	self.stat_arty["power"] = self.stat_arty["power"] * utils_ui.stats_table["artefact"]["power_restore_speed"].magnitude / 100
+	-- Convert raw equipment power_restore_speed to the same display scale used
+	-- by artefacts: 0.000330 = 10%, 0.000660 = 20%, etc.
+	local power_restore_magnitude = utils_ui.stats_table["artefact"]["power_restore_speed"].magnitude
+	self.stat_outfit["power"] = self.stat_outfit["power"] * power_restore_magnitude / 100
+	self.stat_helm["power"] = self.stat_helm["power"] * power_restore_magnitude / 100
+	self.stat_arty["power"] = self.stat_arty["power"] * power_restore_magnitude / 100
 	self.stat_boost["power"] = self.stat_boost["power"] * utils_ui.stats_table["booster"]["boost_power_restore"].magnitude / 100
 	
-	self.stat["power"].value = power + self.stat_helm["power"] + self.stat_arty["power"] + self.stat_boost["power"]
+	self.stat["power"].value = power + self.stat_outfit["power"] + self.stat_helm["power"] + self.stat_arty["power"] + self.stat_boost["power"]
 	-- actor power without equipments (body power for tooltip)
-	self.actor_power = power_no_outfit / power_clamp / power_max
+	self.actor_power = power
 	
 -- Blinking Icons
 	for name,v in pairs(self.stat) do

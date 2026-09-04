@@ -41,7 +41,7 @@
     <string id="st_up_thirdd_exolight_isg_descr"><text>This gives 10% stamina regeneration.</text></string>
 
     <string id="st_up_thirde_exolight_isg_name"><text>Health</text></string>
-    <string id="st_up_thirde_exolight_isg_descr"><text>This gives +1 health restoration.</text></string>
+    <string id="st_up_thirde_exolight_isg_descr"><text>This gives +0.25 health restoration.</text></string>
 
     <string id="st_up_thirdf_exolight_isg_name"><text>Bleeding</text></string>
     <string id="st_up_thirdf_exolight_isg_descr"><text>This gives 10% bleeding recovery.</text></string>

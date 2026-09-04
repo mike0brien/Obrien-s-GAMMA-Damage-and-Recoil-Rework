@@ -102,14 +102,14 @@
         <text>Health</text>
     </string>
     <string id="st_up_thirde_seva_monolith_descr">
-        <text>This gives +1 health restoration.</text>
+        <text>This gives +0.25 health restoration.</text>
     </string>
 
     <string id="st_up_thirdf_seva_monolith_name">
         <text>Bleeding</text>
     </string>
     <string id="st_up_thirdf_seva_monolith_descr">
-        <text>This gives 10% bleeding recovery.</text>
+        <text>This gives 200 mL/min bleeding control.</text>
     </string>
 
     <!-- Row 4 -->

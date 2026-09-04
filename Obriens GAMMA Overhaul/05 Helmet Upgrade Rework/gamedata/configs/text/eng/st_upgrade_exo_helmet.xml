@@ -50,7 +50,7 @@
     <string id="st_up_thirda_exo_helmet_descr"><text>This reduces helmet weight by 0.5 kg.</text></string>
 
     <string id="st_up_thirdc_exo_helmet_name"><text>Stamina</text></string>
-    <string id="st_up_thirdc_exo_helmet_descr"><text>This gives 25% stamina regeneration.</text></string>
+    <string id="st_up_thirdc_exo_helmet_descr"><text>This gives 20% stamina regeneration.</text></string>
 
     <string id="st_up_thirde_exo_helmet_name"><text>Radiation</text></string>
     <string id="st_up_thirde_exo_helmet_descr"><text>This gives 10% radiation protection.</text></string>

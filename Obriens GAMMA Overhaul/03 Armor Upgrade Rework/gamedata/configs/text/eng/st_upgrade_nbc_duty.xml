@@ -38,7 +38,7 @@
     <string id="st_up_thirdd_nbc_duty_descr"><text>This gives 15% stamina recovery.</text></string>
 
     <string id="st_up_thirde_nbc_duty_name"><text>Health Restoration</text></string>
-    <string id="st_up_thirde_nbc_duty_descr"><text>This gives +1 health restoration.</text></string>
+    <string id="st_up_thirde_nbc_duty_descr"><text>This gives +0.25 health restoration.</text></string>
 
     <string id="st_up_thirdf_nbc_duty_name"><text>Stamina Recovery</text></string>
     <string id="st_up_thirdf_nbc_duty_descr"><text>This gives 15% stamina recovery.</text></string>

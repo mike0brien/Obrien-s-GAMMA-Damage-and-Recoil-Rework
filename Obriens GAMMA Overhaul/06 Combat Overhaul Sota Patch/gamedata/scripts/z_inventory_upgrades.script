@@ -8,9 +8,9 @@ local stat_radia		= ui_inventory.stat_radia
 local char_ini			= ini_file("item_upgrades.ltx")
 
 local property_table	= inventory_upgrades.property_table
-property_table["prop_restore_health"][5]	= 1.5
-property_table["prop_restore_bleeding"][5]	= 15
-property_table["prop_power"][5]				= 1											-- in vanilla mul is 2 (todo: adjust it for true upgrade bonus)
+property_table["prop_restore_health"][5]	= 1
+property_table["prop_restore_bleeding"][5]	= 10
+property_table["prop_power"][5]				= 1									-- in vanilla mul is 2 (todo: adjust it for true upgrade bonus)
 property_table["prop_chem"][5]				= gadb_const["ChemicalBurn"].adjuster	-- / 4	-- 0.33
 property_table["prop_psy"][5]				= gadb_const["Telepatic"].adjuster		-- / 4	-- 0.425
 property_table["prop_radio"][5]				= 1.0 -- 0.55										-- "Radiation"

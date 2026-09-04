@@ -41,10 +41,10 @@
     <string id="st_up_thirdd_seva_isg_descr"><text>This gives 10% stamina regeneration.</text></string>
 
     <string id="st_up_thirde_seva_isg_name"><text>Health</text></string>
-    <string id="st_up_thirde_seva_isg_descr"><text>This gives +1 health restoration.</text></string>
+    <string id="st_up_thirde_seva_isg_descr"><text>This gives +0.25 health restoration.</text></string>
 
     <string id="st_up_thirdf_seva_isg_name"><text>Bleeding</text></string>
-    <string id="st_up_thirdf_seva_isg_descr"><text>This gives 10% bleeding recovery.</text></string>
+    <string id="st_up_thirdf_seva_isg_descr"><text>This gives 200 mL/min bleeding control.</text></string>
 
     <string id="st_up_fourta_seva_isg_name"><text>Belt Slot</text></string>
     <string id="st_up_fourta_seva_isg_descr"><text>This gives +1 belt slot.</text></string>

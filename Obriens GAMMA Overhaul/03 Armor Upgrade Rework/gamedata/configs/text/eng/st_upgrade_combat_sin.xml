@@ -43,9 +43,9 @@
     <string id="st_up_thirdd_combat_sin_descr"><text>This gives 20% stamina regeneration.</text></string>
 
     <string id="st_up_thirde_combat_sin_name"><text>Health</text></string>
-    <string id="st_up_thirde_combat_sin_descr"><text>This gives +1 health restoration.</text></string>
+    <string id="st_up_thirde_combat_sin_descr"><text>This gives +0.25 health restoration.</text></string>
 
     <string id="st_up_thirdf_combat_sin_name"><text>Bleeding</text></string>
-    <string id="st_up_thirdf_combat_sin_descr"><text>This gives 20% bleeding recovery.</text></string>
+    <string id="st_up_thirdf_combat_sin_descr"><text>This gives 400 mL/min bleeding control.</text></string>
 
 </string_table>

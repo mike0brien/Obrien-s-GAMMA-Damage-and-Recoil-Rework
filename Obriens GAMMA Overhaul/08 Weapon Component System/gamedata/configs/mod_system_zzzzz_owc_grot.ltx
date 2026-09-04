@@ -1,0 +1,285 @@
+![wpn_grot_short]:wpn_grot
+owc_compatible = true
+owc_family = wpn_grot_short
+owc_anim_override = true
+owc_compatible_foregrip = vfg, owc_mlok_vfg
+owc_mount_foregrip_parent_bone = wpn_body
+owc_mount_foregrip_position = 0.002,0.048,0.105
+owc_mount_foregrip_rotation = 0,0,0
+owc_mount_foregrip_scale = 1
+owc_compatible_muzzle = flashhider_556, brake_556, comp_556
+owc_mount_muzzle_parent_bone = wpn_body
+owc_mount_muzzle_position = 0.0022,0.051,0.322
+owc_mount_muzzle_rotation = 0,0,0
+owc_mount_muzzle_scale = 1
+
+owc_compatible_stock = grot_base_stock, grot_ar_stock
+owc_default_stock = owc_item_grot_base_stock
+owc_stock_required = true
+owc_mount_stock_parent_bone = wpn_body
+owc_mount_stock_position = 0.0032,0.0317,-0.1245
+owc_mount_stock_rotation = 0,0,0
+owc_mount_stock_scale = 1
+; GROT AR stock needs a slightly different weapon-specific alignment.
+owc_mount_grot_ar_stock_parent_bone = wpn_body
+owc_mount_grot_ar_stock_position = 0.00245,0.03137,-0.1343
+owc_mount_grot_ar_stock_rotation = 0,0,0
+owc_mount_grot_ar_stock_scale = 1
+
+
+![wpn_grot_short_hud]
+item_visual = dynamics\weapons\wpn_grot\wpn_grot_short_base_hud.ogf
+
+; base animations
+anm_show_owc_base = hand_grotshort_draw, grotshort_draw
+anm_hide_owc_base = hand_grotshort_hide, grotshort_hide
+anm_idle_owc_base = hand_grotshort_idle, idle
+anm_idle_aim_owc_base = hand_grotshort_idle_aim, idle
+anm_idle_empty_owc_base = hand_grotshort_idle, idle_empty
+anm_idle_aim_empty_owc_base = hand_grotshort_idle_aim, idle_empty
+anm_idle_empty_jammed_owc_base = hand_grotshort_idle, idle_jammed_empty
+anm_idle_aim_empty_jammed_owc_base = hand_grotshort_idle_aim, idle_jammed_empty
+anm_idle_moving_owc_base = hand_grotshort_walk, idle
+anm_idle_aim_moving_owc_base = hand_grotshort_walk, idle
+anm_idle_moving_crouch_owc_base = hand_grotshort_walk, idle, 0.75
+anm_idle_aim_moving_crouch_owc_base = hand_grotshort_walk, idle, 0.75
+anm_idle_sprint_owc_base = hand_grotshort_sprint, idle
+anm_reload_owc_base = hand_grotshort_reload, grotshort_reload
+anm_reload_empty_owc_base = hand_grotshort_reload_empty, grotshort_reload_empty
+anm_reload_aim_owc_base = hand_grotshort_reload_aim, grotshort_reload_aim
+anm_reload_empty_aim_owc_base = hand_grotshort_reload_empty_aim, grotshort_reload_empty_aim
+anm_shots_owc_base = hand_grotshort_fire02, grotshort_fire02
+anm_shots_variant1_owc_base = hand_grotshort_fire02, grotshort_fire02
+anm_shots_variant2_owc_base = hand_grotshort_fire03, grotshort_fire03
+anm_shots_jammed_owc_base = hand_grotshort_fire_jammed, grotshort_fire_jammed
+anm_shot_l_jammed_owc_base = hand_grotshort_fire_jammed, grotshort_fire_jammed_empty
+anm_shot_l_owc_base = hand_grotshort_fire_last, grotshort_fire_last
+anm_bore_owc_base = hand_grotshort_inspect, idle
+anm_switch_mode_owc_base = hand_grotshort_firemode, grotshort_firemode
+anm_reload_misfire_owc_base = hand_grotshort_unjam, grotshort_unjam
+anm_ammo_check_owc_base = hand_grotshort_magcheck, grotshort_magcheck
+anm_ammo_check_aim_owc_base = hand_grotshort_magcheck_aim, grotshort_magcheck_aim
+
+; vfg animations
+anm_show_owc_vfg = hand_grot_draw, grotshort_draw
+anm_hide_owc_vfg = hand_grot_hide, grotshort_hide
+anm_idle_owc_vfg = hand_grot_idle, idle
+anm_idle_aim_owc_vfg = hand_grot_idle_aim, idle
+anm_idle_empty_owc_vfg = hand_grot_idle, idle_empty
+anm_idle_aim_empty_owc_vfg = hand_grot_idle_aim, idle_empty
+anm_idle_empty_jammed_owc_vfg = hand_grot_idle, idle_jammed_empty
+anm_idle_aim_empty_jammed_owc_vfg = hand_grot_idle_aim, idle_jammed_empty
+anm_idle_moving_owc_vfg = hand_grot_walk, idle
+anm_idle_aim_moving_owc_vfg = hand_grot_walk, idle
+anm_idle_moving_crouch_owc_vfg = hand_grot_walk, idle, 0.75
+anm_idle_aim_moving_crouch_owc_vfg = hand_grot_walk, idle, 0.75
+anm_idle_sprint_owc_vfg = hand_grot_sprint, idle
+anm_reload_owc_vfg = hand_grot_reload, grotshort_reload
+anm_reload_empty_owc_vfg = hand_grot_reload_empty, grotshort_reload_empty
+anm_reload_aim_owc_vfg = hand_grot_reload_aim, grotshort_reload_aim
+anm_reload_empty_aim_owc_vfg = hand_grot_reload_empty_aim, grotshort_reload_empty_aim
+anm_shots_owc_vfg = hand_grot_fire02, grotshort_fire02
+anm_shots_variant1_owc_vfg = hand_grot_fire02, grotshort_fire02
+anm_shots_variant2_owc_vfg = hand_grot_fire03, grotshort_fire03
+anm_shots_jammed_owc_vfg = hand_grot_fire_jammed, grotshort_fire_jammed
+anm_shot_l_jammed_owc_vfg = hand_grot_fire_jammed, grotshort_fire_jammed_empty
+anm_shot_l_owc_vfg = hand_grot_fire_last, grotshort_fire_last
+anm_bore_owc_vfg = hand_grot_inspect, idle
+anm_switch_mode_owc_vfg = hand_grot_firemode, grotshort_firemode
+anm_reload_misfire_owc_vfg = hand_grot_unjam, grotshort_unjam
+anm_ammo_check_owc_vfg = hand_grot_magcheck, grotshort_magcheck
+anm_ammo_check_aim_owc_vfg = hand_grot_magcheck_aim, grotshort_magcheck_aim
+
+; afg animations
+;anm_show_owc_afg = UPDATE
+;anm_hide_owc_afg = UPDATE
+;anm_idle_owc_afg = UPDATE
+;anm_idle_aim_owc_afg = UPDATE
+;anm_idle_empty_owc_afg = UPDATE
+;anm_idle_aim_empty_owc_afg = UPDATE
+;anm_idle_empty_jammed_owc_afg = UPDATE
+;anm_idle_aim_empty_jammed_owc_afg = UPDATE
+;anm_idle_moving_owc_afg = UPDATE
+;anm_idle_aim_moving_owc_afg = UPDATE
+;anm_idle_moving_crouch_owc_afg = UPDATE
+;anm_idle_aim_moving_crouch_owc_afg = UPDATE
+;anm_idle_sprint_owc_afg = UPDATE
+;anm_reload_owc_afg = UPDATE
+;anm_reload_empty_owc_afg = UPDATE
+;anm_reload_aim_owc_afg = UPDATE
+;anm_reload_empty_aim_owc_afg = UPDATE
+;anm_shots_owc_afg = UPDATE
+;anm_shots_variant1_owc_afg = UPDATE
+;anm_shots_variant2_owc_afg = UPDATE
+;anm_shots_jammed_owc_afg = UPDATE
+;anm_shot_l_jammed_owc_afg = UPDATE
+;anm_shot_l_owc_afg = UPDATE
+;anm_bore_owc_afg = UPDATE
+;anm_switch_mode_owc_afg = UPDATE
+;anm_reload_misfire_owc_afg = UPDATE
+;anm_ammo_check_owc_afg = UPDATE
+;anm_ammo_check_aim_owc_afg = UPDATE
+
+![wpn_grot_short_specter_hud]
+item_visual = dynamics\weapons\wpn_grot\wpn_grot_short_specter_base_hud.ogf
+
+![wpn_grot_short_e0t2_hud]
+item_visual = dynamics\weapons\wpn_grot\wpn_grot_short_e0t2_base_hud.ogf
+
+![wpn_grot]
+owc_compatible = true
+owc_family = wpn_grot
+owc_anim_override = true
+owc_compatible_foregrip = vfg, owc_mlok_vfg
+owc_mount_foregrip_parent_bone = wpn_body
+owc_mount_foregrip_position = 0.002,0.048,0.105
+owc_mount_foregrip_rotation = 0,0,0
+owc_mount_foregrip_scale = 1
+owc_compatible_muzzle = flashhider_556, brake_556, comp_556
+owc_mount_muzzle_parent_bone = wpn_body
+owc_mount_muzzle_position = 0.0022,0.051,0.417
+owc_mount_muzzle_rotation = 0,0,0
+owc_mount_muzzle_scale = 1
+
+owc_compatible_stock = grot_base_stock, grot_ar_stock
+owc_default_stock = owc_item_grot_base_stock
+owc_stock_required = true
+owc_mount_stock_parent_bone = wpn_body
+owc_mount_stock_position = 0.0032,0.0317,-0.1245
+owc_mount_stock_rotation = 0,0,0
+owc_mount_stock_scale = 1
+; GROT AR stock needs a slightly different weapon-specific alignment.
+owc_mount_grot_ar_stock_parent_bone = wpn_body
+owc_mount_grot_ar_stock_position = 0.00245,0.03137,-0.1343
+owc_mount_grot_ar_stock_rotation = 0,0,0
+owc_mount_grot_ar_stock_scale = 1
+
+
+![wpn_grot_hud]
+item_visual = dynamics\weapons\wpn_grot\wpn_grot_base_hud.ogf
+
+; native animations
+anm_show = hand_grotshort_draw, grot_draw
+anm_hide = hand_grotshort_hide, grot_hide
+anm_idle = hand_grotshort_idle, idle
+anm_idle_aim = hand_grotshort_idle_aim, idle
+anm_idle_empty = hand_grotshort_idle, idle_empty
+anm_idle_aim_empty = hand_grotshort_idle_aim, idle_empty
+anm_idle_empty_jammed = hand_grotshort_idle, idle_jammed_empty
+anm_idle_aim_empty_jammed = hand_grotshort_idle_aim, idle_jammed_empty
+anm_idle_moving = hand_grotshort_walk, idle
+anm_idle_aim_moving = hand_grotshort_walk, idle
+anm_idle_moving_crouch = hand_grotshort_walk, idle, 0.75
+anm_idle_aim_moving_crouch = hand_grotshort_walk, idle, 0.75
+anm_idle_sprint = hand_grotshort_sprint, idle
+anm_reload = hand_grotshort_reload, grot_reload
+anm_reload_empty = hand_grotshort_reload_empty, grot_reload_empty
+anm_reload_aim = hand_grotshort_reload_aim, grot_reload_aim
+anm_reload_empty_aim = hand_grotshort_reload_empty_aim, grot_reload_empty_aim
+anm_shots = hand_grotshort_fire02, grot_fire02
+anm_shots_variant1 = hand_grotshort_fire02, grot_fire02
+anm_shots_variant2 = hand_grotshort_fire03, grot_fire03
+anm_shots_jammed = hand_grotshort_fire_jammed, grot_fire_jammed
+anm_shot_l_jammed = hand_grotshort_fire_jammed, grot_fire_jammed_empty
+anm_shot_l = hand_grotshort_fire_last, grot_fire_last
+anm_bore = hand_grotshort_inspect, idle
+anm_switch_mode = hand_grotshort_firemode, grot_firemode
+anm_reload_misfire = hand_grotshort_unjam, grot_unjam
+anm_ammo_check = hand_grotshort_magcheck, grot_magcheck
+anm_ammo_check_aim = hand_grotshort_magcheck_aim, grot_magcheck_aim
+
+; base animations
+anm_show_owc_base = hand_grotshort_draw, grot_draw
+anm_hide_owc_base = hand_grotshort_hide, grot_hide
+anm_idle_owc_base = hand_grotshort_idle, idle
+anm_idle_aim_owc_base = hand_grotshort_idle_aim, idle
+anm_idle_empty_owc_base = hand_grotshort_idle, idle_empty
+anm_idle_aim_empty_owc_base = hand_grotshort_idle_aim, idle_empty
+anm_idle_empty_jammed_owc_base = hand_grotshort_idle, idle_jammed_empty
+anm_idle_aim_empty_jammed_owc_base = hand_grotshort_idle_aim, idle_jammed_empty
+anm_idle_moving_owc_base = hand_grotshort_walk, idle
+anm_idle_aim_moving_owc_base = hand_grotshort_walk, idle
+anm_idle_moving_crouch_owc_base = hand_grotshort_walk, idle, 0.75
+anm_idle_aim_moving_crouch_owc_base = hand_grotshort_walk, idle, 0.75
+anm_idle_sprint_owc_base = hand_grotshort_sprint, idle
+anm_reload_owc_base = hand_grotshort_reload, grot_reload
+anm_reload_empty_owc_base = hand_grotshort_reload_empty, grot_reload_empty
+anm_reload_aim_owc_base = hand_grotshort_reload_aim, grot_reload_aim
+anm_reload_empty_aim_owc_base = hand_grotshort_reload_empty_aim, grot_reload_empty_aim
+anm_shots_owc_base = hand_grotshort_fire02, grot_fire02
+anm_shots_variant1_owc_base = hand_grotshort_fire02, grot_fire02
+anm_shots_variant2_owc_base = hand_grotshort_fire03, grot_fire03
+anm_shots_jammed_owc_base = hand_grotshort_fire_jammed, grot_fire_jammed
+anm_shot_l_jammed_owc_base = hand_grotshort_fire_jammed, grot_fire_jammed_empty
+anm_shot_l_owc_base = hand_grotshort_fire_last, grot_fire_last
+anm_bore_owc_base = hand_grotshort_inspect, idle
+anm_switch_mode_owc_base = hand_grotshort_firemode, grot_firemode
+anm_reload_misfire_owc_base = hand_grotshort_unjam, grot_unjam
+anm_ammo_check_owc_base = hand_grotshort_magcheck, grot_magcheck
+anm_ammo_check_aim_owc_base = hand_grotshort_magcheck_aim, grot_magcheck_aim
+
+; vfg animations
+anm_show_owc_vfg = hand_grot_draw, grot_draw
+anm_hide_owc_vfg = hand_grot_hide, grot_hide
+anm_idle_owc_vfg = hand_grot_idle, idle
+anm_idle_aim_owc_vfg = hand_grot_idle_aim, idle
+anm_idle_empty_owc_vfg = hand_grot_idle, idle_empty
+anm_idle_aim_empty_owc_vfg = hand_grot_idle_aim, idle_empty
+anm_idle_empty_jammed_owc_vfg = hand_grot_idle, idle_jammed_empty
+anm_idle_aim_empty_jammed_owc_vfg = hand_grot_idle_aim, idle_jammed_empty
+anm_idle_moving_owc_vfg = hand_grot_walk, idle
+anm_idle_aim_moving_owc_vfg = hand_grot_walk, idle
+anm_idle_moving_crouch_owc_vfg = hand_grot_walk, idle, 0.75
+anm_idle_aim_moving_crouch_owc_vfg = hand_grot_walk, idle, 0.75
+anm_idle_sprint_owc_vfg = hand_grot_sprint, idle
+anm_reload_owc_vfg = hand_grot_reload, grot_reload
+anm_reload_empty_owc_vfg = hand_grot_reload_empty, grot_reload_empty
+anm_reload_aim_owc_vfg = hand_grot_reload_aim, grot_reload_aim
+anm_reload_empty_aim_owc_vfg = hand_grot_reload_empty_aim, grot_reload_empty_aim
+anm_shots_owc_vfg = hand_grot_fire02, grot_fire02
+anm_shots_variant1_owc_vfg = hand_grot_fire02, grot_fire02
+anm_shots_variant2_owc_vfg = hand_grot_fire03, grot_fire03
+anm_shots_jammed_owc_vfg = hand_grot_fire_jammed, grot_fire_jammed
+anm_shot_l_jammed_owc_vfg = hand_grot_fire_jammed, grot_fire_jammed_empty
+anm_shot_l_owc_vfg = hand_grot_fire_last, grot_fire_last
+anm_bore_owc_vfg = hand_grot_inspect, idle
+anm_switch_mode_owc_vfg = hand_grot_firemode, grot_firemode
+anm_reload_misfire_owc_vfg = hand_grot_unjam, grot_unjam
+anm_ammo_check_owc_vfg = hand_grot_magcheck, grot_magcheck
+anm_ammo_check_aim_owc_vfg = hand_grot_magcheck_aim, grot_magcheck_aim
+
+; afg animations
+;anm_show_owc_afg = UPDATE
+;anm_hide_owc_afg = UPDATE
+;anm_idle_owc_afg = UPDATE
+;anm_idle_aim_owc_afg = UPDATE
+;anm_idle_empty_owc_afg = UPDATE
+;anm_idle_aim_empty_owc_afg = UPDATE
+;anm_idle_empty_jammed_owc_afg = UPDATE
+;anm_idle_aim_empty_jammed_owc_afg = UPDATE
+;anm_idle_moving_owc_afg = UPDATE
+;anm_idle_aim_moving_owc_afg = UPDATE
+;anm_idle_moving_crouch_owc_afg = UPDATE
+;anm_idle_aim_moving_crouch_owc_afg = UPDATE
+;anm_idle_sprint_owc_afg = UPDATE
+;anm_reload_owc_afg = UPDATE
+;anm_reload_empty_owc_afg = UPDATE
+;anm_reload_aim_owc_afg = UPDATE
+;anm_reload_empty_aim_owc_afg = UPDATE
+;anm_shots_owc_afg = UPDATE
+;anm_shots_variant1_owc_afg = UPDATE
+;anm_shots_variant2_owc_afg = UPDATE
+;anm_shots_jammed_owc_afg = UPDATE
+;anm_shot_l_jammed_owc_afg = UPDATE
+;anm_shot_l_owc_afg = UPDATE
+;anm_bore_owc_afg = UPDATE
+;anm_switch_mode_owc_afg = UPDATE
+;anm_reload_misfire_owc_afg = UPDATE
+;anm_ammo_check_owc_afg = UPDATE
+;anm_ammo_check_aim_owc_afg = UPDATE
+
+![wpn_grot_specter_hud]
+item_visual = dynamics\weapons\wpn_grot\wpn_grot_specter_base_hud.ogf
+
+![wpn_grot_e0t2_hud]
+item_visual = dynamics\weapons\wpn_grot\wpn_grot_e0t2_base_hud.ogf

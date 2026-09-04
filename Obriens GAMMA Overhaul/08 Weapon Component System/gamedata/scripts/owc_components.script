@@ -1,0 +1,1385 @@
+local DEBUG = true
+-- V20.20 OWC/OCR NAMESPACE
+local ini_sys = system_ini()
+local snd_attach = sound_object("interface\\items\\inv_items_addon_1")
+
+local SAVE_PREFIX = "owc_"
+
+-- Inventory highlight registry, generated from mod_system_owc_items.ltx.
+-- Maps OWC compatibility types to the concrete inventory item sections that should receive the native actor-menu grid highlight when a compatible weapon is focused. Compatibility itself remains authoritative in can_attach_section().
+local HIGHLIGHT_SECTIONS_BY_TYPE = {
+    ["brake_45acp"] = {
+        "owc_item_experienced_45acp_muzzle_brake",
+        "owc_item_expert_45acp_muzzle_brake",
+        "owc_item_professional_45acp_muzzle_brake",
+        "owc_item_veteran_45acp_muzzle_brake",
+    },
+    ["brake_545"] = {
+        "owc_item_experienced_545_muzzle_brake",
+        "owc_item_expert_545_muzzle_brake",
+        "owc_item_professional_545_muzzle_brake",
+        "owc_item_veteran_545_muzzle_brake",
+    },
+    ["brake_556"] = {
+        "owc_item_experienced_556_muzzle_brake",
+        "owc_item_expert_556_muzzle_brake",
+        "owc_item_professional_556_muzzle_brake",
+        "owc_item_veteran_556_muzzle_brake",
+    },
+    ["brake_762"] = {
+        "owc_item_experienced_762_muzzle_brake",
+        "owc_item_expert_762_muzzle_brake",
+        "owc_item_professional_762_muzzle_brake",
+        "owc_item_veteran_762_muzzle_brake",
+    },
+    ["brake_9mm"] = {
+        "owc_item_experienced_9mm_muzzle_brake",
+        "owc_item_expert_9mm_muzzle_brake",
+        "owc_item_professional_9mm_muzzle_brake",
+        "owc_item_veteran_9mm_muzzle_brake",
+    },
+    ["comp_45acp"] = {
+        "owc_item_experienced_45acp_compensator",
+        "owc_item_expert_45acp_compensator",
+        "owc_item_professional_45acp_compensator",
+        "owc_item_veteran_45acp_compensator",
+    },
+    ["comp_545"] = {
+        "owc_item_experienced_545_compensator",
+        "owc_item_expert_545_compensator",
+        "owc_item_professional_545_compensator",
+        "owc_item_veteran_545_compensator",
+    },
+    ["comp_556"] = {
+        "owc_item_experienced_556_compensator",
+        "owc_item_expert_556_compensator",
+        "owc_item_professional_556_compensator",
+        "owc_item_veteran_556_compensator",
+    },
+    ["comp_762"] = {
+        "owc_item_experienced_762_compensator",
+        "owc_item_expert_762_compensator",
+        "owc_item_professional_762_compensator",
+        "owc_item_veteran_762_compensator",
+    },
+    ["comp_9mm"] = {
+        "owc_item_experienced_9mm_compensator",
+        "owc_item_expert_9mm_compensator",
+        "owc_item_professional_9mm_compensator",
+        "owc_item_veteran_9mm_compensator",
+    },
+    ["flashhider_45acp"] = {
+        "owc_item_experienced_45acp_flashhider",
+        "owc_item_expert_45acp_flashhider",
+        "owc_item_professional_45acp_flashhider",
+        "owc_item_veteran_45acp_flashhider",
+    },
+    ["flashhider_545"] = {
+        "owc_item_experienced_545_flashhider",
+        "owc_item_expert_545_flashhider",
+        "owc_item_professional_545_flashhider",
+        "owc_item_veteran_545_flashhider",
+    },
+    ["flashhider_556"] = {
+        "owc_item_experienced_556_flashhider",
+        "owc_item_expert_556_flashhider",
+        "owc_item_professional_556_flashhider",
+        "owc_item_veteran_556_flashhider",
+    },
+    ["flashhider_762"] = {
+        "owc_item_experienced_762_flashhider",
+        "owc_item_expert_762_flashhider",
+        "owc_item_professional_762_flashhider",
+        "owc_item_veteran_762_flashhider",
+    },
+    ["flashhider_9mm"] = {
+        "owc_item_experienced_9mm_flashhider",
+        "owc_item_expert_9mm_flashhider",
+        "owc_item_professional_9mm_flashhider",
+        "owc_item_veteran_9mm_flashhider",
+    },
+    ["generic_foregrip"] = {
+        "owc_item_experienced_afg",
+        "owc_item_experienced_vfg",
+        "owc_item_expert_afg",
+        "owc_item_expert_vfg",
+        "owc_item_professional_afg",
+        "owc_item_professional_vfg",
+        "owc_item_veteran_afg",
+        "owc_item_veteran_vfg",
+    },
+    ["generic_muzzle"] = {
+        "owc_item_generic_experienced_compensator",
+        "owc_item_generic_experienced_flashhider",
+        "owc_item_generic_experienced_muzzlebrake",
+        "owc_item_generic_expert_compensator",
+        "owc_item_generic_expert_flashhider",
+        "owc_item_generic_expert_muzzlebrake",
+        "owc_item_generic_professional_compensator",
+        "owc_item_generic_professional_flashhider",
+        "owc_item_generic_professional_muzzlebrake",
+        "owc_item_generic_veteran_compensator",
+        "owc_item_generic_veteran_flashhider",
+        "owc_item_generic_veteran_muzzlebrake",
+    },
+    ["shotgun_muzzle"] = {
+        "owc_item_experienced_shotgun_compensator",
+        "owc_item_experienced_shotgun_flashhider",
+        "owc_item_experienced_shotgun_muzzlebrake",
+        "owc_item_expert_shotgun_compensator",
+        "owc_item_expert_shotgun_flashhider",
+        "owc_item_expert_shotgun_muzzlebrake",
+        "owc_item_professional_shotgun_compensator",
+        "owc_item_professional_shotgun_flashhider",
+        "owc_item_professional_shotgun_muzzlebrake",
+        "owc_item_veteran_shotgun_compensator",
+        "owc_item_veteran_shotgun_flashhider",
+        "owc_item_veteran_shotgun_muzzlebrake",
+    },
+    ["generic_stock"] = {
+        "owc_item_experienced_stock",
+        "owc_item_expert_stock",
+        "owc_item_normal_stock",
+        "owc_item_professional_stock",
+        "owc_item_veteran_stock",
+    },
+    ["grot_ar_stock"] = {
+        "owc_item_grot_ar_stock",
+    },
+    ["grot_base_stock"] = {
+        "owc_item_grot_base_stock",
+    },
+    ["no_stock"] = {
+        "owc_item_no_stock",
+    },
+    ["owc_mlok_vfg"] = {
+        "owc_item_magpul_mlok_vfg",
+    },
+    ["owc_picatinny_vfg"] = {
+        "owc_item_kac_picatinny_vfg",
+    },
+}
+
+-- Magazines deliberately remain outside this framework.
+local VALID_SLOTS = {
+    muzzle = true,
+    foregrip = true,
+    stock = true,
+}
+
+
+local function dlog(fmt, ...)
+    if not DEBUG then return end
+    if select("#", ...) > 0 then
+        printf("OWC | " .. tostring(fmt), ...)
+    else
+        log("OWC | " .. tostring(fmt))
+    end
+end
+
+local function trim(s)
+    if s == nil then return nil end
+    return tostring(s):match("^%s*(.-)%s*$")
+end
+
+local function read_string(section, key)
+    if not section or section == "" then return nil end
+    if not ini_sys:section_exist(section) then return nil end
+    if not ini_sys:line_exist(section, key) then return nil end
+    local value = trim(ini_sys:r_string(section, key))
+    if not value or value == "" or value == "nil" or value == "none" or value == "false" then
+        return nil
+    end
+    return value
+end
+
+local function read_bool(section, key, fallback)
+    if not section or not ini_sys:section_exist(section) then return fallback end
+    if not ini_sys:line_exist(section, key) then return fallback end
+    return ini_sys:r_bool(section, key)
+end
+
+local function split_csv(value)
+    local out = {}
+    if not value then return out end
+    for token in tostring(value):gmatch("[^,]+") do
+        token = trim(token)
+        if token and token ~= "" then out[#out + 1] = token end
+    end
+    return out
+end
+
+local function list_contains(list, wanted)
+    for _, value in ipairs(list or {}) do
+        if value == wanted then return true end
+    end
+    return false
+end
+
+local function valid_slot(slot)
+    return slot and VALID_SLOTS[slot] == true
+end
+
+local function save_key(slot)
+    return SAVE_PREFIX .. tostring(slot)
+end
+
+local function weapon_section(wpn)
+    return wpn and wpn.section and wpn:section() or nil
+end
+
+local function item_section(item)
+    return item and item.section and item:section() or nil
+end
+
+local function component_slot(section)
+    return read_string(section, "owc_slot")
+end
+
+local function component_type(section)
+    return read_string(section, "owc_type")
+end
+
+local function component_model(section)
+    return read_string(section, "owc_model")
+end
+
+
+-- The item section name is the visual identity.
+--
+--   owc_item_surefire_warcomp -> surefire_warcomp
+--   owc_item_grot_ar_stock    -> grot_ar_stock
+
+local function component_visual_id(section)
+    if not section then return nil end
+    local id = tostring(section):gsub("^owc_item_", "")
+    id = id:gsub("[^%w_]", "_")
+    if id == "" then return nil end
+    return id
+end
+
+local function component_profile(section, slot)
+    if not section or not slot then return nil end
+    return read_string(section, "ocr_profile")
+        or read_string(section, "ocr_" .. slot)
+end
+
+local function component_family(wpn)
+    local sec = weapon_section(wpn)
+    if not sec then return nil end
+    return read_string(sec, "owc_family")
+end
+
+
+local function component_enabled_weapon(wpn)
+    local sec = weapon_section(wpn)
+    if not sec then return false end
+
+    if read_bool(sec, "owc_compatible", false) == true then
+        return true
+    end
+
+    local family = component_family(wpn)
+    if family
+    and ini_sys:section_exist(family)
+    and read_bool(family, "owc_compatible", false) == true then
+        return true
+    end
+
+    return false
+end
+
+is_active = true
+
+-- Public module flag. Recoil integration is optional; the attachment system remains fully functional when the recoil module is absent or disabled.
+
+local function recoil_module_active()
+    return ocr_recoil
+        and ocr_recoil.is_active == true
+end
+
+
+-- All author-facing compatibility and visual data lives on the root family.
+
+local function family_value(wpn, key)
+    local family = component_family(wpn)
+    if family and ini_sys:section_exist(family) then
+        local value = read_string(family, key)
+        if value then return value end
+    end
+    return read_string(weapon_section(wpn), key)
+end
+
+
+--==========================================================================
+-- SCRIPTED HUD VISUALS
+--
+-- Runtime responsibility split:
+--
+-- Component item owns:
+--   owc_slot
+--   owc_type
+--   owc_model        (optional; absent = recoil/logical only)
+--   ocr_profile      (optional recoil integration)
+--
+-- Weapon/family owns compatibility plus mount transforms.  Transform lookup is intentionally layered so integrations can stay minimal:
+--
+--   1. per-item override, derived from the item section name
+--      owc_item_grot_ar_stock -> owc_mount_grot_ar_stock_position
+--
+--   2. per-component-type override (optional)
+--      owc_type = comp_556 -> owc_mount_comp_556_position
+--
+--   3. generic slot/base mount
+--      owc_mount_muzzle_position / foregrip / stock
+--
+-- Each transform field falls back independently, so an item can override only position while inheriting the generic rotation/bone/scale.  
+-- Components with no owc_model are valid compatibility/recoil modifiers and do not create a child OGF.
+--==========================================================================
+
+local VISUAL_NAME_PREFIX = "owc_visual_"
+
+local function visual_name(slot)
+    return VISUAL_NAME_PREFIX .. tostring(slot)
+end
+
+local function parse_vec3(value, fallback_x, fallback_y, fallback_z)
+    local x, y, z = fallback_x or 0, fallback_y or 0, fallback_z or 0
+    if not value then return x, y, z end
+
+    local vals = {}
+    for token in tostring(value):gmatch("[^,]+") do
+        vals[#vals + 1] = tonumber(trim(token))
+    end
+
+    if vals[1] ~= nil then x = vals[1] end
+    if vals[2] ~= nil then y = vals[2] end
+    if vals[3] ~= nil then z = vals[3] end
+    return x, y, z
+end
+
+local function normalize_model_path(model)
+    model = trim(model)
+    if not model then return nil end
+    model = model:gsub("%.ogf$", "")
+    return model
+end
+
+local function remove_component_visual(wpn, slot)
+    if not wpn or not slot then return end
+    local name = visual_name(slot)
+
+    local existing = nil
+    local ok_get, result = pcall(function()
+        return wpn:get_attachment(name)
+    end)
+    if ok_get then existing = result end
+
+    if existing then
+        local ok_remove, err = pcall(function()
+            wpn:remove_attachment(name)
+        end)
+        if ok_remove then
+            dlog(
+                "removed HUD visual | weapon=%s slot=%s name=%s",
+                tostring(weapon_section(wpn)),
+                tostring(slot),
+                tostring(name)
+            )
+        else
+            dlog(
+                "WARNING visual remove failed | weapon=%s slot=%s err=%s",
+                tostring(weapon_section(wpn)),
+                tostring(slot),
+                tostring(err)
+            )
+        end
+    end
+end
+
+-- Read one mount field using item -> type -> slot fallback.
+
+local function mount_value(wpn, item_id, ctype, slot, suffix)
+    local keys = {}
+    if item_id then keys[#keys + 1] = "owc_mount_" .. item_id .. suffix end
+    if ctype and ctype ~= item_id then
+        keys[#keys + 1] = "owc_mount_" .. ctype .. suffix
+    end
+    keys[#keys + 1] = "owc_mount_" .. slot .. suffix
+
+    for _, key in ipairs(keys) do
+        local value = family_value(wpn, key)
+        if value then return value, key end
+    end
+    return nil, nil
+end
+
+local function visual_config(wpn, component_section)
+    local slot = component_slot(component_section)
+    local ctype = component_type(component_section)
+    if not slot or not ctype then return nil, "component missing slot/type" end
+
+    -- No model is intentional: generic recoil/stat-only components simply remove a previous child for this slot and leave base weapon geometry.
+
+    local raw_model = component_model(component_section)
+    if not raw_model then return nil, nil end
+    if raw_model == "UPDATE" or raw_model == "NEEDS_UPDATE" then
+        return nil, "component model still needs UPDATE"
+    end
+
+    local model = normalize_model_path(raw_model)
+    if not model then return nil, "invalid owc_model" end
+
+    local item_id = component_visual_id(component_section)
+
+    local bone_raw, bone_key = mount_value(wpn, item_id, ctype, slot, "_parent_bone")
+    local pos_raw, pos_key = mount_value(wpn, item_id, ctype, slot, "_position")
+    local rot_raw, rot_key = mount_value(wpn, item_id, ctype, slot, "_rotation")
+    local scale_raw, scale_key = mount_value(wpn, item_id, ctype, slot, "_scale")
+
+    -- A model-bearing item needs at least a base/specific mount position. Use the bones.
+
+    if not pos_raw then
+        return nil, "weapon family has no mount position for " .. tostring(item_id or ctype or slot)
+    end
+
+    local bone = tonumber(bone_raw) or bone_raw or 0
+    local px, py, pz = parse_vec3(pos_raw, 0, 0, 0)
+    local rx, ry, rz = parse_vec3(rot_raw, 0, 0, 0)
+    local scale = tonumber(scale_raw) or 1
+
+    return {
+        slot = slot,
+        component_type = ctype,
+        component_section = component_section,
+        visual_id = item_id,
+        raw_model = raw_model,
+        model = model,
+        bone = bone,
+        px = px, py = py, pz = pz,
+        rx = rx, ry = ry, rz = rz,
+        scale = scale,
+        bone_key = bone_key,
+        pos_key = pos_key,
+        rot_key = rot_key,
+        scale_key = scale_key,
+    }, nil
+end
+
+local function ensure_component_visual(wpn, slot, component_section)
+    if not wpn or not slot or not component_section then return false end
+
+    local cfg, err = visual_config(wpn, component_section)
+    if err then
+        dlog(
+            "visual unavailable | weapon=%s component=%s err=%s",
+            tostring(weapon_section(wpn)),
+            tostring(component_section),
+            tostring(err)
+        )
+        return false
+    end
+
+    -- A component without a visual requirement is valid. Remove any child left behind by the previous component in this slot, then leave weapon geometry alone.
+
+    if not cfg then
+        remove_component_visual(wpn, slot)
+        return true
+    end
+
+    local name = visual_name(slot)
+    local att = nil
+    local existed = false
+
+    local ok_get, get_result = pcall(function()
+        return wpn:get_attachment(name)
+    end)
+    if ok_get then
+        att = get_result
+        existed = att ~= nil
+    end
+
+    if att then
+        -- The attachment name is the slot's runtime authority. Ask the attachment which model it already owns rather than mirroring that information in a Lua table. 
+        -- anm_show can therefore refresh safely without reloading the same model every time.
+
+        local current_model = nil
+        local ok_current, current_result = pcall(function()
+            return att:get_model()
+        end)
+        if ok_current then
+            current_model = normalize_model_path(current_result)
+        end
+
+        if current_model ~= cfg.model then
+            local ok_model, model_err = pcall(function()
+                att:set_model(cfg.model, false)
+            end)
+
+            if not ok_model then
+                dlog(
+                    "WARNING HUD visual model swap failed; rebuilding | weapon=%s slot=%s model=%s err=%s",
+                    tostring(weapon_section(wpn)),
+                    tostring(slot),
+                    tostring(cfg.model),
+                    tostring(model_err)
+                )
+                remove_component_visual(wpn, slot)
+                att = nil
+                existed = false
+            end
+        end
+    end
+
+    if not att then
+        local ok_add, add_result = pcall(function()
+            return wpn:add_attachment(name, cfg.model)
+        end)
+
+        if ok_add then att = add_result end
+        if not att then
+            dlog(
+                "WARNING HUD visual add failed | weapon=%s slot=%s model=%s err=%s",
+                tostring(weapon_section(wpn)),
+                tostring(slot),
+                tostring(cfg.model),
+                tostring(ok_add and "nil attachment" or add_result)
+            )
+            return false
+        end
+    end
+
+    local ok_cfg, cfg_err = pcall(function()
+        -- 0 = HUD script attachment type. Set type before parent bone so bone lookup is performed against the weapon HUD model.
+        att:set_type(0)
+        att:set_parent_bone(cfg.bone)
+        att:set_position(cfg.px, cfg.py, cfg.pz)
+        att:set_rotation(cfg.rx, cfg.ry, cfg.rz)
+        att:set_scale(cfg.scale)
+    end)
+
+    if not ok_cfg then
+        dlog(
+            "WARNING HUD visual configure failed | weapon=%s slot=%s err=%s",
+            tostring(weapon_section(wpn)),
+            tostring(slot),
+            tostring(cfg_err)
+        )
+        remove_component_visual(wpn, slot)
+        return false
+    end
+
+    dlog(
+        "%s HUD visual | weapon=%s slot=%s component=%s component_type=%s visual_id=%s model=%s bone=%s pos=%s rot=%s scale=%s",
+        tostring(existed and "updated" or "attached"),
+        tostring(weapon_section(wpn)),
+        tostring(slot),
+        tostring(cfg.component_section),
+        tostring(cfg.component_type),
+        tostring(cfg.visual_id or "none"),
+        tostring(cfg.raw_model),
+        tostring(cfg.bone),
+        string.format("%.4f,%.4f,%.4f", cfg.px, cfg.py, cfg.pz),
+        string.format("%.2f,%.2f,%.2f", cfg.rx, cfg.ry, cfg.rz),
+        string.format("%.3f", cfg.scale)
+    )
+    return true
+end
+
+
+local function slot_fixed(wpn, slot)
+    if not wpn or not valid_slot(slot) then return false end
+    return list_contains(
+        split_csv(family_value(wpn, "owc_compatible_" .. slot)),
+        "fixed"
+    )
+end
+
+local function stock_slot_fixed(wpn)
+    return slot_fixed(wpn, "stock")
+end
+
+
+-- A required runtime stock may be swapped for another compatible stock, but the slot may never be left empty. 
+-- This is independent from the general per-slot "fixed" opt-out:
+--
+--   owc_compatible_stock = fixed = stock slot accepts no components
+--   owc_stock_required = true     = runtime stock slot exists, removal blocked
+--
+-- Keeping this as a separate author-facing key allows operable stockless guns to continue using owc_default_stock/no_stock when desired.
+
+local function stock_required(wpn)
+    if not wpn or stock_slot_fixed(wpn) then return false end
+    return read_bool(component_family(wpn), "owc_stock_required", false) == true
+        or read_bool(weapon_section(wpn), "owc_stock_required", false) == true
+end
+
+
+local function refresh_saved_visuals(wpn)
+    if not wpn or not is_customizable(wpn) then return end
+
+    for _, slot in ipairs({"muzzle", "foregrip", "stock"}) do
+        -- "fixed" is a per-slot opt-out: never restore a runtime child OGF.
+        if slot_fixed(wpn, slot) then
+            remove_component_visual(wpn, slot)
+        else
+            local saved = get_attached_data(wpn, slot)
+
+            if saved
+            and saved.section
+            and ini_sys:section_exist(saved.section) then
+                local ok, result = pcall(
+                    ensure_component_visual,
+                    wpn,
+                    slot,
+                    saved.section
+                )
+
+                if not ok or result ~= true then
+                    dlog(
+                        "visual refresh skipped/failed | weapon=%s slot=%s component=%s err=%s",
+                        tostring(weapon_section(wpn)),
+                        tostring(slot),
+                        tostring(saved.section),
+                        tostring(ok and "visual unavailable" or result)
+                    )
+                    remove_component_visual(wpn, slot)
+                end
+            else
+                remove_component_visual(wpn, slot)
+            end
+        end
+    end
+end
+
+local function compatible_types(wpn, slot)
+    if not wpn or not valid_slot(slot) then return {} end
+    return split_csv(family_value(wpn, "owc_compatible_" .. slot))
+end
+
+
+local function current_recoil_component_state(wpn)
+    if not wpn then return nil, false end
+
+    local state = {
+        muzzle = get_profile(wpn, "muzzle"),
+        foregrip = get_profile(wpn, "foregrip"),
+        stock = get_profile(wpn, "stock"),
+    }
+
+    local any =
+        state.muzzle ~= nil
+        or state.foregrip ~= nil
+        or state.stock ~= nil
+
+    return state, any
+end
+
+local function refresh_recoil(wpn, reason)
+    if not wpn or not recoil_module_active() or not db.actor then
+        return false
+    end
+
+    local active = db.actor:active_item()
+    if not active or active:id() ~= wpn:id() then
+        return false
+    end
+
+    if component_enabled_weapon(wpn) then
+        local state = current_recoil_component_state(wpn)
+
+        if type(ocr_recoil.refresh_weapon_with_components) ~= "function" then
+            dlog(
+                "managed recoil refresh unavailable | weapon=%s id=%s",
+                tostring(weapon_section(wpn)), tostring(wpn:id())
+            )
+            return false
+        end
+
+        dlog(
+            "recoil update requested | reason=%s | weapon=%s id=%s | muzzle=%s foregrip=%s stock=%s",
+            tostring(reason or "unspecified"),
+            tostring(weapon_section(wpn)), tostring(wpn:id()),
+            tostring(state.muzzle), tostring(state.foregrip),
+            tostring(state.stock)
+        )
+
+        local ok =
+            ocr_recoil.refresh_weapon_with_components(
+                wpn,
+                state
+            )
+
+        dlog(
+            "recoil update complete | reason=%s | weapon=%s id=%s | result=%s",
+            tostring(reason or "unspecified"),
+            tostring(weapon_section(wpn)), tostring(wpn:id()),
+            tostring(ok)
+        )
+        return ok
+    end
+
+    if type(ocr_recoil.refresh_weapon) == "function" then
+        return ocr_recoil.refresh_weapon(wpn)
+    end
+
+    return false
+end
+
+
+function request_recoil_refresh(wpn, reason)
+    return refresh_recoil(wpn, reason or "external_event")
+end
+
+
+function is_customizable(wpn)
+    return component_enabled_weapon(wpn)
+end
+
+function is_component_section(section)
+    return section and ini_sys:section_exist(section)
+        and read_bool(section, "owc_attachment", false) == true
+end
+
+function is_component_item(item)
+    return is_component_section(item_section(item))
+end
+
+
+--==========================================================================
+-- RUNTIME STOCK DEFAULTS
+--
+-- Stocks never change the weapon section. They use the same child-OGF path as runtime foregrips and muzzles.
+--
+-- Weapon/family config:
+--
+--   owc_compatible_stock = fixed
+--       Stock geometry is already part of the base weapon model. The component
+--       manager does not render, attach, detach, or return a stock item.
+--
+--   owc_compatible_stock = grot_base_stock, grot_ar_stock, ocr_veteran_stock
+--   owc_default_stock = owc_item_grot_base_stock
+--   owc_stock_required = true
+--       Compatibility IDs are independent from visuals/recoil profiles. A stock with owc_model requests a child OGF; a generic upgrade stock may omit it and only change recoil/stat behavior.
+--
+--       When owc_stock_required is true, the default/installed stock may be swapped for another compatible stock but may not be detached into an empty slot.
+--
+--   owc_default_stock = no_stock
+--       The weapon starts with no runtime stock. Installing a stock returns no previous item. Detaching an installed stock restores no_stock, unless owc_stock_required is true (an invalid author configuration).
+--==========================================================================
+
+local STOCK_EMPTY_SENTINEL = "__owc_no_stock__"
+
+
+local function default_stock_section(wpn)
+    if not wpn or stock_slot_fixed(wpn) then return nil end
+
+    local value = family_value(wpn, "owc_default_stock")
+    if not value or value == "no_stock" then return nil end
+    if not ini_sys:section_exist(value) then
+        dlog(
+            "WARNING invalid owc_default_stock | weapon=%s section=%s",
+            tostring(weapon_section(wpn)),
+            tostring(value)
+        )
+        return nil
+    end
+    if component_slot(value) ~= "stock" then
+        dlog(
+            "WARNING default stock item is not stock slot | weapon=%s section=%s",
+            tostring(weapon_section(wpn)),
+            tostring(value)
+        )
+        return nil
+    end
+    return value
+end
+
+local function raw_saved_component(wpn, slot)
+    if not wpn or not valid_slot(slot) then return nil end
+    return se_load_var(wpn:id(), wpn:name(), save_key(slot))
+end
+
+local function stock_explicitly_empty(wpn)
+    local saved = raw_saved_component(wpn, "stock")
+    if saved == STOCK_EMPTY_SENTINEL then return true end
+    if type(saved) == "table" and saved.empty == true then return true end
+    return false
+end
+
+local function set_stock_empty(wpn)
+    se_save_var(wpn:id(), wpn:name(), save_key("stock"), STOCK_EMPTY_SENTINEL)
+end
+
+function get_attached_data(wpn, slot)
+    if not wpn or not valid_slot(slot) then return nil end
+
+    local saved = raw_saved_component(wpn, slot)
+
+    -- Factory-stock migration:
+    -- If this unique weapon has never had a stock state saved, convert its owc_default_stock into normal persistent component data exactly once.
+    -- Visual restoration then operates on saved state just like UTFL.
+    if slot == "stock"
+    and saved == nil
+    and not stock_slot_fixed(wpn) then
+        local default_section = default_stock_section(wpn)
+
+        if default_section then
+            local data = {
+                section = default_section,
+                slot = "stock",
+                component_type = component_type(default_section),
+                is_default = true,
+            }
+            se_save_var(wpn:id(), wpn:name(), save_key("stock"), data)
+            saved = data
+
+            dlog(
+                "initialized factory stock state | weapon=%s id=%s stock=%s",
+                tostring(weapon_section(wpn)),
+                tostring(wpn:id()),
+                tostring(default_section)
+            )
+        elseif family_value(wpn, "owc_default_stock") == "no_stock" then
+            set_stock_empty(wpn)
+            saved = STOCK_EMPTY_SENTINEL
+        end
+    end
+
+    if slot == "stock" and stock_explicitly_empty(wpn) then
+        return nil
+    end
+
+    if type(saved) == "table" then
+        if saved.section and saved.section ~= "" then return saved end
+        return nil
+    end
+
+    if saved ~= nil then
+        local sec = tostring(saved)
+        if sec ~= ""
+        and sec ~= "none"
+        and sec ~= "nil"
+        and sec ~= STOCK_EMPTY_SENTINEL then
+            return { section = sec, slot = slot }
+        end
+    end
+
+    return nil
+end
+
+function get_attached_section(wpn, slot)
+    local saved = get_attached_data(wpn, slot)
+    return saved and saved.section or nil
+end
+
+function get_profile(wpn, slot)
+    if not wpn or not valid_slot(slot) then return nil end
+
+    local sec = get_attached_section(wpn, slot)
+    if not sec or not ini_sys:section_exist(sec) then return nil end
+    return component_profile(sec, slot)
+end
+
+local function save_component(wpn, slot, section)
+    se_save_var(wpn:id(), wpn:name(), save_key(slot), {
+        section = section,
+        slot = slot,
+        component_type = component_type(section),
+    })
+end
+
+local function clear_component(wpn, slot)
+    se_save_var(wpn:id(), wpn:name(), save_key(slot), nil)
+end
+
+--==========================================================================
+-- RUNTIME RENDER RESOLVER
+--
+-- Muzzle, foregrip, and stock components are runtime-only. A component may define owc_model for a child HUD OGF, or omit it and act as a logical/recoil-only component. No weapon section cloning is performed.
+--==========================================================================
+
+local function resolve_render(wpn, component_section)
+    local slot = component_slot(component_section)
+    local ctype = component_type(component_section)
+    if not slot or not ctype then
+        return nil, "component missing slot/type"
+    end
+
+    local _, visual_err = visual_config(wpn, component_section)
+    if visual_err then return nil, visual_err end
+    return "runtime", nil
+end
+
+function can_attach_section(wpn, section)
+    if not wpn or not section then
+        return false, "missing weapon or component section"
+    end
+    if not is_customizable(wpn) then
+        return false, "weapon is not opted into Obrien custom components"
+    end
+    if not is_component_section(section) then
+        return false, "item is not an Obrien component"
+    end
+
+    local slot = component_slot(section)
+    if not valid_slot(slot) then
+        return false, "unsupported component slot"
+    end
+
+    local ctype = component_type(section)
+    if not ctype then
+        return false, "component has no owc_type"
+    end
+
+    local allowed = compatible_types(wpn, slot)
+    if #allowed == 0 then
+        return false, "weapon has no owc_compatible_" .. slot
+    end
+
+    -- "fixed" is an exclusive opt-out for any component slot. If it appears in owc_compatible_<slot>, that slot accepts no runtime component.
+    -- Because omission of the compatibility key also rejects components, "fixed" is optional and mainly serves as an explicit/self-documenting declaration for weapon integrations.
+
+    if list_contains(allowed, "fixed") then
+        return false, "component slot is fixed"
+    end
+
+    if not list_contains(allowed, ctype) then
+        return false, string.format(
+            "%s is not compatible with %s",
+            tostring(ctype), tostring(weapon_section(wpn))
+        )
+    end
+
+    -- Recoil profiles are optional. A visual/cosmetic component remains valid even when no ocr_profile is defined.
+
+    local mode, render_err = resolve_render(wpn, section)
+    if not mode then return false, render_err end
+
+    return true, slot, mode
+end
+
+function can_attach(wpn, item)
+    return can_attach_section(wpn, item_section(item))
+end
+
+
+local HIGHLIGHT_LISTS = {
+    EDDListType.iActorBag,
+    EDDListType.iPartnerTradeBag,
+    EDDListType.iDeadBodyBag,
+    EDDListType.iActorTrade,
+    EDDListType.iPartnerTrade,
+}
+
+local focus_highlight_section = nil
+local focus_highlight_sections = {}
+
+local function rebuild_focus_highlights(wpn)
+    focus_highlight_section = weapon_section(wpn)
+    focus_highlight_sections = {}
+
+    if not component_enabled_weapon(wpn) then
+        return
+    end
+
+    local seen = {}
+    for _, slot in ipairs({"muzzle", "foregrip", "stock"}) do
+        local allowed = compatible_types(wpn, slot)
+        if not list_contains(allowed, "fixed") then
+            for _, ctype in ipairs(allowed) do
+                local sections = HIGHLIGHT_SECTIONS_BY_TYPE[ctype]
+                if sections then
+                    for _, section in ipairs(sections) do
+                        -- Use the same final compatibility resolver as drag/drop.
+                        -- This filters invalid visual configs and keeps highlighting synchronized with what OWC will actually accept.
+
+                        if not seen[section] and can_attach_section(wpn, section) then
+                            seen[section] = true
+                            focus_highlight_sections[#focus_highlight_sections + 1] = section
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    if DEBUG then
+        local types = {}
+        local seen_types = {}
+        for _, slot in ipairs({"muzzle", "foregrip", "stock"}) do
+            for _, ctype in ipairs(compatible_types(wpn, slot)) do
+                if ctype ~= "fixed" and not seen_types[ctype] then
+                    seen_types[ctype] = true
+                    types[#types + 1] = ctype
+                end
+            end
+        end
+
+        dlog(
+            "UI highlight | weapon=%s | types=%s | highlight_count=%d | sections=%s",
+            tostring(focus_highlight_section),
+            #types > 0 and table.concat(types, ",") or "none",
+            #focus_highlight_sections,
+            #focus_highlight_sections > 0 and table.concat(focus_highlight_sections, ",") or "none"
+        )
+    end
+end
+
+local function ActorMenu_on_item_focus_receive(obj)
+    if not obj or not component_enabled_weapon(obj) then
+        return
+    end
+
+    local sec = weapon_section(obj)
+    if focus_highlight_section ~= sec then
+        rebuild_focus_highlights(obj)
+    end
+
+    local inventory = GetActorMenu()
+    if not inventory or not inventory:IsShown() then
+        return
+    end
+
+    for _, section in ipairs(focus_highlight_sections) do
+        for _, list_type in ipairs(HIGHLIGHT_LISTS) do
+            inventory:highlight_section_in_slot(section, list_type)
+        end
+    end
+end
+
+local function attach_inventory_item(wpn, item)
+    local section = item_section(item)
+    local ok, slot_or_reason = can_attach_section(wpn, section)
+    if not ok then return false, slot_or_reason end
+
+    local slot = slot_or_reason
+    local existing = get_attached_data(wpn, slot)
+    if existing and existing.section == section then
+        return false, "this component is already attached"
+    end
+
+    -- Save first so recoil/visual refreshes see the new state. Roll back if the inventory item cannot be consumed.
+    save_component(wpn, slot, section)
+
+    local release_ok, release_err = pcall(alife_release_id, item:id())
+    if not release_ok then
+        if existing and existing.section then
+            save_component(wpn, slot, existing.section)
+        else
+            clear_component(wpn, slot)
+        end
+        return false, "failed to consume component: " .. tostring(release_err)
+    end
+
+    if existing and existing.section then
+        alife_create_item(existing.section, db.actor)
+    end
+
+    ensure_component_visual(wpn, slot, section)
+    refresh_recoil(wpn, "component_changed")
+    snd_attach:play(db.actor, 0, sound_object.s2d)
+
+    dlog(
+        "attached/replaced | weapon=%s slot=%s component=%s profile=%s",
+        tostring(weapon_section(wpn)), tostring(slot), tostring(section),
+        tostring(component_profile(section, slot))
+    )
+    return true, slot
+end
+
+function detach(wpn, slot, return_item)
+    if not wpn or not valid_slot(slot) then
+        return false, "invalid weapon or slot"
+    end
+
+    local saved = get_attached_data(wpn, slot)
+    if not saved or not saved.section then
+        return false, "nothing attached in " .. tostring(slot)
+    end
+
+    if slot == "stock" and stock_required(wpn) then
+        return false, "stock is required; replace it with another compatible stock"
+    end
+
+    if return_item ~= false then
+        alife_create_item(saved.section, db.actor)
+    end
+
+    if slot == "stock" then
+        set_stock_empty(wpn)
+    else
+        clear_component(wpn, slot)
+    end
+
+    remove_component_visual(wpn, slot)
+    refresh_recoil(wpn, "component_changed")
+
+    dlog(
+        "detached | weapon=%s id=%s slot=%s",
+        tostring(weapon_section(wpn)), tostring(wpn:id()), tostring(slot)
+    )
+    return true, saved.section
+end
+
+-- Inventory component drag/drop.
+local function ActorMenu_on_item_drag_drop(obj, weapon, no1, no2)
+    if not obj or not weapon then return end
+    if not is_component_item(obj) then return end
+    if not is_customizable(weapon) then return end
+
+    local ok, reason = attach_inventory_item(weapon, obj)
+    if not ok then
+        dlog("drag/drop attach rejected: %s", tostring(reason))
+    end
+end
+
+local function make_detach_functors(slot, display_name)
+    local condition = function(obj, bag, mode)
+        if mode ~= "inventory"
+        or not obj
+        or not is_customizable(obj) then
+            return false
+        end
+
+        if slot == "stock" then
+            if stock_slot_fixed(obj) then
+                return false
+            end
+            if stock_required(obj) then
+                return false
+            end
+        end
+
+        return get_attached_section(obj, slot) ~= nil
+    end
+
+    local name = function(obj, bag, mode)
+        return "Detach " .. display_name
+    end
+
+    local action = function(obj, bag, mode)
+        return detach(obj, slot, true)
+    end
+
+    return condition, name, action
+end
+
+
+
+
+local recoil_active_weapon_id = nil
+
+local function refresh_active_managed_weapon(force)
+    if not db.actor then return end
+
+    local active = db.actor:active_item()
+
+    if not active then
+        recoil_active_weapon_id = nil
+        return
+    end
+
+    local id = active:id()
+
+    if not force and recoil_active_weapon_id == id then
+        return
+    end
+
+    recoil_active_weapon_id = id
+
+    if component_enabled_weapon(active) then
+        dlog(
+            "active managed weapon -> recoil handoff | weapon=%s id=%s",
+            tostring(weapon_section(active)), tostring(id)
+        )
+        refresh_recoil(active, "active_weapon_changed")
+    end
+end
+
+
+local function actor_on_update()
+    -- Cheap ID comparison only. A full recoil calculation occurs only when the active weapon object actually changes. Component attach/detach events call refresh_recoil() directly.
+    refresh_active_managed_weapon(false)
+end
+
+
+-- Script attachments are not serialized by the engine. Component state is saved separately, so rebuild HUD visuals when a weapon enters a slot and after the actor's first update.
+
+local function actor_on_first_update()
+    CreateTimeEvent(
+        "owc_components",
+        "visual_first_update",
+        0.25,
+        function()
+            if db.actor then
+                -- No HUD child creation during first-update/load. Recoil/state can initialize here, while visuals wait for the weapon's actual anm_show callback.
+                refresh_active_managed_weapon(true)
+            end
+            return true
+        end
+    )
+end
+
+
+
+--==========================================================================
+-- RUNTIME COMPONENT HUD ANIMATION PROFILES
+--
+-- A weapon family opts in with:
+--     owc_anim_override = true
+--
+-- The mutator selects one alias family from current component state:
+--     no modeled foregrip -> anm_*_owc_base
+--     modeled VFG         -> anm_*_owc_vfg
+--     modeled AFG         -> anm_*_owc_afg
+--
+-- animation_common.mutate_anim() is the existence filter, so no separate No animation-key whitelist is required. If owc_anim_override is false/missing, nothing is changed.
+--==========================================================================
+
+local animation_override_cache = {}
+local component_type_cache = {}
+
+local function family_uses_animation_override(family)
+    if not family then return false end
+
+    local cached = animation_override_cache[family]
+    if cached ~= nil then return cached end
+
+    local enabled =
+        read_bool(family, "owc_anim_override", false) == true
+
+    animation_override_cache[family] = enabled
+    return enabled
+end
+
+local function cached_component_type(section)
+    if not section then return nil end
+
+    local cached = component_type_cache[section]
+    if cached ~= nil then
+        return cached or nil
+    end
+
+    local ctype = component_type(section)
+    component_type_cache[section] = ctype or false
+    return ctype
+end
+
+local function component_animation_type(section)
+    -- Visual-less generic foregrips are recoil/stat upgrades only. They should not force the weapon into a VFG/AFG hand-animation family.
+    if not section or not component_model(section) then
+        return nil
+    end
+
+    local ctype = cached_component_type(section)
+    if ctype == "vfg" or (ctype and tostring(ctype):match("_vfg$")) then
+        return "vfg"
+    elseif ctype == "afg" or (ctype and tostring(ctype):match("_afg$")) then
+        return "afg"
+    end
+    return nil
+end
+
+
+
+-- Register through animation_common instead of owning a second direct actor_on_hud_animation_play callback.  - thank you Verdatim for the pointer.
+-- Animation_common is GAMMA's ordered source-of-truth for animation mutation, avoiding random cross-script callback order while still reaching the same engine CHudItem::PlayHUDMotion hook.
+
+local OBRIEN_ANIM_MUTATOR_PRIORITY = 500
+
+local function owc_anim_mutator(anm_table, obj)
+    if type(anm_table) ~= "table" or not obj then return false end
+
+    local requested = anm_table.anm_name
+    if not requested then return false end
+
+    -- Reconcile script-owned child OGFs when a saved weapon enters its HUD show animation. This must stay in the animation path even though animation mutation itself is now delegated to animation_common.
+
+    if tostring(requested):find("^anm_show")
+    and is_customizable(obj) then
+        local active = db.actor and db.actor:active_item() or nil
+
+        if active and active:id() == obj:id() then
+            local ok, err = pcall(refresh_saved_visuals, obj)
+            if not ok then
+                dlog(
+                    "WARNING anm_show visual restore failed | weapon=%s id=%s err=%s",
+                    tostring(weapon_section(obj)),
+                    tostring(obj:id()),
+                    tostring(err)
+                )
+            end
+        end
+    end
+
+    local animation_owner = component_family(obj) or weapon_section(obj)
+    if not family_uses_animation_override(animation_owner) then return false end
+
+    local foregrip_section = get_attached_section(obj, "foregrip")
+    local grip_animation_type = component_animation_type(foregrip_section)
+
+    local suffix = "_owc_base"
+
+    if grip_animation_type == "vfg" then
+        suffix = "_owc_vfg"
+    elseif grip_animation_type == "afg" then
+        suffix = "_owc_afg"
+    end
+
+    -- Let animation_common perform the existence check before changing the alias. This preserves the original requested animation if a particular weapon/HUD does not define the component suffix.
+
+    if animation_common
+    and animation_common.mutate_anim then
+        animation_common.mutate_anim(anm_table, suffix, weapon_section(obj))
+    end
+
+    -- Never stop the mutator chain. Later systems (notably animation transition handlers commonly registered near priority 999) must be allowed to see and preserve our selected suffix.
+    
+    return false
+end
+
+
+function on_game_start()
+    if animation_common and animation_common.add_anim_mutator then
+        animation_common.add_anim_mutator(
+            owc_anim_mutator,
+            OBRIEN_ANIM_MUTATOR_PRIORITY
+        )
+        dlog("registered animation_common mutator | priority=%s", tostring(OBRIEN_ANIM_MUTATOR_PRIORITY))
+    else
+        log("OWC | WARNING: animation_common unavailable; component animation remap/visual restore disabled")
+    end
+
+    RegisterScriptCallback(
+        "ActorMenu_on_item_drag_drop",
+        ActorMenu_on_item_drag_drop
+    )
+    RegisterScriptCallback("ActorMenu_on_item_focus_receive", ActorMenu_on_item_focus_receive)
+    RegisterScriptCallback("actor_on_first_update", actor_on_first_update)
+    RegisterScriptCallback("actor_on_update", actor_on_update)
+
+    if custom_functor_autoinject
+    and custom_functor_autoinject.add_functor then
+        for _, entry in ipairs({
+            {"muzzle", "muzzle"},
+            {"foregrip", "foregrip"},
+            {"stock", "stock"},
+        }) do
+            local slot, label = entry[1], entry[2]
+            local cond, name, action =
+                make_detach_functors(slot, label)
+
+            custom_functor_autoinject.add_functor(
+                "owc_custom_" .. slot,
+                cond, name, nil, action, false
+            )
+        end
+
+        dlog("registered generic detach context functors")
+    else
+        dlog("custom_functor_autoinject unavailable; detach context actions disabled")
+    end
+
+    dlog("component manager loaded")
+end

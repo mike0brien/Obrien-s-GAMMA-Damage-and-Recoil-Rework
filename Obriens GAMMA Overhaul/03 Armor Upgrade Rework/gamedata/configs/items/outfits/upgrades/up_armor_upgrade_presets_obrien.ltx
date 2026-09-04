@@ -1,4 +1,4 @@
-;=================================================================
+﻿;=================================================================
 ;--- This defines all the effects for upgrade trees.
 ;--- Part of Mike O'brien GAMMA Damage Overhaul
 
@@ -375,83 +375,83 @@ artefact_count                         = 1
 cost                                   = 1000
 value                                  = +5 ;--- +5
 
-power_restore_speed                    = 0.0001625 ;--- 0.00033
+power_restore_speed                    = 0.000165 ;--- 0.00033
 
 [up_sect_stam_two]
 cost                                   = 1500
 value                                  = +10 ;--- +7.5
 
-power_restore_speed                    = 0.000325 ;--- 0.000495
+power_restore_speed                    = 0.000330 ;--- 0.000495
 
 [up_sect_stam_three]
 cost                                   = 2000
 value                                  = +15 ;--- +10
 
-power_restore_speed                    = 0.0004875 ;--- 0.00066
+power_restore_speed                    = 0.000495 ;--- 0.00066
 
 [up_sect_stam_four]
 cost                                   = 2500
 value                                  = +20 ;--- +12.5
 
-power_restore_speed                    = 0.000650 ;--- 0.000825
+power_restore_speed                    = 0.000660 ;--- 0.000825
 
 [up_sect_stam_five]
 cost                                   = 3000
 value                                  = +25 ;--- +15
 
-power_restore_speed                    = 0.0008125 ;--- 0.00099
+power_restore_speed                    = 0.000825 ;--- 0.00099
 
 
 
 ;=========================================================
 ; Health Restoration
 ; health restore speed is health_restore_speed * game_time_factor, which from what I can find is 6, so 6 ingame seconds per 1 second IRL. So if you want 1 HP per sec .00166667 should be 1. SotaUI incorrectly scales to 4.25, idk why. 
-; I'm using .0001 for +1 HP because the pelt/artifact UI shows that as +1, and I don't feel like correcting it. So basically you'll get 0.6 HP/sec. It's fine...
+; I'm using .0001 for +1 HP because the pelt/artifact UI shows that as +1, and I don't feel like correcting it. So basically you'll get 0.6 HP/sec. It's fine... so I changed the scaling in the UI...
 ;=========================================================
 
 [up_sect_heal_one]
 cost                                   = 7000
-value                                  = +1
+value                                  = +0.25
 
-health_restore_speed                   = 0.0001
+health_restore_speed                   = 0.00041667 ;--- 0.00166667 ;--- 0.0001
 
 [up_sect_heal_secon]
 cost                                   = 7000
-value                                  = +2
+value = +0.5
 
-health_restore_speed                   = 0.0002
+health_restore_speed = 0.00083333
 
 
 
 ;=========================================================
 ; Bleeding Reduction
-; 20% equivalent is 0.001786
+; Put bleed calculation here
 ;=========================================================
 
 [up_sect_bleed_one]
 cost                                   = 6000
-value                                  = +5
+value                                  = +10
 
-bleeding_restore_speed                 = 0.000447
+bleeding_restore_speed                 = 0.0010204 ;--- 0.000447
 
 
 [up_sect_bleed_secon]
 cost                                   = 6000
-value                                  = +10
+value                                  = +20
 
-bleeding_restore_speed                 = 0.000893
+bleeding_restore_speed                 = 0.0020408 ;--- 0.000893
 
 [up_sect_bleed_third]
 cost                                   = 6000
-value                                  = +15
+value                                  = +30
 
-bleeding_restore_speed                 = 0.0013395
+bleeding_restore_speed                 = 0.0030612 ;--- 0.0013395
 
 [up_sect_bleed_fourt]
 cost                                   = 6000
-value                                  = +20
+value                                  = +40
 
-bleeding_restore_speed                 = 0.001786
+bleeding_restore_speed                 = 0.0040816 ;--- 0.001786
 
 
 ;=========================================================

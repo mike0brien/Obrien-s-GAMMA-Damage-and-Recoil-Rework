@@ -1,0 +1,1481 @@
+;======================================================================
+; OBRIEN GENERIC WEAPON COMPONENT ITEMS
+; Location: gamedata\configs\mod_system_owc_items.ltx
+;
+; Item owns:
+;   slot
+;   component type / physical compatibility
+;   optional HUD child model (owc_model)
+;   recoil profile (used only when recoil module is installed)
+;
+; Weapon owns compatibility and mount transforms.  The component item section
+; name is automatically used for optional per-item mount overrides.
+; Components without owc_model are valid recoil/logical-only parts.
+;======================================================================
+
+;======================================================================
+; SHARED COMPONENT BASE
+;======================================================================
+
+[owc_item_base]:addon
+visual = UPDATE
+icons_texture = UPDATE
+inv_grid_width = UPDATE
+inv_grid_height = UPDATE
+inv_grid_x = UPDATE
+inv_grid_y = UPDATE
+repair_type = scope
+owc_attachment = true
+
+;======================================================================
+; 1. MUZZLES
+;======================================================================
+
+;======================================================================
+; 1.1 FLASH HIDERS
+;======================================================================
+
+[owc_flashhider_base]:addon
+visual = dynamics\weapons\generic_components\grot_flashhider.ogf
+icons_texture = ui\ui_owc_components\silencercoflashhider50
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+repair_type = scope
+owc_attachment = true
+
+[owc_flashhider_556_base]:addon
+owc_model = dynamics\weapons\generic_components\grot_flashhider.ogf
+visual = dynamics\weapons\generic_components\grot_flashhider.ogf
+icons_texture = ui\ui_owc_components\silencercoflashhider50
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+repair_type = scope
+owc_attachment = true
+
+[owc_flashhider_545_base]:addon
+owc_model = dynamics\weapons\generic_components\grot_flashhider.ogf
+visual = dynamics\weapons\generic_components\grot_flashhider.ogf
+icons_texture = ui\ui_owc_components\silencercoflashhider50
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+repair_type = scope
+owc_attachment = true
+
+[owc_flashhider_762_base]:addon
+owc_model = dynamics\weapons\generic_components\silencerco_flashhider.ogf
+visual = dynamics\weapons\generic_components\silencerco_flashhider.ogf
+icons_texture = ui\ui_owc_components\silencercoflashhider50
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+repair_type = scope
+owc_attachment = true
+
+[owc_flashhider_9mm_base]:addon
+owc_model = dynamics\weapons\generic_components\grot_flashhider.ogf
+visual = dynamics\weapons\generic_components\grot_flashhider.ogf
+icons_texture = ui\ui_owc_components\silencercoflashhider50
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+repair_type = scope
+owc_attachment = true
+
+[owc_flashhider_45acp_base]:addon
+owc_model = dynamics\weapons\generic_components\grot_flashhider.ogf
+visual = dynamics\weapons\generic_components\grot_flashhider.ogf
+icons_texture = ui\ui_owc_components\silencercoflashhider50
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+repair_type = scope
+owc_attachment = true
+
+;--- 5.56 flash hiders ---
+
+[owc_item_experienced_556_flashhider]:owc_flashhider_556_base
+inv_name = "Experienced 5.56 Flash Hider"
+inv_name_short = "Experienced 5.56 Flash Hider"
+description = "5.56 flash hider."
+inv_weight = 0.080
+cost = 3000
+owc_slot = muzzle
+owc_type = flashhider_556
+ocr_profile = ocr_experienced_flashhider
+
+[owc_item_expert_556_flashhider]:owc_flashhider_556_base
+inv_name = "Expert 5.56 Flash Hider"
+inv_name_short = "Expert 5.56 Flash Hider"
+description = "5.56 flash hider."
+inv_weight = 0.080
+cost = 4000
+owc_slot = muzzle
+owc_type = flashhider_556
+ocr_profile = ocr_expert_flashhider
+
+[owc_item_veteran_556_flashhider]:owc_flashhider_556_base
+inv_name = "Veteran 5.56 Flash Hider"
+inv_name_short = "Veteran 5.56 Flash Hider"
+description = "5.56 flash hider."
+inv_weight = 0.080
+cost = 5500
+owc_slot = muzzle
+owc_type = flashhider_556
+ocr_profile = ocr_veteran_flashhider
+
+[owc_item_professional_556_flashhider]:owc_flashhider_556_base
+inv_name = "Professional 5.56 Flash Hider"
+inv_name_short = "Professional 5.56 Flash Hider"
+description = "5.56 flash hider."
+inv_weight = 0.080
+cost = 7500
+owc_slot = muzzle
+owc_type = flashhider_556
+ocr_profile = ocr_professional_flashhider
+
+;--- 5.45 flash hiders ---
+
+[owc_item_experienced_545_flashhider]:owc_flashhider_545_base
+inv_name = "Experienced 5.45 Flash Hider"
+inv_name_short = "Experienced 5.45 Flash Hider"
+description = "5.45 flash hider."
+inv_weight = 0.080
+cost = 3000
+owc_slot = muzzle
+owc_type = flashhider_545
+ocr_profile = ocr_experienced_flashhider
+
+[owc_item_expert_545_flashhider]:owc_flashhider_545_base
+inv_name = "Expert 5.45 Flash Hider"
+inv_name_short = "Expert 5.45 Flash Hider"
+description = "5.45 flash hider."
+inv_weight = 0.080
+cost = 4000
+owc_slot = muzzle
+owc_type = flashhider_545
+ocr_profile = ocr_expert_flashhider
+
+[owc_item_veteran_545_flashhider]:owc_flashhider_545_base
+inv_name = "Veteran 5.45 Flash Hider"
+inv_name_short = "Veteran 5.45 Flash Hider"
+description = "5.45 flash hider."
+inv_weight = 0.080
+cost = 5500
+owc_slot = muzzle
+owc_type = flashhider_545
+ocr_profile = ocr_veteran_flashhider
+
+[owc_item_professional_545_flashhider]:owc_flashhider_545_base
+inv_name = "Professional 5.45 Flash Hider"
+inv_name_short = "Professional 5.45 Flash Hider"
+description = "5.45 flash hider."
+inv_weight = 0.080
+cost = 7500
+owc_slot = muzzle
+owc_type = flashhider_545
+ocr_profile = ocr_professional_flashhider
+
+;--- 7.62 flash hiders ---
+
+[owc_item_experienced_762_flashhider]:owc_flashhider_762_base
+inv_name = "Experienced 7.62 Flash Hider"
+inv_name_short = "Experienced 7.62 Flash Hider"
+description = "7.62 flash hider."
+inv_weight = 0.080
+cost = 3000
+owc_slot = muzzle
+owc_type = flashhider_762
+ocr_profile = ocr_experienced_flashhider
+
+[owc_item_expert_762_flashhider]:owc_flashhider_762_base
+inv_name = "Expert 7.62 Flash Hider"
+inv_name_short = "Expert 7.62 Flash Hider"
+description = "7.62 flash hider."
+inv_weight = 0.080
+cost = 4000
+owc_slot = muzzle
+owc_type = flashhider_762
+ocr_profile = ocr_expert_flashhider
+
+[owc_item_veteran_762_flashhider]:owc_flashhider_762_base
+inv_name = "Veteran 7.62 Flash Hider"
+inv_name_short = "Veteran 7.62 Flash Hider"
+description = "7.62 flash hider."
+inv_weight = 0.080
+cost = 5500
+owc_slot = muzzle
+owc_type = flashhider_762
+ocr_profile = ocr_veteran_flashhider
+
+[owc_item_professional_762_flashhider]:owc_flashhider_762_base
+inv_name = "Professional 7.62 Flash Hider"
+inv_name_short = "Professional 7.62 Flash Hider"
+description = "7.62 flash hider."
+inv_weight = 0.080
+cost = 7500
+owc_slot = muzzle
+owc_type = flashhider_762
+ocr_profile = ocr_professional_flashhider
+
+;--- 9mm flash hiders ---
+
+[owc_item_experienced_9mm_flashhider]:owc_flashhider_9mm_base
+inv_name = "Experienced 9mm Flash Hider"
+inv_name_short = "Experienced 9mm Flash Hider"
+description = "9mm flash hider."
+inv_weight = 0.080
+cost = 3000
+owc_slot = muzzle
+owc_type = flashhider_9mm
+ocr_profile = ocr_experienced_flashhider
+
+[owc_item_expert_9mm_flashhider]:owc_flashhider_9mm_base
+inv_name = "Expert 9mm Flash Hider"
+inv_name_short = "Expert 9mm Flash Hider"
+description = "9mm flash hider."
+inv_weight = 0.080
+cost = 4000
+owc_slot = muzzle
+owc_type = flashhider_9mm
+ocr_profile = ocr_expert_flashhider
+
+[owc_item_veteran_9mm_flashhider]:owc_flashhider_9mm_base
+inv_name = "Veteran 9mm Flash Hider"
+inv_name_short = "Veteran 9mm Flash Hider"
+description = "9mm flash hider."
+inv_weight = 0.080
+cost = 5500
+owc_slot = muzzle
+owc_type = flashhider_9mm
+ocr_profile = ocr_veteran_flashhider
+
+[owc_item_professional_9mm_flashhider]:owc_flashhider_9mm_base
+inv_name = "Professional 9mm Flash Hider"
+inv_name_short = "Professional 9mm Flash Hider"
+description = "9mm flash hider."
+inv_weight = 0.080
+cost = 7500
+owc_slot = muzzle
+owc_type = flashhider_9mm
+ocr_profile = ocr_professional_flashhider
+
+;--- .45acp flash hiders ---
+
+[owc_item_experienced_45acp_flashhider]:owc_flashhider_45acp_base
+inv_name = "Experienced .45 ACP Flash Hider"
+inv_name_short = "Experienced .45 ACP Flash Hider"
+description = ".45 ACP flash hider."
+inv_weight = 0.080
+cost = 3000
+owc_slot = muzzle
+owc_type = flashhider_45acp
+ocr_profile = ocr_experienced_flashhider
+
+[owc_item_expert_45acp_flashhider]:owc_flashhider_45acp_base
+inv_name = "Expert .45 ACP Flash Hider"
+inv_name_short = "Expert .45 ACP Flash Hider"
+description = ".45 ACP flash hider."
+inv_weight = 0.080
+cost = 4000
+owc_slot = muzzle
+owc_type = flashhider_45acp
+ocr_profile = ocr_expert_flashhider
+
+[owc_item_veteran_45acp_flashhider]:owc_flashhider_45acp_base
+inv_name = "Veteran .45 ACP Flash Hider"
+inv_name_short = "Veteran .45 ACP Flash Hider"
+description = ".45 ACP flash hider."
+inv_weight = 0.080
+cost = 5500
+owc_slot = muzzle
+owc_type = flashhider_45acp
+ocr_profile = ocr_veteran_flashhider
+
+[owc_item_professional_45acp_flashhider]:owc_flashhider_45acp_base
+inv_name = "Professional .45 ACP Flash Hider"
+inv_name_short = "Professional .45 ACP Flash Hider"
+description = ".45 ACP flash hider."
+inv_weight = 0.080
+cost = 7500
+owc_slot = muzzle
+owc_type = flashhider_45acp
+ocr_profile = ocr_professional_flashhider
+
+;======================================================================
+; 1.2 MUZZLE BRAKES
+;======================================================================
+
+[owc_brake_base]:addon
+visual = dynamics\weapons\generic_components\grot_flashhider.ogf
+icons_texture = ui\ui_owc_components\silencercobrake
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+repair_type = scope
+owc_attachment = true
+
+[owc_brake_556_base]:addon
+owc_model = dynamics\weapons\generic_components\silencerco_muzzle_brake.ogf
+visual = dynamics\weapons\generic_components\silencerco_muzzle_brake.ogf
+icons_texture = ui\ui_owc_components\silencercobrake
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+repair_type = scope
+owc_attachment = true
+
+[owc_brake_545_base]:addon
+owc_model = dynamics\weapons\generic_components\silencerco_muzzle_brake.ogf
+visual = dynamics\weapons\generic_components\silencerco_muzzle_brake.ogf
+icons_texture = ui\ui_owc_components\silencercobrake
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+repair_type = scope
+owc_attachment = true
+
+[owc_brake_762_base]:addon
+owc_model = dynamics\weapons\generic_components\silencerco_muzzle_brake.ogf
+visual = dynamics\weapons\generic_components\silencerco_muzzle_brake.ogf
+icons_texture = ui\ui_owc_components\silencercobrake
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+repair_type = scope
+owc_attachment = true
+
+[owc_brake_9mm_base]:addon
+owc_model = dynamics\weapons\generic_components\silencerco_muzzle_brake.ogf
+visual = dynamics\weapons\generic_components\silencerco_muzzle_brake.ogf
+icons_texture = ui\ui_owc_components\silencercobrake
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+repair_type = scope
+owc_attachment = true
+
+[owc_brake_45acp_base]:addon
+owc_model = dynamics\weapons\generic_components\silencerco_muzzle_brake.ogf
+visual = dynamics\weapons\generic_components\silencerco_muzzle_brake.ogf
+icons_texture = ui\ui_owc_components\silencercobrake
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+repair_type = scope
+owc_attachment = true
+
+;--- 5.56 muzzle brake ---
+
+[owc_item_experienced_556_muzzle_brake]:owc_brake_556_base
+inv_name = "Experienced 5.56 Muzzle Brake"
+inv_name_short = "Experienced 5.56 Muzzle Brake"
+description = "5.56 muzzle brake."
+inv_weight = 0.080
+cost = 3000
+owc_slot = muzzle
+owc_type = brake_556
+ocr_profile = ocr_experienced_brake
+
+[owc_item_expert_556_muzzle_brake]:owc_brake_556_base
+inv_name = "Expert 5.56 Muzzle Brake"
+inv_name_short = "Expert 5.56 Muzzle Brake"
+description = "5.56 muzzle brake."
+inv_weight = 0.080
+cost = 4000
+owc_slot = muzzle
+owc_type = brake_556
+ocr_profile = ocr_expert_brake
+
+[owc_item_veteran_556_muzzle_brake]:owc_brake_556_base
+inv_name = "Veteran 5.56 Muzzle Brake"
+inv_name_short = "Veteran 5.56 Muzzle Brake"
+description = "5.56 muzzle brake."
+inv_weight = 0.080
+cost = 5500
+owc_slot = muzzle
+owc_type = brake_556
+ocr_profile = ocr_veteran_brake
+
+[owc_item_professional_556_muzzle_brake]:owc_brake_556_base
+inv_name = "Professional 5.56 Muzzle Brake"
+inv_name_short = "Professional 5.56 Muzzle Brake"
+description = "5.56 muzzle brake."
+inv_weight = 0.080
+cost = 7500
+owc_slot = muzzle
+owc_type = brake_556
+ocr_profile = ocr_professional_brake
+
+;--- 5.45 muzzle brake ---
+
+[owc_item_experienced_545_muzzle_brake]:owc_brake_545_base
+inv_name = "Experienced 5.45 Muzzle Brake"
+inv_name_short = "Experienced 5.45 Muzzle Brake"
+description = "5.45 muzzle brake."
+inv_weight = 0.080
+cost = 3000
+owc_slot = muzzle
+owc_type = brake_545
+ocr_profile = ocr_experienced_brake
+
+[owc_item_expert_545_muzzle_brake]:owc_brake_545_base
+inv_name = "Expert 5.45 Muzzle Brake"
+inv_name_short = "Expert 5.45 Muzzle Brake"
+description = "5.45 muzzle brake."
+inv_weight = 0.080
+cost = 4000
+owc_slot = muzzle
+owc_type = brake_545
+ocr_profile = ocr_expert_brake
+
+[owc_item_veteran_545_muzzle_brake]:owc_brake_545_base
+inv_name = "Veteran 5.45 Muzzle Brake"
+inv_name_short = "Veteran 5.45 Muzzle Brake"
+description = "5.45 muzzle brake."
+inv_weight = 0.080
+cost = 5500
+owc_slot = muzzle
+owc_type = brake_545
+ocr_profile = ocr_veteran_brake
+
+[owc_item_professional_545_muzzle_brake]:owc_brake_545_base
+inv_name = "Professional 5.45 Muzzle Brake"
+inv_name_short = "Professional 5.45 Muzzle Brake"
+description = "5.45 muzzle brake."
+inv_weight = 0.080
+cost = 7500
+owc_slot = muzzle
+owc_type = brake_545
+ocr_profile = ocr_professional_brake
+
+;--- 7.62 muzzle brake ---
+
+[owc_item_experienced_762_muzzle_brake]:owc_brake_762_base
+inv_name = "Experienced 7.62 Muzzle Brake"
+inv_name_short = "Experienced 7.62 Muzzle Brake"
+description = "7.62 muzzle brake."
+inv_weight = 0.080
+cost = 3000
+owc_slot = muzzle
+owc_type = brake_762
+ocr_profile = ocr_experienced_brake
+
+[owc_item_expert_762_muzzle_brake]:owc_brake_762_base
+inv_name = "Expert 7.62 Muzzle Brake"
+inv_name_short = "Expert 7.62 Muzzle Brake"
+description = "7.62 muzzle brake."
+inv_weight = 0.080
+cost = 4000
+owc_slot = muzzle
+owc_type = brake_762
+ocr_profile = ocr_expert_brake
+
+[owc_item_veteran_762_muzzle_brake]:owc_brake_762_base
+inv_name = "Veteran 7.62 Muzzle Brake"
+inv_name_short = "Veteran 7.62 Muzzle Brake"
+description = "7.62 muzzle brake."
+inv_weight = 0.080
+cost = 5500
+owc_slot = muzzle
+owc_type = brake_762
+ocr_profile = ocr_veteran_brake
+
+[owc_item_professional_762_muzzle_brake]:owc_brake_762_base
+inv_name = "Professional 7.62 Muzzle Brake"
+inv_name_short = "Professional 7.62 Muzzle Brake"
+description = "7.62 muzzle brake."
+inv_weight = 0.080
+cost = 7500
+owc_slot = muzzle
+owc_type = brake_762
+ocr_profile = ocr_professional_brake
+
+;--- 9mm muzzle brake ---
+
+[owc_item_experienced_9mm_muzzle_brake]:owc_brake_9mm_base
+inv_name = "Experienced 9mm Muzzle Brake"
+inv_name_short = "Experienced 9mm Muzzle Brake"
+description = "9mm muzzle brake."
+inv_weight = 0.080
+cost = 3000
+owc_slot = muzzle
+owc_type = brake_9mm
+ocr_profile = ocr_experienced_brake
+
+[owc_item_expert_9mm_muzzle_brake]:owc_brake_9mm_base
+inv_name = "Expert 9mm Muzzle Brake"
+inv_name_short = "Expert 9mm Muzzle Brake"
+description = "9mm muzzle brake."
+inv_weight = 0.080
+cost = 4000
+owc_slot = muzzle
+owc_type = brake_9mm
+ocr_profile = ocr_expert_brake
+
+[owc_item_veteran_9mm_muzzle_brake]:owc_brake_9mm_base
+inv_name = "Veteran 9mm Muzzle Brake"
+inv_name_short = "Veteran 9mm Muzzle Brake"
+description = "9mm muzzle brake."
+inv_weight = 0.080
+cost = 5500
+owc_slot = muzzle
+owc_type = brake_9mm
+ocr_profile = ocr_veteran_brake
+
+[owc_item_professional_9mm_muzzle_brake]:owc_brake_9mm_base
+inv_name = "Professional 9mm Muzzle Brake"
+inv_name_short = "Professional 9mm Muzzle Brake"
+description = "9mm muzzle brake."
+inv_weight = 0.080
+cost = 7500
+owc_slot = muzzle
+owc_type = brake_9mm
+ocr_profile = ocr_professional_brake
+
+;--- .45 acp muzzle brake ---
+
+[owc_item_experienced_45acp_muzzle_brake]:owc_brake_45acp_base
+inv_name = "Experienced .45 ACP Muzzle Brake"
+inv_name_short = "Experienced .45 ACP Muzzle Brake"
+description = ".45 ACP muzzle brake."
+inv_weight = 0.080
+cost = 3000
+owc_slot = muzzle
+owc_type = brake_45acp
+ocr_profile = ocr_experienced_brake
+
+[owc_item_expert_45acp_muzzle_brake]:owc_brake_45acp_base
+inv_name = "Expert .45 ACP Muzzle Brake"
+inv_name_short = "Expert .45 ACP Muzzle Brake"
+description = ".45 ACP muzzle brake."
+inv_weight = 0.080
+cost = 4000
+owc_slot = muzzle
+owc_type = brake_45acp
+ocr_profile = ocr_expert_brake
+
+[owc_item_veteran_45acp_muzzle_brake]:owc_brake_45acp_base
+inv_name = "Veteran .45 ACP Muzzle Brake"
+inv_name_short = "Veteran .45 ACP Muzzle Brake"
+description = ".45 ACP muzzle brake."
+inv_weight = 0.080
+cost = 5500
+owc_slot = muzzle
+owc_type = brake_45acp
+ocr_profile = ocr_veteran_brake
+
+[owc_item_professional_45acp_muzzle_brake]:owc_brake_45acp_base
+inv_name = "Professional .45 ACP Muzzle Brake"
+inv_name_short = "Professional .45 ACP Muzzle Brake"
+description = ".45 ACP muzzle brake."
+inv_weight = 0.080
+cost = 7500
+owc_slot = muzzle
+owc_type = brake_45acp
+ocr_profile = ocr_professional_brake
+
+;======================================================================
+; 1.3 COMPENSATORS
+;======================================================================
+
+[owc_comp_556_base]:addon
+owc_model = dynamics\weapons\generic_components\silencerco_flashhider.ogf
+visual = dynamics\weapons\generic_components\silencerco_muzzle_brake.ogf
+icons_texture = ui\ui_owc_components\surefirecomp
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+repair_type = scope
+owc_attachment = true
+
+
+[owc_comp_545_base]:addon
+owc_model = dynamics\weapons\generic_components\silencerco_flashhider.ogf
+visual = dynamics\weapons\generic_components\silencerco_muzzle_brake.ogf
+icons_texture = ui\ui_owc_components\surefirecomp
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+repair_type = scope
+owc_attachment = true
+
+[owc_comp_762_base]:addon
+owc_model = dynamics\weapons\generic_components\silencerco_flashhider.ogf
+visual = dynamics\weapons\generic_components\silencerco_muzzle_brake.ogf
+icons_texture = ui\ui_owc_components\surefirecomp
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+repair_type = scope
+owc_attachment = true
+
+[owc_comp_9mm_base]:addon
+owc_model = dynamics\weapons\generic_components\silencerco_flashhider.ogf
+visual = dynamics\weapons\generic_components\silencerco_muzzle_brake.ogf
+icons_texture = ui\ui_owc_components\surefirecomp
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+repair_type = scope
+owc_attachment = true
+
+[owc_comp_45acp_base]:addon
+owc_model = dynamics\weapons\generic_components\silencerco_flashhider.ogf
+visual = dynamics\weapons\generic_components\silencerco_muzzle_brake.ogf
+icons_texture = ui\ui_owc_components\surefirecomp
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+repair_type = scope
+owc_attachment = true
+
+;--- 5.56 comp ---
+
+[owc_item_experienced_556_compensator]:owc_comp_556_base
+inv_name = "Experienced 5.56 Compensator"
+inv_name_short = "Experienced 5.56 Compensator"
+description = "5.56 compensator."
+inv_weight = 0.080
+cost = 3000
+owc_slot = muzzle
+owc_type = comp_556
+ocr_profile = ocr_experienced_compensator
+
+[owc_item_expert_556_compensator]:owc_comp_556_base
+inv_name = "Expert 5.56 Compensator"
+inv_name_short = "Expert 5.56 Compensator"
+description = "5.56 compensator."
+inv_weight = 0.080
+cost = 4000
+owc_slot = muzzle
+owc_type = comp_556
+ocr_profile = ocr_expert_compensator
+
+[owc_item_veteran_556_compensator]:owc_comp_556_base
+inv_name = "Veteran 5.56 Compensator"
+inv_name_short = "Veteran 5.56 Compensator"
+description = "5.56 compensator."
+inv_weight = 0.080
+cost = 5500
+owc_slot = muzzle
+owc_type = comp_556
+ocr_profile = ocr_veteran_compensator
+
+[owc_item_professional_556_compensator]:owc_comp_556_base
+inv_name = "Professional 5.56 Compensator"
+inv_name_short = "Professional 5.56 Compensator"
+description = "5.56 compensator."
+inv_weight = 0.080
+cost = 7500
+owc_slot = muzzle
+owc_type = comp_556
+ocr_profile = ocr_professional_compensator
+
+;--- 5.45 comp ---
+
+[owc_item_experienced_545_compensator]:owc_comp_545_base
+inv_name = "Experienced 5.45 Compensator"
+inv_name_short = "Experienced 5.45 Compensator"
+description = "5.45 compensator."
+inv_weight = 0.080
+cost = 3000
+owc_slot = muzzle
+owc_type = comp_545
+ocr_profile = ocr_experienced_compensator
+
+[owc_item_expert_545_compensator]:owc_comp_545_base
+inv_name = "Expert 5.45 Compensator"
+inv_name_short = "Expert 5.45 Compensator"
+description = "5.45 compensator."
+inv_weight = 0.080
+cost = 4000
+owc_slot = muzzle
+owc_type = comp_545
+ocr_profile = ocr_expert_compensator
+
+[owc_item_veteran_545_compensator]:owc_comp_545_base
+inv_name = "Veteran 5.45 Compensator"
+inv_name_short = "Veteran 5.45 Compensator"
+description = "5.45 compensator."
+inv_weight = 0.080
+cost = 5500
+owc_slot = muzzle
+owc_type = comp_545
+ocr_profile = ocr_veteran_compensator
+
+[owc_item_professional_545_compensator]:owc_comp_545_base
+inv_name = "Professional 5.45 Compensator"
+inv_name_short = "Professional 5.45 Compensator"
+description = "5.45 compensator."
+inv_weight = 0.080
+cost = 7500
+owc_slot = muzzle
+owc_type = comp_545
+ocr_profile = ocr_professional_compensator
+
+;--- 7.62 comp ---
+
+[owc_item_experienced_762_compensator]:owc_comp_762_base
+inv_name = "Experienced 7.62 Compensator"
+inv_name_short = "Experienced 7.62 Compensator"
+description = "7.62 compensator."
+inv_weight = 0.080
+cost = 3000
+owc_slot = muzzle
+owc_type = comp_762
+ocr_profile = ocr_experienced_compensator
+
+[owc_item_expert_762_compensator]:owc_comp_762_base
+inv_name = "Expert 7.62 Compensator"
+inv_name_short = "Expert 7.62 Compensator"
+description = "7.62 compensator."
+inv_weight = 0.080
+cost = 4000
+owc_slot = muzzle
+owc_type = comp_762
+ocr_profile = ocr_expert_compensator
+
+[owc_item_veteran_762_compensator]:owc_comp_762_base
+inv_name = "Veteran 7.62 Compensator"
+inv_name_short = "Veteran 7.62 Compensator"
+description = "7.62 compensator."
+inv_weight = 0.080
+cost = 5500
+owc_slot = muzzle
+owc_type = comp_762
+ocr_profile = ocr_veteran_compensator
+
+[owc_item_professional_762_compensator]:owc_comp_762_base
+inv_name = "Professional 7.62 Compensator"
+inv_name_short = "Professional 7.62 Compensator"
+description = "7.62 compensator."
+inv_weight = 0.080
+cost = 7500
+owc_slot = muzzle
+owc_type = comp_762
+ocr_profile = ocr_professional_compensator
+
+;--- 9mm comp ---
+
+[owc_item_experienced_9mm_compensator]:owc_comp_9mm_base
+inv_name = "Experienced 9mm Compensator"
+inv_name_short = "Experienced 9mm Compensator"
+description = "9mm compensator."
+inv_weight = 0.080
+cost = 3000
+owc_slot = muzzle
+owc_type = comp_9mm
+ocr_profile = ocr_experienced_compensator
+
+[owc_item_expert_9mm_compensator]:owc_comp_9mm_base
+inv_name = "Expert 9mm Compensator"
+inv_name_short = "Expert 9mm Compensator"
+description = "9mm compensator."
+inv_weight = 0.080
+cost = 4000
+owc_slot = muzzle
+owc_type = comp_9mm
+ocr_profile = ocr_expert_compensator
+
+[owc_item_veteran_9mm_compensator]:owc_comp_9mm_base
+inv_name = "Veteran 9mm Compensator"
+inv_name_short = "Veteran 9mm Compensator"
+description = "9mm compensator."
+inv_weight = 0.080
+cost = 5500
+owc_slot = muzzle
+owc_type = comp_9mm
+ocr_profile = ocr_veteran_compensator
+
+[owc_item_professional_9mm_compensator]:owc_comp_9mm_base
+inv_name = "Professional 9mm Compensator"
+inv_name_short = "Professional 9mm Compensator"
+description = "9mm compensator."
+inv_weight = 0.080
+cost = 7500
+owc_slot = muzzle
+owc_type = comp_9mm
+ocr_profile = ocr_professional_compensator
+
+;--- .45 acp comp ---
+
+[owc_item_experienced_45acp_compensator]:owc_comp_45acp_base
+inv_name = "Experienced .45 ACP Compensator"
+inv_name_short = "Experienced .45 ACP Compensator"
+description = ".45 ACP compensator."
+inv_weight = 0.080
+cost = 3000
+owc_slot = muzzle
+owc_type = comp_45acp
+ocr_profile = ocr_experienced_compensator
+
+[owc_item_expert_45acp_compensator]:owc_comp_45acp_base
+inv_name = "Expert .45 ACP Compensator"
+inv_name_short = "Expert .45 ACP Compensator"
+description = ".45 ACP compensator."
+inv_weight = 0.080
+cost = 4000
+owc_slot = muzzle
+owc_type = comp_45acp
+ocr_profile = ocr_expert_compensator
+
+[owc_item_veteran_45acp_compensator]:owc_comp_45acp_base
+inv_name = "Veteran .45 ACP Compensator"
+inv_name_short = "Veteran .45 ACP Compensator"
+description = ".45 ACP compensator."
+inv_weight = 0.080
+cost = 5500
+owc_slot = muzzle
+owc_type = comp_45acp
+ocr_profile = ocr_veteran_compensator
+
+[owc_item_professional_45acp_compensator]:owc_comp_45acp_base
+inv_name = "Professional .45 ACP Compensator"
+inv_name_short = "Professional .45 ACP Compensator"
+description = ".45 ACP compensator."
+inv_weight = 0.080
+cost = 7500
+owc_slot = muzzle
+owc_type = comp_45acp
+ocr_profile = ocr_professional_compensator
+
+;======================================================================
+; 2. VFGs
+;======================================================================
+
+; Specific physical VFGs.  These carry their own HUD child model.
+; Generic tiered VFG items below intentionally have no owc_model.
+
+[owc_item_magpul_mlok_vfg]:owc_vfg_base
+inv_name = "Magpul M-LOK Vertical Foregrip"
+inv_name_short = "Magpul M-LOK VFG"
+description = "M-LOK vertical foregrip. Uses the weapon's foregrip mount unless a per-item override is defined."
+inv_weight = 0.090
+cost = 3500
+owc_slot = foregrip
+owc_type = owc_mlok_vfg
+owc_model = dynamics\weapons\wpn_grot\grot_vfg_hud.ogf
+ocr_profile = ocr_veteran_vfg
+
+[owc_item_kac_picatinny_vfg]:owc_vfg_base
+inv_name = "KAC Picatinny Vertical Foregrip"
+inv_name_short = "KAC Picatinny VFG"
+description = "Picatinny vertical foregrip. Uses the weapon's foregrip mount unless a per-item override is defined."
+inv_weight = 0.090
+cost = 3500
+owc_slot = foregrip
+owc_type = owc_picatinny_vfg
+owc_model = dynamics\weapons\generic_components\kac_vfg_hud.ogf
+ocr_profile = ocr_professional_vfg
+
+[owc_vfg_base]:addon
+visual = world\weapons\foregrips\mlok_vfg_world.ogf
+icons_texture = ui\ui_owc_components\mlokvfg
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+repair_type = scope
+owc_attachment = true
+
+[owc_item_experienced_vfg]:owc_vfg_base
+inv_name = "Experienced Vertical Foregrip"
+inv_name_short = "Experienced Vertical Foregrip"
+description = "Generic recoil-only VFG upgrade. Does not add a model or require alternate grip animations."
+inv_weight = 0.090
+cost = 3500
+owc_slot = foregrip
+owc_type = generic_foregrip
+ocr_profile = ocr_experienced_vfg
+
+[owc_item_expert_vfg]:owc_vfg_base
+inv_name = "Expert Vertical Foregrip"
+inv_name_short = "Expert Vertical Foregrip"
+description = "Generic recoil-only VFG upgrade. Does not add a model or require alternate grip animations."
+inv_weight = 0.090
+cost = 4500
+owc_slot = foregrip
+owc_type = generic_foregrip
+ocr_profile = ocr_expert_vfg
+
+[owc_item_veteran_vfg]:owc_vfg_base
+inv_name = "Veteran Vertical Foregrip"
+inv_name_short = "Veteran Vertical Foregrip"
+description = "Generic recoil-only VFG upgrade. Does not add a model or require alternate grip animations."
+inv_weight = 0.090
+cost = 6000
+owc_slot = foregrip
+owc_type = generic_foregrip
+ocr_profile = ocr_veteran_vfg
+
+[owc_item_professional_vfg]:owc_vfg_base
+inv_name = "Professional Vertical Foregrip"
+inv_name_short = "Professional Vertical Foregrip"
+description = "Generic recoil-only VFG upgrade. Does not add a model or require alternate grip animations."
+inv_weight = 0.090
+cost = 8000
+owc_slot = foregrip
+owc_type = generic_foregrip
+ocr_profile = ocr_professional_vfg
+
+;======================================================================
+; 3. AFGs
+;======================================================================
+
+[owc_afg_base]:addon
+visual = world\weapons\foregrips\mlok_vfg_world.ogf
+icons_texture = ui\ui_owc_components\magpulafg
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+repair_type = scope
+owc_attachment = true
+
+[owc_item_experienced_afg]:owc_afg_base
+inv_name = "Experienced Angled Foregrip"
+inv_name_short = "Experienced Angled Foregrip"
+description = "Generic recoil-only AFG upgrade. Does not add a model or require alternate grip animations."
+inv_weight = 0.090
+cost = 3500
+owc_slot = foregrip
+owc_type = generic_foregrip
+ocr_profile = ocr_experienced_afg
+
+[owc_item_expert_afg]:owc_afg_base
+inv_name = "Expert Angled Foregrip"
+inv_name_short = "Expert Angled Foregrip"
+description = "Generic recoil-only AFG upgrade. Does not add a model or require alternate grip animations."
+inv_weight = 0.090
+cost = 4500
+owc_slot = foregrip
+owc_type = generic_foregrip
+ocr_profile = ocr_expert_afg
+
+[owc_item_veteran_afg]:owc_afg_base
+inv_name = "Veteran Angled Foregrip"
+inv_name_short = "Veteran Angled Foregrip"
+description = "Generic recoil-only AFG upgrade. Does not add a model or require alternate grip animations."
+inv_weight = 0.090
+cost = 6000
+owc_slot = foregrip
+owc_type = generic_foregrip
+ocr_profile = ocr_veteran_afg
+
+[owc_item_professional_afg]:owc_afg_base
+inv_name = "Professional Angled Foregrip"
+inv_name_short = "Professional Angled Foregrip"
+description = "Generic recoil-only AFG upgrade. Does not add a model or require alternate grip animations."
+inv_weight = 0.090
+cost = 8000
+owc_slot = foregrip
+owc_type = generic_foregrip
+ocr_profile = ocr_professional_afg
+
+;======================================================================
+; 4. STOCKS
+;======================================================================
+
+[owc_item_stock_base]:addon
+visual = world\weapons\foregrips\mlok_vfg_world.ogf
+icons_texture = ui\ui_owc_components\ctrstock
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+repair_type = scope
+owc_attachment = true
+
+[owc_item_no_stock]:owc_item_base
+inv_name = "No Stock Configuration"
+inv_name_short = "No Stock Configuration"
+description = "Generic no-stock configuration."
+inv_weight = 0.050
+cost = 1000
+owc_slot = stock
+owc_type = no_stock
+ocr_profile = ocr_no_stock
+
+[owc_item_normal_stock]:owc_item_stock_base
+inv_name = "Standard Stock"
+inv_name_short = "Standard Stock"
+description = "Generic recoil-only stock upgrade. Requires weapon compatibility type generic_stock."
+inv_weight = 0.250
+cost = 2500
+owc_slot = stock
+owc_type = generic_stock
+ocr_profile = ocr_normal_stock
+
+[owc_item_experienced_stock]:owc_item_stock_base
+inv_name = "Experienced Stock"
+inv_name_short = "Experienced Stock"
+description = "Generic recoil-only stock upgrade. Requires weapon compatibility type generic_stock."
+inv_weight = 0.250
+cost = 4000
+owc_slot = stock
+owc_type = generic_stock
+ocr_profile = ocr_experienced_stock
+
+[owc_item_expert_stock]:owc_item_stock_base
+inv_name = "Expert Stock"
+inv_name_short = "Expert Stock"
+description = "Generic recoil-only stock upgrade. Requires weapon compatibility type generic_stock."
+inv_weight = 0.250
+cost = 5000
+owc_slot = stock
+owc_type = generic_stock
+ocr_profile = ocr_expert_stock
+
+[owc_item_veteran_stock]:owc_item_stock_base
+inv_name = "Veteran Stock"
+inv_name_short = "Veteran Stock"
+description = "Generic recoil-only stock upgrade. Requires weapon compatibility type generic_stock."
+inv_weight = 0.250
+cost = 6500
+owc_slot = stock
+owc_type = generic_stock
+ocr_profile = ocr_veteran_stock
+
+[owc_item_professional_stock]:owc_item_stock_base
+inv_name = "Professional Stock"
+inv_name_short = "Professional Stock"
+description = "Generic recoil-only stock upgrade. Requires weapon compatibility type generic_stock."
+inv_weight = 0.250
+cost = 8500
+owc_slot = stock
+owc_type = generic_stock
+ocr_profile = ocr_professional_stock
+
+
+;--- grot stocks ---
+
+[owc_item_grot_base_stock]:owc_item_stock_base
+visual = world\weapons\foregrips\mlok_vfg_world.ogf
+icons_texture = ui\ui_owc_components\bootstock
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+inv_name = "Grot Base Stock"
+inv_name_short = "Grot Base Stock"
+description = "Factory Grot stock."
+inv_weight = 0.250
+cost = 2500
+owc_slot = stock
+owc_type = grot_base_stock
+owc_model = dynamics\weapons\wpn_grot\grot_base_stock.ogf
+ocr_profile = ocr_normal_stock
+
+[owc_item_grot_ar_stock]:owc_item_stock_base
+visual = world\weapons\foregrips\mlok_vfg_world.ogf
+icons_texture = ui\ui_owc_components\ctrstock
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+inv_name = "Grot AR Stock"
+inv_name_short = "Grot AR Stock"
+description = "AR-pattern Grot replacement stock."
+inv_weight = 0.250
+cost = 8500
+owc_slot = stock
+owc_type = grot_ar_stock
+owc_model = dynamics\weapons\wpn_grot\grot_ar_stock.ogf
+ocr_profile = ocr_professional_stock
+
+;======================================================================
+; LEGACY / DISABLED BARREL ITEMS
+;======================================================================
+
+; [owc_item_long_barrel]:owc_item_base
+; inv_name = "Long Barrel"
+; inv_name_short = "Long Barrel"
+; description = "Generic long-barrel component."
+; inv_weight = 0.400
+; cost = 5000
+; owc_slot = barrel
+; owc_type = long_barrel
+; ocr_profile = ocr_long_barrel
+
+; [owc_item_short_barrel]:owc_item_base
+; inv_name = "Short Barrel"
+; inv_name_short = "Short Barrel"
+; description = "Generic short-barrel component."
+; inv_weight = 0.400
+; cost = 5000
+; owc_slot = barrel
+; owc_type = short_barrel
+; ocr_profile = ocr_short_barrel
+
+; [owc_item_standard_barrel]:owc_item_base
+; inv_name = "Standard Barrel"
+; inv_name_short = "Standard Barrel"
+; description = "Generic standard-barrel component."
+; inv_weight = 0.400
+; cost = 5000
+; owc_slot = barrel
+; owc_type = standard_barrel
+; ocr_profile = ocr_standard_barrel
+
+
+;======================================================================
+; 1.4 SHOTGUN MUZZLES
+;======================================================================
+;
+; Shotgun muzzle components share one compatibility group:
+;
+;   owc_compatible_muzzle = shotgun_muzzle
+;
+; This allows a supported shotgun to accept the shotgun flash hider,
+; muzzle brake, and compensator families below. The current HUD/world models
+; and inventory textures are placeholder copies of the existing muzzle assets
+; and can be replaced later without changing component section names.
+;======================================================================
+
+[owc_shotgun_flashhider_base]:addon
+owc_model = dynamics\weapons\generic_components\shotgun_flashhider.ogf
+visual = dynamics\weapons\generic_components\shotgun_flashhider.ogf
+icons_texture = ui\ui_owc_components\shotgunflashhider
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+repair_type = scope
+owc_attachment = true
+
+[owc_shotgun_brake_base]:addon
+owc_model = dynamics\weapons\generic_components\shotgun_muzzle_brake.ogf
+visual = dynamics\weapons\generic_components\shotgun_muzzle_brake.ogf
+icons_texture = ui\ui_owc_components\shotgunmuzzlebrake
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+repair_type = scope
+owc_attachment = true
+
+[owc_shotgun_compensator_base]:addon
+owc_model = dynamics\weapons\generic_components\shotgun_compensator.ogf
+visual = dynamics\weapons\generic_components\shotgun_compensator.ogf
+icons_texture = ui\ui_owc_components\shotguncompensator
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+repair_type = scope
+owc_attachment = true
+
+;--- Shotgun flash hiders ---
+
+[owc_item_experienced_shotgun_flashhider]:owc_shotgun_flashhider_base
+inv_name = "Experienced Shotgun Flash Hider"
+inv_name_short = "Experienced Shotgun Flash Hider"
+description = "Shotgun flash hider."
+inv_weight = 0.100
+cost = 3000
+owc_slot = muzzle
+owc_type = shotgun_muzzle
+ocr_profile = ocr_experienced_flashhider
+
+[owc_item_expert_shotgun_flashhider]:owc_shotgun_flashhider_base
+inv_name = "Expert Shotgun Flash Hider"
+inv_name_short = "Expert Shotgun Flash Hider"
+description = "Shotgun flash hider."
+inv_weight = 0.100
+cost = 4000
+owc_slot = muzzle
+owc_type = shotgun_muzzle
+ocr_profile = ocr_expert_flashhider
+
+[owc_item_veteran_shotgun_flashhider]:owc_shotgun_flashhider_base
+inv_name = "Veteran Shotgun Flash Hider"
+inv_name_short = "Veteran Shotgun Flash Hider"
+description = "Shotgun flash hider."
+inv_weight = 0.100
+cost = 5500
+owc_slot = muzzle
+owc_type = shotgun_muzzle
+ocr_profile = ocr_veteran_flashhider
+
+[owc_item_professional_shotgun_flashhider]:owc_shotgun_flashhider_base
+inv_name = "Professional Shotgun Flash Hider"
+inv_name_short = "Professional Shotgun Flash Hider"
+description = "Shotgun flash hider."
+inv_weight = 0.100
+cost = 7500
+owc_slot = muzzle
+owc_type = shotgun_muzzle
+ocr_profile = ocr_professional_flashhider
+
+;--- Shotgun muzzle brakes ---
+
+[owc_item_experienced_shotgun_muzzlebrake]:owc_shotgun_brake_base
+inv_name = "Experienced Shotgun Muzzle Brake"
+inv_name_short = "Experienced Shotgun Muzzle Brake"
+description = "Shotgun muzzle brake."
+inv_weight = 0.110
+cost = 3000
+owc_slot = muzzle
+owc_type = shotgun_muzzle
+ocr_profile = ocr_experienced_brake
+
+[owc_item_expert_shotgun_muzzlebrake]:owc_shotgun_brake_base
+inv_name = "Expert Shotgun Muzzle Brake"
+inv_name_short = "Expert Shotgun Muzzle Brake"
+description = "Shotgun muzzle brake."
+inv_weight = 0.110
+cost = 4000
+owc_slot = muzzle
+owc_type = shotgun_muzzle
+ocr_profile = ocr_expert_brake
+
+[owc_item_veteran_shotgun_muzzlebrake]:owc_shotgun_brake_base
+inv_name = "Veteran Shotgun Muzzle Brake"
+inv_name_short = "Veteran Shotgun Muzzle Brake"
+description = "Shotgun muzzle brake."
+inv_weight = 0.110
+cost = 5500
+owc_slot = muzzle
+owc_type = shotgun_muzzle
+ocr_profile = ocr_veteran_brake
+
+[owc_item_professional_shotgun_muzzlebrake]:owc_shotgun_brake_base
+inv_name = "Professional Shotgun Muzzle Brake"
+inv_name_short = "Professional Shotgun Muzzle Brake"
+description = "Shotgun muzzle brake."
+inv_weight = 0.110
+cost = 7500
+owc_slot = muzzle
+owc_type = shotgun_muzzle
+ocr_profile = ocr_professional_brake
+
+;--- Shotgun compensators ---
+
+[owc_item_experienced_shotgun_compensator]:owc_shotgun_compensator_base
+inv_name = "Experienced Shotgun Compensator"
+inv_name_short = "Experienced Shotgun Compensator"
+description = "Shotgun compensator."
+inv_weight = 0.105
+cost = 3000
+owc_slot = muzzle
+owc_type = shotgun_muzzle
+ocr_profile = ocr_experienced_compensator
+
+[owc_item_expert_shotgun_compensator]:owc_shotgun_compensator_base
+inv_name = "Expert Shotgun Compensator"
+inv_name_short = "Expert Shotgun Compensator"
+description = "Shotgun compensator."
+inv_weight = 0.105
+cost = 4000
+owc_slot = muzzle
+owc_type = shotgun_muzzle
+ocr_profile = ocr_expert_compensator
+
+[owc_item_veteran_shotgun_compensator]:owc_shotgun_compensator_base
+inv_name = "Veteran Shotgun Compensator"
+inv_name_short = "Veteran Shotgun Compensator"
+description = "Shotgun compensator."
+inv_weight = 0.105
+cost = 5500
+owc_slot = muzzle
+owc_type = shotgun_muzzle
+ocr_profile = ocr_veteran_compensator
+
+[owc_item_professional_shotgun_compensator]:owc_shotgun_compensator_base
+inv_name = "Professional Shotgun Compensator"
+inv_name_short = "Professional Shotgun Compensator"
+description = "Shotgun compensator."
+inv_weight = 0.105
+cost = 7500
+owc_slot = muzzle
+owc_type = shotgun_muzzle
+ocr_profile = ocr_professional_compensator
+
+;======================================================================
+; 1.5 GENERIC / RECOIL-ONLY MUZZLES
+;======================================================================
+;
+; These components intentionally define no owc_model.
+; They are logical/recoil-only upgrades for weapons that opt into:
+;
+;   owc_compatible_muzzle = generic_muzzle
+;
+; Their inventory/world visual is only the pickup item representation and is
+; not attached to the weapon HUD.
+;======================================================================
+
+[owc_generic_flashhider_base]:addon
+visual = dynamics\weapons\generic_components\grot_flashhider.ogf
+icons_texture = ui\ui_owc_components\silencercoflashhider50
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+repair_type = scope
+owc_attachment = true
+
+[owc_generic_brake_base]:addon
+visual = dynamics\weapons\generic_components\silencerco_muzzle_brake.ogf
+icons_texture = ui\ui_owc_components\silencercobrake
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+repair_type = scope
+owc_attachment = true
+
+[owc_generic_compensator_base]:addon
+visual = dynamics\weapons\generic_components\silencerco_muzzle_brake.ogf
+icons_texture = ui\ui_owc_components\surefirecomp
+inv_grid_width = 1
+inv_grid_height = 1
+inv_grid_x = 0
+inv_grid_y = 0
+repair_type = scope
+owc_attachment = true
+
+;--- Generic flash hiders ---
+
+[owc_item_generic_experienced_flashhider]:owc_generic_flashhider_base
+inv_name = "Experienced Generic Flash Hider"
+inv_name_short = "Experienced Generic Flash Hider"
+description = "Generic recoil-only flash hider upgrade. Does not change the weapon model."
+inv_weight = 0.080
+cost = 3000
+owc_slot = muzzle
+owc_type = generic_muzzle
+ocr_profile = ocr_experienced_flashhider
+
+[owc_item_generic_expert_flashhider]:owc_generic_flashhider_base
+inv_name = "Expert Generic Flash Hider"
+inv_name_short = "Expert Generic Flash Hider"
+description = "Generic recoil-only flash hider upgrade. Does not change the weapon model."
+inv_weight = 0.080
+cost = 4000
+owc_slot = muzzle
+owc_type = generic_muzzle
+ocr_profile = ocr_expert_flashhider
+
+[owc_item_generic_veteran_flashhider]:owc_generic_flashhider_base
+inv_name = "Veteran Generic Flash Hider"
+inv_name_short = "Veteran Generic Flash Hider"
+description = "Generic recoil-only flash hider upgrade. Does not change the weapon model."
+inv_weight = 0.080
+cost = 5500
+owc_slot = muzzle
+owc_type = generic_muzzle
+ocr_profile = ocr_veteran_flashhider
+
+[owc_item_generic_professional_flashhider]:owc_generic_flashhider_base
+inv_name = "Professional Generic Flash Hider"
+inv_name_short = "Professional Generic Flash Hider"
+description = "Generic recoil-only flash hider upgrade. Does not change the weapon model."
+inv_weight = 0.080
+cost = 7500
+owc_slot = muzzle
+owc_type = generic_muzzle
+ocr_profile = ocr_professional_flashhider
+
+;--- Generic muzzle brakes ---
+
+[owc_item_generic_experienced_muzzlebrake]:owc_generic_brake_base
+inv_name = "Experienced Generic Muzzle Brake"
+inv_name_short = "Experienced Generic Muzzle Brake"
+description = "Generic recoil-only muzzle brake upgrade. Does not change the weapon model."
+inv_weight = 0.090
+cost = 3000
+owc_slot = muzzle
+owc_type = generic_muzzle
+ocr_profile = ocr_experienced_brake
+
+[owc_item_generic_expert_muzzlebrake]:owc_generic_brake_base
+inv_name = "Expert Generic Muzzle Brake"
+inv_name_short = "Expert Generic Muzzle Brake"
+description = "Generic recoil-only muzzle brake upgrade. Does not change the weapon model."
+inv_weight = 0.090
+cost = 4000
+owc_slot = muzzle
+owc_type = generic_muzzle
+ocr_profile = ocr_expert_brake
+
+[owc_item_generic_veteran_muzzlebrake]:owc_generic_brake_base
+inv_name = "Veteran Generic Muzzle Brake"
+inv_name_short = "Veteran Generic Muzzle Brake"
+description = "Generic recoil-only muzzle brake upgrade. Does not change the weapon model."
+inv_weight = 0.090
+cost = 5500
+owc_slot = muzzle
+owc_type = generic_muzzle
+ocr_profile = ocr_veteran_brake
+
+[owc_item_generic_professional_muzzlebrake]:owc_generic_brake_base
+inv_name = "Professional Generic Muzzle Brake"
+inv_name_short = "Professional Generic Muzzle Brake"
+description = "Generic recoil-only muzzle brake upgrade. Does not change the weapon model."
+inv_weight = 0.090
+cost = 7500
+owc_slot = muzzle
+owc_type = generic_muzzle
+ocr_profile = ocr_professional_brake
+
+;--- Generic compensators ---
+
+[owc_item_generic_experienced_compensator]:owc_generic_compensator_base
+inv_name = "Experienced Generic Compensator"
+inv_name_short = "Experienced Generic Compensator"
+description = "Generic recoil-only compensator upgrade. Does not change the weapon model."
+inv_weight = 0.085
+cost = 3000
+owc_slot = muzzle
+owc_type = generic_muzzle
+ocr_profile = ocr_experienced_compensator
+
+[owc_item_generic_expert_compensator]:owc_generic_compensator_base
+inv_name = "Expert Generic Compensator"
+inv_name_short = "Expert Generic Compensator"
+description = "Generic recoil-only compensator upgrade. Does not change the weapon model."
+inv_weight = 0.085
+cost = 4000
+owc_slot = muzzle
+owc_type = generic_muzzle
+ocr_profile = ocr_expert_compensator
+
+[owc_item_generic_veteran_compensator]:owc_generic_compensator_base
+inv_name = "Veteran Generic Compensator"
+inv_name_short = "Veteran Generic Compensator"
+description = "Generic recoil-only compensator upgrade. Does not change the weapon model."
+inv_weight = 0.085
+cost = 5500
+owc_slot = muzzle
+owc_type = generic_muzzle
+ocr_profile = ocr_veteran_compensator
+
+[owc_item_generic_professional_compensator]:owc_generic_compensator_base
+inv_name = "Professional Generic Compensator"
+inv_name_short = "Professional Generic Compensator"
+description = "Generic recoil-only compensator upgrade. Does not change the weapon model."
+inv_weight = 0.085
+cost = 7500
+owc_slot = muzzle
+owc_type = generic_muzzle
+ocr_profile = ocr_professional_compensator

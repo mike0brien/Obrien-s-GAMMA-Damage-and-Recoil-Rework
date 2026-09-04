@@ -34,8 +34,8 @@
     <string id="st_up_thirda_combat_lm_helmet_name"><text>Weight Reduction</text></string>
     <string id="st_up_thirda_combat_lm_helmet_descr"><text>This reduces helmet weight by 0.5 kg.</text></string>
 
-    <string id="st_up_thirdc_combat_lm_helmet_name"><text>Impact</text></string>
-    <string id="st_up_thirdc_combat_lm_helmet_descr"><text>This gives 20% impact protection.</text></string>
+    <string id="st_up_thirdc_combat_lm_helmet_name"><text>Stamina</text></string>
+    <string id="st_up_thirdc_combat_lm_helmet_descr"><text>This gives 20% stamina regeneration.</text></string>
 
     <string id="st_up_thirde_combat_lm_helmet_name"><text>Psi</text></string>
     <string id="st_up_thirde_combat_lm_helmet_descr"><text>This gives 10% psi protection.</text></string>
@@ -44,7 +44,7 @@
     <string id="st_up_thirda_combat_h_helmet_descr"><text>This reduces helmet weight by 1 kg.</text></string>
 
     <string id="st_up_thirdc_combat_h_helmet_name"><text>Stamina</text></string>
-    <string id="st_up_thirdc_combat_h_helmet_descr"><text>This gives 20% stamina regeneration.</text></string>
+    <string id="st_up_thirdc_combat_h_helmet_descr"><text>This gives 15% stamina regeneration.</text></string>
 
     <string id="st_up_thirde_combat_h_helmet_name"><text>Psi</text></string>
     <string id="st_up_thirde_combat_h_helmet_descr"><text>This gives 5% psi protection.</text></string>

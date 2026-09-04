@@ -1,0 +1,961 @@
+; -- base recoil profiles are assigned to each weapon in the OCR weapon assignment DLTX, or if you assign them in the base weapon ltx.
+; -- the base profile replaces the existing stats in the base ltx with the ones assigned to the profile. Currently the supported stats are...
+; -- zoom_rotate_time - this is ADS time
+; -- cam_dispersion - this is vertical recoil while hipfiring.
+; -- cam_dispersion_inc - this is the increment that vertical recoil increases by per shot, normally only applied in full auto.
+; -- cam_step_angle_horz - this is horizontal recoil while hipfiring. It is less prounoned with base engine recoil due to how it's calculated.
+; -- zoom_cam_dispersion, zoom_cam_dispersion_inc, zoom_cam_step_angle_horz - the same as above, just while aiming down sights.
+; -- pdm_disp_base - the pdm stats are used to calculate base cone of fire, normally only applied while hipfiring, but can be enabled to affect ADS accuracy in the modded EXE settings. the base value is the final value all individual pdm settings are multiplied against.
+
+; -- compensators, muzzle brake, suppressor, barrels, VFG, AFG, magazines, and stocks are all components to be assigned either in the OCR weapon assignment DLTX, or directly in the base weapon ltx.
+
+; -- the _mul stat under each component section is used to apply a multiplier to the base profile. Per component the multipliers will be added together, and then applied to the final multiplier. If the value is changed enough to cause the value to go negative, it will clamp the minimum to 0.01.
+
+
+
+;===============================================================
+; BASE RECOIL PROFILES
+;===============================================================
+
+[ocr_m4]
+
+zoom_rotate_time                = 0.27
+
+cam_dispersion                  = 2.9
+cam_dispersion_inc              = 0.44
+cam_step_angle_horz             = 0.1
+
+zoom_cam_dispersion             = 1.8
+zoom_cam_dispersion_inc         = 0.28
+zoom_cam_step_angle_horz        = 0.05
+
+[ocr_aug]
+
+zoom_rotate_time                = 0.24
+
+cam_dispersion                  = 3.19
+cam_dispersion_inc              = 0.49
+cam_step_angle_horz             = 0.1
+
+zoom_cam_dispersion             = 1.98
+zoom_cam_dispersion_inc         = 0.3
+zoom_cam_step_angle_horz        = 0.05
+
+[ocr_val]
+
+zoom_rotate_time                = 0.24
+
+cam_dispersion                  = 4
+cam_dispersion_inc              = 0.68
+cam_step_angle_horz             = 0.7
+
+zoom_cam_dispersion             = 2.65
+zoom_cam_dispersion_inc         = 0.45
+zoom_cam_step_angle_horz        = 0.35
+
+[ocr_valbp]
+
+zoom_rotate_time                = 0.25
+
+cam_dispersion                  = 4.4
+cam_dispersion_inc              = 0.75
+cam_step_angle_horz             = 0.6
+
+zoom_cam_dispersion             = 2.92
+zoom_cam_dispersion_inc         = 0.3
+zoom_cam_step_angle_horz        = 0.3
+
+[ocr_ak74]
+
+zoom_rotate_time                = 0.24
+
+cam_dispersion                  = 3.0
+cam_dispersion_inc              = 0.43
+cam_step_angle_horz             = 0.1
+
+zoom_cam_dispersion             = 1.9
+zoom_cam_dispersion_inc         = 0.28
+zoom_cam_step_angle_horz        = 0.05
+
+[ocr_74bp]
+
+zoom_rotate_time                = 0.24
+
+cam_dispersion                  = 3.3
+cam_dispersion_inc              = 0.48
+cam_step_angle_horz             = 0.1
+
+zoom_cam_dispersion             = 2.09
+zoom_cam_dispersion_inc         = 0.3
+zoom_cam_step_angle_horz        = 0.05
+
+[ocr_akm]
+
+zoom_rotate_time                = 0.3
+
+cam_dispersion                  = 3.75
+cam_dispersion_inc              = 0.7
+cam_step_angle_horz             = 0.8
+
+zoom_cam_dispersion             = 2.4
+zoom_cam_dispersion_inc         = 0.45
+zoom_cam_step_angle_horz        = 0.4
+
+[ocr_300blk]
+
+zoom_rotate_time                = 0.28
+
+cam_dispersion                  = 3.5
+cam_dispersion_inc              = 0.73
+cam_step_angle_horz             = 0.6
+
+zoom_cam_dispersion             = 2.15
+zoom_cam_dispersion_inc         = 0.45
+zoom_cam_step_angle_horz        = 0.3
+
+[ocr_fal]
+
+zoom_rotate_time                = 0.32
+
+cam_dispersion                  = 5.5
+cam_dispersion_inc              = 0.97
+cam_step_angle_horz             = 1.0
+
+zoom_cam_dispersion             = 3.6
+zoom_cam_dispersion_inc         = 0.63
+zoom_cam_step_angle_horz        = 0.5
+
+[ocr_falbp]
+
+zoom_rotate_time                = 0.27
+
+cam_dispersion                  = 6.05
+cam_dispersion_inc              = 1.06
+cam_step_angle_horz             = 1.0
+
+zoom_cam_dispersion             = 3.96
+zoom_cam_dispersion_inc         = 0.7
+zoom_cam_step_angle_horz        = 0.5
+
+[ocr_svd]
+
+zoom_rotate_time                = 0.24
+
+cam_dispersion                  = 5.8
+cam_dispersion_inc              = 0.87
+cam_step_angle_horz             = 1.0
+
+zoom_cam_dispersion             = 4.0
+zoom_cam_dispersion_inc         = 0.6
+zoom_cam_step_angle_horz        = 0.5
+
+[ocr_svdbp]
+
+zoom_rotate_time                = 0.24
+
+cam_dispersion                  = 6.38
+cam_dispersion_inc              = 0.96
+cam_step_angle_horz             = 1.0
+
+zoom_cam_dispersion             = 4.4
+zoom_cam_dispersion_inc         = 0.66
+zoom_cam_step_angle_horz        = 0.5
+
+[ocr_ash12]
+
+zoom_rotate_time                = 0.3
+
+cam_dispersion                  = 6.5
+cam_dispersion_inc              = 1.44
+cam_step_angle_horz             = 1.2
+
+zoom_cam_dispersion             = 4.5
+zoom_cam_dispersion_inc         = 1.0
+zoom_cam_step_angle_horz        = 0.6
+
+[ocr_r700]
+
+zoom_rotate_time                = 0.34
+
+cam_dispersion                  = 4.0
+cam_dispersion_inc              = 2.0
+cam_step_angle_horz             = 1.0
+
+zoom_cam_dispersion             = 2.0
+zoom_cam_dispersion_inc         = 0.67
+zoom_cam_step_angle_horz        = 0.01
+
+[ocr_338lp]
+
+zoom_rotate_time                = 0.34
+
+cam_dispersion                  = 4.8
+cam_dispersion_inc              = 4.8
+cam_step_angle_horz             = 1.0
+
+zoom_cam_dispersion             = 2.4
+zoom_cam_dispersion_inc         = 1.2
+zoom_cam_step_angle_horz        = 0.01
+
+[ocr_m249]
+
+zoom_rotate_time                = 0.33
+
+cam_dispersion                  = 3.2
+cam_dispersion_inc              = 0.55
+cam_step_angle_horz             = 0.2
+
+zoom_cam_dispersion             = 1.9
+zoom_cam_dispersion_inc         = 0.33
+zoom_cam_step_angle_horz        = 0.1
+
+[ocr_m240]
+
+zoom_rotate_time                = 0.35
+
+cam_dispersion                  = 5.5
+cam_dispersion_inc              = 0.89
+cam_step_angle_horz             = 1.0
+
+zoom_cam_dispersion             = 3.7
+zoom_cam_dispersion_inc         = 0.6
+zoom_cam_step_angle_horz        = 0.5
+
+[ocr_rpk74]
+
+zoom_rotate_time                = 0.33
+
+cam_dispersion                  = 3.0
+cam_dispersion_inc              = 0.43
+cam_step_angle_horz             = 1.0
+
+zoom_cam_dispersion             = 1.9
+zoom_cam_dispersion_inc         = 0.28
+zoom_cam_step_angle_horz        = 0.5
+
+[ocr_rpk]
+
+zoom_rotate_time                = 0.35
+
+cam_dispersion                  = 4.0
+cam_dispersion_inc              = 0.82
+cam_step_angle_horz             = 1.1
+
+zoom_cam_dispersion             = 2.2
+zoom_cam_dispersion_inc         = 0.45
+zoom_cam_step_angle_horz        = 0.55
+
+[ocr_pkm]
+
+zoom_rotate_time                = 0.24
+
+cam_dispersion                  = 5.8
+cam_dispersion_inc              = 0.94
+cam_step_angle_horz             = 1.2
+
+zoom_cam_dispersion             = 3.9
+zoom_cam_dispersion_inc         = 0.63
+zoom_cam_step_angle_horz        = 0.6
+
+[ocr_pkp]
+
+zoom_rotate_time                = 0.37
+
+cam_dispersion                  = 5.7
+cam_dispersion_inc              = 0.95
+cam_step_angle_horz             = 1.2
+
+zoom_cam_dispersion             = 3.8
+zoom_cam_dispersion_inc         = 0.63
+zoom_cam_step_angle_horz        = 0.6
+
+[ocr_4ga_sg]
+
+zoom_rotate_time                = 0.3
+
+cam_dispersion                  = 3.19
+cam_dispersion_inc              = 0.49
+cam_step_angle_horz             = 0.2
+
+zoom_cam_dispersion             = 5.5
+zoom_cam_dispersion_inc         = 0.3
+zoom_cam_step_angle_horz        = 0.1
+
+[ocr_4ga_sgbp]
+
+zoom_rotate_time                = 0.28
+
+cam_dispersion                  = 7.7
+cam_dispersion_inc              = 3.08
+cam_step_angle_horz             = 0.4
+
+zoom_cam_dispersion             = 5.5
+zoom_cam_dispersion_inc         = 2.2
+zoom_cam_step_angle_horz        = 0.2
+
+[ocr_12ga_sg]
+
+zoom_rotate_time                = 0.3
+
+cam_dispersion                  = 6.0
+cam_dispersion_inc              = 1.5
+cam_step_angle_horz             = 0.3
+
+zoom_cam_dispersion             = 4.0
+zoom_cam_dispersion_inc         = 1.0
+zoom_cam_step_angle_horz        = 0.15
+
+[ocr_20ga_sg]
+
+zoom_rotate_time                = 0.27
+
+cam_dispersion                  = 4.0
+cam_dispersion_inc              = 0.44
+cam_step_angle_horz             = 0.2
+
+zoom_cam_dispersion             = 3.0
+zoom_cam_dispersion_inc         = 0.33
+zoom_cam_step_angle_horz        = 0.1
+
+[ocr_sr2]
+
+zoom_rotate_time                = 0.22
+
+cam_dispersion                  = 1.6
+cam_dispersion_inc              = 0.09
+cam_step_angle_horz             = 0.08
+
+zoom_cam_dispersion             = 1.2
+zoom_cam_dispersion_inc         = 0.7
+zoom_cam_step_angle_horz        = 0.04
+
+[ocr_mp5]
+
+zoom_rotate_time                = 0.22
+
+cam_dispersion                  = 1.5
+cam_dispersion_inc              = 0.08
+cam_step_angle_horz             = 0.08
+
+zoom_cam_dispersion             = 1.1
+zoom_cam_dispersion_inc         = 0.06
+zoom_cam_step_angle_horz        = 0.04
+
+[ocr_aug9mm]
+
+zoom_rotate_time                = 0.2
+
+cam_dispersion                  = 1.65
+cam_dispersion_inc              = 0.09
+cam_step_angle_horz             = 0.1
+
+zoom_cam_dispersion             = 1.21
+zoom_cam_dispersion_inc         = 0.06
+zoom_cam_step_angle_horz        = 0.05
+
+[ocr_ump]
+
+zoom_rotate_time                = 0.22
+
+cam_dispersion                  = 2.2
+cam_dispersion_inc              = 0.17
+cam_step_angle_horz             = 0.11
+
+zoom_cam_dispersion             = 1.6
+zoom_cam_dispersion_inc         = 0.12
+zoom_cam_step_angle_horz        = 0.055
+
+[ocr_usp]
+
+zoom_rotate_time                = 0.2
+
+cam_dispersion                  = 4.2
+cam_dispersion_inc              = 0.44
+cam_step_angle_horz             = 0.14
+
+zoom_cam_dispersion             = 3.2
+zoom_cam_dispersion_inc         = 0.33
+zoom_cam_step_angle_horz        = 0.07
+
+[ocr_m1911]
+
+zoom_rotate_time                = 0.2
+
+cam_dispersion                  = 4.0
+cam_dispersion_inc              = 0.44
+cam_step_angle_horz             = 0.14
+
+zoom_cam_dispersion             = 3.0
+zoom_cam_dispersion_inc         = 0.33
+zoom_cam_step_angle_horz        = 0.07
+
+[ocr_de]
+
+zoom_rotate_time                = 0.23
+
+cam_dispersion                  = 5.0
+cam_dispersion_inc              = 0.63
+cam_step_angle_horz             = 0.3
+
+zoom_cam_dispersion             = 4.0
+zoom_cam_dispersion_inc         = 0.5
+zoom_cam_step_angle_horz        = 0.15
+
+[ocr_9x18]
+
+zoom_rotate_time                = 0.17
+
+cam_dispersion                  = 2.7
+cam_dispersion_inc              = 0.2
+cam_step_angle_horz             = 0.08
+
+zoom_cam_dispersion             = 1.7
+zoom_cam_dispersion_inc         = 0.13
+zoom_cam_step_angle_horz        = 0.04
+
+[ocr_glock]
+
+zoom_rotate_time                = 0.18
+
+cam_dispersion                  = 3.2
+cam_dispersion_inc              = 0.36
+cam_step_angle_horz             = 0.08
+
+zoom_cam_dispersion             = 2.2
+zoom_cam_dispersion_inc         = 0.25
+zoom_cam_step_angle_horz        = 0.04
+
+
+
+
+;===============================================================
+; FLASH HIDER
+;===============================================================
+
+[ocr_experienced_flashhider]
+
+zoom_rotate_time_mul                = 1.0
+
+cam_dispersion_mul              = 0.99
+cam_dispersion_inc_mul          = 0.99
+cam_step_angle_horz_mul         = 1.0
+
+zoom_cam_dispersion_mul         = 0.99
+zoom_cam_dispersion_inc_mul     = 0.99
+zoom_cam_step_angle_horz_mul    = 1.0
+
+[ocr_expert_flashhider]
+
+zoom_rotate_time_mul                = 1.0
+
+cam_dispersion_mul              = 0.98
+cam_dispersion_inc_mul          = 0.98
+cam_step_angle_horz_mul         = 0.99
+
+zoom_cam_dispersion_mul         = 0.98
+zoom_cam_dispersion_inc_mul     = 0.98
+zoom_cam_step_angle_horz_mul    = 0.99
+
+[ocr_veteran_flashhider]
+
+zoom_rotate_time_mul                = 1.0
+
+cam_dispersion_mul              = 0.97
+cam_dispersion_inc_mul          = 0.97
+cam_step_angle_horz_mul         = 0.985
+
+zoom_cam_dispersion_mul         = 0.97
+zoom_cam_dispersion_inc_mul     = 0.97
+zoom_cam_step_angle_horz_mul    = 0.985
+
+[ocr_professional_flashhider]
+
+zoom_rotate_time_mul                = 1.0
+
+cam_dispersion_mul              = 0.96
+cam_dispersion_inc_mul          = 0.96
+cam_step_angle_horz_mul         = 0.98
+
+zoom_cam_dispersion_mul         = 0.96
+zoom_cam_dispersion_inc_mul     = 0.96
+zoom_cam_step_angle_horz_mul    = 0.98
+
+
+;===============================================================
+; MUZZLE COMPENSATOR
+;===============================================================
+
+[ocr_experienced_compensator]
+
+zoom_rotate_time_mul                = 1.0
+
+cam_dispersion_mul              = 0.99
+cam_dispersion_inc_mul          = 0.925
+cam_step_angle_horz_mul         = 1.0
+
+zoom_cam_dispersion_mul         = 0.99
+zoom_cam_dispersion_inc_mul     = 0.925
+zoom_cam_step_angle_horz_mul    = 1.0
+
+[ocr_expert_compensator]
+
+zoom_rotate_time_mul                = 1.0
+
+cam_dispersion_mul              = 0.98
+cam_dispersion_inc_mul          = 0.85
+cam_step_angle_horz_mul         = 1.0
+
+zoom_cam_dispersion_mul         = 0.98
+zoom_cam_dispersion_inc_mul     = 0.85
+zoom_cam_step_angle_horz_mul    = 1.0
+
+[ocr_veteran_compensator]
+
+zoom_rotate_time_mul                = 1.0
+
+cam_dispersion_mul              = 0.96
+cam_dispersion_inc_mul          = 0.775
+cam_step_angle_horz_mul         = 1.0
+
+zoom_cam_dispersion_mul         = 0.97
+zoom_cam_dispersion_inc_mul     = 0.775
+zoom_cam_step_angle_horz_mul    = 1.0
+
+[ocr_professional_compensator]
+
+zoom_rotate_time_mul                = 1.0
+
+cam_dispersion_mul              = 0.95
+cam_dispersion_inc_mul          = 0.7
+cam_step_angle_horz_mul         = 1.0
+
+zoom_cam_dispersion_mul         = 0.95
+zoom_cam_dispersion_inc_mul     = 0.7
+zoom_cam_step_angle_horz_mul    = 1.0
+
+;===============================================================
+; MUZZLE BRAKE
+;===============================================================
+
+[ocr_experienced_brake]
+
+zoom_rotate_time_mul                = 1.0
+
+cam_dispersion_mul              = 0.97
+cam_dispersion_inc_mul          = 0.97
+cam_step_angle_horz_mul         = 0.97
+
+zoom_cam_dispersion_mul         = 0.97
+zoom_cam_dispersion_inc_mul     = 0.97
+zoom_cam_step_angle_horz_mul    = 0.97
+
+[ocr_expert_brake]
+
+zoom_rotate_time_mul                = 1.0
+
+cam_dispersion_mul              = 0.94
+cam_dispersion_inc_mul          = 0.94
+cam_step_angle_horz_mul         = 0.94
+
+zoom_cam_dispersion_mul         = 0.94
+zoom_cam_dispersion_inc_mul     = 0.94
+zoom_cam_step_angle_horz_mul    = 0.94
+
+[ocr_veteran_brake]
+
+zoom_rotate_time_mul                = 1.0
+
+cam_dispersion_mul              = 0.90
+cam_dispersion_inc_mul          = 0.90
+cam_step_angle_horz_mul         = 0.90
+
+zoom_cam_dispersion_mul         = 0.90
+zoom_cam_dispersion_inc_mul     = 0.90
+zoom_cam_step_angle_horz_mul    = 0.90
+
+[ocr_professional_brake]
+
+zoom_rotate_time_mul                = 1.0
+
+cam_dispersion_mul              = 0.85
+cam_dispersion_inc_mul          = 0.85
+cam_step_angle_horz_mul         = 0.85
+
+zoom_cam_dispersion_mul         = 0.85
+zoom_cam_dispersion_inc_mul     = 0.85
+zoom_cam_step_angle_horz_mul    = 0.85
+
+;===============================================================
+; SUPPRESSOR
+;===============================================================
+
+[ocr_experienced_suppressor]
+
+zoom_rotate_time_mul                = 1.3
+
+cam_dispersion_mul              = 0.95
+cam_dispersion_inc_mul          = 0.95
+cam_step_angle_horz_mul         = 0.995
+
+zoom_cam_dispersion_mul         = 0.95
+zoom_cam_dispersion_inc_mul     = 0.95
+zoom_cam_step_angle_horz_mul    = 0.995
+
+pdm_disp_base_mul               = 1.1
+
+[ocr_expert_suppressor]
+
+zoom_rotate_time_mul                = 1.3
+
+cam_dispersion_mul              = 0.93
+cam_dispersion_inc_mul          = 0.93
+cam_step_angle_horz_mul         = 0.99
+
+zoom_cam_dispersion_mul         = 0.93
+zoom_cam_dispersion_inc_mul     = 0.93
+zoom_cam_step_angle_horz_mul    = 0.99
+
+pdm_disp_base_mul               = 1.1
+
+[ocr_veteran_suppressor]
+
+zoom_rotate_time_mul                = 1.3
+
+cam_dispersion_mul              = 0.9
+cam_dispersion_inc_mul          = 0.9
+cam_step_angle_horz_mul         = 0.965
+
+zoom_cam_dispersion_mul         = 0.9
+zoom_cam_dispersion_inc_mul     = 0.9
+zoom_cam_step_angle_horz_mul    = 0.965
+
+pdm_disp_base_mul               = 1.1
+
+[ocr_professional_suppressor]
+
+zoom_rotate_time_mul                = 1.3
+
+cam_dispersion_mul              = 0.85
+cam_dispersion_inc_mul          = 0.85
+cam_step_angle_horz_mul         = 0.93
+
+zoom_cam_dispersion_mul         = 0.85
+zoom_cam_dispersion_inc_mul     = 0.85
+zoom_cam_step_angle_horz_mul    = 0.93
+
+pdm_disp_base_mul               = 1.1
+
+
+;===============================================================
+; VERTICAL FOREGRIPS
+;===============================================================
+
+[ocr_experienced_vfg]
+
+zoom_rotate_time_mul                = 1.0
+
+cam_dispersion_mul              = 1.0
+cam_dispersion_inc_mul          = 1.0
+cam_step_angle_horz_mul         = 1.0
+
+zoom_cam_dispersion_mul         = 1.0
+zoom_cam_dispersion_inc_mul     = 1.0
+zoom_cam_step_angle_horz_mul    = 1.0
+
+[ocr_expert_vfg]
+
+zoom_rotate_time_mul                = 0.96
+
+cam_dispersion_mul              = 0.95
+cam_dispersion_inc_mul          = 0.95
+cam_step_angle_horz_mul         = 0.95
+
+zoom_cam_dispersion_mul         = 0.95
+zoom_cam_dispersion_inc_mul     = 0.95
+zoom_cam_step_angle_horz_mul    = 0.95
+
+[ocr_veteran_vfg]
+
+zoom_rotate_time_mul                = 0.94
+
+cam_dispersion_mul              = 0.90
+cam_dispersion_inc_mul          = 0.90
+cam_step_angle_horz_mul         = 0.90
+
+zoom_cam_dispersion_mul         = 0.90
+zoom_cam_dispersion_inc_mul     = 0.90
+zoom_cam_step_angle_horz_mul    = 0.90
+
+[ocr_professional_vfg]
+
+zoom_rotate_time_mul                = 0.92
+
+cam_dispersion_mul              = 0.85
+cam_dispersion_inc_mul          = 0.85
+cam_step_angle_horz_mul         = 0.85
+
+zoom_cam_dispersion_mul         = 0.85
+zoom_cam_dispersion_inc_mul     = 0.85
+zoom_cam_step_angle_horz_mul    = 0.85
+
+;===============================================================
+; ANGLED FOREGRIPS
+;===============================================================
+
+[ocr_experienced_afg]
+
+zoom_rotate_time_mul                = 1.0
+
+cam_dispersion_mul              = 1.0
+cam_dispersion_inc_mul          = 1.0
+cam_step_angle_horz_mul         = 1.0
+
+zoom_cam_dispersion_mul         = 1.0
+zoom_cam_dispersion_inc_mul     = 1.0
+zoom_cam_step_angle_horz_mul    = 1.0
+
+[ocr_expert_afg]
+
+zoom_rotate_time_mul                = 0.94
+
+cam_dispersion_mul              = 0.97
+cam_dispersion_inc_mul          = 0.97
+cam_step_angle_horz_mul         = 0.97
+
+zoom_cam_dispersion_mul         = 0.97
+zoom_cam_dispersion_inc_mul     = 0.97
+zoom_cam_step_angle_horz_mul    = 0.97
+
+[ocr_veteran_afg]
+
+zoom_rotate_time_mul                = 0.88
+
+cam_dispersion_mul              = 0.94
+cam_dispersion_inc_mul          = 0.94
+cam_step_angle_horz_mul         = 0.94
+
+zoom_cam_dispersion_mul         = 0.94
+zoom_cam_dispersion_inc_mul     = 0.94
+zoom_cam_step_angle_horz_mul    = 0.94
+
+[ocr_professional_afg]
+
+zoom_rotate_time_mul                = 0.82
+
+cam_dispersion_mul              = 0.92
+cam_dispersion_inc_mul          = 0.92
+cam_step_angle_horz_mul         = 0.92
+
+zoom_cam_dispersion_mul         = 0.92
+zoom_cam_dispersion_inc_mul     = 0.92
+zoom_cam_step_angle_horz_mul    = 0.92
+
+
+;===============================================================
+; BARRELS
+;===============================================================
+
+[ocr_short_barrel]
+
+zoom_rotate_time_mul            = 0.8
+
+cam_dispersion_mul              = 1.05
+cam_dispersion_inc_mul          = 1.05
+cam_step_angle_horz_mul         = 1.0
+
+zoom_cam_dispersion_mul         = 1.05
+zoom_cam_dispersion_inc_mul     = 1.05
+zoom_cam_step_angle_horz_mul    = 1.0
+
+pdm_disp_base_mul               = 0.95
+
+[ocr_standard_barrel]
+
+zoom_rotate_time_mul            = 1.0
+
+cam_dispersion_mul              = 1.0
+cam_dispersion_inc_mul          = 1.0
+cam_step_angle_horz_mul         = 1.0
+
+zoom_cam_dispersion_mul         = 1.0
+zoom_cam_dispersion_inc_mul     = 1.0
+zoom_cam_step_angle_horz_mul    = 1.0
+
+pdm_disp_base_mul               = 1.0
+
+[ocr_long_barrel]
+
+zoom_rotate_time_mul            = 1.2
+
+cam_dispersion_mul              = 0.95
+cam_dispersion_inc_mul          = 0.95
+cam_step_angle_horz_mul         = 1.0
+
+zoom_cam_dispersion_mul         = 0.95
+zoom_cam_dispersion_inc_mul     = 0.95
+zoom_cam_step_angle_horz_mul    = 1.0
+
+pdm_disp_base_mul               = 1.05
+
+
+;===============================================================
+; MAGAZINES
+;===============================================================
+
+[ocr_normal_mag]
+
+zoom_rotate_time_mul            = 1.0
+
+cam_dispersion_mul              = 1.0
+cam_dispersion_inc_mul          = 1.0
+cam_step_angle_horz_mul         = 1.0
+
+zoom_cam_dispersion_mul         = 1.0
+zoom_cam_dispersion_inc_mul     = 1.0
+zoom_cam_step_angle_horz_mul    = 1.0
+
+pdm_disp_base_mul               = 1.0
+
+[ocr_experienced_mag] ;--- faster reload magazine, if possible.
+
+zoom_rotate_time_mul            = 1.0
+
+cam_dispersion_mul              = 1.0
+cam_dispersion_inc_mul          = 1.0
+cam_step_angle_horz_mul         = 1.0
+
+zoom_cam_dispersion_mul         = 1.0
+zoom_cam_dispersion_inc_mul     = 1.0
+zoom_cam_step_angle_horz_mul    = 1.0
+
+pdm_disp_base_mul               = 1.0
+
+[ocr_expert_mag] ;--- if base magazine size is 30 rounds, this is 45 rounds.
+
+zoom_rotate_time_mul            = 1.1
+
+cam_dispersion_mul              = 1.0
+cam_dispersion_inc_mul          = 1.0
+cam_step_angle_horz_mul         = 1.0
+
+zoom_cam_dispersion_mul         = 1.0
+zoom_cam_dispersion_inc_mul     = 1.0
+zoom_cam_step_angle_horz_mul    = 1.0
+
+pdm_disp_base_mul               = 1.05
+
+[ocr_veteran_mag] ;--- if base magazine size is 30 rounds, this is 60 rounds.
+
+zoom_rotate_time_mul            = 1.15
+
+cam_dispersion_mul              = 1.0
+cam_dispersion_inc_mul          = 1.0
+cam_step_angle_horz_mul         = 1.0
+
+zoom_cam_dispersion_mul         = 1.0
+zoom_cam_dispersion_inc_mul     = 1.0
+zoom_cam_step_angle_horz_mul    = 1.0
+
+pdm_disp_base_mul               = 1.1
+
+[ocr_professional_mag] ;--- if base magazine size is 30 rounds, this is 100 rounds.
+
+zoom_rotate_time_mul            = 1.2
+
+cam_dispersion_mul              = 1.0
+cam_dispersion_inc_mul          = 1.0
+cam_step_angle_horz_mul         = 1.0
+
+zoom_cam_dispersion_mul         = 1.0
+zoom_cam_dispersion_inc_mul     = 1.0
+zoom_cam_step_angle_horz_mul    = 1.0
+
+pdm_disp_base_mul               = 1.15
+
+;===============================================================
+; MAGAZINES
+;===============================================================
+
+[ocr_no_stock]
+
+zoom_rotate_time_mul            = 0.7
+
+cam_dispersion_mul              = 1.2
+cam_dispersion_inc_mul          = 1.2
+cam_step_angle_horz_mul         = 1.2
+
+zoom_cam_dispersion_mul         = 1.2
+zoom_cam_dispersion_inc_mul     = 1.2
+zoom_cam_step_angle_horz_mul    = 1.2
+
+pdm_disp_base_mul               = 1.0
+
+[ocr_normal_stock]
+
+zoom_rotate_time_mul            = 1.0
+
+cam_dispersion_mul              = 1.0
+cam_dispersion_inc_mul          = 1.0
+cam_step_angle_horz_mul         = 1.0
+
+zoom_cam_dispersion_mul         = 1.0
+zoom_cam_dispersion_inc_mul     = 1.0
+zoom_cam_step_angle_horz_mul    = 1.0
+
+pdm_disp_base_mul               = 1.0
+
+[ocr_experienced_stock]
+
+zoom_rotate_time_mul            = 1.0
+
+cam_dispersion_mul              = 1.0
+cam_dispersion_inc_mul          = 1.0
+cam_step_angle_horz_mul         = 1.0
+
+zoom_cam_dispersion_mul         = 1.0
+zoom_cam_dispersion_inc_mul     = 1.0
+zoom_cam_step_angle_horz_mul    = 1.0
+
+pdm_disp_base_mul               = 1.0
+
+[ocr_expert_stock]
+
+zoom_rotate_time_mul            = 1.1
+
+cam_dispersion_mul              = 1.0
+cam_dispersion_inc_mul          = 1.0
+cam_step_angle_horz_mul         = 1.0
+
+zoom_cam_dispersion_mul         = 1.0
+zoom_cam_dispersion_inc_mul     = 1.0
+zoom_cam_step_angle_horz_mul    = 1.0
+
+pdm_disp_base_mul               = 1.0
+
+[ocr_veteran_stock]
+
+zoom_rotate_time_mul            = 1.15
+
+cam_dispersion_mul              = 1.0
+cam_dispersion_inc_mul          = 1.0
+cam_step_angle_horz_mul         = 1.0
+
+zoom_cam_dispersion_mul         = 1.0
+zoom_cam_dispersion_inc_mul     = 1.0
+zoom_cam_step_angle_horz_mul    = 1.0
+
+pdm_disp_base_mul               = 1.0
+
+[ocr_professional_stock]
+
+zoom_rotate_time_mul            = 1.2
+
+cam_dispersion_mul              = 1.0
+cam_dispersion_inc_mul          = 1.0
+cam_step_angle_horz_mul         = 1.0
+
+zoom_cam_dispersion_mul         = 1.0
+zoom_cam_dispersion_inc_mul     = 1.0
+zoom_cam_step_angle_horz_mul    = 1.0
+
+pdm_disp_base_mul               = 1.0

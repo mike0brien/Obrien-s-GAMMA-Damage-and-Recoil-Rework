@@ -54,11 +54,11 @@
 
 
     <string id="st_up_thirde_hybrid_proto_freedom_name"><text>Health</text></string>
-    <string id="st_up_thirde_hybrid_proto_freedom_descr"><text>This gives +1 health restoration.</text></string>
+    <string id="st_up_thirde_hybrid_proto_freedom_descr"><text>This gives +0.25 health restoration.</text></string>
 
 
     <string id="st_up_thirdf_hybrid_proto_freedom_name"><text>Bleeding</text></string>
-    <string id="st_up_thirdf_hybrid_proto_freedom_descr"><text>This gives 15% bleeding recovery.</text></string>
+    <string id="st_up_thirdf_hybrid_proto_freedom_descr"><text>This gives 300 mL/min bleeding control.</text></string>
 
 
     <string id="st_up_fourta_hybrid_proto_freedom_name"><text>Belt Slot</text></string>
